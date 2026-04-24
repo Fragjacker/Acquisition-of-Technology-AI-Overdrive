@@ -1,0 +1,257 @@
+
+has_robot_growth = {
+    or = {
+        has_building = building_robot_assembly_plant
+        has_building = building_robot_assembly_complex
+        has_building = building_acot_dm_super_assembly
+        has_building = building_acot_ae_super_assembly
+        has_building = building_phanon_super_assembly
+        has_building = building_stellarite_super_assembly
+    }
+}
+has_bio_growth = {
+    or = {
+        has_building = building_clone_vats
+        has_building = building_acot_dm_clone_vats
+        has_building = building_acot_ae_clone_vats
+        has_building = building_phanon_clone_vats
+        has_building = building_stellarite_clone_vats
+    }
+}
+
+has_miner_job = {
+    OR = {
+        has_job = miner
+        has_job = mining_drone
+        has_job = acot_mineralman
+        has_job = ae_mineralman
+        has_job = phanon_mineralman
+        has_job = stellarite_mineralman
+        has_job = acot_mineraldrone
+        has_job = ae_mineraldrone
+        has_job = phanon_mineraldrone
+        has_job = stellarite_mineraldrone
+    }
+}
+has_technician_job = {
+    OR = {
+        has_job = technician
+        has_job = technician_drone
+        has_job = acot_energyman
+        has_job = ae_energyman
+        has_job = phanon_energyman
+        has_job = stellarite_energyman
+        has_job = acot_energydrone
+        has_job = ae_energydrone
+        has_job = phanon_energydrone
+        has_job = stellarite_energydrone
+    }
+}
+has_farmer_job = {
+    OR = {
+        has_job = farmer
+        has_job = agri_drone
+        has_job = acot_foodman
+        has_job = ae_foodman
+        has_job = phanon_foodman
+        has_job = stellarite_foodman
+        has_job = acot_fooddrone
+        has_job = ae_fooddrone
+        has_job = phanon_fooddrone
+        has_job = stellarite_fooddrone
+    }
+}
+has_foundry_job = {
+    OR = {
+        has_job = foundry
+        has_job = fabricator
+        has_job = alloy_drone
+        has_job = acot_alloyman
+        has_job = ae_alloyman
+        has_job = phanon_alloyman
+        has_job = stellarite_alloyman
+        has_job = acot_alloydrone
+        has_job = ae_alloydrone
+        has_job = phanon_alloydrone
+        has_job = stellarite_alloydrone
+    }
+}
+has_factory_job = {
+    OR = {
+        has_job = artisan
+        has_job = artisan_drone
+        has_job = acot_artisan
+        has_job = ae_artisan
+        has_job = phanon_artisan
+        has_job = stellarite_artisan
+        has_job = acot_artisan_drone
+        has_job = ae_artisan_drone
+        has_job = phanon_artisan_drone
+        has_job = stellarite_artisan_drone
+    }
+}
+
+has_farming_designation = {
+    OR = {
+        has_designation = col_farming
+        has_designation = col_ring_farming
+        has_designation = col_habitat_farming
+        has_designation = col_habitat_gestalt_farming
+    }
+}
+
+has_factory_designation = {
+    OR = {
+        has_designation = col_capital_factory
+        has_designation = col_factory
+        has_designation = col_mac_factory
+        has_designation = col_ecu_factory
+        has_designation = col_habitat_factory
+    }
+}
+
+has_foundry_designation = {
+    OR = {
+        has_designation = col_capital_foundry
+        has_designation = col_foundry
+        has_designation = col_ecu_foundry
+        has_designation = col_habitat_foundry
+        has_designation = col_mac_foundry
+        has_designation = col_hiv_foundry
+    }
+}
+
+has_generator_designation = {
+    OR = {
+        has_designation = col_generator
+        has_designation = col_habitat_energy
+        has_designation = col_ring_generator
+    }
+}
+
+has_mining_designation = {
+    OR = {
+        has_designation = col_habitat_mining
+        has_designation = col_mining
+    }
+}
+
+
+is_acot_advanced_starbase = {
+    #NOT = {
+    #    is_normal_starbase = yes
+    #}
+    OR = {
+        has_starbase_size = acot_behemoth
+        has_starbase_size = acot_behemoth_2
+        has_starbase_size = acot_behemoth_3
+        has_starbase_size >= acot_precusor_starbase
+        has_starbase_size >= precursor_colossus
+        is_sbtg_advanced_starbase = yes
+    }
+}
+
+has_dm_capital_tech = {
+    OR = {
+        has_technology = tech_acot_dm_ancient_palace
+        has_technology = tech_acot_dm_ancient_control_center
+        has_technology = tech_acot_dm_ancient_hive_cluster
+    }
+}
+
+has_phanon_capital_tech = {
+    OR = {
+        has_technology = tech_phanon_palace
+        has_technology = tech_phanon_control_center
+        has_technology = tech_phanon_hive_cluster
+    }
+}
+
+has_stellarite_capital_tech = {
+    OR = {
+        has_technology = tech_stellarite_palace
+        has_technology = tech_stellarite_control_center
+        has_technology = tech_stellarite_hive_cluster
+    }
+}
+
+is_special_planet = {
+    NOT = {
+        uses_district_set = habitat
+        uses_district_set = standard
+        uses_district_set = hive_world
+        uses_district_set = machine_world
+    }
+}
+
+has_any_farming_district_or_buildings = {
+    OR = {
+        has_district = district_farming
+        has_district = district_rw_farming
+        has_district = district_farming_uncapped
+        has_building = building_hydroponics_farm
+        has_district = district_acot_ai_rural
+        has_district = district_ae_ai_rural
+        has_district = district_runic_ai_rural
+        has_district = district_stellarite_ai_rural
+    }
+}
+has_any_mining_district = {
+    OR = {
+        has_district = district_mining
+        has_district = district_hab_mining
+        has_district = district_mining_uncapped
+        has_district = district_acot_ai_rural
+        has_district = district_ae_ai_rural
+        has_district = district_runic_ai_rural
+        has_district = district_stellarite_ai_rural
+    }
+}
+has_any_generator_district_or_building = {
+    OR = {
+        has_district = district_generator
+        has_district = district_hab_energy
+        has_district = district_generator_uncapped
+        has_district = district_rw_generator
+        has_building = building_betharian_power_plant
+        has_district = district_acot_ai_rural
+        has_district = district_ae_ai_rural
+        has_district = district_runic_ai_rural
+        has_district = district_stellarite_ai_rural
+    }
+}
+
+has_any_industry_district = {
+    OR = {
+        has_district = district_arcology_arms_industry
+        has_district = district_arcology_civilian_industry
+        has_district = district_acot_ai_industrial
+        has_district = district_ae_ai_industrial
+        has_district = district_runic_ai_industrial
+        has_district = district_stellarite_ai_industrial
+    }
+}
+has_research_designation = {
+    OR = {
+        has_designation = col_research
+        has_designation = col_ring_research
+        has_designation = col_habitat_research
+        has_designation = col_ecu_research
+        has_designation = col_acot_knowledge_is_power
+    }
+}
+has_any_outdated_zone = {
+    OR = {
+        has_any_agriculture_zone = yes
+        has_any_betharian_zone = yes
+        has_any_factory_zone = yes
+        has_any_fortress_zone = yes
+        has_any_foundry_zone = yes
+        has_any_industrial_zone = yes
+        has_any_generator_zone = yes
+        has_any_mining_zone = yes
+        has_any_research_zone = yes
+        has_any_unity_zone = yes
+        has_any_trade_zone = yes
+    }
+}

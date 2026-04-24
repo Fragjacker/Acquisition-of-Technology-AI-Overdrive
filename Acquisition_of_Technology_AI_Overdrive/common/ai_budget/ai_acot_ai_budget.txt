@@ -1,0 +1,959 @@
+acot_sr_dark_energy_expenditure_edicts = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = edicts
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 0.2
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+dark_matter_expenditure_edicts = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = edicts
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 0.2
+    }
+    desired_min = {
+        base = 1
+        modifier = {
+            add = 100
+            has_resource = {
+                type = sr_dark_matter
+                amount >= 500
+            }
+        }
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+acot_sr_stellarite_expenditure_edicts = {
+    resource = acot_sr_stellarite
+    type = expenditure
+    category = edicts
+
+    potential = {
+        always = no
+    }
+
+    weight = {
+        weight = 1
+    }
+}
+acot_alloy_expenditure_planets = {
+    resource = alloys
+    category = planets
+    type = expenditure
+    potential = {
+        has_dm_capital_tech = yes
+    }
+    weight = {
+        base = 0.3
+    }
+}
+
+
+acot_alloys_expenditure_starbases = {
+    resource = alloys
+    category = starbases
+    type = expenditure
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        base = 0.5
+    }
+    desired_max = {
+        base = 600000
+    }
+}
+
+acot_unity_upkeep_leaders = {
+    resource = unity
+    type = upkeep
+    category = leaders
+    potential = {
+        has_dm_capital_tech = yes
+    }
+    weight = {
+        base = 10
+    }
+}
+
+influence_expenditure_planets = {
+    resource = influence
+    type = expenditure
+    category = planets
+
+    potential = {
+        has_technology = tech_giga_fortress_dm
+    }
+
+    weight = {
+        weight = 0.5
+    }
+    desired_min = {
+        base = 100
+    }
+}
+
+influence_expenditure_decisions = {
+    resource = influence
+    type = expenditure
+    category = decisions
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 0.20
+        modifier = {
+            factor = 2
+            OR = {
+                AND = {
+                    has_technology = tech_housing_2
+                    any_owned_planet = {
+                        is_planet_class = pc_relic
+                        num_uncleared_blockers < 1
+                    }
+                }
+                AND = {
+                    has_ascension_perk = ap_arcology_project
+                    any_owned_planet = {
+                        is_artificial = no
+                        NOR = {
+                            is_planet_class = pc_city
+                            is_planet_class = pc_relic
+                            has_modifier = resort_colony
+                            has_modifier = penal_colony
+                            has_modifier = slave_colony
+                            has_modifier = pm_wenkwort_custodian
+                        }
+                        num_uncleared_blockers < 1
+                        free_district_slots < 1
+                        OR = {
+                            num_pops >= 70
+                            is_capital = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    desired_min = {
+        base = 100
+    }
+
+    # this is the cost of the arcology project decision
+    desired_max = {
+        base = 200
+    }
+}
+
+unity_expenditure_ships = {
+    resource = unity
+    type = expenditure
+    category = ships
+    potential = {
+        has_technology = tech_dark_matter_power_core_dm
+    }
+    weight = {
+        weight = 0.2
+    }
+}
+
+acot_influence_expenditure_armies = {
+    resource = influence
+    type = expenditure
+    category = armies
+    potential = {
+        is_at_war = yes
+        OR = {
+            check_variable = {
+                which = doomguy_count
+                value = 0
+            }
+            check_variable = {
+                which = godmech_count
+                value = 0
+            }
+            check_variable = {
+                which = terror_count
+                value = 0
+            }
+            check_variable = {
+                which = synthmando_count
+                value = 0
+            }
+        }
+    }
+    weight = {
+        base = 1000
+    }
+}
+acot_alloy_upkeep_armies = {
+    resource = alloys
+    category = armies
+    type = upkeep
+    potential = {
+        has_technology = tech_dark_matter_power_core_dm
+    }
+    weight = {
+        base = 1
+    }
+}
+acot_alloy_expenditure_ships = {
+    resource = alloys
+    category = ships
+    type = expenditure
+    potential = {
+        has_monthly_income = {
+            resource = alloys
+            value > 10000
+        }
+    }
+    weight = {
+        base = 1
+    }
+}
+
+sr_dark_matter_expenditure_decisions = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = decisions
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 0.3
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+
+acot_sr_dark_energy_expenditure_decisions = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = decisions
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 1
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+
+
+unity_upkeep_ships = {
+    resource = unity
+    type = upkeep
+    category = ships
+    potential = {
+        has_technology = tech_dark_matter_power_core_dm
+    }
+    weight = {
+        weight = 0.2
+    }
+}
+acot_dark_matter_expenditure_planet = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = planets
+    potential = {
+        has_ae_capital_tech = yes
+    }
+    desired_min = {
+        min = 2500
+    }
+    weight = {
+        weight = 0.4
+    }
+}
+acot_dark_matter_expenditure_starbase = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = starbases
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_energy_expenditure_starbase = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = starbases
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_matter_upkeep_starbase = {
+    resource = sr_dark_matter
+    type = upkeep
+    category = starbases
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_energy_upkeep_starbase = {
+    resource = acot_sr_dark_energy
+    type = upkeep
+    category = starbases
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_matter_upkeep_starbase_module = {
+    resource = sr_dark_matter
+    type = upkeep
+    category = starbase_modules
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_energy_upkeep_starbase_module = {
+    resource = acot_sr_dark_energy
+    type = upkeep
+    category = starbase_modules
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        weight = 0.3
+    }
+}
+acot_dark_matter_expenditure_blocker = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = deposit_blockers
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_dark_fractured
+        }
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 5000
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+acot_dark_energy_expenditure_blocker = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = deposit_blockers
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_dark_fractured
+        }
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 5000
+    }
+    desired_max = {
+        base = 5000
+    }
+}
+acot_alloy_megas_expenditure = {
+    resource = alloys
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        base = 1
+    }
+}
+acot_dark_matter_megas_expenditure = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        base = 0.5
+    }
+}
+acot_dark_energy_megas_expenditure = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        base = 0.5
+    }
+}
+acot_alloys_upkeep_ships = {
+    type = upkeep
+    category = ships
+    resource = alloys
+    potential = {
+        has_technology = tech_dark_matter_power_core_dm
+    }
+    weight = {
+        base = 1.0
+    }
+}
+
+acot_mirror_alloy_expenditure = {
+    resource = alloys
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_phanon_dimensional_mirror
+        NOR = {
+            has_country_flag = completed_dimensional_mirror
+            any_owned_megastructure = {
+                is_megastructure_type = dimensional_mirror_0
+            }
+        }
+    }
+    weight = {
+        base = 1
+    }
+    desired_max = {
+        base = 40000
+    }
+    desired_min = {
+        base = 40000
+    }
+}
+
+
+acot_minerals_decisions_expenditure = {
+    resource = minerals
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            OR = {
+                is_planet_class = pc_dark_fractured
+                is_planet_class = pc_acot_enigmatic
+            }
+        }
+        has_technology = tech_acot_create_enigmatic_world
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 1000000
+    }
+    desired_max = {
+        base = 1000000
+    }
+}
+acot_energy_decisions_expenditure = {
+    resource = energy
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            OR = {
+                is_planet_class = pc_dark_fractured
+                is_planet_class = pc_acot_enigmatic
+            }
+        }
+        has_technology = tech_acot_create_enigmatic_world
+
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 1000000
+    }
+    desired_max = {
+        base = 1000000
+    }
+}
+acot_influence_decisions_expenditure_sphere = {
+    resource = influence
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            OR = {
+                is_planet_class = pc_dark_fractured
+                is_planet_class = pc_acot_enigmatic
+            }
+        }
+        has_technology = tech_acot_create_enigmatic_world
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 200
+    }
+    desired_max = {
+        base = 200
+    }
+}
+acot_dark_matter_expenditure_decision = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            OR = {
+                is_planet_class = pc_dark_fractured
+                is_planet_class = pc_acot_enigmatic
+            }
+        }
+        has_technology = tech_acot_create_enigmatic_world
+        has_deficit_situation = no
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 10000
+    }
+    desired_max = {
+        base = 20000
+    }
+}
+acot_dark_energy_expenditure_decision = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            OR = {
+                is_planet_class = pc_dark_fractured
+                is_planet_class = pc_acot_enigmatic
+            }
+        }
+        has_technology = tech_acot_create_enigmatic_world
+        has_deficit_situation = no
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 10000
+    }
+    desired_max = {
+        base = 20000
+    }
+}
+#alloys = 500000
+#unity = 50000
+#acot_sr_dark_energy = 20000
+#sr_dark_matter = 20000
+#influence = 200
+
+acot_alloy_expenditure_sphere = {
+    resource = alloys
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmatic
+        }
+        has_technology = tech_acot_create_enigmapolis
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 500000
+    }
+    desired_max = {
+        set = 1000000
+    }
+}
+acot_unity_expenditure_sphere = {
+    resource = unity
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmatic
+        }
+        has_technology = tech_acot_create_enigmapolis
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 500000
+    }
+    desired_max = {
+        base = 2000000
+    }
+}
+
+acot_alloy_expenditure_sphere_silo = {
+    resource = alloys
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 100000
+    }
+    desired_max = {
+        set = 100000
+    }
+}
+acot_food_expenditure_sphere_silo = {
+    resource = food
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 100000
+    }
+    desired_max = {
+        set = 100000
+    }
+}
+acot_minerals_expenditure_sphere_silo = {
+    resource = minerals
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 100000
+    }
+    desired_max = {
+        set = 100000
+    }
+}
+acot_energy_expenditure_sphere_silo = {
+    resource = energy
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 100000
+    }
+    desired_max = {
+        set = 100000
+    }
+}
+acot_cg_expenditure_sphere_silo = {
+    resource = consumer_goods
+    type = expenditure
+    category = decisions
+    potential = {
+        country_uses_consumer_goods = yes
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 100000
+    }
+    desired_max = {
+        set = 100000
+    }
+}
+acot_de_expenditure_sphere_silo = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 10000
+    }
+    desired_max = {
+        set = 10000
+    }
+}
+acot_dm_expenditure_sphere_silo = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = decisions
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_technology = tech_acot_enigmapolis_silo
+    }
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        set = 10000
+    }
+    desired_max = {
+        set = 10000
+    }
+}
+
+acot_minerals_buildings_sphere_expenditure = {
+    resource = minerals
+    category = planets
+    potential = {
+        any_owned_planet = {
+            is_planet_class = pc_acot_enigmopolis
+        }
+    }
+    type = expenditure
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 15000
+    }
+    desired_max = {
+        base = 30000
+    }
+}
+#alloys = 500000
+#unity = 100000
+#sr_dark_matter = 50000
+#acot_sr_dark_energy = 50000
+#influence  = 200
+
+acot_alloy_expenditure_mega_herc = {
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    resource = alloys
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 500000
+    }
+    desired_max = {
+        base = 1000000
+    }
+    type = expenditure
+}
+acot_dark_matter_expenditure_mega_herc = {
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    resource = unity
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 100000
+    }
+    desired_max = {
+        base = 100000
+    }
+    type = expenditure
+}
+acot_dark_energy_expenditure_mega_herc = {
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    resource = acot_sr_dark_energy
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 50000
+    }
+    desired_max = {
+        base = 100000
+    }
+    type = expenditure
+}
+acot_unity_expenditure_mega_herc = {
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    resource = unity
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 100000
+    }
+    desired_max = {
+        base = 200000
+    }
+    type = expenditure
+}
+acot_influence_expenditure_mega_herc = {
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    resource = influence
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 200
+    }
+    type = expenditure
+}
+
+#alloys = 500
+#minerals = 1000
+#energy = 1000
+#sr_dark_matter = 50
+#acot_sr_dark_energy = 50
+
+acot_alloy_upkeep_mega_herc = {
+    resource = alloys
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    type = upkeep
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 500
+    }
+}
+acot_minerals_upkeep_mega_herc = {
+    resource = minerals
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    type = upkeep
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 1000
+    }
+}
+acot_energy_upkeep_mega_herc = {
+    resource = energy
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    type = upkeep
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 1000
+    }
+}
+acot_dark_matter_upkeep_mega_herc = {
+    resource = sr_dark_matter
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    type = upkeep
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 50
+    }
+}
+acot_dark_energy_upkeep_mega_herc = {
+    resource = acot_sr_dark_energy
+    potential = {
+        has_technology = tech_precursor_colossus
+    }
+    category = megastructures
+    type = upkeep
+    weight = {
+        base = 1
+    }
+    desired_min = {
+        base = 50
+    }
+}

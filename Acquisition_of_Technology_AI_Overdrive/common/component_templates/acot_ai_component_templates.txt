@@ -1,0 +1,37 @@
+# Weapon Range
+utility_component_template = {
+    key = "HYPERION_AURA_NO"
+    size = medium
+    icon = "GFX_ship_part_aura_range"
+    icon_frame = 1
+    power = 0
+    size_restriction = {
+        precursor_titan
+    }
+    component_set = "ship_aura_components"
+    ai_weight = { # too many WILLL crash your game lol
+        weight = 1000000
+        modifier = {
+            factor = 2
+            is_ai = yes
+        }
+    }
+}
+utility_component_template = {
+    key = "HYPERION_AURA_NO_2"
+    size = medium
+    icon = "GFX_ship_part_aura_range"
+    icon_frame = 1
+    power = 0
+    size_restriction = {
+        precursor_titan
+    }
+    component_set = "ship_aura_components"
+    ai_weight = { # too many WILLL crash your game lol
+        weight = 1000000
+        modifier = {
+            factor = 2
+            is_ai = yes
+        }
+    }
+}

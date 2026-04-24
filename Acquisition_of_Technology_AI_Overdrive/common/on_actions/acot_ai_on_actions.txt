@@ -1,0 +1,36 @@
+on_yearly_pulse_country = {
+	events = {
+		acot_ai_districts.1
+		acot_ai_districts.8000
+		acot_ai_districts.6
+		acot_ai_districts.6000# god i hate stellaris
+	}
+}
+
+on_bi_yearly_pulse_country = {
+	events = {
+		acot_ai_districts.2 # god i hate stellaris even more
+		#acot_ai_districts.4 # voic dpshere
+		#acot_ai_districts.7000
+		acot_ai_districts.5
+		acot_ai_districts.51
+		acot_ai_districts.53
+	}
+}
+
+#on_tech_increased = {
+#	events = {
+#		acot_ai_districts.8000
+#	}
+#}
+
+on_colonized = {
+	events = {
+	}
+}
+
+on_megastructure_built = {
+	events = {
+		#acot_ai_districts.9000
+	}
+}

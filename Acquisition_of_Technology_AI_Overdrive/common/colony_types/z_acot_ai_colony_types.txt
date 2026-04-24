@@ -1,0 +1,506 @@
+@small_planet_threshold = 18
+@free_districts_verylow_threshold = 3
+@free_districts_low_threshold = 5
+@free_districts_medium_threshold = 10
+@free_districts_high_threshold = 15
+@built_districts_low_threshold = 3
+@built_districts_medium_threshold = 4
+@built_districts_high_threshold = 8
+
+@stickiness = 15
+@stickiness_low = 8
+
+### Delta+ Palace+ on Capital
+col_acot_enigma_capital = {
+    icon = GFX_colony_type_capital
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = no
+        }
+        NOR = {
+            is_planet_class = pc_dark_fractured
+            is_planet_class = pc_acot_enigmatic
+            is_planet_class = pc_acot_enigmopolis
+        }
+        is_capital = yes
+        has_enigmatic_capital = yes
+    }
+    # Capital is very stable and conforms to ethics, all jobs shall make a lot of stuff
+    planet_modifier = {
+        planet_stability_add = 5	# Stability thing is overflowing too much, keep it same as vanilla
+        planet_amenities_add = 15	# Slight buff to vanilla so that ACoT amenity buildings still have some usage
+        pop_government_ethic_attraction = 2
+        planet_resettlement_unemployed_destination_mult = 0.1
+        planet_building_build_speed_mult = 0.50
+        planet_jobs_produces_mult = 0.30	# Better than most designation, slightly worse than industrial with galatic resolution on
+        planet_jobs_upkeep_mult = -0.10
+    }
+    # If Planet is Ringworld, stronger effects of vanilla ringworld specialization
+    triggered_planet_modifier = {
+        potential = { merg_is_hab_ringworld = yes }
+        pop_growth_speed = 0.25
+        planet_pop_assembly_mult = 0.2
+        planet_pop_assembly_organic_mult = 0.2
+    }
+    ### Automated Production, all districts go nuts I guess
+    triggered_planet_modifier = { ### Standard world for capital
+        potential = {
+            has_modifier = acot_modifier_ascended_city
+            NOR = {
+                merg_is_hab_ringworld = yes
+                uses_district_set = habitat
+            }
+        }
+        modifier = {
+            planet_districts_industrial_alloys_produces_add = 20
+            planet_districts_industrial_consumer_goods_produces_add = 20
+            planet_districts_industrial_acot_sr_dark_energy_upkeep_add = 4
+            planet_districts_generator_energy_produces_add = 25
+            planet_districts_generator_acot_sr_dark_energy_upkeep_add = 0.5
+            planet_districts_farming_food_produces_add = 25
+            planet_districts_farming_acot_sr_dark_energy_upkeep_add = 0.25
+            planet_districts_mining_minerals_produces_add = 25
+            planet_districts_mining_acot_sr_dark_energy_upkeep_add = 0.5
+        }
+    }
+    triggered_planet_modifier = { ### Habitat capital
+        potential = {
+            has_modifier = acot_modifier_ascended_city
+            uses_district_set = habitat
+        }
+        modifier = {
+            planet_districts_hab_mining_minerals_produces_add = 25
+            planet_districts_hab_mining_acot_sr_dark_energy_upkeep_add = 0.5
+            planet_districts_hab_energy_energy_produces_add = 25
+            planet_districts_hab_energy_acot_sr_dark_energy_upkeep_add = 0.5
+        }
+    }
+    triggered_planet_modifier = { ### Ring world capital
+        potential = {
+            owner = {
+                is_regular_empire = yes
+            }
+            has_modifier = acot_modifier_ascended_city
+            merg_is_hab_ringworld = yes
+        }
+        modifier = {
+            planet_districts_rw_science_physics_research_produces_add = 80
+            planet_districts_rw_science_engineering_research_produces_add = 80
+            planet_districts_rw_science_society_research_produces_add = 80
+            planet_districts_rw_science_acot_sr_dark_energy_upkeep_add = 8
+            planet_districts_rw_science_acot_sr_dark_energy_upkeep_add = 8
+            planet_districts_rw_farming_food_produces_add = 125
+            planet_districts_rw_farming_acot_sr_dark_energy_upkeep_add = 1.25
+            planet_districts_rw_farming_acot_sr_dark_energy_upkeep_add = 1.25
+            planet_districts_rw_industrial_alloys_produces_add = 50
+            planet_districts_rw_industrial_consumer_goods_produces_add = 100
+            planet_districts_rw_industrial_acot_sr_dark_energy_upkeep_add = 10
+        }
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = { has_tradition = tr_adaptability_finish }
+        }
+        modifier = {
+            planet_jobs_produces_mult = 0.10
+        }
+    }
+
+    weight_modifier = {
+        base = 2000	# Vanilla base is 1000
+    }
+}
+
+### Delta+ Basic Resource World
+col_acot_brw = {
+    icon = GFX_colony_type_rural
+
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = no
+        }
+        NOR = {
+            is_planet_class = pc_dark_fractured
+            is_planet_class = pc_acot_enigmatic
+            is_planet_class = pc_acot_enigmopolis
+            uses_district_set = city_world
+        }
+        is_capital = no
+        has_enigmatic_capital = yes
+    }
+
+    # Normal planets build districts super fast
+    triggered_planet_modifier = {
+        potential = {
+            NOR = {
+                uses_district_set = habitat
+                merg_is_hab_ringworld = yes
+            }
+        }
+        modifier = {
+            planet_district_farming_build_speed_mult = 0.50
+            planet_district_generator_build_speed_mult = 0.50
+            planet_district_mining_build_speed_mult = 0.50
+        }
+    }
+    # If Planet is Ringworld, stronger effects of vanilla ringworld specialization
+    triggered_planet_modifier = {
+        potential = { merg_is_hab_ringworld = yes }
+        modifier = {
+            pop_growth_speed = 0.25
+            planet_pop_assembly_mult = 0.2
+            planet_pop_assembly_organic_mult = 0.2
+        }
+    }
+
+    # Habitats build districts super fast
+    triggered_planet_modifier = {
+        potential = { uses_district_set = habitat }
+        modifier = {
+            planet_district_hab_mining_build_speed_mult = 0.50
+            planet_district_hab_energy_build_speed_mult = 0.50
+        }
+    }
+
+    # Normal empire workers produce much more
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_gestalt = no
+            }
+        }
+        modifier = {
+            planet_jobs_worker_produces_mult = 0.35
+        }
+    }
+
+    # Gestalt empire drones produce much more
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_gestalt = yes
+            }
+        }
+        modifier = {
+            planet_jobs_simple_drone_produces_mult = 0.35
+        }
+    }
+
+    # Basic Resource Districts produce during Auto Production
+    triggered_planet_modifier = {
+        potential = {
+            has_modifier = acot_modifier_ascended_city
+            NOR = {
+                merg_is_hab_ringworld = yes
+                uses_district_set = habitat
+            }
+        }
+        modifier = {
+            planet_districts_generator_energy_produces_add = 25
+            planet_districts_generator_acot_sr_dark_energy_upkeep_add = 0.5
+            planet_districts_farming_food_produces_add = 25
+            planet_districts_farming_acot_sr_dark_energy_upkeep_add = 0.25
+            planet_districts_farming_acot_sr_dark_energy_upkeep_add = 0.25
+            planet_districts_mining_minerals_produces_add = 25
+            planet_districts_mining_acot_sr_dark_energy_upkeep_add = 0.5
+        }
+    }
+
+    # Hab districts produce during Auto Production
+    triggered_planet_modifier = {
+        potential = {
+            has_modifier = acot_modifier_ascended_city
+            uses_district_set = habitat
+        }
+        modifier = {
+            planet_districts_hab_mining_minerals_produces_add = 25
+            planet_districts_hab_mining_acot_sr_dark_energy_upkeep_add = 0.5
+            planet_districts_hab_energy_energy_produces_add = 25
+            planet_districts_hab_energy_acot_sr_dark_energy_upkeep_add = 0.5
+        }
+    }
+
+    # Ringworld districts produce a lot during Auto Production
+    triggered_planet_modifier = {
+        potential = {
+            has_modifier = acot_modifier_ascended_city
+            merg_is_hab_ringworld = yes
+        }
+        modifier = {
+            planet_districts_rw_generator_energy_produces_add = 125
+            planet_districts_rw_generator_acot_sr_dark_energy_upkeep_add = 2.5
+            planet_districts_rw_farming_food_produces_add = 125
+            planet_districts_rw_farming_acot_sr_dark_energy_upkeep_add = 2.5
+        }
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = { has_tradition = tr_adaptability_finish }
+        }
+        modifier = {
+            planet_jobs_produces_mult = 0.05
+        }
+    }
+
+    weight_modifier = {
+        modifier = {
+            add = @stickiness
+            has_designation = col_acot_brw
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_farming
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_farming_uncapped
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_free_districts
+            parameters = {
+                type = district_farming
+            }
+            mode = add
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_generator
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_generator_uncapped
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_free_districts
+            parameters = {
+                type = district_generator
+            }
+            mode = add
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_mining
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_mining_uncapped
+            }
+            mode = add
+            mult = 1.5
+        }
+        complex_trigger_modifier = {
+            trigger = num_free_districts
+            parameters = {
+                type = district_mining
+            }
+            mode = add
+        }
+    }
+}
+
+### Delta+ Industrial Refinement
+col_acot_indus_refin = {
+    icon = GFX_colony_type_industrial
+
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = no
+        }
+        NOR = {
+            is_planet_class = pc_dark_fractured
+            is_planet_class = pc_acot_enigmatic
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_enigmatic_capital = yes
+        is_capital = no
+    }
+
+    planet_modifier = {
+        planet_district_industrial_build_speed_mult = 0.50
+        planet_artisans_upkeep_mult = -0.05
+        planet_artisans_minerals_upkeep_mult = -0.15
+        planet_artisans_produces_mult = 0.10
+        planet_metallurgists_upkeep_mult = -0.05
+        planet_metallurgists_minerals_upkeep_mult = -0.15
+        planet_metallurgists_food_upkeep_mult = -0.15
+        planet_metallurgists_produces_mult = 0.10
+        planet_refiners_produces_mult = 0.25
+        planet_refiners_upkeep_mult = -0.10
+        planet_translucers_produces_mult = 0.25
+        planet_translucers_upkeep_mult = -0.10
+        planet_chemists_produces_mult = 0.25
+        planet_chemists_upkeep_mult = -0.10
+        planet_sr_miners_produces_mult = 0.25
+    }
+    # If Planet is Ringworld, stronger effects of vanilla ringworld specialization
+    triggered_planet_modifier = {
+        potential = { merg_is_hab_ringworld = yes }
+        pop_growth_speed = 0.25
+        planet_pop_assembly_mult = 0.2
+        planet_pop_assembly_organic_mult = 0.2
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_galactic_community_member = yes
+            }
+            OR = {
+                is_active_resolution = "resolution_industry_environmental_ordinance_waivers"
+                is_active_resolution = "resolution_industry_project_cornucopia"
+            }
+        }
+        modifier = {
+            planet_artisans_produces_mult = 0.05
+            planet_metallurgists_produces_mult = 0.05
+            planet_refiners_produces_mult = 0.1
+            planet_translucers_produces_mult = 0.1
+            planet_chemists_produces_mult = 0.1
+            planet_sr_miners_produces_mult = 0.1
+        }
+    }
+
+    # triggered_planet_modifier = {
+    # 	potential = {
+    # 		exists = owner
+    # 		owner = {
+    # 			is_gestalt = no
+    # 		}
+    # 	}
+    # 	modifier = {
+
+    # 	}
+    # }
+
+    # triggered_planet_modifier = {
+    # 	potential = {
+    # 		exists = owner
+    # 		owner = {
+    # 			is_gestalt = yes
+    # 		}
+    # 	}
+    # 	modifier = {
+
+    # 	}
+    # }
+
+    triggered_planet_modifier = {
+        potential = { has_modifier = acot_modifier_ascended_city }
+        planet_districts_industrial_alloys_produces_add = 20
+        planet_districts_industrial_consumer_goods_produces_add = 20
+        planet_districts_industrial_acot_sr_dark_energy_upkeep_add = 4
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = { has_tradition = tr_adaptability_finish }
+        }
+        modifier = {
+            planet_jobs_produces_mult = 0.05
+        }
+    }
+
+    weight_modifier = {
+        modifier = {
+            add = @stickiness
+            has_designation = col_acot_indus_refin
+        }
+        complex_trigger_modifier = {
+            trigger = num_districts
+            parameters = {
+                type = district_industrial
+            }
+            mode = add
+            mult = 6
+        }
+        complex_trigger_modifier = {
+            trigger = count_owned_pop
+            parameters = {
+                limit = {
+                    has_sr_producing_job = yes
+                }
+            }
+            mode = add
+            mult = 3
+        }
+    }
+}
+
+### Delta+ Research World
+col_acot_knowledge_is_power = {
+    icon = GFX_colony_type_research
+    potential = {
+        exists = owner
+        NOR = {
+            is_planet_class = pc_dark_fractured
+            is_planet_class = pc_acot_enigmatic
+            is_planet_class = pc_acot_enigmopolis
+        }
+        has_enigmatic_capital = yes
+        is_capital = no
+    }
+
+    planet_modifier = {
+        planet_researchers_produces_mult = 0.2
+        planet_researchers_upkeep_mult = -0.05
+    }
+
+    weight_modifier = {
+        modifier = {
+            add = @stickiness
+            has_designation = col_acot_knowledge_is_power
+        }
+        complex_trigger_modifier = {
+            trigger = count_owned_pop
+            parameters = {
+                limit = {
+                    has_research_job = yes
+                }
+            }
+            mode = add
+            mult = 3
+        }
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = { has_tradition = tr_adaptability_finish }
+        }
+        modifier = {
+            planet_jobs_produces_mult = 0.05
+        }
+    }
+}

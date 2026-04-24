@@ -1,0 +1,757 @@
+
+@build_block_radius_starbase = 20
+@starbase_formation_priority = 1
+
+@corvette_collision_radius = 2.0
+@corvette_formation_priority = 4
+
+@destroyer_collision_radius = 2.5
+@destroyer_formation_priority = 2
+
+@cruiser_collision_radius = 3.5
+@cruiser_formation_priority = 3
+
+@battleship_collision_radius = 6
+@battleship_formation_priority = 5
+
+@titan_collision_radius = 12
+@titan_formation_priority = 1
+
+@build_block_radius_none = 0
+@build_block_radius_civilian = 20
+@build_block_radius_military = 200
+
+@speed_very_slow = 100
+@speed_slow = 120
+@speed_default = 140
+@speed_fast = 180
+@speed_very_fast = 200
+
+@build_block_orbital_ring = 20
+@orbital_ring_formation_priority = 1
+
+precursor_escort = {
+	use_shipnames_from = destroyer
+	formation_priority = 3
+	max_speed = @speed_very_fast
+	acceleration = 0.3
+	rotation_speed = 0.3
+	collision_radius = @destroyer_collision_radius
+	modifier = {
+		ship_evasion_add = 40
+		ship_hull_regen_add_static = 500
+		ship_armor_add = 1000
+		ship_armor_regen_add_static = 50
+		ship_shield_add = 1000
+		ship_shield_regen_add_static = 100
+		ship_piracy_suppression_add = 15
+		ship_cloaking_strength_add = 4
+	}
+	max_hitpoints = 5000
+	size_multiplier = 5
+	fleet_slot_size = 5
+	section_slots = { "bow" = { locator = "part1" } "mid" = { locator = "part1" } "stern" = { locator = "part1" } }
+	num_target_locators = 0
+	icon = acot_ship_escort_icon
+	is_space_station = no
+
+	default_behavior = origin_balance
+
+	combat_disengage_chance = 1.5
+
+	resources = {
+		category = ships
+		upkeep = {
+			sr_dark_matter = 0.25
+			acot_sr_dark_energy = 0.25
+		}
+	}
+
+	min_upgrade_cost = {
+		alloys = 4
+	}
+
+	base_buildtime = 280
+
+	class = shipclass_military
+	construction_type = starbase_shipyard
+	is_designable = yes
+	enable_default_design = yes
+	can_have_federation_design = yes
+	is_space_object = yes
+
+    potential_construction = {
+        OR =  {
+            can_build_precursor_ship = yes
+        }
+    }
+
+    prerequisites = { "tech_precursor_escort" }
+
+    possible_country = {
+        NOR = {
+            is_country_type = fallen_empire
+            is_country_type = awakened_fallen_empire
+        }
+    }
+
+    ai_ship_data = {
+        fraction = {
+            base = 0
+            modifier = {
+                add = 400
+                uses_standard_ship_sizes = yes
+            }
+            modifier = {
+                factor = 0
+                not = {
+                    has_technology = tech_precursor_escort
+                }
+            }
+        }
+    }
+
+    required_component_set = "power_core"
+    required_component_set = "ftl_components"
+    required_component_set = "thruster_components"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+}
+
+precursor_battlecruiser = {
+	use_shipnames_from = battleship
+	formation_priority = 6
+	max_speed = @speed_fast
+	acceleration = 0.2
+	rotation_speed = 0.2
+	collision_radius = @battleship_collision_radius
+	modifier = {
+		ship_evasion_add = 20
+		ship_hull_regen_add_static = 1500
+		ship_armor_add = 3000
+		ship_armor_regen_add_static = 150
+		ship_shield_add = 3000
+		ship_shield_regen_add_static = 300
+		ship_piracy_suppression_add = 25
+		ship_cloaking_strength_add = 2
+	}
+	max_hitpoints = 15000
+	size_multiplier = 10
+	fleet_slot_size = 10
+	section_slots = { "bow" = { locator = "part1" } "mid" = { locator = "part1" } "stern" = { locator = "part1" }}
+	num_target_locators = 0
+	is_space_station = no
+	is_space_object = yes
+	icon = acot_ship_bc_icon
+
+	default_behavior = origin_balance_bc
+
+	combat_disengage_chance = 1.00
+
+	resources = {
+		category = ships
+		upkeep = {
+			sr_dark_matter = 0.50
+			acot_sr_dark_energy = 0.50
+		}
+	}
+
+	min_upgrade_cost = {
+		alloys = 8
+	}
+
+    base_buildtime = 560
+
+    prerequisites = { "tech_precursor_bc" }
+
+    possible_country = {
+        NOR = {
+            is_country_type = fallen_empire
+            is_country_type = awakened_fallen_empire
+        }
+    }
+
+    class = shipclass_military
+    construction_type = starbase_shipyard
+    is_designable = yes
+    enable_default_design = yes
+    can_have_federation_design = yes
+
+    potential_construction = {
+        OR =  {
+            can_build_precursor_ship = yes
+        }
+    }
+
+    ai_ship_data = {
+        fraction = {
+            base = 0
+            modifier = {
+                add = 1000
+                uses_standard_ship_sizes = yes
+            }
+            modifier = {
+                factor = 0
+                not = {
+                    has_technology = tech_precursor_bc
+                }
+            }
+        }
+    }
+
+    required_component_set = "power_core"
+    required_component_set = "ftl_components"
+    required_component_set = "thruster_components"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+}
+
+##### HEAVY BIAS TOWARDS HYPERIONS!
+
+precursor_titan = {
+    use_shipnames_from = titan
+    hull_scale = 1.25 ## I AM BIG
+    formation_priority = 10
+    max_speed = @speed_slow
+    acceleration = 0.10
+    rotation_speed = 0.10
+    collision_radius = 24
+    modifier = {
+        ship_evasion_add = 1
+        ship_hull_regen_add_static = 40000
+        ship_armor_add = 30000
+        ship_armor_mult = 1.0
+        ship_armor_regen_add_static = 3000
+        ship_shield_add = 30000
+        ship_shield_mult = 1.0
+        ship_shield_regen_add_static = 6000
+        ship_piracy_suppression_add = 500
+        ship_cloaking_strength_add = 1
+        ships_upkeep_mult = 0.50
+        ship_weapon_damage = 1.00
+    }
+    ship_modifier = {
+        ship_weapon_range_mult = 0.25
+        ship_shield_hardening_add = 0.20
+        ship_armor_hardening_add = 0.2
+    }
+    max_hitpoints = 400000
+    size_multiplier = 100
+    fleet_slot_size = 100
+    section_slots = { "spinal" = { locator = "part1" } "mid" = { locator = "part1" } "core" = { locator = "part1" } "stern" = { locator = "part1" } }
+    num_target_locators = 0
+    is_space_station = no
+    icon = acot_ship_titan_icon
+
+    is_space_object = yes
+
+    combat_disengage_chance = 0.5
+
+    default_behavior = origin_balance_titan
+
+    resources = {
+        category = ships
+        upkeep = {
+            sr_dark_matter = 20
+            acot_sr_dark_energy = 20
+        }
+    }
+
+    base_buildtime = 1500
+
+    min_upgrade_cost = {
+        alloys = 10
+    }
+
+    class = shipclass_military
+    construction_type = starbase_shipyard
+    is_designable = yes
+    enable_default_design = yes
+    can_have_federation_design = yes
+
+    potential_construction = {
+        can_build_precursor_ship = yes
+    }
+
+    prerequisites = { "tech_precursor_titan" }
+
+    required_component_set = "power_core"
+    required_component_set = "ftl_components"
+    required_component_set = "thruster_components"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+    required_component_set = "ship_aura_components"
+    required_component_set = "ship_aura_components"
+
+    ai_ship_data = {
+        fraction = {
+            base = 0
+            modifier = {
+                add = 100
+                uses_standard_ship_sizes = yes
+            }
+            modifier = {
+                factor = 0
+                not = {
+                    has_technology = tech_precursor_titan
+                }
+            }
+        }
+    }
+
+    possible_country = {
+        NOR = {
+            is_country_type = fallen_empire
+            is_country_type = awakened_fallen_empire
+        }
+    }
+
+}
+
+##### Lets weave some Phanon ships in!
+# Star Dominator II - Capital Ship
+acot_megadreadnought = {
+    formation_priority = 40
+    is_space_object = yes
+    max_speed = 90
+    acceleration = 0.15
+    rotation_speed = 0.1
+    collision_radius = 7
+    modifier = {
+        ship_evasion_add = 15
+        ship_weapon_damage = 2.5
+        ship_shield_add = 1500000
+        ship_armor_add = 1500000
+        ships_upkeep_mult = -0.50
+        ship_cloaking_strength_add = 3
+    }
+    max_hitpoints = 3000000
+    combat_size_multiplier = 150
+    size_multiplier = 80
+    fleet_slot_size = 80
+    section_slots = {
+        "mid" = { locator = "part1" }
+        "tube_a1" = { locator = "part2" }
+        "tube_a2" = { locator = "part2down" }
+        "tube_b1" = { locator = "part3" }
+        "tube_b2" = { locator = "part3down" }
+        "tube_c1" = { locator = "part4" }
+        "tube_c2" = { locator = "part4down" }
+        "tube_d1" = { locator = "part5" }
+        "tube_d2" = { locator = "part5down" }
+        "stern1" = { locator = "part6" }
+        "stern2" = { locator = "part7" }
+        "hammer1" = { locator = "hammer" }
+        "hammer2" = { locator = "hammerdown" }
+        "bottom" = { locator = "bottom" }
+        "left" = { locator = "left" }
+        "right" = { locator = "right" }
+    }
+    num_target_locators = 0
+    is_space_station = no
+    icon = ship_size_military_16
+    prerequisites = { tech_phanon_mothership }
+
+    resources = {
+        category = ships
+        cost = {
+        }
+        upkeep = {
+        }
+    }
+    base_buildtime = 2500
+
+    class = shipclass_military
+    is_designable = no
+
+    potential_construction = {
+        can_build_phanon_ship = yes
+    }
+    ai_ship_data = {
+        fraction = {
+            base = 0
+            modifier = {
+                add = 2000
+                uses_standard_ship_sizes = yes
+            }
+            modifier = {
+                factor = 0
+                not = {
+                    has_technology = tech_phanon_mothership
+                }
+            }
+        }
+    }
+
+
+    construction_type = starbase_shipyard
+}
+
+# Star Annihilator - Flagship
+acot_star_annihilator = {
+    formation_priority = 60
+    is_space_object = yes
+    max_speed = 45
+    acceleration = 0.1
+    rotation_speed = 0.1
+    collision_radius = 7
+    modifier = {
+        ship_evasion_add = 15
+        ship_shield_add = 10000000
+        ship_armor_add = 10000000
+        ships_upkeep_mult = -0.50
+        ship_cloaking_strength_add = 3
+    }
+    max_hitpoints = 20000000
+    combat_size_multiplier = 150
+    size_multiplier = 160
+    fleet_slot_size = 160
+    section_slots = {
+        "hub" = { locator = "hub" }
+
+        "hammer" = { locator = "hammer" }
+        "hammerdown" = { locator = "hammerdown" }
+
+        "spinal" = { locator = "part1" }
+        "spinal2" = { locator = "part1down" }
+
+        "fpart1" = { locator = "fpart1" }
+        "fpart1down" = { locator = "fpart1down" }
+        "fpart2" = { locator = "fpart2" }
+        "fpart2down" = { locator = "fpart2down" }
+
+        "bow" = { locator = "part2" }
+        "mid" = { locator = "part3" }
+        "core" = { locator = "part4" }
+        "stern" = { locator = "part6" }
+        "bow2" = { locator = "part2down" }
+        "mid2" = { locator = "part3down" }
+        "core2" = { locator = "part4down" }
+        "stern2" = { locator = "part6rerverse" }
+        "back" = { locator = "part5" }
+        "side1" = { locator = "side1" locator = "armor1" }
+        "side2" = { locator = "side2" locator = "armor2" }
+
+        "fside1" = { locator = "fside1" }
+        "fside2" = { locator = "fside2" }
+
+        "armor1" = { locator = "armor1" }
+        "armor2" = { locator = "armor2" }
+    }
+    num_target_locators = 0
+    is_space_station = no
+    icon = ship_size_military_32
+    prerequisites = { tech_phanon_mothership }
+
+    resources = {
+        category = ships
+        cost = {
+        }
+        upkeep = {
+        }
+    }
+    base_buildtime = 3750
+
+    class = shipclass_military
+    is_designable = no
+
+    potential_construction = {
+        can_build_phanon_ship = yes
+    }
+    ai_ship_data = {
+        fraction = {
+            base = 0
+            modifier = {
+                add = 2000
+                uses_standard_ship_sizes = yes
+            }
+            modifier = {
+                factor = 0
+                not = {
+                    has_technology = tech_phanon_mothership
+                }
+            }
+        }
+    }
+
+    construction_type = starbase_shipyard
+}
+
+
+### Changing starbases to handle new levels
+acot_precusor_starbase = {
+    max_speed = 0.0
+    acceleration = 0.0
+    rotation_speed = 0.0
+    modifier = {
+        ship_evasion_add = 5
+        ship_armor_add = 500000
+        ship_shield_add = 500000
+        starbase_module_capacity_add = 10
+        starbase_building_capacity_add = 5
+        starbase_defense_platform_capacity_add = 20
+        #trade system
+        starbase_trade_collection_range_add = 2
+        starbase_trade_protection_range_add = 2
+        starbase_trade_protection_add = 200
+
+        ship_cloaking_detection_add = 3
+    }
+    ship_modifier = {
+        ship_fire_rate_mult = 0.50
+        ship_weapon_range_mult = 0.20
+    }
+    max_hitpoints = 1000000
+    base_buildtime = 200
+    resources = {
+        category = starbase_stations
+        cost = {
+            minerals = 0
+        }
+    }
+
+
+    combat_size_multiplier = 50
+    size_multiplier = 4
+    fleet_slot_size = 2
+    section_slots = {
+        "core" = { locator = "part1" }
+        "1" = { locator = "part2" }
+        "2" = { locator = "part3" }
+        "3" = { locator = "part4" }
+        "4" = { locator = "part5" }
+        "5" = { locator = "part6" }
+        "6" = { locator = "part7" }
+        "7" = { locator = "part2" }
+        "8" = { locator = "part3" }
+        "9" = { locator = "part4" }
+        "10" = { locator = "part5" }
+        "11" = { locator = "part6" }
+        "12" = { locator = "part7" }
+        "13" = { locator = "part2" }
+        "14" = { locator = "part3" }
+        "15" = { locator = "part4" }
+        "16" = { locator = "part5" }
+        "17" = { locator = "part6" }
+        "18" = { locator = "part7" }
+        "19" = { locator = "part6" }
+        "20" = { locator = "part7" }
+    }
+    is_designable = no
+    num_target_locators = 0
+    is_space_station = no
+    can_have_federation_design = no
+    is_civilian = no
+    components_add_to_cost = no
+    can_disable = yes
+    flip_control_on_disable = yes
+
+
+    enable_default_design = yes		#if yes, countries will have an auto-generated design at start
+    class = shipclass_starbase
+
+    required_component_set = "power_core"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+    required_component_set = "ftl_inhibitor"
+
+    build_block_radius = @build_block_radius_starbase
+    formation_priority = @starbase_formation_priority
+    icon_frame = 4
+    prerequisites = {
+        tech_acot_ai_tech_debug
+    }
+
+    potential_construction = {
+        always = no
+    }
+
+    possible_construction = {
+        always = no
+    }
+}
+
+acot_precusor_sigma_starbase = {
+    max_speed = 0.0
+    acceleration = 0.0
+    rotation_speed = 0.0
+    modifier = {
+        ship_evasion_add = 5
+        ship_armor_add = 1000000
+        ship_shield_add = 1000000
+        starbase_module_capacity_add = 20
+        starbase_building_capacity_add = 6
+        starbase_defense_platform_capacity_add = 60
+        #trade system
+        starbase_trade_collection_range_add = 4
+        starbase_trade_protection_range_add = 4
+        starbase_trade_protection_add = 800
+
+        ship_cloaking_detection_add = 5
+    }
+    ship_modifier = {
+        ship_fire_rate_mult = 0.50
+        ship_weapon_range_mult = 0.20
+    }
+    max_hitpoints = 2000000
+    base_buildtime = 200
+    resources = {
+        category = starbase_stations
+        cost = {
+            alloys = 200000
+            acot_sr_stellarite = 15000
+        }
+    }
+
+
+    combat_size_multiplier = 50
+    size_multiplier = 4
+    fleet_slot_size = 2
+    section_slots = {
+        "core" = { locator = "part1" }
+        "1" = { locator = "part2" }
+        "2" = { locator = "part3" }
+        "3" = { locator = "part4" }
+        "4" = { locator = "part5" }
+        "5" = { locator = "part6" }
+        "6" = { locator = "part7" }
+        "7" = { locator = "part2" }
+        "8" = { locator = "part3" }
+        "9" = { locator = "part4" }
+        "10" = { locator = "part5" }
+        "11" = { locator = "part6" }
+        "12" = { locator = "part7" }
+        "13" = { locator = "part2" }
+        "14" = { locator = "part3" }
+        "15" = { locator = "part4" }
+        "16" = { locator = "part5" }
+        "17" = { locator = "part6" }
+        "18" = { locator = "part7" }
+        "19" = { locator = "part6" }
+        "20" = { locator = "part7" }
+    }
+    is_designable = no
+    num_target_locators = 0
+    is_space_station = no
+    can_have_federation_design = no
+    is_civilian = no
+    components_add_to_cost = no
+    can_disable = yes
+    flip_control_on_disable = yes
+
+
+    enable_default_design = yes		#if yes, countries will have an auto-generated design at start
+    class = shipclass_starbase
+
+    required_component_set = "power_core"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+    required_component_set = "ftl_inhibitor"
+
+    build_block_radius = @build_block_radius_starbase
+    formation_priority = @starbase_formation_priority
+    icon_frame = 4
+    prerequisites = {
+        tech_acot_ai_tech_debug
+    }
+
+    potential_construction = {
+        always = no
+    }
+
+    possible_construction = {
+        always = no
+    }
+}
+
+acot_precusor_phanon_starcitadel = {
+    max_speed = 0.0
+    acceleration = 0.0
+    rotation_speed = 0.0
+    modifier = {
+        ship_evasion_add = 5
+        ship_armor_add = 5000000
+        ship_shield_add = 5000000
+        starbase_module_capacity_add = 20
+        starbase_building_capacity_add = 10
+        starbase_defense_platform_capacity_add = 100
+        #trade system
+        starbase_trade_collection_range_add = 4
+        starbase_trade_protection_range_add = 4
+
+        ship_cloaking_detection_add = 7
+    }
+    ship_modifier = {
+        ship_fire_rate_mult = 0.50
+        ship_weapon_range_mult = 0.20
+    }
+    max_hitpoints = 10000000
+    base_buildtime = 1200
+    resources = {
+        category = starbase_stations
+        cost = {
+            alloys = 50000
+            aot_sr_runic_power = 1000
+        }
+    }
+
+
+    combat_size_multiplier = 50
+    size_multiplier = 6
+    fleet_slot_size = 4
+    section_slots = {
+        "core" = { locator = "part1" }
+        "1" = { locator = "part2" }
+        "2" = { locator = "part3" }
+        "3" = { locator = "part4" }
+        "4" = { locator = "part5" }
+        "5" = { locator = "part6" }
+        "6" = { locator = "part7" }
+        "7" = { locator = "part2" }
+        "8" = { locator = "part3" }
+        "9" = { locator = "part4" }
+        "10" = { locator = "part5" }
+        "11" = { locator = "part6" }
+        "12" = { locator = "part7" }
+        "13" = { locator = "part2" }
+        "14" = { locator = "part3" }
+        "15" = { locator = "part4" }
+        "16" = { locator = "part5" }
+        "17" = { locator = "part6" }
+        "18" = { locator = "part7" }
+        "19" = { locator = "part6" }
+        "20" = { locator = "part7" }
+    }
+    is_designable = no
+    num_target_locators = 0
+    is_space_station = no
+    can_have_federation_design = no
+    is_civilian = no
+    components_add_to_cost = no
+    can_disable = yes
+    flip_control_on_disable = yes
+
+
+    enable_default_design = yes	#if yes, countries will have an auto-generated design at start
+    class = shipclass_starbase
+
+    required_component_set = "power_core"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+    required_component_set = "ftl_inhibitor"
+
+    build_block_radius = @build_block_radius_starbase
+    formation_priority = @starbase_formation_priority
+    icon_frame = 4
+    prerequisites = {
+        tech_acot_ai_tech_debug
+    }
+
+    potential_construction = {
+        always = no
+    }
+
+    possible_construction = {
+        always = no
+    }
+}

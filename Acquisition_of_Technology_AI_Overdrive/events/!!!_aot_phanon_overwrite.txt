@@ -1,0 +1,1323 @@
+namespace = aot_phanon_events
+country_event = {
+	id = aot_phanon_events.1
+	title = "aot_phanon_events.1.name"
+	desc = "aot_phanon_events.1.desc"
+	is_triggered_only = yes
+	picture = GFX_evt_dimensional_mirror
+	show_sound = event_phanon_discovery
+	# trigger = {
+	# 	is_playable_country = yes
+	# 	has_technology = tech_dark_matter_power_core_ae
+	# 	NOR = {
+	# 		has_global_flag = aot_phanon_content_OFF
+	# 		has_country_flag = offer_phanon_dimensional_mirror_chain
+	# 		has_country_flag = block_phanon_dimensional_mirror_chain
+	# 		has_country_flag = finished_phanon_dimensional_mirror_chain
+	# 		has_event_chain = phanon_dimensional_mirror_chain
+	# 		has_country_flag = attacked_phanon_property
+	# 		has_technology = tech_dark_matter_power_core_re
+	# 	}
+	# }
+	option = {
+		allow = {
+			NOT = {
+				has_event_chain = phanon_dimensional_mirror_chain
+			}
+		}
+		name = aot_phanon_events.1.a
+		custom_tooltip = aot_phanon_events.1.a_desc
+		set_country_flag = offer_phanon_dimensional_mirror_chain
+		default_hide_option = yes
+		trigger = {
+			always = yes
+		}
+		hidden_effect = {
+			begin_event_chain = {
+				event_chain = phanon_dimensional_mirror_chain
+			}
+			capital_scope = {
+				save_event_target_as = pc_home
+			}
+			enable_special_project = {
+				name = "RESEARCH_PHANON_DIMENSIONAL_MIRROR"
+				location = event_target:pc_home
+				owner = root
+			}
+		}
+		ai_chance = {
+			factor = 1000
+		}
+	}
+	option = {
+		name = aot_phanon_dimensional_mirror_postpone
+		custom_tooltip = aot_phanon_dimensional_mirror_postpone_desc
+		trigger = {
+			is_ai = no
+		}
+		set_timed_country_flag = {
+			flag = block_phanon_dimensional_mirror_chain
+			years = 5
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		name = aot_dm_production_core_skip
+		custom_tooltip = aot_dm_production_core_skip_desc
+		trigger = {
+			is_ai = no
+		}
+		set_country_flag = block_phanon_dimensional_mirror_chain
+		ai_chance = {
+			factor = 0
+		}
+	}
+	# The AI is too dumb for this, so give the option right away but without any progress.
+	# I actually doubt that.
+	#option = {
+	#	name = aot_phanon_events.1.a
+	#	custom_tooltip = aot_phanon_events.1.a_desc
+	#	set_country_flag = offer_phanon_dimensional_mirror_chain
+	#	trigger = {
+	#		is_ai = yes
+	#	}
+	#	random_list = {
+	#		60 = {
+	#		}
+	#		40 = {
+	#			hidden_effect = {
+	#				phanon_type_a_tech_gift = yes
+	#				phanon_type_civ_tech_gift = yes
+	#				phanon_type_ship_tech_gift = yes
+	#				phanon_type_b_tech_gift = yes
+	#				phanon_species_traits_tech_gift_card = yes
+	#			}
+	#		}
+	#	}
+	#	ai_chance = {
+	#		factor = 1000
+	#	}
+	#}
+}
+
+namespace = acot_alpha_matter_events
+
+
+# Alpha is actually pretty attainable for the AI! its going to be commented if I do have to edit it further.
+# i was actually so wrong
+
+### Stellarite also is pretty doable!
+### TOO EASY
+namespace = stellarite_events
+
+
+country_event = {
+	id = stellarite_events.1
+	title = stellarite_events.1.name
+	is_triggered_only = yes
+	desc = {
+		text = stellarite_events.1.desc.a
+		trigger = {
+			NOR = {
+				has_country_flag = guardians_stellarite_encountered
+				has_country_flag = learned_stellarite_from_outergate_ask
+			}
+		}
+	}
+	desc = {
+		text = stellarite_events.1.desc.b
+		trigger = {
+			has_country_flag = guardians_stellarite_encountered
+			NOT = {
+				has_country_flag = learned_stellarite_from_outergate_ask
+			}
+		}
+	}
+	desc = {
+		text = stellarite_events.1.desc.c
+		trigger = {
+			has_country_flag = learned_stellarite_from_outergate_ask
+		}
+	}
+	picture = GFX_evt_physics_research
+	show_sound = event_acot_empire_event_start
+	trigger = {
+		NOR = {
+			has_global_flag = acot_sigma_forbidden
+			has_country_flag = acot_stellarite_project_begin
+			has_technology = tech_dark_matter_power_core_se
+			has_tech_option = tech_dark_matter_power_core_se
+		}
+		is_playable_country = yes
+		is_fallen_empire = no
+	}
+	immediate = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = hear_stellarite
+				}
+			}
+			set_country_flag = hear_stellarite
+		}
+		set_country_flag = acot_stellarite_project_begin
+	}
+	option = {
+		name = stellarite_events.1.a
+		default_hide_option = yes
+		trigger = {
+			always = yes
+		}
+		hidden_effect = {
+			country_event = {
+				id = stellarite_events.100
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+	option = {
+		name = stellarite_events.1.b
+		trigger = {
+			is_sbtg_activated = no
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Stellar - For AI
+# yuckers!
+country_event = {
+	id = stellarite_events.101
+	hide_window = yes
+
+	trigger = {
+		always = no
+	}
+
+	immediate = {
+		set_country_flag = hear_stellarite
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = acot_stellarite_saturated
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = acot_ai_simple_event_forbidden
+					}
+				}
+				add_resource = {
+					sr_dark_matter = -1000
+					acot_sr_dark_energy = -1000
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = acot_ai_simple_event_forbidden
+				}
+				add_resource = {
+					sr_dark_matter = -10000
+					acot_sr_dark_energy = -10000
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_event_chain = acot_stellarite_chain
+					}
+				}
+				begin_event_chain = {
+					event_chain = acot_stellarite_chain
+				}
+				capital_scope = {
+					create_point_of_interest = {
+						id = acot_stellarite_tech_poi.1
+						name = "acot_stellarite_experiment"
+						desc = "acot_stellarite_experiment_desc"
+						event_chain = acot_stellarite_chain
+						location = this
+					}
+				}
+			}
+			enable_special_project = {
+				name = RESEARCH_STELLARITE_POWER
+			}
+			hidden_effect = {
+				remove_country_flag = acot_databank_diplomacy_engaged
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = acot_ai_simple_event_forbidden
+					}
+				}
+				add_resource = {
+					sr_dark_matter = -1000
+					acot_sr_dark_energy = -1000
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = acot_ai_simple_event_forbidden
+				}
+				add_resource = {
+					sr_dark_matter = -10000
+					acot_sr_dark_energy = -10000
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_event_chain = acot_stellarite_chain
+					}
+				}
+				begin_event_chain = {
+					event_chain = acot_stellarite_chain
+				}
+				capital_scope = {
+					create_point_of_interest = {
+						id = acot_stellarite_tech_poi.1
+						name = "acot_stellarite_experiment"
+						desc = "acot_stellarite_experiment_desc"
+						event_chain = acot_stellarite_chain
+						location = this
+					}
+				}
+			}
+			enable_special_project = {
+				name = RESEARCH_STELLARITE_POWER_CHEAP
+			}
+			hidden_effect = {
+				remove_country_flag = acot_databank_diplomacy_engaged
+			}
+		}
+	}
+}
+
+
+namespace = acot_herculean_events
+
+# PROMPT
+country_event = {
+	id = acot_herculean_events.1
+	title = acot_herculean_events.1.name
+	desc = acot_herculean_events.1.desc
+	picture = GFX_evt_physics_research
+	show_sound = event_mystery
+
+	mean_time_to_happen = {
+		years = 2
+	}
+
+	trigger = {
+		has_technology = tech_precursor_design
+		has_technology = tech_precursor_citadel
+		NOR = {
+			has_technology = tech_precursor_colossus
+			has_country_flag = acot_herculean_rumor_heard
+		}
+		NOT = {
+			has_global_flag = acot_herculean_forbidden
+		}
+	}
+
+	immediate = {
+		set_country_flag = acot_herculean_rumor_heard
+	}
+
+	option = {
+		name = acot_herculean_events.1.a
+		trigger = {
+			is_ai = no
+		}
+		begin_event_chain = {
+			event_chain = acot_herculean_development_chain
+		}
+		capital_scope = {
+			create_point_of_interest = {
+				id = acot_herculean_poi.1
+				name = acot_herculean_poi.1.name
+				desc = acot_herculean_poi.1.desc
+				event_chain = acot_herculean_development_chain
+				location = this
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = acot_herculean_events.2
+			}
+		}
+	}
+
+	option = {
+		name = acot_herculean_events.1.c
+		trigger = {
+			is_ai = no
+		}
+	}
+
+	### FOR AI
+	option = {
+		name = acot_herculean_events.1.a
+		trigger = {
+			is_ai = yes
+			NOT = {
+				has_global_flag = acot_ai_simple_event_forbidden
+			}
+		}
+		begin_event_chain = {
+			event_chain = acot_herculean_development_chain
+		}
+		hidden_effect = {
+			country_event = {
+				id = acot_herculean_events.2
+			}
+		}
+	}
+
+	option = {
+		name = acot_herculean_events.1.a
+		trigger = {
+			is_ai = yes
+			has_global_flag = acot_ai_simple_event_forbidden
+		}
+		begin_event_chain = {
+			event_chain = acot_herculean_development_chain
+		}
+		capital_scope = {
+			create_point_of_interest = {
+				id = acot_herculean_poi.1
+				name = acot_herculean_poi.1.name
+				desc = acot_herculean_poi.1.desc
+				event_chain = acot_herculean_development_chain
+				location = this
+			}
+		}
+		enable_special_project = {
+			name = ACOT_HERCULEAN_PHYSICS_STUDY
+		}
+		enable_special_project = {
+			name = ACOT_HERCULEAN_SOCIETY_STUDY
+		}
+		enable_special_project = {
+			name = ACOT_HERCULEAN_ENGINEER_STUDY
+		}
+		hidden_effect = {
+		}
+	}
+}
+
+#### CONTACT
+country_event = {
+	id = acot_herculean_events.2
+	title = acot_precursor_databank.3.name
+	desc = acot_herculean_events.2.desc
+
+	diplomatic = yes
+	custom_gui = "enclave_curator_window"
+
+	is_triggered_only = yes
+
+	picture_event_data = {
+		room = acot_sophia_room
+		portrait = event_target:acot_sophia_ruler
+	}
+
+
+	immediate = {
+		set_country_flag = acot_databank_diplomacy_engaged
+	}
+
+	after = {
+	}
+
+	option = {
+		name = acot_herculean_events.2.a
+		response_text = acot_herculean_events.2.a.response
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = acot_herculean_events.2.b
+		response_text = acot_herculean_events.2.b.response
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = acot_herculean_events.2.c
+		response_text = acot_herculean_events.2.c.response
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = acot_herculean_events.2.d
+		default_hide_option = yes
+		hidden_effect = {
+			remove_country_flag = acot_databank_diplomacy_engaged
+			country_event = {
+				id = acot_herculean_events.3
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			is_ai = no
+		}
+		name = acot_herculean_events.2.e
+		custom_tooltip = acot_herculean_events.2.e.response
+		end_event_chain = acot_herculean_development_chain
+		hidden_effect = {
+			remove_country_flag = acot_databank_diplomacy_engaged
+		}
+	}
+}
+
+country_event = {
+	id = acot_herculean_events.3
+	title = acot_precursor_databank.3.name
+	desc = acot_herculean_events.3.desc
+
+	diplomatic = yes
+	custom_gui = "enclave_curator_window"
+
+	is_triggered_only = yes
+
+	picture_event_data = {
+		room = acot_sophia_room
+		portrait = event_target:acot_sophia_ruler
+	}
+
+
+	immediate = {
+		set_country_flag = acot_databank_diplomacy_engaged
+	}
+
+	after = {
+	}
+
+	option = {
+		name = acot_herculean_events.3.a
+		response_text = acot_herculean_events.3.a.response
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = acot_herculean_events.3.b
+		response_text = acot_herculean_events.3.b.response
+		hidden_effect = {
+			remove_country_flag = acot_databank_diplomacy_engaged
+			begin_event_chain = {
+				event_chain = acot_herculean_development_chain
+			}
+			if = {
+				limit = {
+					is_ai = no
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_PHYSICS_STUDY
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_SOCIETY_STUDY
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_ENGINEER_STUDY
+				}
+			}
+			else = {
+				country_event = {
+					id = acot_herculean_events.30
+					days = 10
+				}
+			}
+		}
+	}
+	option = {
+		trigger = {
+			is_ai = no
+		}
+		name = acot_herculean_events.3.c
+		response_text = acot_herculean_events.3.c.response
+		end_event_chain = acot_herculean_development_chain
+		hidden_effect = {
+			remove_country_flag = acot_databank_diplomacy_engaged
+		}
+	}
+}
+
+country_event = {
+	id = acot_herculean_events.30
+	is_triggered_only = yes
+	hide_window = yes
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					or = {
+						AND = {
+							has_technology = tech_acot_enigmapolis_silo
+							any_owned_planet = {
+								is_planet_class = pc_acot_enigmopolis
+							}
+						}
+						has_monthly_income = {
+							resource = physics_research
+							value > 100000
+						}
+					}
+					NOT = {
+						has_special_project = ACOT_HERCULEAN_PHYSICS_STUDY
+					}
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_PHYSICS_STUDY
+				}
+			}
+			if = {
+				limit = {
+					or = {
+						any_owned_planet = {
+							is_planet_class = pc_acot_enigmopolis
+						}
+						has_monthly_income = {
+							resource = society_research
+							value > 100000
+						}
+					}
+					NOT = {
+						has_special_project = ACOT_HERCULEAN_SOCIETY_STUDY
+					}
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_SOCIETY_STUDY
+				}
+			}
+			if = {
+				limit = {
+					or = {
+						any_owned_planet = {
+							is_planet_class = pc_acot_enigmopolis
+						}
+						has_monthly_income = {
+							resource = engineering_research
+							value > 100000
+						}
+					}
+					NOT = {
+						has_special_project = ACOT_HERCULEAN_ENGINEER_STUDY
+					}
+				}
+				enable_special_project = {
+					name = ACOT_HERCULEAN_ENGINEER_STUDY
+				}
+			}
+			if = {
+				limit = {
+					NAND = {
+						has_special_project = ACOT_HERCULEAN_PHYSICS_STUDY
+						has_special_project = ACOT_HERCULEAN_SOCIETY_STUDY
+						has_special_project = ACOT_HERCULEAN_ENGINEER_STUDY
+					}
+				}
+				country_event = {
+					id = acot_herculean_events.30
+					days = 360
+				}
+			}
+		}
+	}
+}
+
+namespace = acot_mega
+country_event = {
+	id = acot_mega.1
+	title = "acot_mega.1.name"
+	desc = "acot_mega.1.desc"
+	picture = GFX_acot_precursor_station
+	show_sound = event_citadel_ready
+	location = FROMFROM
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			is_megastructure_type = acot_precursor_citadel_base
+		}
+	}
+	immediate = {
+		IF = {
+			limit = {
+				NOT = {
+					has_country_flag = precursor_citadel_design
+				}
+			}
+			create_ship_design = {
+				design = "NAME_ACOT_CITADEL_1"
+			}
+			add_ship_design = last_created_design
+			set_country_flag = precursor_citadel_design
+		}
+		FROM = {
+			remove_megastructure = this
+		}
+		FROMFROM = {
+			if = {
+				limit = {
+					any_ship_in_system = {
+						is_ship_class = shipclass_starbase
+						NOR = {
+							is_ship_size = precursor_colossus
+							is_ship_size = juggernaut
+						}
+					}
+				}
+				random_fleet_in_system = {
+					limit = {
+						any_owned_ship = {
+							is_ship_class = shipclass_starbase
+							OR = {
+								is_ship_size = starbase_outpost
+								is_ship_size = starbase_starport
+								is_ship_size = starbase_starhold
+								is_ship_size = starbase_starfortress
+								is_ship_size = starbase_citadel
+								is_ship_size = acot_fallen_outpost
+								is_ship_size = acot_fallen_starbase
+							}
+						}
+					}
+					destroy_fleet = this
+				}
+			}
+			create_starbase = {
+				size = "acot_precusor_starbase"
+				owner = root
+				effect = {
+				}
+			}
+		}
+	}
+	option = {
+		name = "acot_mega.1.a"
+	}
+}
+
+country_event = {
+	id = acot_mega.3
+	title = "acot_mega.3.name"
+	desc = "acot_mega.3.desc"
+	picture = GFX_acot_precursor_sigma_station
+	show_sound = event_citadel_ready
+	location = FROMFROM
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			is_megastructure_type = acot_precursor_sigma_citadel_base
+		}
+	}
+	immediate = {
+		IF = {
+			limit = {
+				NOT = {
+					has_country_flag = sigma_citadel_built
+				}
+			}
+			create_ship_design = {
+				design = "NAME_ACOT_SIGMA_CITADEL_1"
+			}
+			add_ship_design = last_created_design
+			set_country_flag = sigma_citadel_built
+		}
+		FROM = {
+			remove_megastructure = this
+		}
+		FROMFROM = {
+			if = {
+				limit = {
+					any_ship_in_system = {
+						OR = {
+							is_ship_size = starbase_outpost
+							is_ship_size = starbase_starport
+							is_ship_size = starbase_starhold
+							is_ship_size = starbase_starfortress
+							is_ship_size = starbase_citadel
+							is_ship_size = acot_precusor_starbase
+							is_ship_size = acot_fallen_outpost
+							is_ship_size = acot_fallen_starbase
+						}
+					}
+				}
+				random_fleet_in_system = {
+					limit = {
+						any_owned_ship = {
+							OR = {
+								is_ship_size = starbase_outpost
+								is_ship_size = starbase_starport
+								is_ship_size = starbase_starhold
+								is_ship_size = starbase_starfortress
+								is_ship_size = starbase_citadel
+								is_ship_size = acot_precusor_starbase
+								is_ship_size = acot_fallen_outpost
+								is_ship_size = acot_fallen_starbase
+							}
+						}
+					}
+					destroy_fleet = this
+				}
+				create_starbase = {
+					size = "acot_precusor_sigma_starbase"
+					owner = root
+					effect = {
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_ship_in_system = {
+						is_ship_size = acot_precusor_starfortress
+					}
+				}
+				random_fleet_in_system = {
+					limit = {
+						any_owned_ship = {
+							is_ship_size = acot_precusor_starfortress
+						}
+					}
+					destroy_fleet = this
+				}
+				create_starbase = {
+					size = "acot_precusor_sigma_starfortress"
+					owner = root
+					effect = {
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_ship_in_system = {
+						OR = {
+							is_ship_size = acot_precusor_starcitadel
+							is_ship_size = acot_precusor_phanon_starcitadel
+						}
+					}
+				}
+				random_fleet_in_system = {
+					limit = {
+						any_owned_ship = {
+							OR = {
+								is_ship_size = acot_precusor_starcitadel
+								is_ship_size = acot_precusor_phanon_starcitadel
+							}
+						}
+					}
+					destroy_fleet = this
+				}
+				create_starbase = {
+					size = "acot_precusor_sigma_starcitadel"
+					owner = root
+					effect = {
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = "acot_mega.3.a"
+	}
+}
+
+#### PHANON
+country_event = {
+	id = acot_mega.200
+	title = acot_mega.2new.name
+	desc = acot_mega.2new.desc
+	picture = GFX_acot_precursor_sigma_station_plans
+	show_sound = event_ringworld_build_upgrade
+	location = FROMFROM
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			is_megastructure_type = acot_precursor_phanon_citadel_site
+		}
+	}
+	immediate = {
+		IF = {
+			limit = {
+				NOT = {
+					has_country_flag = precursor_phanon_citadel_built
+				}
+			}
+			create_ship_design = {
+				design = "NAME_ACOT_PHANON_CITADEL_3"
+			}
+			add_ship_design = last_created_design
+			set_country_flag = precursor_phanon_citadel_built
+		}
+	}
+
+	option = {
+		name = "acot_mega.2.a"
+	}
+}
+
+country_event = {
+	id = acot_mega.300
+	title = acot_mega.3new.name
+	desc = acot_mega.3new.desc
+	picture = GFX_acot_precursor_sigma_station
+	show_sound = event_citadel_ready
+	location = FROMFROM
+	is_triggered_only = yes
+	trigger = {
+		FROM = {
+			is_megastructure_type = acot_precursor_phanon_citadel_base
+		}
+	}
+	immediate = {
+		FROM = {
+			remove_megastructure = this
+		}
+		FROMFROM = {
+			if = {
+				limit = {
+					any_ship_in_system = {
+						is_ship_class = shipclass_starbase
+						NOT = {
+							is_ship_size = precursor_colossus
+						}
+					}
+				}
+				random_fleet_in_system = {
+					limit = {
+						any_owned_ship = {
+							is_ship_class = shipclass_starbase
+							NOR = {
+								is_ship_size = precursor_colossus
+								is_ship_size = juggernaut
+							}
+						}
+					}
+					destroy_fleet = this
+				}
+			}
+			create_starbase = {
+				size = "acot_precusor_phanon_starcitadel"
+				owner = root
+				effect = {
+				}
+			}
+		}
+	}
+	option = {
+		name = "acot_mega.3.a"
+	}
+}
+
+namespace = acot_planets
+planet_event = {
+	id = acot_planets.5
+	title = acot_planets.5.name
+	desc = acot_planets.5.desc
+	picture = GFX_acot_precursor_uprising
+	show_sound = event_mystic_reveal
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			IF = {
+				limit = {
+					NOT = {
+						has_country_flag = acot_has_made_enigmatic_world
+					}
+				}
+				set_country_flag = acot_has_made_enigmatic_world
+			}
+		}
+		this = {
+			change_pc = pc_acot_enigmatic
+		}
+	}
+
+	option = {
+		name = acot_planets.5.a
+	}
+
+}
+planet_event = {
+	id = acot_planets.7
+	title = acot_planets.7.name
+	desc = acot_planets.7.desc
+	picture = GFX_acot_precursor_uprising
+	show_sound = event_mega_structure_other_empire_build_complete
+
+	is_triggered_only = yes
+
+	immediate = {
+		this = {
+			trigger_megastructure_icon = yes
+			change_pc = pc_acot_enigmopolis
+			set_planet_flag = is_void_sphere
+		}
+	}
+
+	option = {
+		name = acot_planets.7.a
+	}
+
+}
+
+namespace = acot_mod_options
+country_event = {
+	id = acot_mod_options.401
+	title = acot_mod_options.401.name
+	picture = GFX_evt_acot_greetings
+	is_triggered_only = yes
+
+	desc = {
+		trigger = {
+			NOR = {
+				has_global_flag = normal_acot
+				has_global_flag = medium_acot
+				has_global_flag = hard_acot
+			}
+		}
+		text = "acot_mod_options.401.a.desc"
+	}
+	desc = {
+		trigger = {
+			has_global_flag = normal_acot
+		}
+		text = "acot_mod_options.401.b.desc"
+	}
+	desc = {
+		trigger = {
+			has_global_flag = medium_acot
+		}
+		text = "acot_mod_options.401.c.desc"
+	}
+	desc = {
+		trigger = {
+			has_global_flag = hard_acot
+		}
+		text = "acot_mod_options.401.d.desc"
+	}
+
+	option = {
+		name = acot_mod_options.401.a
+		hidden_effect = {
+			country_event = { id = acot_mod_options.401 days = 0 }
+			remove_global_flag = normal_acot
+			remove_global_flag = medium_acot
+			remove_global_flag = hard_acot
+			every_country = {
+				limit = {
+					is_ai = yes
+				}
+				remove_modifier = easy_acot
+				remove_modifier = medium_acot
+				remove_modifier = hard_acot
+			}
+		}
+	}
+
+	option = {
+		name = acot_mod_options.401.b
+		hidden_effect = {
+			country_event = { id = acot_mod_options.401 days = 0 }
+			remove_global_flag = normal_acot
+			remove_global_flag = medium_acot
+			remove_global_flag = hard_acot
+			set_global_flag = normal_acot
+			every_country = {
+				limit = {
+					is_ai = yes
+					OR = {
+						is_country_type = default
+						is_country_type = fallen_empire
+						is_country_type = awakened_fallen_empire
+					}
+				}
+				remove_modifier = easy_acot
+				remove_modifier = medium_acot
+				remove_modifier = hard_acot
+				add_modifier = {
+					modifier = easy_acot
+				}
+			}
+		}
+	}
+
+	option = {
+		name = acot_mod_options.401.c
+		hidden_effect = {
+			country_event = { id = acot_mod_options.401 days = 0 }
+			remove_global_flag = normal_acot
+			remove_global_flag = medium_acot
+			remove_global_flag = hard_acot
+			set_global_flag = medium_acot
+			every_country = {
+				limit = {
+					is_ai = yes
+					OR = {
+						is_country_type = default
+						is_country_type = fallen_empire
+						is_country_type = awakened_fallen_empire
+					}
+				}
+				remove_modifier = easy_acot
+				remove_modifier = medium_acot
+				remove_modifier = hard_acot
+				add_modifier = {
+					modifier = easy_acot
+					mult = 10
+				}
+			}
+		}
+	}
+
+	option = {
+		name = acot_mod_options.401.d
+		hidden_effect = {
+			country_event = { id = acot_mod_options.401 days = 0 }
+			remove_global_flag = normal_acot
+			remove_global_flag = medium_acot
+			remove_global_flag = hard_acot
+			set_global_flag = hard_acot
+			every_country = {
+				limit = {
+					is_ai = yes
+					OR = {
+						is_country_type = default
+						is_country_type = fallen_empire
+						is_country_type = awakened_fallen_empire
+					}
+				}
+				remove_modifier = easy_acot
+				remove_modifier = medium_acot
+				remove_modifier = hard_acot
+				add_modifier = {
+					modifier = easy_acot
+					mult = 100
+				}
+			}
+		}
+	}
+	option = {
+		name = acot_mod_options.401.e
+		hidden_effect = {
+			country_event = { id = acot_mod_options.401 days = 0 }
+			remove_global_flag = normal_acot
+			remove_global_flag = medium_acot
+			remove_global_flag = hard_acot
+			set_global_flag = hard_acot
+			every_country = {
+				limit = {
+					is_ai = yes
+					OR = {
+						is_country_type = default
+						is_country_type = fallen_empire
+						is_country_type = awakened_fallen_empire
+					}
+				}
+				remove_modifier = easy_acot
+				remove_modifier = medium_acot
+				remove_modifier = hard_acot
+				add_modifier = {
+					modifier = easy_acot
+					mult = 100000
+				}
+			}
+		}
+	}
+	option = {
+		name = return_to_menu
+		hidden_effect = {
+			country_event = { id = acot_mod_options.1 days = 0 }
+		}
+	}
+
+	option = {
+		name = EXCELLENT
+	}
+}
+
+namespace = aot_tech_events
+
+namespace = aot_events
+ship_event = {
+	id = aot_events.11
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ship_size = enigmatic_fortress_platform
+	}
+	immediate = {
+		solar_system = {
+			starbase = {
+				fleet = {
+					set_formation_scale = 3
+				}
+			}
+		}
+	}
+}
+
+namespace = acot_ai_helper
+planet_event = {
+	id = acot_ai_helper.3
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	pre_triggers = {
+		has_owner = yes
+	}
+
+	trigger = {
+		exists = owner
+		owner = {
+			is_ai = yes
+			is_playable_country = yes
+		}
+		has_enigmatic_capital = yes
+		free_building_slots <= 4
+	}
+
+	immediate = {
+		set_update_modifiers_batch = begin
+		acot_upgrade_to_delta_building = yes
+		no_scope = {
+			event = {
+				id = acot_ai_districts.31
+				days = 1
+			}
+		}
+	}
+}
+
+namespace = aot_planetary_shields_event
+planet_event = {
+	id = aot_planetary_shields_event.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		always = no
+	}
+	immediate = {
+		planet_event = {
+			id = aot_planetary_shields_event.2
+		}
+		planet_event = {
+			id = aot_planetary_shields_event.3
+		}
+		planet_event = {
+			id = aot_planetary_shields_event.6
+		}
+		planet_event = {
+			id = aot_planetary_shields_event.7
+		}
+	}
+}
+
+namespace = acot_startup_origins
+planet_event = {
+	id = acot_startup_origins.600
+	hide_window = yes
+	is_triggered_only = yes
+	# fire_only_once = yes
+
+	immediate = {
+		clear_blockers = yes
+		remove_all_buildings = yes
+		prevent_anomaly = yes
+		if = {
+			limit = {
+				exists = owner
+			}
+			if = {
+				limit = { owner = { is_regular_empire = yes } }
+				add_building = building_acot_dm_ancient_palace
+				add_building = building_acot_dm_transmutor
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_alloy_forge
+				add_building = building_acot_dm_factory
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_synthersizer
+				if = {
+					limit = { owner = { is_megacorp = yes } }
+					add_district_and_planet_size_if_needed_effect = {
+						district = district_city
+					}
+				}
+			}
+			if = {
+				limit = { owner = { is_hive_empire = yes } }
+
+				add_building = building_acot_dm_ancient_hive_cluster
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_alloy_forge
+				add_building = building_acot_dm_transmutor
+				add_building = building_acot_dm_hive_pool
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_synthersizer
+			}
+
+			# Replace capital building for machine empires
+			if = {
+				limit = { owner = { is_machine_empire = yes } }
+
+				add_building = building_acot_dm_ancient_control_center
+				add_building = building_acot_dm_super_assembly_machine
+				add_building = building_acot_dm_transmutor
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_enigmatic_lab
+				add_building = building_acot_dm_alloy_forge
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_energy_pylon
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_generator
+				add_building = building_acot_dm_dark_matter_synthersizer
+				# Servitors
+				if = {
+					limit = { owner = { has_civic = civic_machine_servitor } }
+					add_building = building_organic_sanctuary
+				}
+			}
+			if = {
+				limit = {
+					is_capital = yes
+				}
+				build_basic_districts = {
+					PLANET_OWNER = planet_owner
+					DISTRICT_CITY_COUNT = 3
+					DISTRICT_INDUSTRIAL_COUNT = 6
+					DISTRICT_MINING_COUNT = 1
+					DISTRICT_GENERATOR_COUNT = 1
+					DISTRICT_POP_UPKEEP_COUNT = 1
+				}
+				while = {
+					count = 40
+					create_pop = { species = owner_main_species }
+				}
+			}
+		}
+	}
+}
+# EOF

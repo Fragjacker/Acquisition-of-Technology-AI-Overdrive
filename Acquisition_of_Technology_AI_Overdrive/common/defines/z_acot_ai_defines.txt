@@ -1,0 +1,13 @@
+NGameplay = {
+    COMMAND_LIMIT_MAX										= 5000 # raising this by a factor of 10 because it will be entertaining
+    PLANET_COMBAT_WIDTH_FROM_SIZE = 2 # i love ground combat :3
+    NAVAL_CAPACITY_MAX                  = 99999
+    MEGASTRUCTURE_BUILD_CAP_BASE		= 5.0
+}
+NAI = {
+    AI_TECHNOLOGY_INFINITELY_REPEATABLE_WEIGHT_MULT = 0.001	# AI will multiply AI weight of infinitely repeatable techs with this value
+    #AI_ADDITIVE_SUPERFLUOUS_INCOME_THRESOLD = 5000 		# Addative threshold,
+    #AI_MULTIPLICATIVE_SUPERFLUOUS_INCOME_THRESOLD = 1.3 	# Multiplicative threshold
+    AI_UPPER_AMENITIES_LIMIT = 5 							# AI will try to reduce the amount of amenities on a planet if it's above this number by downprioritizing amenity jobs
+    AI_LOWER_AMENITIES_LIMIT = 2 							# AI will try to increase amenities on a planet if it's below this number by increasing priority of amenity jobs
+}

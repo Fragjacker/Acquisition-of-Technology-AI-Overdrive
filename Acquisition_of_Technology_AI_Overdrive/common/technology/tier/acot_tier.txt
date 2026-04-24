@@ -1,0 +1,59 @@
+6 = { # Tier 6
+    previously_unlocked = 1
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = {
+            trigger = num_repeatable_techs
+            mode = add
+            mult = 0.2
+        }
+    }
+}
+
+7 = { # Tier 7
+    previously_unlocked = 4
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = {
+            trigger = num_repeatable_techs
+            mode = add
+            mult = 0.2
+        }
+    }
+}
+
+8 = { # Tier 8
+    previously_unlocked = 4
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = {
+            trigger = num_repeatable_techs
+            mode = add
+            mult = 0.2
+        }
+    }
+}
+
+9 = { # Tier 9
+    previously_unlocked = 4
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = {
+            trigger = num_repeatable_techs
+            mode = add
+            mult = 0.2
+        }
+    }
+}
+
+10 = { # Tier 10
+    previously_unlocked = 4
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = {
+            trigger = num_repeatable_techs
+            mode = add
+            mult = 0.2
+        }
+    }
+}

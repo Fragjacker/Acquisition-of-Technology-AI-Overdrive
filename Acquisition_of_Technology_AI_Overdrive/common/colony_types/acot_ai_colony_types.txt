@@ -1,0 +1,561 @@
+#@stickiness = 20
+#@stickiness_low = 5
+## Mining Planet
+#col_acot_mining = {
+#    icon = GFX_colony_type_mine
+#
+#    potential = {
+#        exists = owner
+#        NOR = {
+#            is_planet_class = pc_dark_fractured
+#            is_planet_class = pc_acot_enigmatic
+#            is_planet_class = pc_acot_enigmopolis
+#            uses_district_set = city_world
+#        }
+#        is_capital = no
+#        has_enigmatic_capital = yes
+#    }
+#
+#    planet_modifier = {
+#        planet_miners_produces_mult = 0.25
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = no
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_worker_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = yes
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_simple_drone_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = { has_tradition = tr_adaptability_finish }
+#        }
+#        modifier = { planet_miners_produces_mult = 0.1 }
+#    }
+#
+#    weight_modifier = {
+#        base = 10 # combat regular stickiness
+#        modifier = {
+#            add = @stickiness
+#            has_designation = col_mining
+#        }
+#        complex_trigger_modifier = {
+#            trigger = count_owned_pop
+#            parameters = {
+#                limit = {
+#                    has_miner_job = yes
+#                }
+#            }
+#            mode = add
+#            mult = 1
+#        }
+#        modifier = {
+#            add = 10
+#            OR = {
+#                has_building = building_mineral_purification_plant
+#                has_building = building_mineral_purification_hub
+#            }
+#        }
+#        modifier = {
+#            add = 5
+#            OR = {
+#                has_modifier = asteroid_belt
+#                has_modifier = mineral_rich
+#                has_modifier = ultra_rich
+#                has_modifier = extensive_moon_system
+#                has_modifier = asteroid_impacts
+#                has_modifier = carbon_world
+#            }
+#        }
+#        modifier = {
+#            add = -10
+#            has_modifier = mineral_poor
+#        }
+#    }
+#}
+#
+## Farming Planet
+#col_acot_farming = {
+#    icon = GFX_colony_type_farm
+#
+#    potential = {
+#        exists = owner
+#        owner = { country_uses_food = yes }
+#        NOR = {
+#            is_planet_class = pc_dark_fractured
+#            is_planet_class = pc_acot_enigmatic
+#            is_planet_class = pc_acot_enigmopolis
+#            uses_district_set = city_world
+#        }
+#        is_capital = no
+#        has_enigmatic_capital = yes
+#    }
+#
+#    planet_modifier = {
+#        planet_district_farming_build_speed_mult = 0.25
+#        planet_farmers_produces_mult = 0.25
+#    }
+#
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = no
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_worker_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = yes
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_simple_drone_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = { has_tradition = tr_adaptability_finish }
+#        }
+#        modifier = { planet_farmers_produces_mult = 0.1 }
+#    }
+#
+#    weight_modifier = {
+#        base = 10 # combat regular stickiness
+#        modifier = {
+#            add = @stickiness_low
+#            has_designation = col_acot_farming
+#        }
+#        complex_trigger_modifier = {
+#            trigger = count_owned_pop
+#            parameters = {
+#                limit = {
+#                    has_farmer_job = yes
+#                }
+#            }
+#            mode = add
+#            mult = 1
+#        }
+#        modifier = {
+#            add = 5
+#            has_modifier = lush_planet
+#        }
+#        modifier = {
+#            add = 10
+#            OR = {
+#                has_building = building_food_processing_facility
+#                has_building = building_food_processing_center
+#            }
+#        }
+#        modifier = {
+#            add = 5
+#            has_building = building_baol_organic_plant
+#        }
+#        modifier = {
+#            add = -10
+#            OR = {
+#                has_modifier = bleak_planet
+#                has_modifier = unbalanced_ecosystem
+#                has_modifier = irradiated_planet
+#            }
+#        }
+#    }
+#}
+#
+## Generator Planet
+#col_acot_generator = {
+#    icon = GFX_colony_type_generator
+#
+#    potential = {
+#        exists = owner
+#        NOR = {
+#            is_planet_class = pc_dark_fractured
+#            is_planet_class = pc_acot_enigmatic
+#            is_planet_class = pc_acot_enigmopolis
+#            uses_district_set = city_world
+#        }
+#        is_capital = no
+#        has_enigmatic_capital = yes
+#    }
+#
+#    planet_modifier = {
+#        planet_technician_produces_mult = 0.25
+#    }
+#
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = no
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_worker_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#                is_gestalt = yes
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_greatergood_five_year_plans"
+#                is_active_resolution = "resolution_greatergood_greater_than_ourselves"
+#                is_active_resolution = "resolution_greatergood_balance_in_the_middle"
+#                is_active_resolution = "resolution_greatergood_universal_prosperity_mandate"
+#            }
+#        }
+#        modifier = {
+#            planet_jobs_simple_drone_produces_mult = 0.1
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = { has_tradition = tr_adaptability_finish }
+#        }
+#        modifier = { planet_technician_produces_mult = 0.1 }
+#    }
+#
+#    weight_modifier = {
+#        base = 10 # combat regular stickiness
+#        modifier = {
+#            add = @stickiness
+#            has_designation = col_acot_generator
+#        }
+#        complex_trigger_modifier = {
+#            trigger = count_owned_pop
+#            parameters = {
+#                limit = {
+#                    has_technician_job = yes
+#                }
+#            }
+#            mode = add
+#            mult = 1
+#        }
+#        modifier = {
+#            add = 5
+#            OR = {
+#                has_modifier = hazardous_weather
+#                has_modifier = strong_magnetic_field
+#            }
+#        }
+#        modifier = {
+#            add = 10
+#            OR = {
+#                has_building = building_energy_grid
+#                has_building = building_energy_nexus
+#            }
+#        }
+#        modifier = {
+#            add = -10
+#            has_modifier = energy_poor
+#        }
+#    }
+#}
+#
+#col_acot_foundry = {
+#    icon = GFX_colony_type_foundry
+#
+#    # used by AI to estimate what will happen when we change the designation
+#    ai_resource_conversion = {
+#        consumer_goods = 0
+#        alloys = 2
+#
+#        trigger = {
+#            owner = {
+#                is_gestalt = no
+#            }
+#        }
+#    }
+#
+#    ai_resource_current_conversion = {
+#        alloys = 0.5
+#        consumer_goods = -2
+#
+#        trigger = {
+#            owner = {
+#                is_gestalt = no
+#            }
+#        }
+#    }
+#
+#    potential = {
+#        exists = owner
+#        NOR = {
+#            is_planet_class = pc_dark_fractured
+#            is_planet_class = pc_acot_enigmatic
+#            is_planet_class = pc_acot_enigmopolis
+#            uses_district_set = city_world
+#        }
+#        is_capital = no
+#        has_enigmatic_capital = yes
+#    }
+#
+#    custom_tooltip = col_foundry_custom
+#    planet_modifier = {
+#        planet_metallurgists_upkeep_mult = -0.20
+#    }
+#
+#    triggered_planet_modifier = {
+#        potential = { uses_district_set = ring_world }
+#        pop_growth_speed = 0.1
+#        planet_pop_assembly_mult = 0.1
+#        planet_pop_assembly_organic_mult = 0.1
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_industry_environmental_ordinance_waivers"
+#                is_active_resolution = "resolution_industry_project_cornucopia"
+#            }
+#        }
+#        modifier = {
+#            planet_metallurgists_produces_mult = 0.05
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = { has_tradition = tr_adaptability_finish }
+#        }
+#        modifier = {
+#            planet_metallurgists_produces_mult = 0.05
+#        }
+#    }
+#
+#    weight_modifier = {
+#        base = 10 # combat regular stickiness
+#        modifier = {
+#            add = @stickiness
+#            has_designation = col_foundry
+#        }
+#        complex_trigger_modifier = {
+#            trigger = count_owned_pop
+#            parameters = {
+#                limit = {
+#                    has_foundry_job = yes
+#                }
+#            }
+#            mode = add
+#            mult = 1
+#        }
+#        modifier = {
+#            add = 10
+#            OR = {
+#                has_building = building_foundry_1
+#                has_building = building_foundry_2
+#                has_building = building_foundry_3
+#            }
+#        }
+#        modifier = {
+#            add = -5
+#            OR = {
+#                has_building = building_factory_1
+#                has_building = building_factory_2
+#                has_building = building_factory_3
+#            }
+#        }
+#        modifier = {
+#            add = 11
+#            has_designation = col_factory
+#            exists = owner
+#            owner = {
+#                has_monthly_income = { resource = alloys value < 0 }
+#                has_monthly_income = { resource = consumer_goods value >= 0 }
+#            }
+#        }
+#    }
+#}
+#
+#col_acot_factory = {
+#    icon = GFX_colony_type_factory
+#
+#    # used by AI to estimate what will happen when we change the designation
+#    ai_resource_conversion = {
+#        consumer_goods = 2
+#        alloys = 0
+#
+#        trigger = {
+#            owner = {
+#                is_gestalt = no
+#            }
+#        }
+#    }
+#
+#    # Used by AI to estimate the current effects of this designation
+#    ai_resource_current_conversion = {
+#        consumer_goods = 0.5
+#        alloys = -0.5
+#
+#        trigger = {
+#            owner = {
+#                is_gestalt = no
+#            }
+#        }
+#    }
+#
+#    potential = {
+#        exists = owner
+#        NOR = {
+#            is_planet_class = pc_dark_fractured
+#            is_planet_class = pc_acot_enigmatic
+#            is_planet_class = pc_acot_enigmopolis
+#            uses_district_set = city_world
+#        }
+#        is_capital = no
+#        has_enigmatic_capital = yes
+#    }
+#
+#    custom_tooltip = col_factory_custom
+#    planet_modifier = {
+#        planet_artisans_upkeep_mult = -0.20
+#    }
+#
+#    triggered_planet_modifier = {
+#        potential = { uses_district_set = ring_world }
+#        pop_growth_speed = 0.1
+#        planet_pop_assembly_mult = 0.1
+#        planet_pop_assembly_organic_mult = 0.1
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = {
+#                is_galactic_community_member = yes
+#            }
+#            OR = {
+#                is_active_resolution = "resolution_industry_environmental_ordinance_waivers"
+#                is_active_resolution = "resolution_industry_project_cornucopia"
+#            }
+#        }
+#        modifier = {
+#            planet_artisans_produces_mult = 0.05
+#        }
+#    }
+#    triggered_planet_modifier = {
+#        potential = {
+#            exists = owner
+#            owner = { has_tradition = tr_adaptability_finish }
+#        }
+#        modifier = {
+#            planet_artisans_produces_mult = 0.05
+#        }
+#    }
+#
+#    weight_modifier = {
+#        base = 10 # combat regular stickiness
+#        modifier = {
+#            add = @stickiness
+#            has_designation = col_factory
+#        }
+#        complex_trigger_modifier = {
+#            trigger = count_owned_pop
+#            parameters = {
+#                limit = {
+#                    has_factory_job = yes
+#                }
+#            }
+#            mode = add
+#            mult = 1
+#        }
+#        modifier = {
+#            add = 10
+#            OR = {
+#                has_building = building_factory_1
+#                has_building = building_factory_2
+#                has_building = building_factory_3
+#            }
+#        }
+#        modifier = {
+#            add = -5
+#            OR = {
+#                has_building = building_foundry_1
+#                has_building = building_foundry_2
+#                has_building = building_foundry_3
+#            }
+#        }
+#        modifier = {
+#            add = 11
+#            has_designation = col_foundry
+#            exists = owner
+#            owner = {
+#                has_monthly_income = { resource = consumer_goods value < 0 }
+#                has_monthly_income = { resource = alloys value >= 0 }
+#            }
+#        }
+#        modifier = {
+#            mult = 0.5
+#            exists = owner
+#            owner = {
+#                any_owned_planet = {
+#                    has_factory_designation = yes
+#                }
+#            }
+#        }
+#    }
+#}
+#

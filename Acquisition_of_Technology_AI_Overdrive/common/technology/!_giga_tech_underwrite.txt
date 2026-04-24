@@ -1,0 +1,34 @@
+giga_tech_amb_supertensiles = {
+	cost = @tier3cost1
+	area = physics
+	tier = 1 # we need to be able to draw this potentially from the very start
+	category = { field_manipulation }
+	prerequisites = {} # notionally behind mega-engineering but prereqs are handled in weights because we need this earlier depending on setup
+	weight = @tier3weight1
+
+	potential = { has_global_flag = @giga_amb_flag }
+
+	modifier = {
+	}
+
+	weight_modifier = {
+		factor = 0
+	}
+}
+tech_acot_ai_tech_debug = {
+	cost = @tier3cost1
+	area = physics
+	tier = 1 # we need to be able to draw this potentially from the very start
+	category = { field_manipulation }
+	prerequisites = {} # notionally behind mega-engineering but prereqs are handled in weights because we need this earlier depending on setup
+	weight = @tier3weight1
+
+	potential = { always = no }
+
+	modifier = {
+	}
+
+	weight_modifier = {
+		factor = 0
+	}
+}

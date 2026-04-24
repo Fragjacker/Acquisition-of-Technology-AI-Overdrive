@@ -1,0 +1,344 @@
+
+### im removing most of the weird little mechanics from these jobs. theyre obtuse and very hard for the AI to do.
+
+acot_dark_energy_man = {
+    category = specialist
+    condition_string = SPECIALIST_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_energy_pylon
+    clothes_texture_index = 3
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            acot_sr_dark_energy = 6
+        }
+        upkeep = {
+           energy = 12
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_energy_man
+        }
+        modifier = {
+            factor = 1.2
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+}
+
+acot_dark_energy_drone = {
+    category = complex_drone
+    condition_string = DRONE_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_energy_pylon
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_drone_job
+
+    possible = { can_think = yes }
+
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            acot_sr_dark_energy = 6
+        }
+        upkeep = {
+            energy = 12
+        }
+    }
+
+    weight = {
+        weight = @complex_drone_job_weight
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_energy_drone
+        }
+    }
+}
+
+acot_dark_matter_man = {
+    category = specialist
+    condition_string = SPECIALIST_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_matter_generator
+    clothes_texture_index = 3
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            sr_dark_matter = 6
+        }
+        upkeep = {
+            minerals = 9
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_matter_man
+        }
+        modifier = {
+            factor = 1.2
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+}
+
+acot_dark_matter_drone = {
+    category = complex_drone
+    condition_string = DRONE_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_matter_generator
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_drone_job
+
+    possible = { can_think = yes }
+
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            sr_dark_matter = 6
+        }
+        upkeep = {
+            minerals = 9
+        }
+    }
+
+    weight = {
+        weight = @complex_drone_job_weight
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_matter_drone
+        }
+    }
+}
+
+ae_dark_energy_man = {
+    icon = acot_dark_energy_man
+    category = specialist
+    condition_string = SPECIALIST_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_energy_pylon
+    clothes_texture_index = 3
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            acot_sr_dark_energy = 12
+        }
+        upkeep = {
+            energy = 24
+        }
+    }
+    weight = {
+        weight = @specialist_job_weight
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = {
+                has_trait = trait_mechanical
+            }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_energy_man
+        }
+        modifier = {
+            factor = 1.2
+            is_enslaved = yes
+            has_slavery_type = {
+                type = slavery_indentured
+            }
+        }
+    }
+}
+
+ae_dark_energy_drone = {
+    icon = acot_dark_energy_drone
+    category = complex_drone
+    condition_string = DRONE_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_energy_pylon
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+    possible_precalc = can_fill_drone_job
+    possible = {
+        can_think = yes
+    }
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            acot_sr_dark_energy = 12
+        }
+        upkeep = {
+            energy = 24
+        }
+    }
+    weight = {
+        weight = @complex_drone_job_weight
+        modifier = {
+            factor = 1.5
+            has_job = acot_dark_energy_drone
+        }
+    }
+}
+
+ae_dark_matter_man = {
+    icon = acot_dark_matter_man
+    category = specialist
+    condition_string = SPECIALIST_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_matter_generator
+    clothes_texture_index = 3
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            sr_dark_matter = 12
+        }
+        upkeep = {
+            minerals = 18
+        }
+    }
+    weight = {
+        weight = @specialist_job_weight
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = {
+                has_trait = trait_mechanical
+            }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 5
+            has_job = ae_dark_matter_man
+        }
+        modifier = {
+            factor = 1.2
+            is_enslaved = yes
+            has_slavery_type = {
+                type = slavery_indentured
+            }
+        }
+    }
+}
+
+ae_dark_matter_drone = {
+    category = complex_drone
+    condition_string = DRONE_JOB_TRIGGER
+    building_icon = building_acot_ae_dark_matter_generator
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+    possible_precalc = can_fill_drone_job
+    possible = {
+        can_think = yes
+    }
+    resources = {
+        category = planet_jobs_productive
+        produces = {
+            sr_dark_matter = 12
+        }
+        upkeep = {
+            minerals = 18
+        }
+    }
+    weight = {
+        weight = @complex_drone_job_weight
+        modifier = {
+            factor = 5
+            has_job = ae_dark_matter_drone
+        }
+    }
+}
+

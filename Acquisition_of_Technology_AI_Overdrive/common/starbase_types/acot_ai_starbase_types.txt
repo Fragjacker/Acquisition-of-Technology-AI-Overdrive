@@ -1,0 +1,1431 @@
+# haha funny things
+
+## oh my god i have to overwrite vanilla fml
+sshipyard = {
+    potential = {
+        has_starbase_size > starbase_outpost
+        has_starbase_size < acot_precusor_starbase
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 0
+        complex_trigger_modifier = { #+100 for each shipyard
+            trigger = count_starbase_modules
+            parameters = {
+                type = shipyard
+            }
+            mode = add
+            mult = 100
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                NOT = {
+                    any_owned_starbase = {
+                        has_starbase_module = shipyard
+                    }
+                }
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 1
+        }
+
+        ratio = {
+            base = 0.20
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            crew_quarters = {
+                base = 1.00
+            }
+
+            fleet_academy = {
+                base = 1.00
+            }
+
+            titan_yards = {
+                base = 1.00
+            }
+
+            colossus_yards = {
+                base = 1.00
+            }
+
+            ice_mining_station = {
+                base = 1.00
+            }
+
+            dragon_hatchery = {
+                base = 1.00
+            }
+
+            hydroponics_bay = {
+                base = 1.00
+            }
+
+            irassian_naval_yards = {
+                base = 3.00
+            }
+            cordyceptic_reanimation_facility = {
+                base = 3.00
+            }
+        }
+
+        modules = {
+            shipyard = {
+                base = 1.00
+            }
+
+            anchorage = {
+                base = 0.50
+            }
+
+            hangar_bay = {
+                base = 0.45
+            }
+        }
+    }
+}
+
+sdetection_array = {
+    potential = {
+        has_first_contact_dlc = yes
+        has_starbase_size > starbase_outpost
+        has_starbase_size < acot_precusor_starbase
+        exists = owner
+        owner = {
+            has_technology = tech_detection_array
+        }
+        exists = sector
+        sector = {
+            any_system_within_border = {
+                starbase = {
+                    NOT = {
+                        is_starbase_type = sdetection_array
+                    }
+                }
+            }
+        }
+        solar_system = {
+            is_capital_system = no
+        }
+        OR = {
+            AND = {
+                owner = { is_ai = no }
+                has_starbase_module = detection_array
+            }
+            # Either this is near the capital system
+            AND = {
+                owner = { is_ai = yes }
+                sector = {
+                    any_system_within_border = {
+                        is_capital_system = yes
+                    }
+                }
+            }
+            # Or is a border system
+            AND = {
+                owner = { is_ai = yes }
+                closest_system = {
+                    min_steps = 0
+                    max_steps = 4
+                    limit = {
+                        exists = owner
+                        owner = {
+                            is_country_type = default
+                            NOR = {
+                                is_same_value = root.owner
+                                is_in_federation_with = root.owner
+                                has_association_status = root.owner
+                                has_defensive_pact = root.owner
+                                has_non_aggression_pact = root.owner
+                                has_overlord = root.owner
+                                AND = {
+                                    has_subject = root.owner
+                                    has_loyalty > 0
+                                }
+                            }
+                        }
+                    }
+                    exists = this
+                }
+            }
+        }
+    }
+
+    ai_use_defense_platforms = yes #AI will not build defense platforms otherwise, except in the capital system
+
+    weight_modifier = {
+        base = 0
+        complex_trigger_modifier = { #+100 for each detection array
+            trigger = count_starbase_modules
+            parameters = {
+                type = detection_array
+            }
+            mode = add
+            mult = 100
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                NOT = {
+                    any_owned_starbase = {
+                        has_starbase_module = detection_array
+                    }
+                }
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 1
+        }
+
+        ratio = {
+            base = 0.10
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_pacifist
+                }
+            }
+            modifier = {
+                add = 0.20
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_pacifist
+                }
+            }
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_xenophobe
+                }
+            }
+            modifier = {
+                add = 0.20
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_xenophobe
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            listening_post = {
+                base = 1.00
+                modifier = {
+                    factor = 6
+                    exists = owner
+                    owner = {
+                        has_technology = tech_unusual_senses
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    exists = owner
+                    owner = {
+                        has_civic = civic_hive_subspace_ephapse
+                    }
+                }
+            }
+
+            dark_matter_detector = {
+                base = 10.00
+            }
+
+            yuht_detection_array = {
+                base = 5.00
+            }
+
+            target_uplink_computer = {
+                base = 1.00
+            }
+
+            defense_grid = {
+                base = 1.00
+            }
+
+
+            cybrex_mining_hub = {
+                base = 1.00
+            }
+        }
+
+        modules = {
+            detection_array = {
+                base = 1.00
+            }
+        }
+    }
+}
+
+
+# shipyard
+sshipyard_ae = {
+    potential = {
+        has_starbase_size >= acot_precusor_starbase
+        NOT = {
+            has_starbase_size > acot_precusor_starcitadel
+        }
+
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+100 for each shipyard
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_shipyard
+            }
+            mode = add
+            mult = 200
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                NOT = {
+                    any_owned_starbase = {
+                        has_starbase_module = acot_starbase_shipyard
+                    }
+                }
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 1
+        }
+
+        ratio = {
+            base = 0.20
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_starbase_detection_amplifier = {
+                base = 1.00
+            }
+
+            acot_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_starbase_super_computer = {
+                base = 1.00
+            }
+
+            acot_sb_phanon_assembly = {
+                base = 1.0
+            }
+        }
+
+        modules = {
+            acot_starbase_shipyard = {
+                base = 1.00
+            }
+
+            acot_starbase_anchorage = {
+                base = 0.50
+            }
+
+            acot_starbase_hangar_bay = {
+                base = 0.45
+            }
+        }
+    }
+}
+
+# Anchorage
+sanchorage_ae = {
+    potential = {
+        has_starbase_size >= acot_precusor_starbase
+        NOT = {
+            has_starbase_size > acot_precusor_starcitadel
+        }
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+100 for each anchorage
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_anchorage
+            }
+            mode = add
+            mult = 200
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.65
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.02
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_starbase_detection_amplifier = {
+                base = 1.00
+            }
+
+            acot_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_starbase_super_computer = {
+                base = 1.00
+            }
+        }
+
+        modules = {
+            acot_starbase_anchorage = {
+                base = 1.00
+            }
+        }
+    }
+}
+
+# Fortress System
+sfortress_ae = {
+    potential = {
+        has_starbase_size >= acot_precusor_starbase
+        NOT = {
+            has_starbase_size > acot_precusor_starcitadel
+        }
+        exists = owner
+
+        OR = {
+            owner = { is_ai = no }
+            AND = {
+                solar_system = { is_bottleneck_system = yes }
+                closest_system = {
+                    min_steps = 0
+                    max_steps = 2
+                    limit = {
+                        exists = owner
+                        owner = {
+                            is_country_type = default
+                            NOR = {
+                                is_same_value = root.owner
+                                is_in_federation_with = root.owner
+                                has_association_status = root.owner
+                                has_defensive_pact = root.owner
+                                has_non_aggression_pact = root.owner
+                                has_overlord = root.owner
+                                AND = {
+                                    has_subject = root.owner
+                                    has_loyalty > 0
+                                }
+                            }
+                        }
+                    }
+                    exists = this
+                }
+            }
+        }
+
+        NAND = { # Forbidden in sector capital system for trader AI
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    ai_use_defense_platforms = yes #AI will not build defense platforms otherwise, except in the capital system
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_gun_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_missile_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_hangar_bay
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_starbase_laser_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = gun_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = missile_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = hangar_bay
+            }
+            mode = add
+            mult = 80
+        }
+        modifier = {
+            add = 150
+            solar_system = { is_bottleneck_system = yes }
+            closest_system = {
+                max_steps = 2
+                limit = {
+                    exists = owner
+                    owner = {
+                        OR = {
+                            is_rival = root
+                            is_hostile_to = root
+                            is_hostile = root
+                        }
+                    }
+                }
+                exists = this
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.10
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_pacifist
+                }
+            }
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_pacifist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_starbase_detection_amplifier = {
+                base = 1.00
+            }
+
+            acot_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_starbase_super_computer = {
+                base = 1.00
+            }
+
+        }
+
+        modules = {
+            acot_starbase_hangar_bay = {
+                base = 0.80
+            }
+
+            acot_starbase_missile_battery = {
+                base = 1.00
+            }
+
+            acot_starbase_gun_battery = {
+                base = 1.00
+            }
+            acot_starbase_laser_battery = {  }
+
+            archaeo_rampart = {
+                base = 0.3
+            }
+        }
+    }
+}
+
+### phanon balls
+sshipyard_phanon = {
+    potential = {
+        has_starbase_size = acot_precusor_phanon_starcitadel
+
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 0
+        complex_trigger_modifier = { #+100 for each shipyard
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_shipyard
+            }
+            mode = add
+            mult = 200
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                NOT = {
+                    any_owned_starbase = {
+                        has_starbase_module = acot_phanon_starbase_shipyard
+                    }
+                }
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 1
+        }
+
+        ratio = {
+            base = 0.20
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_phanon_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_super_computer = {
+                base = 1.00
+            }
+
+            #acot_sb_phanon_assembly = {
+            #    base = 1.0
+            #}
+        }
+
+        modules = {
+            acot_phanon_starbase_shipyard = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_anchorage = {
+                base = 0.6
+            }
+
+            acot_phanon_starbase_hangar_bay = {
+                base = 0.45
+            }
+        }
+    }
+}
+
+# Anchorage
+sanchorage_phanon = {
+    potential = {
+        has_starbase_size >= acot_precusor_phanon_starcitadel
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 0
+        complex_trigger_modifier = { #+100 for each anchorage
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_anchorage
+            }
+            mode = add
+            mult = 200
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.65
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.02
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_phanon_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_super_computer = {
+                base = 1.00
+            }
+        }
+
+        modules = {
+            acot_phanon_starbase_anchorage = {
+                base = 1.00
+            }
+        }
+    }
+}
+
+# Fortress System
+sfortress_phanon = {
+    potential = {
+        has_starbase_size >= acot_precusor_phanon_starcitadel
+        exists = owner
+        OR = {
+            owner = { is_ai = no }
+            AND = {
+                solar_system = { is_bottleneck_system = yes }
+                closest_system = {
+                    min_steps = 0
+                    max_steps = 2
+                    limit = {
+                        exists = owner
+                        owner = {
+                            is_country_type = default
+                            NOR = {
+                                is_same_value = root.owner
+                                is_in_federation_with = root.owner
+                                has_association_status = root.owner
+                                has_defensive_pact = root.owner
+                                has_non_aggression_pact = root.owner
+                                has_overlord = root.owner
+                                AND = {
+                                    has_subject = root.owner
+                                    has_loyalty > 0
+                                }
+                            }
+                        }
+                    }
+                    exists = this
+                }
+            }
+        }
+
+        NAND = { # Forbidden in sector capital system for trader AI
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    ai_use_defense_platforms = yes #AI will not build defense platforms otherwise, except in the capital system
+
+    weight_modifier = {
+        base = 0
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_gun_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_missile_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_hangar_bay
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_phanon_starbase_laser_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = gun_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = missile_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = hangar_bay
+            }
+            mode = add
+            mult = 80
+        }
+        modifier = {
+            add = 150
+            solar_system = { is_bottleneck_system = yes }
+            closest_system = {
+                max_steps = 2
+                limit = {
+                    exists = owner
+                    owner = {
+                        OR = {
+                            is_rival = root
+                            is_hostile_to = root
+                            is_hostile = root
+                        }
+                    }
+                }
+                exists = this
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.10
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_pacifist
+                }
+            }
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_pacifist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_phanon_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_super_computer = {
+                base = 1.00
+            }
+
+        }
+
+        modules = {
+            acot_phanon_starbase_hangar_bay = {
+                base = 0.80
+            }
+
+            acot_phanon_starbase_missile_battery = {
+                base = 1.00
+            }
+
+            acot_phanon_starbase_gun_battery = {
+                base = 1.00
+            }
+            acot_phanon_starbase_laser_battery = {  }
+
+            archaeo_rampart = {
+                base = 0.3
+            }
+        }
+    }
+}
+
+### sigma balls
+sshipyard_sigma = {
+    potential = {
+        has_starbase_size >= acot_precusor_sigma_starbase
+
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+100 for each shipyard
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_shipyard
+            }
+            mode = add
+            mult = 200
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                NOT = {
+                    any_owned_starbase = {
+                        has_starbase_module = acot_sigma_starbase_shipyard
+                    }
+                }
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 1
+        }
+
+        ratio = {
+            base = 0.20
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_sigma_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_super_computer = {
+                base = 1.00
+            }
+
+            acot_sb_phanon_assembly = {
+                base = 1.0
+            }
+        }
+
+        modules = {
+            acot_sigma_starbase_shipyard = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_anchorage = {
+                base = 0.50
+            }
+
+            acot_sigma_starbase_hangar_bay = {
+                base = 0.45
+            }
+        }
+    }
+}
+
+# Anchorage
+sanchorage_sigma = {
+    potential = {
+        has_starbase_size >= acot_precusor_sigma_starbase
+
+        NAND = {
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+100 for each anchorage
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_anchorage
+            }
+            mode = add
+            mult = 200
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.65
+            modifier = {
+                add = 0.05
+                exists = owner
+                owner = {
+                    has_ethic = ethic_militarist
+                }
+            }
+            modifier = {
+                add = 0.02
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_militarist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_sigma_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_super_computer = {
+                base = 1.00
+            }
+        }
+
+        modules = {
+            acot_sigma_starbase_anchorage = {
+                base = 1.00
+            }
+        }
+    }
+}
+
+# Fortress System
+sfortress_sigma = {
+    potential = {
+        has_starbase_size >= acot_precusor_sigma_starbase
+        exists = owner
+
+        OR = {
+            owner = { is_ai = no }
+            AND = {
+                solar_system = { is_bottleneck_system = yes }
+                closest_system = {
+                    min_steps = 0
+                    max_steps = 2
+                    limit = {
+                        exists = owner
+                        owner = {
+                            is_country_type = default
+                            NOR = {
+                                is_same_value = root.owner
+                                is_in_federation_with = root.owner
+                                has_association_status = root.owner
+                                has_defensive_pact = root.owner
+                                has_non_aggression_pact = root.owner
+                                has_overlord = root.owner
+                                AND = {
+                                    has_subject = root.owner
+                                    has_loyalty > 0
+                                }
+                            }
+                        }
+                    }
+                    exists = this
+                }
+            }
+        }
+
+        NAND = { # Forbidden in sector capital system for trader AI
+            owner = {
+                is_ai = yes
+                should_ai_focus_on_trade = yes
+            }
+
+            solar_system = {
+                is_same_value = sector.sector_capital.solar_system
+            }
+        }
+    }
+
+    ai_use_defense_platforms = yes #AI will not build defense platforms otherwise, except in the capital system
+
+    weight_modifier = {
+        base = 1
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_gun_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_missile_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_hangar_bay
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = acot_sigma_starbase_laser_battery
+            }
+            mode = add
+            mult = 75
+        }
+        complex_trigger_modifier = { #+75 for each gun_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = gun_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each missile_battery
+            trigger = count_starbase_modules
+            parameters = {
+                type = missile_battery
+            }
+            mode = add
+            mult = 80
+        }
+        complex_trigger_modifier = { #+75 for each hangar_bay
+            trigger = count_starbase_modules
+            parameters = {
+                type = hangar_bay
+            }
+            mode = add
+            mult = 80
+        }
+        modifier = {
+            add = 150
+            solar_system = { is_bottleneck_system = yes }
+            closest_system = {
+                max_steps = 2
+                limit = {
+                    exists = owner
+                    owner = {
+                        OR = {
+                            is_rival = root
+                            is_hostile_to = root
+                            is_hostile = root
+                        }
+                    }
+                }
+                exists = this
+            }
+        }
+    }
+
+    ai_design = {
+        min = {
+            base = 0
+        }
+
+        ratio = {
+            base = 0.10
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_pacifist
+                }
+            }
+            modifier = {
+                add = 0.10
+                exists = owner
+                owner = {
+                    has_ethic = ethic_fanatic_pacifist
+                }
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            acot_sigma_starbase_aura_generator = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_reinforced_wall = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_super_computer = {
+                base = 1.00
+            }
+
+        }
+
+        modules = {
+            acot_sigma_starbase_hangar_bay = {
+                base = 0.80
+            }
+
+            acot_sigma_starbase_missile_battery = {
+                base = 1.00
+            }
+
+            acot_sigma_starbase_gun_battery = {
+                base = 1.00
+            }
+            acot_sigma_starbase_laser_battery = {  }
+
+            archaeo_rampart = {
+                base = 0.3
+            }
+        }
+    }
+}
+
+sorbital_ring_precursor = { # generic
+    potential = {
+        has_starbase_size >= acot_precusor_orbital_ring_t1
+    }
+    weight_modifier = { base = 10 }
+    ai_design = {
+        min = {
+            base = 0
+        }
+        modules = {
+            acot_orbital_ring_habitat = {
+                base = 5.0 # much better suited for this
+            }
+            acot_orbital_ring_battery = {
+                base = 2.5 # okay
+            }
+            acot_orbital_ring_missile = {
+                base = 1.0
+            }
+            acot_orbital_ring_pd = {
+                base = 1.0
+            }
+            acot_orbital_ring_hangar = {
+                base = 1.0
+            }
+            acot_orbital_ring_anchorage = {
+                base = 0.5 # starbases do it better
+            }
+        }
+
+        # token followed by priority
+        buildings = {
+            # uh what?
+        }
+    }
+}
+

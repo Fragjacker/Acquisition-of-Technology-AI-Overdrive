@@ -1,0 +1,49 @@
+acot_heavy_armor_ae_def = {
+    use_armynames_from = assault_army
+    damage = 6.00
+    health = 7.00
+    morale = 2.00
+    morale_damage = 2.00
+    collateral_damage = 3.00
+    war_exhaustion = 2.50
+    time = 180
+    has_species = no
+    icon = GFX_army_type_heavy
+    defensive = yes
+    prerequisites = { "tech_acot_army_ae" }
+
+    resources = {
+        category = armies
+        cost = {
+            minerals = 600
+            alloys = 250
+        }
+        #upkeep = {
+        #    energy = 6.0
+        #    alloys = 2.5
+        #}
+    }
+
+    show_tech_unlock_if = {
+        is_regular_empire = yes
+        is_fallen_empire = no
+    }
+    potential_country = {
+        is_regular_empire = yes
+        is_fallen_empire = no
+    }
+    potential = {
+       exists = owner
+        owner = {
+            is_ai = yes
+        }
+    }
+    allow = {
+        always = no
+    }
+
+
+    ai_weight = {
+        base = 40
+    }
+}

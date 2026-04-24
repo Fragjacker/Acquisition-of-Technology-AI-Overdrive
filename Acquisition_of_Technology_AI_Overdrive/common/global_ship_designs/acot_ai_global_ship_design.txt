@@ -1,0 +1,261 @@
+ship_design = {
+    name = "NAME_Dimensional_Titan"
+    ship_size = precursor_titan
+    section = {
+        template = "PRECURSOR_TITAN_SPINAL_ARTILLERY_KEY"
+        slot = spinal
+        component = {
+            slot = "TITANIC_01"
+            template = ACOT_PERDITION_BEAM_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_01"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_02"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_03"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_04"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "PD_01"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_02"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_1
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_2
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_3
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_4
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+    }
+    section = {
+        template = "PRECURSOR_TITAN_MID_ARTILLERY_KEY"
+        slot = mid
+        COMPONENT = {
+            slot = "LARGE_GUN_01"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_02"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_03"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_04"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_05"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_06"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_07"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_08"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "PD_01"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_02"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_03"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_04"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_1
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_2
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_3
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_4
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+    }
+    section = {
+        template = "PRECURSOR_TITAN_MID_ARTILLERY_KEY"
+        slot = core
+        COMPONENT = {
+            slot = "LARGE_GUN_01"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_02"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_03"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_04"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_05"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_06"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_07"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_08"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "PD_01"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_02"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_03"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_04"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_1
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_2
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_3
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_4
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+    }
+    section = {
+        template = "PRECURSOR_TITAN_MID_ARTILLERY_KEY"
+        slot = stern
+        COMPONENT = {
+            slot = "LARGE_GUN_01"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_02"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_03"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_04"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_05"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_06"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_07"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "LARGE_GUN_08"
+            template = LARGE_ACOT_LASER_AE
+        }
+        COMPONENT = {
+            slot = "PD_01"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_02"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_03"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        COMPONENT = {
+            slot = "PD_04"
+            template = ACOT_POINT_DEFENSE_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_1
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_2
+            template = LARGE_ACOT_ARMOR_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_3
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+        component = {
+            slot = LARGE_UTILITY_4
+            template = LARGE_ACOT_ENIGMATIC_SHIELD_AE
+        }
+    }
+    REQUIRED_COMPONENT = TITAN_DARK_MATTER_REACTOR_AE
+    required_component="ACOT_SENSOR_AE"
+    required_component="ACOT_ENIGMATIC_DRIVE_AE"
+    required_component="AE_BALANCE_COMBAT_COMPUTER_TITAN"
+    required_component="ACOT_SHIP_THRUSTER_AE"
+}

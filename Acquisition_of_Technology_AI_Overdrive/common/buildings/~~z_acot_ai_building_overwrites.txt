@@ -1,0 +1,973 @@
+#	# Remove growth for the AI, it will simply spiral out. There is no reason for it to be this astronomically high.
+#	disregard f it we ball
+ ### Giga Fort
+
+building_giga_fortress_dm = {
+    base_buildtime = 1200
+    add_to_first_building_slot = yes
+    can_be_ruined = no
+    can_be_disabled = no
+    can_demolish = no
+    base_cap_amount = 1
+    planetary_ftl_inhibitor = yes
+    is_essential = yes
+    category = army
+    position_priority = 100
+    potential = {
+        exists = owner
+        owner = {
+            has_technology = tech_giga_fortress_dm
+        }
+    }
+    allow = {
+        has_enigmatic_capital = yes
+    }
+    upgrades = {
+        building_acot_giga_fortress
+    }
+    planet_modifier = {
+        planet_amenities_add = 5		#Mod Pack; reduced from 10
+        planet_housing_add = 5		#Mod Pack; reduced from 10
+        planet_stability_add = 5		#Mod Pack; reduced from 25
+    }
+    army_modifier = {
+        army_defense_morale_mult = 0.25
+        army_defense_health_mult = 0.25
+        army_defense_damage_mult = 0.5
+    }
+    resources = {
+        category = planet_buildings
+        produces = {
+            unity = 25
+            food = 25
+        }
+        cost = {
+            minerals = 20000
+            influence = 100
+            sr_dark_matter = 300
+            acot_sr_dark_energy = 300
+        }
+        upkeep = {
+            #Mod Pack; added upkeep
+            energy = 5
+            volatile_motes = 1
+            exotic_gases = 1
+            rare_crystals = 1
+            sr_dark_matter = 1
+            acot_sr_dark_energy = 1
+        }
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_fallen_empire = yes
+            }
+        }
+        job_acot_giga_fortress_operator_ancient_add = 2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_gestalt = no
+            }
+        }
+        job_aot_dm_giga_fortress_operator_add = 2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                is_gestalt = yes
+            }
+        }
+        job_aot_dm_giga_fortress_operator_drone_add = 2
+    }
+    prerequisites = {
+        tech_giga_fortress_dm
+    }
+    ai_weight = {
+        weight = 15000
+        modifier = {
+            factor = 0
+            owner = {
+                has_monthly_income = {
+                    resource = sr_dark_matter
+                    value <= 3
+                }
+            }
+        }
+    }
+}
+
+building_acot_giga_fortress = {
+	base_buildtime = 900
+	add_to_first_building_slot = yes
+	can_be_ruined = no
+    is_essential = yes
+	can_be_disabled = no
+	can_demolish = no
+	can_build = no
+	position_priority = 100
+	planetary_ftl_inhibitor = yes
+	category = army
+	potential = {
+		exists = planet_owner
+		planet_owner = {
+			has_technology = tech_acot_giga_fortress
+		}
+	}
+	allow = {
+		has_ascended_capital = yes
+	}
+	on_built = {
+		if = {
+			limit = {
+				NOT = {
+					any_planet_army = {
+						army_type = acot_garrison_army_giga
+					}
+				}
+			}
+			create_army = {
+				owner = planet_owner
+				type = acot_garrison_army_giga
+			}
+		}
+	}
+	on_destroy = {
+		if = {
+			limit = {
+				has_giga_fort = no
+			}
+			every_planet_army = {
+				limit = {
+					army_type = acot_garrison_army_giga
+				}
+				remove_army = yes
+			}
+		}
+	}
+	country_modifier = {
+		country_naval_cap_add = 100
+	}
+	planet_modifier = {
+		planet_amenities_add = 20
+		planet_housing_add = 20
+		planet_stability_add = 5		# Mod Pack; reduced from 50
+	}
+	triggered_planet_modifier = {
+		potential = {
+			has_ground_combat = yes
+		}
+		pop_defense_armies_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_gestalt = no
+			}
+		}
+		job_acot_giga_fortress_operator_add = 1		# Mod Pack; reduced from 3
+		job_acot_soldier_add = 2
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_gestalt = yes
+			}
+		}
+		job_acot_giga_fortress_operator_drone_add = 1		# Mod Pack: reduced from 3
+		job_acot_soldier_drone_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_fallen_empire = yes
+			}
+		}
+		job_acot_giga_fortress_operator_ancient_add = 3
+	}
+	army_modifier = {
+		army_defense_morale_mult = 1
+		army_defense_health_mult = 0.5
+		army_defense_damage_mult = 0.5
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			unity = 50
+			energy = 50
+		}
+		produces = {
+			trigger = {
+				planet_owner = {
+					country_uses_food = yes
+				}
+			}
+			food = 50
+		}
+		produces = {
+			trigger = {
+				planet_owner = {
+					country_uses_food = no
+				}
+			}
+			energy = 25
+		}
+		cost = {
+			minerals = 35000
+			influence = 50
+			sr_dark_matter = 500
+			acot_sr_dark_energy = 500
+		}
+		cost = {
+			trigger = {
+				planet_owner = {
+					is_ai = yes
+				}
+			}
+			minerals = 1250
+			influence = 25
+			sr_dark_matter = 100
+			acot_sr_dark_energy = 100
+		}
+		upkeep = {
+			# Mod Pack; added upkeep
+			energy = 10
+			volatile_motes = 1
+			exotic_gases = 1
+			rare_crystals = 1
+			sr_dark_matter = 2
+			acot_sr_dark_energy = 2
+		}
+	}
+	prerequisites = {
+		tech_acot_giga_fortress
+	}
+	ai_weight = {
+		weight = 15000
+		modifier = {
+			factor = 0
+			planet_owner = {
+				has_monthly_income = {
+					resource = sr_dark_matter
+					value <= 3
+				}
+			}
+		}
+	}
+	upgrades = {
+		building_acot_giga_fortress_array
+		building_acot_giga_fortress_lab
+		building_acot_giga_fortress_obelisk
+	}
+}
+
+building_acot_giga_fortress_array = {
+	base_buildtime = 1200
+	add_to_first_building_slot = yes
+	can_be_ruined = no
+    is_essential =
+	can_be_disabled = no
+	can_build = no
+	planetary_ftl_inhibitor = yes
+	category = army
+	position_priority = 100
+	potential = {
+		exists = planet_owner
+		planet_owner = {
+			has_technology = tech_acot_giga_fortress
+		}
+		NOT = {
+			has_modifier = resort_colony
+		}
+	}
+	on_built = {
+		if = {
+			limit = {
+				NOT = {
+					any_planet_army = {
+						army_type = acot_garrison_army_giga
+					}
+				}
+			}
+			create_army = {
+				owner = planet_owner
+				type = acot_garrison_army_giga
+			}
+		}
+	}
+	on_destroy = {
+		if = {
+			limit = {
+				has_giga_fort = no
+			}
+			every_planet_army = {
+				limit = {
+					army_type = acot_garrison_army_giga
+				}
+				remove_army = yes
+			}
+		}
+	}
+	allow = {
+		has_ascended_capital = yes
+	}
+	upgrades = {
+		building_phanon_giga_fortress_array
+	}
+	planet_modifier = {
+		planet_amenities_add = 10		# Mod Pack; reduced from 20
+		planet_housing_add = 10		# Mod Pack; reduced from 20
+		planet_stability_add = 10		# Mod Pack; reduced from 50
+	}
+	triggered_planet_modifier = {
+		potential = {
+			has_ground_combat = yes
+		}
+		pop_defense_armies_add = 1
+	}
+	army_modifier = {
+		army_defense_morale_mult = 5
+		army_defense_health_mult = 2.5
+		army_defense_damage_mult = 2.5
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_gestalt = no
+			}
+		}
+		job_acot_giga_fortress_operator_add = 1		# Mod Pack; reduced from 3
+		job_acot_giga_fortress_operator_mentat_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_gestalt = yes
+			}
+		}
+		job_acot_giga_fortress_operator_drone_add = 1		# Mod Pack; reduced from 3
+		job_aot_ae_giga_fortress_operator_mentat_drone_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = planet_owner
+			planet_owner = {
+				is_fallen_empire = yes
+			}
+		}
+		job_acot_giga_fortress_operator_ancient_add = 1		# Mod Pack; reduced from 3
+	}
+	country_modifier = {
+		country_naval_cap_add = 200
+		starbase_shipyard_build_speed_mult = 0.1
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			unity = 50
+			energy = 50
+		}
+		produces = {
+			trigger = {
+				planet_owner = {
+					country_uses_food = yes
+				}
+			}
+			food = 50
+		}
+		produces = {
+			trigger = {
+				planet_owner = {
+					country_uses_food = no
+				}
+			}
+			energy = 25
+		}
+		cost = {
+			minerals = 15000
+			sr_dark_matter = 250
+			acot_sr_dark_energy = 250
+		}
+		upkeep = {
+			# Mod Pack; added upkeep
+			energy = 10
+			volatile_motes = 2
+			exotic_gases = 2
+			rare_crystals = 2
+			sr_dark_matter = 5
+			acot_sr_dark_energy = 5
+		}
+	}
+	prerequisites = {
+		"tech_acot_giga_fortress"
+	}
+	ai_weight = {
+		weight = 150000
+	}
+}
+
+building_phanon_giga_fortress_array = {
+    base_buildtime = 1200
+    add_to_first_building_slot = yes
+    can_be_ruined = no
+    is_essential = yes
+    can_be_disabled = no
+    can_build = no
+    planetary_ftl_inhibitor = yes
+    category = army
+    position_priority = 100
+    potential = {
+        NOT = {
+            has_global_flag = aot_phanon_content_OFF
+        }
+        exists = planet_owner
+        planet_owner = {
+            has_technology = tech_phanon_giga_fortress
+        }
+        NOT = {
+            has_modifier = resort_colony
+        }
+    }
+    on_built = {
+        if = {
+            limit = {
+                NOT = {
+                    any_planet_army = {
+                        army_type = acot_garrison_army_giga
+                    }
+                }
+            }
+            create_army = {
+                owner = planet_owner
+                type = acot_garrison_army_giga
+            }
+        }
+    }
+    on_destroy = {
+        if = {
+            limit = {
+                has_giga_fort = no
+            }
+            every_planet_army = {
+                limit = {
+                    army_type = acot_garrison_army_giga
+                }
+                remove_army = yes
+            }
+        }
+    }
+    allow = {
+        has_phanon_capital = yes
+    }
+    upgrades = {
+        building_stellarite_giga_fortress_array
+    }
+    planet_modifier = {
+        planet_amenities_add = 20		# Mod Pack; reduced from 40
+        planet_housing_add = 15		# Mod Pack; reduced from 40
+        planet_stability_add = 15		# Mod Pack; reduced from 100
+        #		planet_crime_add = -100 # Mod Pack: removed (makes the game mechanic irrelavent, which is bad)
+    }
+    triggered_planet_modifier = {
+        potential = {
+            has_ground_combat = yes
+        }
+        pop_defense_armies_add = 1
+    }
+    army_modifier = {
+        army_defense_damage_mult = 7.5		# Mod Pack; reduced from 20
+        army_defense_health_mult = 5		# Mod Pack; reduced from 20
+        army_defense_morale_mult = 5		# Mod Pack; reduced from 20
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_gestalt = no
+            }
+        }
+        job_phanon_giga_fortress_operator_add = 2		# Mod Pack; reduced from 6
+        #		job_phanon_enforcer_add = 20 # Mod Pack; removed for making this have a more unique purpose
+        job_phanon_giga_fortress_operator_mentat_add = 1		# Mod Pack; reduced from 2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_gestalt = yes
+            }
+        }
+        job_phanon_giga_fortress_operator_drone_add = 2		# Mod Pack; reduced from 6
+        #		job_phanon_enforcer_drone_add = 20 # Mod Pack; removed for making this have a more unique purpose
+        job_phanon_giga_fortress_operator_mentat_drone_add = 2
+    }
+    country_modifier = {
+        country_naval_cap_add = 400
+        starbase_shipyard_build_speed_mult = 0.2
+    }
+    resources = {
+        category = planet_buildings
+        produces = {
+            unity = 100
+            energy = 100
+        }
+        produces = {
+            trigger = {
+                planet_owner = {
+                    country_uses_food = yes
+                }
+            }
+            food = 100
+        }
+        produces = {
+            trigger = {
+                planet_owner = {
+                    country_uses_food = no
+                }
+            }
+            energy = 75
+        }
+        cost = {
+            energy = 50000
+            minerals = 30000
+            aot_sr_runic_power = 10000
+        }
+        upkeep = {
+            # Mod Pack; added upkeep
+            energy = 10
+            volatile_motes = 2
+            exotic_gases = 2
+            rare_crystals = 2
+            sr_dark_matter = 5
+            acot_sr_dark_energy = 5
+            aot_sr_runic_power = 100
+        }
+    }
+    prerequisites = {
+        tech_phanon_giga_fortress
+    }
+    ai_weight = {
+        weight = 150000
+    }
+}
+
+building_stellarite_giga_fortress_array = {
+    base_buildtime = 1200
+    add_to_first_building_slot = yes
+    can_be_ruined = no
+    is_essential = yes
+    can_be_disabled = no
+    can_demolish = no
+    can_build = no
+    planetary_ftl_inhibitor = yes
+    category = army
+    position_priority = 100
+    potential = {
+        exists = planet_owner
+        planet_owner = {
+            has_technology = tech_stellarite_giga_fortress
+        }
+        NOT = {
+            has_modifier = resort_colony
+        }
+    }
+    on_built = {
+        if = {
+            limit = {
+                NOT = {
+                    any_planet_army = {
+                        army_type = acot_garrison_army_giga
+                    }
+                }
+            }
+            create_army = {
+                owner = planet_owner
+                type = acot_garrison_army_giga
+            }
+        }
+    }
+    on_destroy = {
+        if = {
+            limit = {
+                has_giga_fort = no
+            }
+            every_planet_army = {
+                limit = {
+                    army_type = acot_garrison_army_giga
+                }
+                remove_army = yes
+            }
+        }
+    }
+    allow = {
+        has_stellarite_capital = yes
+    }
+    planet_modifier = {
+        planet_amenities_add = 30		# Mod Pack; reduced from 80
+        planet_housing_add = 20		# Mod Pack; reduced from 80
+        planet_stability_add = 20		# Mod Pack; reduced from 80
+        #		planet_crime_add = -200 # Mod Pack: removed (makes the game mechanic irrelavent, which is bad)
+    }
+    triggered_planet_modifier = {
+        potential = {
+            has_ground_combat = yes
+        }
+        pop_defense_armies_add = 1
+    }
+    army_modifier = {
+        army_defense_damage_mult = 10		# Mod Pack; reduced from 20
+        army_defense_health_mult = 7		# Mod Pack; reduced from 20
+        army_defense_morale_mult = 7		# Mod Pack; reduced from 20
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_gestalt = no
+            }
+        }
+        job_stellarite_giga_fortress_operator_add = 2		# Mod Pack; reduced from 6
+        #		job_stellarite_enforcer_add = 20 # Mod Pack; removed for making this have a more unique purpose
+        job_stellarite_giga_fortress_operator_mentat_add = 1		# Mod Pack; reduced from 2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_gestalt = yes
+            }
+        }
+        job_stellarite_giga_fortress_operator_drone_add = 2		# Mod Pack; reduced from 6
+        #		job_stellarite_enforcer_drone_add = 20 # Mod Pack; removed for making this have a more unique purpose
+        job_stellarite_giga_fortress_operator_mentat_drone_add = 1		# Mod Pack; reduced from 2
+    }
+    country_modifier = {
+        country_naval_cap_add = 800
+        starbase_shipyard_build_speed_mult = 0.4
+    }
+    resources = {
+        category = planet_buildings
+        produces = {
+            unity = 200
+            energy = 150
+        }
+        produces = {
+            trigger = {
+                planet_owner = {
+                    country_uses_food = yes
+                }
+            }
+            food = 150
+        }
+        produces = {
+            trigger = {
+                planet_owner = {
+                    country_uses_food = no
+                }
+            }
+            energy = 150
+        }
+        cost = {
+            energy = 100000
+            minerals = 60000
+            acot_sr_stellarite = 5000
+        }
+        upkeep = {
+            # Mod Pack; added upkeep
+            energy = 10
+            volatile_motes = 2
+            exotic_gases = 2
+            rare_crystals = 2
+            sr_dark_matter = 5
+            acot_sr_dark_energy = 5
+            acot_sr_stellarite = 5
+        }
+    }
+    prerequisites = {
+        "tech_stellarite_giga_fortress"
+    }
+    ai_weight = {
+        weight = 150000
+    }
+}
+
+### I have to do this for cosmic storms lol
+building_planetary_shield_generator = {
+    base_buildtime = @b3_time
+    base_cap_amount = 1
+    position_priority = 100
+    can_be_ruined = no
+    category = army
+    upgrades = { building_acot_dm_psg }
+    allow = {
+        has_upgraded_capital = yes
+        if = {
+            limit = {
+                exists = orbital_defence
+            }
+            orbital_defence = {
+                exists = starbase
+                starbase = {
+                    NOR = {
+                        has_starbase_building = ring_orbital_shield_generator
+                        is_starbase_building_building = ring_orbital_shield_generator
+                    }
+                }
+            }
+        }
+    }
+
+    destroy_trigger = {
+    }
+
+    planet_modifier = {
+        planet_orbital_bombardment_damage = -0.5
+    }
+    triggered_planet_modifier = {
+        potential = { has_cosmic_storms_dlc = yes }
+        planet_storm_devastation_mult = -0.5
+    }
+
+    inline_script = {
+        script = cosmic_storms/StormBuildingModifiers
+    }
+
+    on_built = {
+        if = {
+            limit = { has_cosmic_storms_dlc = yes }
+            solar_system = {
+                set_star_flag = storm_no_negative_effects
+                remove_modifier = storm_base_modifier
+            }
+        }
+    }
+
+    on_destroy = {
+        if = {
+            limit = { has_cosmic_storms_dlc = yes }
+            owner = { set_country_flag = shield_on_destroy } #an action when destroyed
+            solar_system = {
+                remove_star_flag = storm_no_negative_effects
+            }
+        }
+    }
+
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = @b2_minerals
+        }
+        upkeep = {
+            energy = @b2_upkeep
+        }
+    }
+
+    prerequisites = {
+        "tech_planetary_shield_generator"
+    }
+
+    custom_storm_ai_weight = {
+        weight = 5
+        modifier = {
+            factor = 5
+            AND = {
+                exists = owner
+                solar_system = {
+                    exists = owner
+                    owner = { num_cosmic_storms_encountered >=2 }
+                }
+            }
+        }
+    }
+}
+
+building_acot_dm_psg = {
+    base_buildtime = 600
+    can_build = no
+    base_cap_amount = 1
+    position_priority = 100
+    category = army
+    allow = {
+        has_enigmatic_capital = yes
+        aot_has_planetary_shield_building = no
+    }
+    inline_script = {
+        script = buildings/psg_shield_gen
+        REDUCTION_FACTOR = -0.7
+    }
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 150
+            acot_sr_dark_energy = 50
+        }
+        upkeep = {
+            trigger = {
+                planet_owner = {
+                    NOT = {
+                        has_technology = tech_acot_fractured_autoharvesting
+                    }
+                }
+            }
+            acot_sr_dark_energy = 1
+        }
+    }
+    prerequisites = {
+        tech_acot_dm_psg
+    }
+    ai_weight = {
+        weight = 15000
+        modifier = {
+            factor = 0
+            planet_owner = {
+                has_monthly_income = {
+                    resource = acot_sr_dark_energy
+                    value <= 3
+                }
+            }
+        }
+    }
+    upgrades = {
+        building_acot_ae_psg
+    }
+}
+
+building_fe_master_archive = {
+    base_buildtime = 360
+    can_build = yes
+    can_demolish = yes
+    icon = building_master_archive
+    base_cap_amount = 1
+    category = research
+    potential = {
+        exists = planet_owner
+        planet_owner = {
+            has_technology = tech_fe_master_archive
+            is_ai = no
+        }
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = ancrel.10004.failtext
+            exists = planet_owner
+            planet_owner = {
+                has_technology = tech_fe_master_archive
+
+            }
+        }
+        has_enigmatic_capital = yes
+        NOR = {
+            has_building = building_ae_master_archive
+            has_building = building_stellarite_master_archive
+            has_building = building_phanon_master_archive
+        }
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_fallen_empire = yes
+            }
+        }
+        job_fe_archivist_add = 10
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_individualistic_empire = yes
+            }
+        }
+        modifier = {
+            job_head_researcher_add = @fe_jobs
+        }
+    }
+    triggered_desc = {
+        trigger = {
+            exists = planet_owner
+            planet_owner = {
+                is_individualistic_empire = yes
+            }
+        }
+        text = job_head_researcher_effect_desc
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_hive_empire = yes
+            }
+        }
+        modifier = {
+            job_brain_drone_add = @fe2_jobs
+        }
+    }
+    triggered_desc = {
+        trigger = {
+            exists = planet_owner
+            planet_owner = {
+                is_hive_empire = yes
+            }
+        }
+        text = job_brain_drone_effect_desc
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = planet_owner
+            planet_owner = {
+                is_machine_empire = yes
+            }
+        }
+        modifier = {
+            job_calculator_add = @fe2_jobs
+        }
+    }
+    triggered_desc = {
+        trigger = {
+            exists = planet_owner
+            planet_owner = {
+                is_machine_empire = yes
+            }
+        }
+        text = job_calculator_effect_desc
+    }
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 1000
+            exotic_gases = 200
+        }
+        produces = {
+            physics_research = @auto_research_dm
+            society_research = @auto_research_dm
+            engineering_research = @auto_research_dm
+        }
+        upkeep = {
+            energy = 20
+            alloys = 3
+            sr_dark_matter = 2
+            acot_sr_dark_energy = 2
+        }
+    }
+    upgrades = {
+        building_ae_master_archive
+    }
+    prerequisites = {
+        tech_fe_master_archive
+    }
+    ai_weight = {
+        weight = 10000
+    }
+    show_in_tech = tech_fe_master_archive
+}
+
+# EOF

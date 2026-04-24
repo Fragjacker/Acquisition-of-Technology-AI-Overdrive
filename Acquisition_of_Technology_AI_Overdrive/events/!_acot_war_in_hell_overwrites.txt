@@ -1,0 +1,251 @@
+namespace = acot_war_in_hell
+country_event = {
+    id = acot_war_in_hell.2
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        set_global_flag = acot_war_in_hell_active
+        set_country_flag = mountain_king_declarer_fe
+        if = {
+            limit = {
+                merg_is_fallen_empire = yes
+            }
+            set_country_type = awakened_fallen_empire
+            change_government = {
+                civics = {
+                    civic = civic_revanchist_fervor
+                    civic = civic_ancient_caches_of_technology
+                }
+            }
+        }
+
+        add_resource = { minerals = 500000 energy = 500000 food = 50000 influence = @influence_max alloys = 50000 consumer_goods = 50000 }
+        add_resource = { volatile_motes = 50000 exotic_gases = 50000 rare_crystals = 50000 acot_sr_dark_energy = 50000 minor_artifacts = 5000 }
+
+        add_modifier = {
+            modifier = acot_war_in_hell_buff
+            years = 10
+        }
+        # Run Fleet Reinforcement Cycles
+
+        set_variable = {
+            which = acot_wih_fe_fleet_resource
+            value = 10
+        }
+        set_variable = {
+            which = acot_wih_pleb_fleet_resource
+            value = 10
+        }
+        set_variable = {
+            which = acot_wih_pirate_fleet_resource
+            value = 10
+        }
+        set_variable = {
+            which = acot_wih_fe_desperation
+            value = 0
+        }
+        every_playable_country = {
+            country_event = { id = acot_war_in_hell.200 }
+        }
+
+        # Establish communications
+        every_country = {
+            limit = {
+                is_playable_country = yes
+                NOT = { has_communications = root }
+            }
+            establish_communications_no_message = root
+            root = { save_event_target_as = contact_empire }
+            country_event = { id = action.1 }
+        }
+    }
+}
+
+## no longer should be called
+country_event = {
+    id = acot_war_in_hell.4
+    title = OK
+    desc = OK
+
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                always = no
+            }
+            ### BUY MORE FLEETS FROM LEGENDARY SMUGGLER
+            if = {
+                limit = {
+                    check_variable = {
+                        which = acot_wih_fe_fleet_resource
+                        value <= 5
+                    }
+                    resource_income_compare = {
+                        resource = energy
+                        value >= 50000
+                    }
+                }
+                change_variable = {
+                    which = acot_wih_fe_fleet_resource
+                    value = 1
+                }
+                add_resource = {
+                    energy = -50000
+                }
+            }
+            ### REINFORCE FLEETS ###
+
+            if = {
+                limit = {
+                    check_variable = {
+                        which = acot_wih_fe_fleet_resource
+                        value > 5
+                    }
+                    NOT = {
+                        check_variable = {
+                            which = acot_wih_fe_fleet_resource
+                            value <= 0
+                        }
+                    }
+                }
+                capital_scope = {
+                    ### FUL FE FLEET
+                    create_fallen_empire_wih_fleet = yes
+                    create_fallen_empire_wih_fleet = yes
+                    create_fallen_empire_wih_fleet = yes
+                    create_fallen_empire_wih_fleet = yes
+                }
+                change_variable = {
+                    which = acot_wih_fe_fleet_resource
+                    value = -1
+                }
+                every_playable_country = {
+                    limit = {
+                        NOT = {
+                            is_same_empire = root
+                        }
+                    }
+                    country_event = { id = acot_war_in_hell.400 }
+                }
+            }
+            ### HALF FE FLEET
+            else_if = {
+                limit = {
+                    check_variable = {
+                        which = acot_wih_fe_fleet_resource
+                        value <= 5
+                    }
+                    NOT = {
+                        check_variable = {
+                            which = acot_wih_fe_fleet_resource
+                            value <= 0
+                        }
+                    }
+                }
+                capital_scope = {
+                    ### FUL FE FLEET
+                    create_fallen_empire_wih_fleet = yes
+                    create_fallen_empire_wih_fleet = yes
+                }
+                change_variable = {
+                    which = acot_wih_fe_fleet_resource
+                    value = -1
+                }
+                every_playable_country = {
+                    limit = {
+                        NOT = {
+                            is_same_empire = root
+                        }
+                    }
+                    country_event = { id = acot_war_in_hell.400 }
+                }
+            }
+            ### PMC FLEET
+            if = {
+                limit = {
+                    check_variable = {
+                        which = acot_wih_pleb_fleet_resource
+                        value > 0
+                    }
+                    check_variable = {
+                        which = acot_wih_fe_fleet_resource
+                        value <= 5
+                    }
+                }
+                capital_scope = {
+                    ### FUL FE FLEET
+                    # create_pmc_wih_fleet = yes
+                    # create_pmc_wih_fleet = yes
+                }
+                change_variable = {
+                    which = acot_wih_pleb_fleet_resource
+                    value = -1
+                }
+                every_playable_country = {
+                    limit = {
+                        NOT = {
+                            is_same_empire = root
+                        }
+                    }
+                    country_event = { id = acot_war_in_hell.401 }
+                }
+            }
+            ### PIRATE FLEET
+            if = {
+                limit = {
+                    check_variable = {
+                        which = acot_wih_pirate_fleet_resource
+                        value > 0
+                    }
+                    check_variable = {
+                        which = acot_wih_pleb_fleet_resource
+                        value <= 5
+                    }
+                }
+                capital_scope = {
+                    ### FUL FE FLEET
+                    # create_pirate_wih_fleet = yes
+                    # create_pirate_wih_fleet = yes
+                }
+                change_variable = {
+                    which = acot_wih_pirate_fleet_resource
+                    value = -1
+                }
+                every_playable_country = {
+                    limit = {
+                        NOT = {
+                            is_same_empire = root
+                        }
+                    }
+                    country_event = { id = acot_war_in_hell.401 }
+                }
+            }
+            ### NO BUDGET MUST DECLARE WAR
+            if = {
+                limit = {
+                    check_variable = {
+                        # which = acot_wih_pirate_fleet_resource
+                        which = acot_wih_fe_fleet_resource
+                        value > 0
+                    }
+                }
+                save_event_target_as = FallenEmpireTaskOrigin
+                random_country = {
+                    limit = {
+                        has_country_flag = prepare_to_die_by_fe
+                    }
+                    save_event_target_as = FallenEmpireTaskTarget
+                    country_event = { id = acot_war_in_hell.6  }
+                }
+            }
+
+            # RECHECK FOR MORE FLEETS
+            country_event = {  id = acot_war_in_hell.4 days = 180 }
+        }
+    }
+}
