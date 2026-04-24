@@ -1,0 +1,15 @@
+has_any_outdated_zone = {
+    OR = {
+        has_any_agriculture_zone = yes
+        has_any_betharian_zone = yes
+        has_any_factory_zone = yes
+        has_any_fortress_zone = yes
+        has_any_foundry_zone = yes
+        has_any_industrial_zone = yes
+        has_any_generator_zone = yes
+        has_any_mining_zone = yes
+        has_any_research_zone = yes
+        has_any_unity_zone = yes
+        has_any_trade_zone = yes
+    }
+}

@@ -6,31 +6,68 @@ automate_factory_planet = {
     }
 
     prio_districts = {
-        district_acot_ai_industrial
-        district_ae_ai_industrial
-        district_runic_ai_industrial
-        district_stellarite_ai_industrial
-        district_industrial
-        district_arcology_civilian_industry
-        district_hab_industrial
-        district_rw_industrial
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
+        district_hab_housing
+    }
+
+    prio_zones = {
+        zone_acot_dm_factory
+        zone_acot_ae_factory
+        zone_aot_PE_factory
+        zone_aot_SE_factory
+        zone_aot_DM_factory_arcology
+        zone_aot_DE_factory_arcology
+        zone_aot_PE_factory_arcology
+        zone_aot_SE_factory_arcology
+        zone_aot_DM_factory_ring_world
+        zone_aot_DE_factory_ring_world
+        zone_aot_PE_factory_ring_world
+        zone_aot_SE_factory_ring_world
+        zone_aot_DM_factory_hive
+        zone_aot_DE_factory_hive
+        zone_aot_PE_factory_hive
+        zone_aot_SE_factory_hive
+        zone_factory
+        zone_factory_arcology
+        zone_factory_ring_world
+        zone_factory_nexus
+        zone_factory_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
-            building = building_factory_1
-        }
-
-        3 = {
             building = building_ministry_production
         }
 
-        4 = {
+        2 = {
             building = building_production_center
+        }
+
+        3 = {
+            building = building_factory_efficiency_1
+        }
+
+        4 = {
+            building = building_factory_upkeep_1
+        }
+
+        5 = {
+            building = building_factory_1
+            available = {
+                has_any_factory_zone = yes
+            }
+        }
+
+        6 = {
+            building = building_factory_upkeep_1
+        }
+
+        7 = {
+            building = building_factory_efficiency_1
         }
     }
 }
@@ -43,31 +80,68 @@ automate_foundry_planet = {
     }
 
     prio_districts = {
-        district_acot_ai_industrial
-        district_ae_ai_industrial
-        district_runic_ai_industrial
-        district_stellarite_ai_industrial
-        district_industrial
-        district_hab_industrial
-        district_arcology_arms_industry
-        district_rw_industrial
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
+        district_hab_housing
+    }
+
+    prio_zones = {
+        zone_acot_dm_foundry
+        zone_acot_ae_foundry
+        zone_aot_PE_foundry
+        zone_aot_SE_foundry
+        zone_aot_DM_foundry_arcology
+        zone_aot_DE_foundry_arcology
+        zone_aot_PE_foundry_arcology
+        zone_aot_SE_foundry_arcology
+        zone_aot_DM_foundry_ring_world
+        zone_aot_DE_foundry_ring_world
+        zone_aot_PE_foundry_ring_world
+        zone_aot_SE_foundry_ring_world
+        zone_aot_DM_foundry_hive
+        zone_aot_DE_foundry_hive
+        zone_aot_PE_foundry_hive
+        zone_aot_SE_foundry_hive
+        zone_foundry
+        zone_foundry_arcology
+        zone_foundry_ring_world
+        zone_foundry_nexus
+        zone_foundry_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
-            building = building_foundry_1
-        }
-
-        3 = {
             building = building_ministry_production
         }
 
-        4 = {
+        2 = {
             building = building_production_center
+        }
+
+        3 = {
+            building = building_foundry_efficiency_1
+        }
+
+        4 = {
+            building = building_foundry_upkeep_1
+        }
+
+        5 = {
+            building = building_foundry_1
+            available = {
+                has_any_foundry_zone = yes
+            }
+        }
+
+        6 = {
+            building = building_foundry_upkeep_1
+        }
+
+        7 = {
+            building = building_foundry_efficiency_1
         }
     }
 }
@@ -80,35 +154,61 @@ automate_industrial_planet = {
     }
 
     prio_districts = {
-        district_acot_ai_industrial
-        district_ae_ai_industrial
-        district_runic_ai_industrial
-        district_stellarite_ai_industrial
-        district_industrial
-        district_hab_industrial
-        district_arcology_arms_industry
-        district_arcology_civilian_industry
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
+        district_hab_housing
+    }
+
+    prio_zones = {
+        zone_acot_dm_industry
+        zone_acot_ae_industry
+        zone_aot_PE_industry
+        zone_aot_SE_industry
+        zone_aot_DM_industry_arcology
+        zone_aot_DE_industry_arcology
+        zone_aot_PE_industry_arcology
+        zone_aot_SE_industry_arcology
+        zone_aot_DM_industry_ring_world
+        zone_aot_DE_industry_ring_world
+        zone_aot_PE_industry_ring_world
+        zone_aot_SE_industry_ring_world
+        zone_aot_DM_industry_hive
+        zone_aot_DE_industry_hive
+        zone_aot_PE_industry_hive
+        zone_aot_SE_industry_hive
+        zone_industrial
+        zone_industrial_arcology
+        zone_industrial_ring_world
+        zone_industrial_nexus
+        zone_industrial_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
-            building = building_foundry_1
-        }
-
-        3 = {
-            building = building_factory_1
-        }
-
-        4 = {
             building = building_ministry_production
         }
 
-        5 = {
+        2 = {
             building = building_production_center
+        }
+
+        3 = {
+            building = building_foundry_efficiency_1
+        }
+
+        4 = {
+            building = building_factory_efficiency_1
+        }
+
+        5 = {
+            building = building_foundry_upkeep_1
+        }
+
+        6 = {
+            building = building_factory_upkeep_1
         }
     }
 }
@@ -121,44 +221,76 @@ automate_research_planet = {
     }
 
     prio_districts = {
-        district_acot_ai_industrial
-        district_ae_ai_industrial
-        district_runic_ai_industrial
-        district_stellarite_ai_industrial
-        district_rw_science
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
         district_hab_science
+        district_hab_housing # habitats can specialize both, and should if they run out of science "rural" slots
+    }
+
+    prio_zones = {
+        zone_acot_dm_research
+        zone_acot_ae_research
+        zone_aot_PE_research
+        zone_aot_SE_research
+        zone_aot_DM_research_arcology
+        zone_aot_DE_research_arcology
+        zone_aot_PE_research_arcology
+        zone_aot_SE_research_arcology
+        zone_aot_DM_research_ring_world
+        zone_aot_DE_research_ring_world
+        zone_aot_PE_research_ring_world
+        zone_aot_SE_research_ring_world
+        zone_aot_DM_research_hive
+        zone_aot_DE_research_hive
+        zone_aot_PE_research_hive
+        zone_aot_SE_research_hive
+        zone_research
+        zone_habitat_research
+        zone_research_arcology
+        zone_research_ring_world
+        zone_minerals_physics
+        zone_research_nexus
+        zone_research_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-            available = {
-                always = yes
-            }
+            building = building_vultaum_reality_computer
         }
 
         2 = {
             building = building_institute
-            available = {
-                NOR = {
-                    owner = { is_hive_empire = yes }
-                    owner = { is_machine_empire = yes }
-                }
-            }
-        }
-
-        2 = {
-            building = building_supercomputer
-            available = {
-                OR = {
-                    owner = { is_hive_empire = yes }
-                    owner = { is_machine_empire = yes }
-                }
-            }
         }
 
         3 = {
-            building = building_research_lab_1
+            building = building_supercomputer
+        }
+
+        4 = {
+            building = building_archaeostudies_faculty
+        }
+
+        5 = {
+            building = building_research_efficiency_1
+        }
+
+        6 = {
+            building = building_research_upkeep_1
+        }
+
+        7 = {
+            building = building_engineering_facility_1
+        }
+
+        8 = {
+            building = building_physics_lab_1
+        }
+
+        9 = {
+            building = building_biolab_1
         }
     }
 }
@@ -170,133 +302,56 @@ automate_fortress_planet = {
         has_fortress_designation = yes
     }
 
+    prio_districts = {
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
+        district_hab_housing
+    }
+
+    prio_zones = {
+        zone_acot_dm_fortress
+        zone_acot_ae_fortress
+        zone_aot_PE_fortress
+        zone_aot_SE_fortress
+        zone_aot_DM_fortress_arcology
+        zone_aot_DE_fortress_arcology
+        zone_aot_PE_fortress_arcology
+        zone_aot_SE_fortress_arcology
+        zone_aot_DM_fortress_ring_world
+        zone_aot_DE_fortress_ring_world
+        zone_aot_PE_fortress_ring_world
+        zone_aot_SE_fortress_ring_world
+        zone_aot_DM_fortress_hive
+        zone_aot_DE_fortress_hive
+        zone_aot_PE_fortress_hive
+        zone_aot_SE_fortress_hive
+        zone_fortress
+        zone_fortress_arcology
+        zone_fortress_ring_world
+        zone_fortress_nexus
+        zone_fortress_hive
+    }
+
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
             building = building_dread_encampment
             available = { owner = { has_valid_civic = civic_reanimated_armies } }
         }
 
-        3 = {
+        2 = {
             building = building_military_academy
             available = { owner = { NOT = { has_valid_civic = civic_reanimated_armies } } }
         }
 
-        4 = {
-            building = building_acot_dm_stronghold
-            available = {
-                owner = {
-                    has_technology = tech_acot_dm_stronghold
-                }
-            }
-        }
-
-        5 = {
+        3 = {
             building = building_planetary_shield_generator
         }
 
-        6 = {
-            building = building_stronghold
-        }
-    }
-}
-
-automate_refinery_planet = {
-    category = "planet_automation_designation_construction"
-
-    available = {
-        has_refinery_designation = yes
-    }
-
-    buildings = {
-        1 = {
-            building = building_capital
-            available = {
-                always = yes
-            }
-        }
-
-        2 = {
-            building = building_archaeo_refinery
-            available = {
-                num_buildings = { type = building_archaeo_refinery value = 0 }
-                owner = { has_technology = tech_archaeo_refinery }
-            }
-        }
-
-        3 = {
-            building = building_acot_dm_transmutor
-            available = {
-                owner = {
-                    has_technology = tech_acot_dm_transmutor
-                }
-            }
-        }
-
         4 = {
-            building = building_chemical_plant
-            available = {
-                num_buildings = { type = building_chemical_plant value = 0 }
-            }
-        }
-
-        5 = {
-            building = building_refinery
-            available = {
-                num_buildings = { type = building_refinery value = 0 }
-            }
-        }
-
-        6 = {
-            building = building_crystal_plant
-            available = {
-                num_buildings = { type = building_crystal_plant value = 0 }
-            }
-        }
-
-        7 = {
-            building = building_chemical_plant
-            available = {
-                num_buildings = { type = building_chemical_plant value = 1 }
-            }
-        }
-
-        8 = {
-            building = building_refinery
-            available = {
-                num_buildings = { type = building_refinery value = 1 }
-            }
-        }
-
-        9 = {
-            building = building_crystal_plant
-            available = {
-                num_buildings = { type = building_crystal_plant value = 1 }
-            }
-        }
-
-        10 = {
-            building = building_chemical_plant
-            available = {
-                num_buildings = { type = building_chemical_plant value = 2 }
-            }
-        }
-
-        11 = {
-            building = building_refinery
-            available = {
-                num_buildings = { type = building_refinery value = 2 }
-            }
-        }
-
-        12 = {
-            building = building_crystal_plant
-            available = {
-                num_buildings = { type = building_crystal_plant value = 2 }
-            }
+            building = building_stronghold
         }
     }
 }
@@ -306,30 +361,53 @@ automate_generator_planet = {
 
     available = {
         has_generator_designation = yes
+        NAND = {
+            exists = owner
+            owner = { has_technology = tech_mine_betharian }
+            has_deposit = d_betharian_deposit
+        }
     }
 
     prio_districts = {
-        district_acot_ai_rural
-        district_ae_ai_rural
-        district_runic_ai_rural
-        district_stellarite_ai_rural
         district_generator
         district_hab_energy
-        district_generator_uncapped
-        district_rw_generator
+        district_rw_urban_1
+    }
+
+    prio_zones = {
+        zone_acot_dm_energy
+        zone_acot_ae_energy
+        zone_aot_PE_energy
+        zone_aot_SE_energy
+        zone_aot_DM_energy_arcology
+        zone_aot_DE_energy_arcology
+        zone_aot_PE_energy_arcology
+        zone_aot_SE_energy_arcology
+        zone_aot_DM_energy_ring_world
+        zone_aot_DE_energy_ring_world
+        zone_aot_PE_energy_ring_world
+        zone_aot_SE_energy_ring_world
+        zone_aot_DM_energy_hive
+        zone_aot_DE_energy_hive
+        zone_aot_PE_energy_hive
+        zone_aot_SE_energy_hive
+        zone_energy
+        zone_energy_ring_world
+        zone_energy_nexus
+        zone_energy_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
             building = building_energy_grid
         }
 
+        2 = {
+            building = building_mote_harvesters
+        }
+
         3 = {
-            building = building_betharian_power_plant
+            building = building_generator_districts_1
         }
     }
 }
@@ -339,30 +417,52 @@ automate_farming_planet = {
 
     available = {
         has_farming_designation = yes
+        NOT = {
+            uses_district_set = habitat
+        }
     }
 
     prio_districts = {
-        district_acot_ai_rural
-        district_ae_ai_rural
-        district_runic_ai_rural
-        district_stellarite_ai_rural
         district_farming
-        district_rw_farming
-        district_farming_uncapped
-        district_hab_housing
+        district_rw_urban_1
+    }
+
+    prio_zones = {
+        zone_acot_dm_food
+        zone_acot_ae_food
+        zone_aot_PE_food
+        zone_aot_SE_food
+        zone_aot_DM_food_arcology
+        zone_aot_DE_food_arcology
+        zone_aot_PE_food_arcology
+        zone_aot_SE_food_arcology
+        zone_aot_DM_food_ring_world
+        zone_aot_DE_food_ring_world
+        zone_aot_PE_food_ring_world
+        zone_aot_SE_food_ring_world
+        zone_aot_DM_food_hive
+        zone_aot_DE_food_hive
+        zone_aot_PE_food_hive
+        zone_aot_SE_food_hive
+        zone_agrarian_anglers
+        zone_anglers
+        zone_agrarian_urban
+        zone_food
+        zone_food_ring_world
+        zone_food_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
             building = building_food_processing_facility
         }
 
+        2 = {
+            building = building_gas_extractors
+        }
+
         3 = {
-            building = building_hydroponics_farm
+            building = building_farming_districts_1
         }
     }
 }
@@ -375,25 +475,45 @@ automate_mining_planet = {
     }
 
     prio_districts = {
-        district_acot_ai_rural
-        district_ae_ai_rural
-        district_runic_ai_rural
-        district_stellarite_ai_rural
         district_mining
         district_hab_mining
-        district_mining_uncapped
+    }
+
+    prio_zones = {
+        zone_acot_dm_minerals
+        zone_acot_ae_minerals
+        zone_aot_PE_minerals
+        zone_aot_SE_minerals
+        zone_aot_DM_minerals_arcology
+        zone_aot_DE_minerals_arcology
+        zone_aot_PE_minerals_arcology
+        zone_aot_SE_minerals_arcology
+        zone_aot_DM_minerals_ring_world
+        zone_aot_DE_minerals_ring_world
+        zone_aot_PE_minerals_ring_world
+        zone_aot_SE_minerals_ring_world
+        zone_aot_DM_minerals_hive
+        zone_aot_DE_minerals_hive
+        zone_aot_PE_minerals_hive
+        zone_aot_SE_minerals_hive
+        zone_subterranean_urban
+        zone_minerals_physics
+        zone_minerals
+        zone_minerals_nexus
+        zone_minerals_hive
     }
 
     buildings = {
         1 = {
-            building = building_capital
-            available = {
-                always = yes
-            }
+            building = building_crystal_mines
         }
 
         2 = {
             building = building_mineral_purification_plant
+        }
+
+        3 = {
+            building = building_mining_districts_1
         }
     }
 }
@@ -406,26 +526,51 @@ automate_trade_planet = {
     }
 
     prio_districts = {
-        district_rw_commercial
-        district_srw_commercial
+        district_city
+        district_hive
+        district_nexus
+        district_arcology_housing
+        district_rw_city
         district_hab_housing
     }
 
+    prio_zones = {
+        zone_acot_dm_trade
+        zone_acot_ae_trade
+        zone_aot_PE_trade
+        zone_aot_SE_trade
+        zone_aot_DM_trade_arcology
+        zone_aot_DE_trade_arcology
+        zone_aot_PE_trade_arcology
+        zone_aot_SE_trade_arcology
+        zone_aot_DM_trade_ring_world
+        zone_aot_DE_trade_ring_world
+        zone_aot_PE_trade_ring_world
+        zone_aot_SE_trade_ring_world
+        zone_aot_DM_trade_hive
+        zone_aot_DE_trade_hive
+        zone_aot_PE_trade_hive
+        zone_aot_SE_trade_hive
+        zone_trade
+        zone_subterranean_urban
+        zone_agrarian_urban
+        zone_agrarian_anglers
+        zone_trade_arcology
+        zone_trade_ring_world
+        zone_trade_nexus
+        zone_trade_hive
+    }
 
     buildings = {
         1 = {
-            building = building_capital
-        }
-
-        2 = {
-            building = building_dm_commercial_megaplex
-        }
-
-        3 = {
             building = building_galactic_stock_exchange
         }
 
-        4 = {
+        2 = {
+            building = building_commercial_megaplex
+        }
+
+        3 = {
             building = building_commercial_zone
         }
     }

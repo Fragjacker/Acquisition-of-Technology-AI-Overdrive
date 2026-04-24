@@ -19,221 +19,220 @@
 @scaling_rare_resource_target = 0.20
 
 basic_economy_plan = {
+    ai_weight = { weight = 10 }
 
-	#### SCALING SUBPLANS HERE ####
-	# Values in the scaling subplans are added to the base plan each time the AI reaches the target
-	# If base alloys = 10 and the AI reaches +12 per month, and it says alloys = 20 in the scaling subplan, the next target becomes alloys = 30
-	# All scaling subplans are cumulative
+    #### SCALING SUBPLANS HERE ####
+    # Values in the scaling subplans are added to the base plan each time the AI reaches the target
+    # If base alloys = 10 and the AI reaches +12 per month, and it says alloys = 20 in the scaling subplan, the next target becomes alloys = 30
+    # All scaling subplans are cumulative
 
 
-	#subplan = {
-	#	scaling = yes
-	#	set_name = "ACOT Economy time"
-	#	potential = {
-	#		has_technology = tech_dark_matter_power_core
-	#	}
-	#	income = {
-	#		alloys = 100
-	#		minerals = 100
-	#		energy = 100
-	#		physics_research = @scaling_research_target_2
-	#		society_research = @scaling_research_target_2
-	#		engineering_research = @scaling_research_target_2
-	#		unity = 100
-	#	}
-	#}
+    #subplan = {
+    #	scaling = yes
+    #	set_name = "ACOT Economy time"
+    #	potential = {
+    #		has_technology = tech_dark_matter_power_core
+    #	}
+    #	income = {
+    #		alloys = 100
+    #		minerals = 100
+    #		energy = 100
+    #		physics_research = @scaling_research_target_2
+    #		society_research = @scaling_research_target_2
+    #		engineering_research = @scaling_research_target_2
+    #		unity = 100
+    #	}
+    #}
 
-	#subplan = {	# scale this to a point, optional bc it is limited
-	#	scaling = yes
-	#	set_name = "DM DE"
-	#	potential = {
-	#		has_technology = tech_dark_matter_power_core_dm
-	#	}
-	#	income = {
-	#		sr_dark_matter = 20
-	#		acot_sr_dark_energy = 20
-	#	}
-	#}
-	subplan = {	# scale this we need the ships!!!
-		scaling = yes
-		#optional = yes
-		set_name = "DM DE AE"
-		potential = {
-			has_technology = tech_dark_matter_power_core_ae
-		}
-		income = {
-			sr_dark_matter = 200
-			acot_sr_dark_energy = 200
-		}
-	}
+    #subplan = {	# scale this to a point, optional bc it is limited
+    #	scaling = yes
+    #	set_name = "DM DE"
+    #	potential = {
+    #		has_technology = tech_dark_matter_power_core_dm
+    #	}
+    #	income = {
+    #		sr_dark_matter = 20
+    #		acot_sr_dark_energy = 20
+    #	}
+    #}
+    subplan = {
+        # scale this we need the ships!!!
+        scaling = yes
+        #optional = yes
+        set_name = "DM DE AE"
+        potential = {
+            has_technology = tech_dark_matter_power_core_ae
+        }
+        income = {
+            sr_dark_matter = 200
+            acot_sr_dark_energy = 200
+        }
+    }
 
-	### I cannot stress how important these resources are.
+    ### I cannot stress how important these resources are.
 
-	# scale but PLEASE upkeep
+    # scale but PLEASE upkeep
 
-	subplan = {
-		scaling = yes
-		optional = yes
-		set_name = "acot vanilla sr"
-		potential = {
-			has_technology = tech_acot_dm_transmutor
-			NOT = {
-				has_monthly_income = {
-					resource = exotic_gases
-					value > 300
-				}
-				has_monthly_income = {
-					resource = rare_crystals
-					value > 300
-				}
-				has_monthly_income = {
-					resource = volatile_motes
-					value > 300
-				}
-			}
-		}
-		income = {
-			exotic_gases = 20
-			rare_crystals = 20
-			volatile_motes = 20
-		}
+    subplan = {
+        scaling = yes
+        optional = yes
+        set_name = "acot vanilla sr"
+        potential = {
+            has_technology = tech_acot_dm_transmutor
+            NOT = {
+                has_monthly_income = {
+                    resource = exotic_gases
+                    value > 300
+                }
+                has_monthly_income = {
+                    resource = rare_crystals
+                    value > 300
+                }
+                has_monthly_income = {
+                    resource = volatile_motes
+                    value > 300
+                }
+            }
+        }
+        income = {
+            exotic_gases = 20
+            rare_crystals = 20
+            volatile_motes = 20
+        }
 
-	}
+    }
 
-	subplan = {
-		scaling = yes
-		#optional = yes
-		set_name = "acot resource focus"
-		potential = {
-			has_technology = tech_dark_matter_power_core_dm
-		}
-		income = {
-			minerals = 300
-			energy = 300
-			unity = 100
-			alloys = 500
-			physics_research = 500
-			engineering_research = 500
-			society_research = 500
-			sr_dark_matter = 200
-			acot_sr_dark_energy = 200
-		}
-	}
-	subplan = {
-		scaling = yes
-		set_name = "acot cg focus"
-		potential = {
-			has_technology = tech_dark_matter_power_core_dm
-			country_uses_consumer_goods = yes
-		}
-		income = {
-			consumer_goods = 300
-		}
-	}
-	subplan = {
-		optional = yes
-		scaling = yes
-		set_name = "Scaling rare crystals"
+    subplan = {
+        scaling = yes
+        #optional = yes
+        set_name = "acot resource focus"
+        potential = {
+            has_technology = tech_dark_matter_power_core_dm
+        }
+        income = {
+            minerals = 300
+            energy = 300
+            unity = 100
+            alloys = 500
+            physics_research = 500
+            engineering_research = 500
+            society_research = 500
+            sr_dark_matter = 200
+            acot_sr_dark_energy = 200
+        }
+    }
+    subplan = {
+        scaling = yes
+        set_name = "acot cg focus"
+        potential = {
+            has_technology = tech_dark_matter_power_core_dm
+            country_uses_consumer_goods = yes
+        }
+        income = {
+            consumer_goods = 300
+        }
+    }
+    subplan = {
+        optional = yes
+        scaling = yes
+        set_name = "Scaling rare crystals"
 
-		potential = {
-			has_monthly_income = { resource = rare_crystals value < @economic_plan_rare_resource_limit }
-		}
+        potential = {
+            has_monthly_income = { resource = rare_crystals value < @economic_plan_rare_resource_limit }
+        }
 
-		income = {
-			rare_crystals = @economic_plan_scaling_rare_resource_target
-		}
-	}
-	### SCALE HARDER!!!!!
-	#subplan = {
-	#	scaling = yes
-	#	set_name = "acot resource focus 2"
-	#	potential = {
-	#		has_technology = tech_dark_matter_power_core
-	#		has_monthly_income = {
-	#			resource = alloys
-	#			value > 10000
-	#		}
-	#		has_monthly_income = {
-	#			resource = society_research
-	#			value > 10000
-	#		}
-	#		has_monthly_income = {
-	#			resource = engineering_research
-	#			value > 10000
-	#		}
-	#		has_monthly_income = {
-	#			resource = society_research
-	#			value > 10000
-	#		}
-	#		has_monthly_income = {
-	#			resource = acot_sr_dark_energy
-	#			value > 400
-	#		}
-	#		has_monthly_income = {
-	#			resource = sr_dark_matter
-	#			value > 400
-	#		}
-	#	}
-	#	income = {
-	#		alloys = 5000
-	#		society_research = 5000
-	#		engineering_research = 5000
-	#		society_research = 5000
-	#	}
-	#}
+        income = {
+            rare_crystals = @economic_plan_scaling_rare_resource_target
+        }
+    }
+    ### SCALE HARDER!!!!!
+    #subplan = {
+    #	scaling = yes
+    #	set_name = "acot resource focus 2"
+    #	potential = {
+    #		has_technology = tech_dark_matter_power_core
+    #		has_monthly_income = {
+    #			resource = alloys
+    #			value > 10000
+    #		}
+    #		has_monthly_income = {
+    #			resource = society_research
+    #			value > 10000
+    #		}
+    #		has_monthly_income = {
+    #			resource = engineering_research
+    #			value > 10000
+    #		}
+    #		has_monthly_income = {
+    #			resource = society_research
+    #			value > 10000
+    #		}
+    #		has_monthly_income = {
+    #			resource = acot_sr_dark_energy
+    #			value > 400
+    #		}
+    #		has_monthly_income = {
+    #			resource = sr_dark_matter
+    #			value > 400
+    #		}
+    #	}
+    #	income = {
+    #		alloys = 5000
+    #		society_research = 5000
+    #		engineering_research = 5000
+    #		society_research = 5000
+    #	}
+    #}
 
-	subplan = {
-		scaling = yes
-		set_name = "Runic Power"
-		potential = {
-			has_technology = tech_civil_phanon_application
-		}
-		income = {
-			aot_sr_runic_power = 100
-		}
-	}
+    subplan = {
+        scaling = yes
+        set_name = "Runic Power"
+        potential = {
+            has_technology = tech_civil_phanon_application
+        }
+        income = {
+            aot_sr_runic_power = 100
+        }
+    }
 
-	subplan = {
-		scaling = yes
-		set_name = "Stellarite"
-		potential = {
-			has_technology = tech_dark_matter_power_core_se
-		}
-		income = {
-			acot_sr_stellarite = 100
-		}
-	}
+    subplan = {
+        scaling = yes
+        set_name = "Stellarite"
+        potential = {
+            has_technology = tech_dark_matter_power_core_se
+        }
+        income = {
+            acot_sr_stellarite = 100
+        }
+    }
 
-	subplan = { # in the end game now!
-		scaling = yes
-		set_name = "sr scale"
-		potential = {
-			has_technology = tech_stellarite_palace
-			has_monthly_income = {
-				resource = aot_sr_runic_power
-				value > 1000
-			}
-			has_monthly_income = {
-				resource = acot_sr_stellarite
-				value > 1000
-			}
-		}
-		income = {
-			acot_sr_stellarite = 100
-			aot_sr_runic_power = 100
-		}
-	}
+    subplan = {
+        # in the end game now!
+        scaling = yes
+        set_name = "sr scale"
+        potential = {
+            has_technology = tech_stellarite_palace
+            has_monthly_income = {
+                resource = aot_sr_runic_power
+                value > 1000
+            }
+            has_monthly_income = {
+                resource = acot_sr_stellarite
+                value > 1000
+            }
+        }
+        income = {
+            acot_sr_stellarite = 100
+            aot_sr_runic_power = 100
+        }
+    }
 
-	#subplan = {
-	#	scaling = yes
-	#	set_name = "Spam Ships"
-	#	potential = {
-	#		has_technology = tech_giga_fortress_dm
-	#	}
-	#	naval_cap = 20
-	#}
-
-	ai_weight = {
-		weight = 1
-	}
+    #subplan = {
+    #	scaling = yes
+    #	set_name = "Spam Ships"
+    #	potential = {
+    #		has_technology = tech_giga_fortress_dm
+    #	}
+    #	naval_cap = 20
+    #}
 }

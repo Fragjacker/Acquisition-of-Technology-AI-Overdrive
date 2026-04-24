@@ -1,984 +1,656 @@
-decision_give_foodman_job = {
-	owned_planets_only = yes
-	sound = event_cityscape
-	icon = decision_expel_population
-
-	resources = {
-		category = decisions
-		cost = {
-			influence = 50
-		}
-	}
-	
-	prerequisites = {
-		tech_go_find_work
-	}
-
-	allow = {
-		has_enigmatic_capital = yes	
-	}
-
-	potential = {
-		always = no
-	}
-	
-	effect = {
-		custom_tooltip = decision_give_foodman_job_effect
-		add_modifier = { modifier = "acot_modifier_free_foodman" days = -1 }
-		hidden_effect = {
-			remove_modifier = acot_modifier_free_soldier
-			remove_modifier = acot_modifier_free_thinker
-			remove_modifier = acot_modifier_free_stasis
-		}
-	}
-	
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 0
-			OR = {
-				has_modifier = acot_modifier_free_foodman
-				has_modifier = acot_modifier_free_soldier
-				has_modifier = acot_modifier_free_thinker
-				has_modifier = acot_modifier_free_stasis
-			}
-		}
-	}
-}
-
-decision_give_thinker_job = {
-	owned_planets_only = yes
-	sound = event_cityscape
-	icon = decision_surreal_visions
-
-	resources = {
-		category = decisions
-		cost = {
-			influence = 50
-		}
-	}
-	
-	prerequisites = {
-		tech_go_find_work
-	}
-
-	allow = {
-		has_enigmatic_capital = yes	
-	}
-
-	potential = {
-		always = no
-	}
-	
-	effect = {
-		custom_tooltip = decision_give_thinker_job_effect
-		add_modifier = { modifier = "acot_modifier_free_thinker" days = -1 }
-		hidden_effect = {
-			remove_modifier = acot_modifier_free_soldier
-			remove_modifier = acot_modifier_free_foodman
-			remove_modifier = acot_modifier_free_stasis
-		}
-	}
-	
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 0
-			OR = {
-				has_modifier = acot_modifier_free_foodman
-				has_modifier = acot_modifier_free_soldier
-				has_modifier = acot_modifier_free_thinker
-				has_modifier = acot_modifier_free_stasis
-			}
-		}
-	}
-}
-
-decision_give_reserve_job = {
-	owned_planets_only = yes
-	sound = event_laboratory_sound
-	icon = decision_galactic_senate
-
-	resources = {
-		category = decisions
-		cost = {
-			influence = 50
-		}
-	}
-	
-	prerequisites = {
-		tech_go_sleep_machine
-	}
-
-	allow = {
-		has_enigmatic_capital = yes	
-	}
-
-	potential = {
-		always = no
-	}
-	
-	effect = {
-		custom_tooltip = decision_give_thinker_job_effect
-		add_modifier = { modifier = "acot_modifier_free_stasis" days = -1 }
-		hidden_effect = {
-			remove_modifier = acot_modifier_free_soldier
-			remove_modifier = acot_modifier_free_foodman
-			remove_modifier = acot_modifier_free_thinker
-		}
-	}
-	
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 0
-			OR = {
-				has_modifier = acot_modifier_free_foodman
-				has_modifier = acot_modifier_free_soldier
-				has_modifier = acot_modifier_free_thinker
-				has_modifier = acot_modifier_free_stasis
-			}
-		}
-	}
-}
-
-decision_fractured_self_detonation = {
-	icon = decision_planet_beam
-	resources = {
-		category = decisions
-		cost = {
-			influence = 250
-		}
-		cost = {
-			trigger = {
-				exists = owner
-				owner = {
-					is_same_empire = root.owner
-				}
-			}
-			influence = 500
-			unity = 50000
-		}
-		cost = {
-			trigger = {
-				NOT = {
-					is_owned_by = root.owner
-				}
-			}
-			influence = 250
-		}
-	}
-	sound = event_ai_started_01
-	potential = {
-		from = {
-			is_ai = no
-			has_technology = tech_bombardment_ae_final
-		}
-		exists = space_owner
-		space_owner = {
-			is_same_value = from
-		}
-		is_star = no
-		is_ringworld = no
-		is_moon = no
-		is_memeable_planet = yes
-		is_memeable_ringworld = no
-		is_memeable_space_habitat = no
-		NOR = {
-			is_planet_class = pc_dark_fractured_ae
-			is_planet_class = pc_acot_enigmopolis
-			is_planet_class = pc_acot_pmc_vault
-		}
-		NOT = {
-			has_planet_flag = final_word_underway
-		}
-	}
-	allow = {
-	}
-	effect = {
-		hidden_effect = {
-			set_planet_flag = final_word_underway
-			save_event_target_as = showered_planet
-			space_owner = {
-				enable_special_project = {
-					name = ACOT_FINAL_WORD_PLANET
-					location = event_target:showered_planet
-					owner = this
-				}
-			}
-		}
-	}
-	ai_weight = {
-		weight = 0
-	}
-}
-
 decision_acot_infiltrate_phanon_grid = {
-	owned_planets_only = yes
-	sound = event_sensor_ping
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
-	allow = {
-		any_planet_army = {
-			is_owned_by = root.owner
-		}
-		NOR = {
-			has_modifier = acot_modifier_vault_delay
-			has_global_flag = aot_phanon_content_OFF
-			has_planet_flag = ongoing_vault_infiltration
-		}
-	}
-	potential = {
-		exists = owner
-		owner = {
-			is_country_type = default
-			NOT = {
-				has_country_flag = acot_phanon_tech_stage_four_enabled
-			}
-		}
-		OR = {
-			is_planet_class = pc_acot_pmc_vault
-			is_same_value = event_target:acot_phanon_vault
-			is_same_value = event_target:aot_bootleg_phanon_vault
-		}
-		NOT = {
-			has_planet_flag = acot_vault_floor_four_cleared
-		}
-		has_ground_combat = no
-	}
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_vault_infiltration
-			add_modifier = {
-				modifier = acot_modifier_vault_delay
-				days = 180
-			}
-			IF = {
-				limit = {
-					owner = {
-						NOT = {
-							has_country_flag = acot_phanon_tech_stage_one_enabled
-						}
-					}
-				}
-				planet_event = {
-					id = acot_pmc.12
-				}
-			}
-			IF = {
-				limit = {
-					owner = {
-						has_country_flag = acot_phanon_tech_stage_one_enabled
-						NOT = {
-							has_country_flag = acot_phanon_tech_stage_two_enabled
-						}
-					}
-				}
-				planet_event = {
-					id = acot_pmc.13
-				}
-			}
-			IF = {
-				limit = {
-					owner = {
-						has_country_flag = acot_phanon_tech_stage_two_enabled
-						NOT = {
-							has_country_flag = acot_phanon_tech_stage_three_enabled
-						}
-					}
-				}
-				planet_event = {
-					id = acot_pmc.14
-				}
-			}
-			IF = {
-				limit = {
-					owner = {
-						has_country_flag = acot_phanon_tech_stage_three_enabled
-						NOT = {
-							has_country_flag = acot_phanon_tech_stage_four_enabled
-						}
-					}
-				}
-				planet_event = {
-					id = acot_pmc.15
-				}
-			}
-			create_vault_defense_drones = yes
-		}
-	}
-	ai_weight = {
-		weight = 10000
-	}
+    owned_planets_only = yes
+    sound = event_sensor_ping
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
+    allow = {
+        any_planet_army = {
+            is_owned_by = root.owner
+        }
+        NOR = {
+            has_modifier = acot_modifier_vault_delay
+            has_global_flag = aot_phanon_content_OFF
+            has_planet_flag = ongoing_vault_infiltration
+        }
+        planet_owner = {
+            has_technology = tech_precursor_phanon_design_pe_1
+            has_technology = tech_precursor_phanon_design_pe_2
+            has_technology = tech_precursor_phanon_design_pe_3
+        }
+        custom_tooltip = {
+            fail_text = acot_infiltrate_phanon_grid_fail_text
+            sapient_pop_amount >= 3000
+        }
+    }
+    potential = {
+        NOT = {
+            has_global_flag = acot_phanon_rival_plan_initiated
+        }
+        planet_owner = {
+            is_ai = no
+            NOT = {
+                has_country_flag = acot_phanon_tech_stage_four_enabled
+            }
+        }
+        OR = {
+            is_planet_class = pc_acot_pmc_vault
+            is_same_value = event_target:acot_phanon_vault
+            is_same_value = event_target:aot_bootleg_phanon_vault
+        }
+        NOR = {
+            has_planet_flag = acot_vault_floor_four_cleared
+            has_planet_flag = acot_vault_rival_cleared
+        }
+        has_ground_combat = no
+    }
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_vault_infiltration
+            add_modifier = {
+                modifier = acot_modifier_vault_delay
+                months = 6
+            }
+            if = {
+                limit = {
+                    NOT = {
+                        has_global_flag = acot_phanon_rival_plan_initiated
+                    }
+                }
+                if = {
+                    limit = {
+                        planet_owner = {
+                            NOT = {
+                                has_country_flag = acot_phanon_tech_stage_one_enabled
+                            }
+                        }
+                    }
+                    planet_event = {
+                        id = acot_pmc.12
+                    }
+                }
+                if = {
+                    limit = {
+                        planet_owner = {
+                            has_country_flag = acot_phanon_tech_stage_one_enabled
+                            NOT = {
+                                has_country_flag = acot_phanon_tech_stage_two_enabled
+                            }
+                        }
+                    }
+                    planet_event = {
+                        id = acot_pmc.13
+                    }
+                }
+                if = {
+                    limit = {
+                        planet_owner = {
+                            has_country_flag = acot_phanon_tech_stage_two_enabled
+                            NOT = {
+                                has_country_flag = acot_phanon_tech_stage_three_enabled
+                            }
+                        }
+                    }
+                    planet_event = {
+                        id = acot_pmc.14
+                    }
+                }
+                if = {
+                    limit = {
+                        planet_owner = {
+                            has_country_flag = acot_phanon_tech_stage_three_enabled
+                            NOT = {
+                                has_country_flag = acot_phanon_tech_stage_four_enabled
+                            }
+                        }
+                    }
+                    planet_event = {
+                        id = acot_pmc.15
+                    }
+                }
+            }
+            else = {
+                planet_event = {
+                    id = acot_pmc.16
+                }
+            }
+            create_vault_defense_drones = yes
+        }
+    }
+    ai_weight = {
+        weight = 10000
+    }
 }
 
 ######################## KILLING VOID ENEMIES ########################
 
 decision_acot_kill_void_mutant = {
-	owned_planets_only = yes
-	sound = event_ground_battle
+    owned_planets_only = yes
+    sound = event_ground_battle
 
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
 
-	allow = {
-		any_planet_army = {
-			owner = {
-				is_same_value = root.owner
-			}
-		}
-	}
+    allow = {
+        any_planet_army = { is_owned_by = root.owner }
+    }
 
-	potential = {
-		has_modifier = acot_modifier_fractured_mutants
-		NOR = {
-			has_planet_flag = ongoing_void_mutant_purge
-			has_planet_flag = ongoing_void_machine_purge
-			has_planet_flag = ongoing_void_crystal_purge
-			has_planet_flag = ongoing_void_fiend_purge
-			has_planet_flag = ongoing_void_plant_purge
-		}
-	}
+    potential = {
+        has_modifier = acot_modifier_fractured_mutants
+        NOR = {
+            has_planet_flag = ongoing_void_mutant_purge
+            has_planet_flag = ongoing_void_machine_purge
+            has_planet_flag = ongoing_void_crystal_purge
+            has_planet_flag = ongoing_void_fiend_purge
+            has_planet_flag = ongoing_void_plant_purge
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_void_mutant_purge
-			while = {
-				count = 120
-				create_army = {
-					owner = event_target:lifeform_country
-					type = acot_void_mutants_army
-					species = event_target:phanon_operative_species
-					land_army = yes
-				}
-			}
-			random_list = {
-				50 = {
-					while = {
-						count = 60
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_mutants_army
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-				50 = {
-					while = {
-						count = 6
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_mutants_hero
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_void_mutant_purge
+            while = {
+                count = 160
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_mutants_army
+                    species = root.owner_main_species
 
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 1000
-			any_planet_army = {
-				army_type = acot_heavy_armor_ae_def
-			}
-		}
-	}
+                }
+            }
+            while = {
+                count = 6
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_mutants_hero
+                    species = root.owner_main_species
+
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 1000
+            any_planet_army = {
+                army_type = acot_defense_army_heavy_ae
+            }
+        }
+    }
 }
 
 decision_acot_kill_void_lifeform = {
-	owned_planets_only = yes
-	sound = event_ground_battle
+    owned_planets_only = yes
+    sound = event_ground_battle
 
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
 
-	allow = {
-		any_planet_army = {
-			owner = {
-				is_same_value = this
-			}
-		}
-	}
+    allow = {
+        any_planet_army = { is_owned_by = root.owner }
+    }
 
-	potential = {
-		has_modifier = acot_modifier_fractured_lifeforms
-		NOR = {
-			has_planet_flag = ongoing_void_mutant_purge
-			has_planet_flag = ongoing_void_machine_purge
-			has_planet_flag = ongoing_void_crystal_purge
-			has_planet_flag = ongoing_void_fiend_purge
-			has_planet_flag = ongoing_void_plant_purge
-		}
-	}
+    potential = {
+        has_modifier = acot_modifier_fractured_lifeforms
+        NOR = {
+            has_planet_flag = ongoing_void_mutant_purge
+            has_planet_flag = ongoing_void_machine_purge
+            has_planet_flag = ongoing_void_crystal_purge
+            has_planet_flag = ongoing_void_fiend_purge
+            has_planet_flag = ongoing_void_plant_purge
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_void_fiend_purge
-			while = {
-				count = 80
-				create_army = {
-					owner = event_target:lifeform_country
-					type = acot_void_fiends_army
-					species = event_target:phanon_operative_species
-					land_army = yes
-				}
-			}
-			random_list = {
-				50 = {
-					while = {
-						count = 40
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_fiends_army
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-				50 = {
-					while = {
-						count = 4
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_fiends_hero
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_void_fiend_purge
+            while = {
+                count = 160
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_fiends_army
+                    species = root.owner_main_species
 
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 1000
-			any_planet_army = {
-				army_type = acot_heavy_armor_ae_def
-			}
-		}
-	}
+                }
+            }
+            while = {
+                count = 6
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_fiends_hero
+                    species = root.owner_main_species
+
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 1000
+            any_planet_army = {
+                army_type = acot_defense_army_heavy_ae
+            }
+        }
+    }
 }
 
 decision_acot_kill_void_machine = {
-	owned_planets_only = yes
-	sound = event_ground_battle
+    owned_planets_only = yes
+    sound = event_ground_battle
 
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
 
-	allow = {
-		any_planet_army = {
-			owner = {
-				is_same_value = root.owner
-			}
-		}
-	}
+    allow = {
+        any_planet_army = { is_owned_by = root.owner }
+    }
 
-	potential = {
-		has_modifier = acot_modifier_fractured_machines
-		NOR = {
-			has_planet_flag = ongoing_void_mutant_purge
-			has_planet_flag = ongoing_void_machine_purge
-			has_planet_flag = ongoing_void_crystal_purge
-			has_planet_flag = ongoing_void_fiend_purge
-			has_planet_flag = ongoing_void_plant_purge
-		}
-	}
+    potential = {
+        has_modifier = acot_modifier_fractured_machines
+        NOR = {
+            has_planet_flag = ongoing_void_mutant_purge
+            has_planet_flag = ongoing_void_machine_purge
+            has_planet_flag = ongoing_void_crystal_purge
+            has_planet_flag = ongoing_void_fiend_purge
+            has_planet_flag = ongoing_void_plant_purge
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_void_machine_purge
-			while = {
-				count = 160
-				create_army = {
-					owner = event_target:lifeform_country
-					type = acot_void_machine_army
-					species = event_target:phanon_operative_species
-					land_army = yes
-				}
-			}
-			random_list = {
-				50 = {
-					while = {
-						count = 80
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_machine_army
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-				50 = {
-					while = {
-						count = 8
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_machine_hero
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_void_machine_purge
+            while = {
+                count = 160
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_machine_army
+                    species = root.owner_main_species
 
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 1000
-			any_planet_army = {
-				army_type = acot_heavy_armor_ae_def
-			}
-		}
-	}
+                }
+            }
+            while = {
+                count = 6
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_machine_hero
+                    species = root.owner_main_species
+
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 1000
+            any_planet_army = {
+                army_type = acot_defense_army_heavy_ae
+            }
+        }
+    }
 }
 
 decision_acot_kill_void_crystal = {
-	owned_planets_only = yes
-	sound = event_ground_battle
+    owned_planets_only = yes
+    sound = event_ground_battle
 
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
 
-	allow = {
-		any_planet_army = {
-			owner = {
-				is_same_value = root.owner
-			}
-		}
-	}
+    allow = {
+        any_planet_army = { is_owned_by = root.owner }
+    }
 
-	potential = {
-		has_modifier = acot_modifier_fractured_sentient_crystal
-		NOR = {
-			has_planet_flag = ongoing_void_mutant_purge
-			has_planet_flag = ongoing_void_machine_purge
-			has_planet_flag = ongoing_void_crystal_purge
-			has_planet_flag = ongoing_void_fiend_purge
-			has_planet_flag = ongoing_void_plant_purge
-		}
-	}
+    potential = {
+        has_modifier = acot_modifier_fractured_sentient_crystal
+        NOR = {
+            has_planet_flag = ongoing_void_mutant_purge
+            has_planet_flag = ongoing_void_machine_purge
+            has_planet_flag = ongoing_void_crystal_purge
+            has_planet_flag = ongoing_void_fiend_purge
+            has_planet_flag = ongoing_void_plant_purge
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_void_crystal_purge
-			while = {
-				count = 60
-				create_army = {
-					owner = event_target:lifeform_country
-					type = acot_void_crystal_army
-					species = event_target:phanon_operative_species
-					land_army = yes
-				}
-			}
-			random_list = {
-				50 = {
-					while = {
-						count = 30
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_crystal_army
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-				50 = {
-					while = {
-						count = 3
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_crystal_hero
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_void_crystal_purge
+            while = {
+                count = 100
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_crystal_army
+                }
+            }
+            while = {
+                count = 4
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_crystal_hero
+                }
+            }
+        }
+    }
 
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 1000
-			any_planet_army = {
-				army_type = acot_heavy_armor_ae_def
-			}
-		}
-	}
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 1000
+            any_planet_army = {
+                army_type = acot_defense_army_heavy_ae
+            }
+        }
+    }
 }
 
 decision_acot_kill_void_flora = {
-	owned_planets_only = yes
-	sound = event_ground_battle
+    owned_planets_only = yes
+    sound = event_ground_battle
 
-	resources = {
-		category = decisions
-		cost = {
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+        }
+    }
 
-	allow = {
-		any_planet_army = {
-			owner = {
-				is_same_value = root.owner
-			}
-		}
-	}
+    allow = {
+        any_planet_army = { is_owned_by = root.owner }
+    }
 
-	potential = {
-		has_modifier = acot_modifier_fractured_plants
-		NOR = {
-			has_planet_flag = ongoing_void_mutant_purge
-			has_planet_flag = ongoing_void_machine_purge
-			has_planet_flag = ongoing_void_crystal_purge
-			has_planet_flag = ongoing_void_fiend_purge
-			has_planet_flag = ongoing_void_plant_purge
-		}
-	}
+    potential = {
+        has_modifier = acot_modifier_fractured_plants
+        NOR = {
+            has_planet_flag = ongoing_void_mutant_purge
+            has_planet_flag = ongoing_void_machine_purge
+            has_planet_flag = ongoing_void_crystal_purge
+            has_planet_flag = ongoing_void_fiend_purge
+            has_planet_flag = ongoing_void_plant_purge
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = ongoing_void_plant_purge
-			while = {
-				count = 60
-				create_army = {
-					owner = event_target:lifeform_country
-					type = acot_void_plant_army
-					species = event_target:phanon_operative_species
-					land_army = yes
-				}
-			}
-			random_list = {
-				50 = {
-					while = {
-						count = 30
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_plant_army
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-				50 = {
-					while = {
-						count = 3
-						create_army = {
-							owner = event_target:lifeform_country
-							type = acot_void_plant_hero
-							species = event_target:phanon_operative_species
-							land_army = yes
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = ongoing_void_plant_purge
+            while = {
+                count = 100
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_plant_army
+                }
+            }
+            while = {
+                count = 4
+                create_army = {
+                    owner = event_target:lifeform_country
+                    type = acot_void_plant_hero
+                }
+            }
+        }
+    }
 
-	ai_weight = {
-		weight = 1
-		modifier = {
-			factor = 1000
-			any_planet_army = {
-				army_type = acot_heavy_armor_ae_def
-			}
-		}
-	}
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 1000
+            any_planet_army = {
+                army_type = acot_defense_army_heavy_ae
+            }
+        }
+    }
 }
 
 decision_transform_into_super_awesome = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = acot_decision_sound
 
-	resources = { # stop with the 500 influence costs lol
-		category = decisions
-		cost = {
-			energy = 1000000
-			minerals = 1000000
-			alloys = 500000
-			unity = 50000
-			acot_sr_dark_energy = 20000
-			sr_dark_matter = 20000
-			influence = 200
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            energy = 1000000
+            minerals = 1000000
+            alloys = 500000
+            unity = 50000
+            acot_sr_dark_energy = 20000
+            sr_dark_matter = 20000
+        }
+    }
 
-	allow = {
-		NOR = {
-			has_modifier = acot_modifier_fractured_lifeforms
-			has_modifier = acot_modifier_fractured_machines
-			has_modifier = acot_modifier_fractured_mutants
-			has_modifier = acot_modifier_fractured_plants
-			has_modifier = acot_modifier_fractured_sentient_crystal
-		}
-		NOR = {
-			has_deposit = d_acot_void_chasm
-			has_deposit = d_acot_void_terrain
-			has_deposit = d_acot_void_rift
-		}
-		has_enigmatic_capital = yes
-		#exists = orbital_defence more just craziness lol
-		#orbital_defence = {
-		#	OR = {
-		#		is_ship_size = acot_precusor_orbital_ring_t1
-		#		is_ship_size = acot_precusor_orbital_ring_t2
-		#		is_ship_size = acot_precusor_orbital_ring_t3
-		#	}
-		#}
-	}
+    allow = {
+        NOR = {
+            has_modifier = acot_modifier_fractured_lifeforms
+            has_modifier = acot_modifier_fractured_machines
+            has_modifier = acot_modifier_fractured_mutants
+            has_modifier = acot_modifier_fractured_plants
+            has_modifier = acot_modifier_fractured_sentient_crystal
+            has_deposit = d_acot_void_chasm
+            has_deposit = d_acot_void_terrain
+            has_deposit = d_acot_void_rift
+        }
+        has_enigmatic_capital = yes
+        #exists = orbital_defence more just craziness lol
+        #orbital_defence = {
+        #	OR = {
+        #		is_ship_size = acot_precusor_orbital_ring_t1
+        #		is_ship_size = acot_precusor_orbital_ring_t2
+        #		is_ship_size = acot_precusor_orbital_ring_t3
+        #	}
+        #}
+    }
 
-	prerequisites = {
-		tech_acot_create_enigmapolis
-	}
+    prerequisites = {
+        tech_acot_create_enigmapolis
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmatic
-		NOT = {
-			has_planet_flag = has_enigmapolis_project
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmatic
+        NOT = {
+            has_planet_flag = has_enigmapolis_project
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			if = {
-				limit = {
-					from = {
-						is_ai = yes
-					}
-				}
-				add_blocker = {
-					type = d_void_construction_blocker
-				}
-			}
-			set_planet_flag = has_enigmapolis_project
-			planet_event = { id = acot_planets.6 }
-			enable_special_project = {
-				name = ACOT_CREATE_ENIGMAPOLIS
-				location = THIS
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = has_enigmapolis_project
+            planet_event = { id = acot_planets.6 }
+            enable_special_project = {
+                name = ACOT_CREATE_ENIGMAPOLIS
+                location = this
+            }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-		modifier = {
-			factor = 0
-			from = {
-				has_resource = {
-					type = influence
-					amount < 200
-				}
-			}
-		}
-	}
+    ai_weight = {
+        weight = 1000
+    }
 }
 
 decision_transform_into_enigmatic_planet = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = acot_decision_sound
 
-	resources = {
-		category = decisions
-		cost = {
-			energy = 500000
-			minerals = 500000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-			influence = 200
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            energy = 500000
+            minerals = 500000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	allow = {
-		NOR = {
-			has_modifier = acot_modifier_fractured_lifeforms
-			has_modifier = acot_modifier_fractured_machines
-			has_modifier = acot_modifier_fractured_mutants
-			has_modifier = acot_modifier_fractured_plants
-			has_modifier = acot_modifier_fractured_sentient_crystal
-		}
-		NOR = {
-			has_deposit = d_acot_void_chasm
-			has_deposit = d_acot_void_terrain
-			has_deposit = d_acot_void_rift
-		}
-	}
+    allow = {
+        NOR = {
+            has_modifier = acot_modifier_fractured_lifeforms
+            has_modifier = acot_modifier_fractured_machines
+            has_modifier = acot_modifier_fractured_mutants
+            has_modifier = acot_modifier_fractured_plants
+            has_modifier = acot_modifier_fractured_sentient_crystal
+            has_deposit = d_acot_void_chasm
+            has_deposit = d_acot_void_terrain
+            has_deposit = d_acot_void_rift
+        }
+    }
 
-	prerequisites = {
-		tech_acot_create_enigmatic_world
-	}
+    prerequisites = {
+        tech_acot_create_enigmatic_world
+    }
 
-	potential = {
-		is_planet_class = pc_dark_fractured
-		NOT = {
-			has_planet_flag = has_enigmatic_planet_project
-		}
-	}
+    potential = {
+        is_planet_class = pc_dark_fractured
+        NOT = {
+            has_planet_flag = has_enigmatic_planet_project
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			set_planet_flag = has_enigmatic_planet_project
-			planet_event = { id = acot_planets.4 }
-			enable_special_project = {
-				name = ACOT_CREATE_ENIGMATIC_WORLD
-				location = THIS
-			}
-		}
-	}
+    effect = {
+        hidden_effect = {
+            set_planet_flag = has_enigmatic_planet_project
+            planet_event = { id = acot_planets.4 }
+            enable_special_project = {
+                name = ACOT_CREATE_ENIGMATIC_WORLD
+                location = this
+            }
+        }
+    }
 
-	ai_weight = { # we really want this!
-		weight = 1000
-		modifier = {
-			factor = 0
-			from = {
-				has_resource = {
-					type = influence
-					amount < 200
-				}
-			}
-		}
-	}
+    ai_weight = {
+        weight = 1000
+    }
 }
 
 ######## GIGA FORT UPGRADDE
 
 decision_upgrade_dm_gigafort = {
-	owned_planets_only = yes
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 20000
-			influence = 100
-			sr_dark_matter = 300
-			acot_sr_dark_energy = 300
-		}
-	}
-	prerequisites = { tech_acot_giga_fortress }
-	enactment_time = 360
-	potential = {
-		has_building = building_giga_fortress_dm
-		has_ascended_capital = yes
-	}
-	effect = {
-		remove_building = building_giga_fortress_dm
-		add_building = building_acot_giga_fortress
-	}
-	abort_trigger = {
-		has_building = building_acot_giga_fortress
-	}
-	ai_weight = {
-		base = 100
-	}
+    owned_planets_only = yes
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 20000
+            influence = 100
+            sr_dark_matter = 300
+            acot_sr_dark_energy = 300
+        }
+    }
+    prerequisites = { tech_acot_giga_fortress }
+    enactment_time = 360
+    potential = {
+        has_building = building_giga_fortress_dm
+        has_ascended_capital = yes
+    }
+    effect = {
+        remove_building = building_giga_fortress_dm
+        add_building = building_acot_giga_fortress
+    }
+    abort_trigger = {
+        has_building = building_acot_giga_fortress
+    }
+    ai_weight = {
+        base = 100
+    }
 }
 
 decision_upgrade_ae_gigafort = {
-	owned_planets_only = yes
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 15000
-			influence = 50
-			sr_dark_matter = 200
-			acot_sr_dark_energy = 200
-		}
-	}
-	prerequisites = { tech_acot_giga_fortress }
-	enactment_time = 360
-	potential = {
-		has_building = building_acot_giga_fortress
-		has_ascended_capital = yes
-	}
-	effect = {
-		remove_building = building_acot_giga_fortress
-		add_building = building_acot_giga_fortress_array
-	}
-	abort_trigger = {
-		has_building = building_acot_giga_fortress_array
-	}
-	ai_weight = {
-		base = 100
-	}
+    owned_planets_only = yes
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 15000
+            influence = 50
+            sr_dark_matter = 200
+            acot_sr_dark_energy = 200
+        }
+    }
+    prerequisites = { tech_acot_giga_fortress }
+    enactment_time = 360
+    potential = {
+        has_building = building_acot_giga_fortress
+        has_ascended_capital = yes
+    }
+    effect = {
+        remove_building = building_acot_giga_fortress
+        add_building = building_acot_giga_fortress_array
+    }
+    abort_trigger = {
+        has_building = building_acot_giga_fortress_array
+    }
+    ai_weight = {
+        base = 100
+    }
 }
 
 decision_upgrade_re_gigafort = {
-	owned_planets_only = yes
-	resources = {
-		category = planet_buildings
-		cost = {
-			energy = 50000
-			minerals = 30000
-			aot_sr_runic_power = 10000
-		}
-	}
-	prerequisites = { tech_phanon_giga_fortress }
-	enactment_time = 360
-	potential = {
-		has_building = building_acot_giga_fortress_array
-		has_phanon_capital = yes
-	}
-	effect = {
-		remove_building = building_acot_giga_fortress_array
-		add_building = building_phanon_giga_fortress_array
-	}
-	abort_trigger = {
-		has_building = building_phanon_giga_fortress_array
-	}
-	ai_weight = {
-		base = 100
-	}
+    owned_planets_only = yes
+    resources = {
+        category = planet_buildings
+        cost = {
+            energy = 50000
+            minerals = 30000
+            aot_sr_runic_power = 10000
+        }
+    }
+    prerequisites = { tech_phanon_giga_fortress }
+    enactment_time = 360
+    potential = {
+        has_building = building_acot_giga_fortress_array
+        has_phanon_capital = yes
+    }
+    effect = {
+        remove_building = building_acot_giga_fortress_array
+        add_building = building_phanon_giga_fortress_array
+    }
+    abort_trigger = {
+        has_building = building_phanon_giga_fortress_array
+    }
+    ai_weight = {
+        base = 100
+    }
 }
 
 decision_upgrade_se_gigafort = {
-	owned_planets_only = yes
-	resources = {
-		category = planet_buildings
-		cost = {
-			energy = 100000
-			minerals = 60000
-			acot_sr_stellarite = 5000
-		}
-	}
-	prerequisites = { tech_stellarite_giga_fortress }
-	enactment_time = 360
-	potential = {
-		has_building = building_phanon_giga_fortress_array
-		has_stellarite_capital = yes
-	}
-	effect = {
-		remove_building = building_phanon_giga_fortress_array
-		add_building = building_stellarite_giga_fortress_array
-	}
-	abort_trigger = {
-		has_building = building_stellarite_giga_fortress_array
-	}
-	ai_weight = {
-		base = 100
-	}
+    owned_planets_only = yes
+    resources = {
+        category = planet_buildings
+        cost = {
+            energy = 100000
+            minerals = 60000
+            acot_sr_stellarite = 5000
+        }
+    }
+    prerequisites = { tech_stellarite_giga_fortress }
+    enactment_time = 360
+    potential = {
+        has_building = building_phanon_giga_fortress_array
+        has_stellarite_capital = yes
+    }
+    effect = {
+        remove_building = building_phanon_giga_fortress_array
+        add_building = building_stellarite_giga_fortress_array
+    }
+    abort_trigger = {
+        has_building = building_stellarite_giga_fortress_array
+    }
+    ai_weight = {
+        base = 100
+    }
 }
 
 ### void sphere
@@ -1035,616 +707,618 @@ decision_upgrade_se_gigafort = {
 #}
 
 decision_build_up_voidsphere = {
-	enactment_time = 240
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		num_free_districts = {
-			type = any
-			value > 1
-		}
-		exists = owner
-		owner = {
-			is_ai = yes
-		}
-	}
-	prerequisites = { tech_acot_create_enigmapolis }
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 15000
-		}
-	}
-	owned_planets_only = yes
-	effect = {
-		add_district = {
-			district_type = district_acot_enigmapolis_silo
-			ignore_cap = yes
-		}
-		add_district = {
-			district_type = district_acot_enigmapolis_science
-			ignore_cap = yes
-		}
-	}
-	ai_weight = {
-		base = 1000
-		modifier = {
-			factor = 0
-			OR = {
-				free_jobs > 3
-				owner = {
-					has_monthly_income = {
-						resource = acot_sr_dark_energy
-						value < 300
-					}
-					has_monthly_income = {
-						resource = sr_dark_matter
-						value < 300
-					}
-				}
-			}
-		}
-	}
+    enactment_time = 240
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        num_free_districts = {
+            type = any
+            value > 1
+        }
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
+    }
+    prerequisites = { tech_acot_create_enigmapolis }
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 15000
+        }
+    }
+    owned_planets_only = yes
+    effect = {
+        add_district = {
+            district_type = district_acot_enigmapolis_silo
+            ignore_cap = yes
+        }
+        add_district = {
+            district_type = district_acot_enigmapolis_science
+            ignore_cap = yes
+        }
+    }
+    ai_weight = {
+        base = 1000
+        modifier = {
+            factor = 0
+            OR = {
+                free_jobs > 3
+                owner = {
+                    has_monthly_income = {
+                        resource = acot_sr_dark_energy
+                        value < 300
+                    }
+                    has_monthly_income = {
+                        resource = sr_dark_matter
+                        value < 300
+                    }
+                }
+            }
+        }
+    }
 }
 
 decision_populate_voidsphere = {
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		free_jobs > 2
-		exists = owner
-		owner = {
-			is_ai = yes
-			has_dm_capital_tech = yes
-			any_owned_planet = {
-				NOT = {
-					is_planet_class = pc_acot_enigmopolis
-				}
-				num_pops > 4
-			}
-		}
-	}
-	prerequisites = { tech_acot_create_enigmapolis }
-	enactment_time = 100
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 1
-		}
-	}
-	effect = {
-		set_update_modifiers_batch = begin
-		owner = {
-			random_owned_planet = {
-				limit = {
-					num_pops > 6
-					NOT = {
-						is_planet_class = pc_acot_enigmopolis
-					}
-				}
-				while = {
-					count = 4
-					random_pop = {
-						resettle_pop = {
-							pop = this
-							planet = root
-						}
-					}
-				}
-			}
-		}
-		set_update_modifiers_batch = end
-	}
-	ai_weight = { ### we REALLY want to max this planet out
-		base = 1500
-		modifier = {
-			factor = 10
-			num_free_districts = {
-				type = any
-				value < 2
-			}
-		}
-		modifier = {
-			factor = 2
-			free_jobs > 1
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        free_jobs > 2
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_dm_capital_tech = yes
+            any_owned_planet = {
+                NOT = {
+                    is_planet_class = pc_acot_enigmopolis
+                }
+                num_pops > 4
+            }
+        }
+    }
+    prerequisites = { tech_acot_create_enigmapolis }
+    enactment_time = 100
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 1
+        }
+    }
+    effect = {
+        set_update_modifiers_batch = begin
+        owner = {
+            random_owned_planet = {
+                limit = {
+                    num_pops > 6
+                    NOT = {
+                        is_planet_class = pc_acot_enigmopolis
+                    }
+                }
+                while = {
+                    count = 4
+                    random_pop = {
+                        resettle_pop = {
+                            pop = this
+                            planet = root
+                        }
+                    }
+                }
+            }
+        }
+        set_update_modifiers_batch = end
+    }
+    ai_weight = {
+        ### we REALLY want to max this planet out
+        base = 1500
+        modifier = {
+            factor = 10
+            num_free_districts = {
+                type = any
+                value < 2
+            }
+        }
+        modifier = {
+            factor = 2
+            free_jobs > 1
+        }
+    }
 }
 
 decision_add_power_planet = {
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-			OR = {
-				has_monthly_income = {
-					resource = acot_sr_dark_energy
-					value < 0
-				}
-				has_monthly_income = {
-					resource = sr_dark_matter
-					value < 0
-				}
-			}
-		}
-		has_enigmatic_capital = yes
-		num_free_districts = {
-			type = any
-			value >= 1
-		}
-	}
-	prerequisites = { tech_dark_matter_power_core_dm }
-	enactment_time = 30 # crisis mode!
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 500
-		}
-	}
-	effect = {
-		add_district = district_acot_ai_reactor
-	}
-	ai_weight = {
-		base = 1000
-	}
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            OR = {
+                has_monthly_income = {
+                    resource = acot_sr_dark_energy
+                    value < 0
+                }
+                has_monthly_income = {
+                    resource = sr_dark_matter
+                    value < 0
+                }
+            }
+        }
+        has_enigmatic_capital = yes
+        num_free_districts = {
+            type = any
+            value >= 1
+        }
+    }
+    prerequisites = { tech_dark_matter_power_core_dm }
+    enactment_time = 30 # crisis mode!
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 500
+        }
+    }
+    effect = {
+        add_district = district_acot_ai_reactor
+    }
+    ai_weight = {
+        base = 1000
+    }
 }
 decision_add_crisis_district = {
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-		}
-		num_unemployed > 2
-		has_enigmatic_capital = yes
-		num_free_districts = {
-			type = any
-			value >= 1
-		}
-	}
-	prerequisites = { tech_dark_matter_power_core_dm }
-	enactment_time = 90 # crisis mode!
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 750
-		}
-	}
-	effect = {
-		random_list = {
-			1 = {
-				add_district = district_acot_ai_rural
-			}
-			1 = {
-				add_district = district_acot_ai_industrial
-			}
-		}
-	}
-	ai_weight = {
-		base = 1000
-	}
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
+        num_unemployed > 2
+        has_enigmatic_capital = yes
+        num_free_districts = {
+            type = any
+            value >= 1
+        }
+    }
+    prerequisites = { tech_dark_matter_power_core_dm }
+    enactment_time = 90 # crisis mode!
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 750
+        }
+    }
+    effect = {
+        random_list = {
+            1 = {
+                add_district = district_acot_ai_rural
+            }
+            1 = {
+                add_district = district_acot_ai_industrial
+            }
+        }
+    }
+    ai_weight = {
+        base = 1000
+    }
 }
 
 decision_destroy_old_lab = {
-	enactment_time = 30
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 50
-		}
-	}
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-			has_dm_capital_tech = yes
-			has_technology = tech_acot_dm_enigmatic_lab
-		}
-		OR = {
-			has_building = building_research_lab_1
-			has_building = building_research_lab_2
-			has_building = building_research_lab_3
-		}
-	}
-	effect = {
-		if = {
-			limit = {
-				has_building = building_research_lab_1
-			}
-			remove_building = building_research_lab_1
-		}
-		if = {
-			limit = {
-				has_building = building_research_lab_2
-			}
-			remove_building = building_research_lab_2
-		}
-		if = {
-			limit = {
-				has_building = building_research_lab_3
-			}
-			remove_building = building_research_lab_3
-		}
-	}
-	ai_weight = {
-		base = 10
-		modifier = {
-			factor = 100
-			free_jobs < 2
-		}
-	}
+    enactment_time = 30
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 50
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_dm_capital_tech = yes
+            has_technology = tech_acot_dm_enigmatic_lab
+        }
+        OR = {
+            has_building = building_research_lab_1
+            has_building = building_research_lab_2
+            has_building = building_research_lab_3
+        }
+    }
+    effect = {
+        if = {
+            limit = {
+                has_building = building_research_lab_1
+            }
+            remove_building = building_research_lab_1
+        }
+        if = {
+            limit = {
+                has_building = building_research_lab_2
+            }
+            remove_building = building_research_lab_2
+        }
+        if = {
+            limit = {
+                has_building = building_research_lab_3
+            }
+            remove_building = building_research_lab_3
+        }
+    }
+    ai_weight = {
+        base = 10
+        modifier = {
+            factor = 100
+            free_jobs < 2
+        }
+    }
 }
 
 decision_destroy_sr_building = {
-	enactment_time = 30
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 50
-		}
-	}
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-			has_dm_capital_tech = yes
-			has_technology = tech_acot_dm_transmutor
-		}
-		OR = {
-			has_building = building_refinery
-			has_building = building_crystal_plant
-			has_building = building_chemical_plant
-		}
-	}
-	effect = {
-		if = {
-			limit = {
-				has_building = building_refinery
-			}
-			remove_building = building_refinery
-		}
-		if = {
-			limit = {
-				has_building = building_crystal_plant
-			}
-			remove_building = building_crystal_plant
-		}
-		if = {
-			limit = {
-				has_building = building_chemical_plant
-			}
-			remove_building = building_chemical_plant
-		}
-	}
-	ai_weight = {
-		base = 10
-		modifier = {
-			factor = 100
-			free_jobs < 2
-		}
-	}
+    enactment_time = 30
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 50
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_dm_capital_tech = yes
+            has_technology = tech_acot_dm_transmutor
+        }
+        OR = {
+            has_building = building_refinery
+            has_building = building_crystal_plant
+            has_building = building_chemical_plant
+        }
+    }
+    effect = {
+        if = {
+            limit = {
+                has_building = building_refinery
+            }
+            remove_building = building_refinery
+        }
+        if = {
+            limit = {
+                has_building = building_crystal_plant
+            }
+            remove_building = building_crystal_plant
+        }
+        if = {
+            limit = {
+                has_building = building_chemical_plant
+            }
+            remove_building = building_chemical_plant
+        }
+    }
+    ai_weight = {
+        base = 10
+        modifier = {
+            factor = 100
+            free_jobs < 2
+        }
+    }
 }
 
 decision_destroy_trade_building = {
-	enactment_time = 30
-	resources = {
-		category = planet_buildings
-		cost = {
-			minerals = 50
-		}
-	}
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-			has_dm_capital_tech = yes
-			has_technology = tech_dm_commercial_megaplex
-		}
-		OR = {
-			has_building = building_commercial_zone
-			has_building = building_commercial_megaplex
-		}
-	}
-	effect = {
-		if = {
-			limit = {
-				has_building = building_commercial_zone
-			}
-			remove_building = building_commercial_zone
-		}
-		if = {
-			limit = {
-				has_building = building_commercial_megaplex
-			}
-			remove_building = building_commercial_megaplex
-		}
-	}
-	ai_weight = {
-		base = 10
-		modifier = {
-			factor = 100
-			free_jobs < 2
-		}
-	}
+    enactment_time = 30
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 50
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_dm_capital_tech = yes
+            has_technology = tech_dm_commercial_megaplex
+        }
+        OR = {
+            has_building = building_commercial_zone
+            has_building = building_commercial_megaplex
+        }
+    }
+    effect = {
+        if = {
+            limit = {
+                has_building = building_commercial_zone
+            }
+            remove_building = building_commercial_zone
+        }
+        if = {
+            limit = {
+                has_building = building_commercial_megaplex
+            }
+            remove_building = building_commercial_megaplex
+        }
+    }
+    ai_weight = {
+        base = 10
+        modifier = {
+            factor = 100
+            free_jobs < 2
+        }
+    }
 }
 
 # mass recruit armies button thanks aerolfos i love you
 decision_enigmatic_mass_recruitment = {
-	enactment_time = 120
+    enactment_time = 120
 
-	resources = {
-		category = armies
-		cost = {
-			energy = 100
-			alloys = 2500
+    resources = {
+        category = armies
+        cost = {
+            energy = 100
+            alloys = 2500
 
-		}
-	}
+        }
+    }
 
-	potential = {
-		exists = owner
-		owner = {
-			is_ai = yes
-			has_technology = tech_dark_matter_power_core_ae
-			is_at_war = yes
-		}
-	}
-	abort_trigger = {
-		exists = owner
-		owner = {
-			is_at_war = no
-		}
-	}
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_technology = tech_dark_matter_power_core_ae
+            is_at_war = yes
+        }
+    }
+    abort_trigger = {
+        exists = owner
+        owner = {
+            is_at_war = no
+        }
+    }
 
-	effect = {
-		#custom_tooltip = decision_maginot_mass_recruitment_effect
-		hidden_effect = {
-			if = {
-				limit = { exists = planet_owner }
-				from = {
-					set_country_flag = acot_decision_army_haver
-				}
-				if = {
-					limit = { planet_owner = { is_machine_empire = no } }
-					while = {
-						set_update_modifiers_batch = begin
-						count = 10
-						create_army = {
-							owner = planet_owner
-							species = planet_owner.species
-							type = acot_special_force_ae
-							effect = {
-								set_army_flag = acot_war_army
-							}
-						}
-						set_update_modifiers_batch = end
-					}
-				}
-				else_if = {
-					limit = { planet_owner = { is_hive_empire = yes } }
-					while = {
-						count = 10
-						create_army = {
-							owner = planet_owner
-							species = planet_owner.species
-							type = acot_hive_heavy_ae
-							effect = {
-								set_army_flag = acot_war_army
-							}
-						}
-					}
-				}
-				else_if = {
-					limit = { planet_owner = { is_machine_empire = yes } }
-					while = {
-						count = 10
-						create_army = {
-							owner = planet_owner
-							species = planet_owner.species
-							type = acot_army_machine_heavy_ae
-							effect = {
-								set_army_flag = acot_war_army
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    effect = {
+        #custom_tooltip = decision_maginot_mass_recruitment_effect
+        hidden_effect = {
+            if = {
+                limit = { exists = planet_owner }
+                from = {
+                    set_country_flag = acot_decision_army_haver
+                }
+                if = {
+                    limit = { planet_owner = { is_machine_empire = no } }
+                    while = {
+                        set_update_modifiers_batch = begin
+                        count = 10
+                        create_army = {
+                            owner = planet_owner
+                            species = planet_owner.species
+                            type = acot_special_force_ae
+                            effect = {
+                                set_army_flag = acot_war_army
+                            }
+                        }
+                        set_update_modifiers_batch = end
+                    }
+                }
+                else_if = {
+                    limit = { planet_owner = { is_hive_empire = yes } }
+                    while = {
+                        count = 10
+                        create_army = {
+                            owner = planet_owner
+                            species = planet_owner.species
+                            type = acot_hive_heavy_ae
+                            effect = {
+                                set_army_flag = acot_war_army
+                            }
+                        }
+                    }
+                }
+                else_if = {
+                    limit = { planet_owner = { is_machine_empire = yes } }
+                    while = {
+                        count = 10
+                        create_army = {
+                            owner = planet_owner
+                            species = planet_owner.species
+                            type = acot_army_machine_heavy_ae
+                            effect = {
+                                set_army_flag = acot_war_army
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	ai_weight = { # this is for player  (in)convenience
-		weight = 300
-	}
+    ai_weight = {
+        # this is for player  (in)convenience
+        weight = 300
+    }
 }
 
 ### man why
 
 decision_acot_voidsphere_silo_alloys = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = choose_ascension_perk_01
 
-	enactment_time = 180
+    enactment_time = 180
 
-	resources = {
-		category = decisions
-		cost = {
-			alloys = 100000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            alloys = 100000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	prerequisites = {
-		tech_acot_enigmapolis_silo
-	}
+    prerequisites = {
+        tech_acot_enigmapolis_silo
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		NOT = {
-			has_modifier = acot_modifier_voidsphere_silo_alloys
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        NOT = {
+            has_modifier = acot_modifier_voidsphere_silo_alloys
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			add_modifier = { modifier = "acot_modifier_voidsphere_silo_alloys" days = -1 }
-		}
-	}
+    effect = {
+        hidden_effect = {
+            add_modifier = { modifier = "acot_modifier_voidsphere_silo_alloys" days = -1 }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-	}
+    ai_weight = {
+        weight = 2000
+    }
 }
 
 decision_acot_voidsphere_silo_energy = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = choose_ascension_perk_01
 
-	enactment_time = 180
+    enactment_time = 180
 
-	resources = {
-		category = decisions
-		cost = {
-			energy = 100000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            energy = 100000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	prerequisites = {
-		tech_acot_enigmapolis_silo
-	}
+    prerequisites = {
+        tech_acot_enigmapolis_silo
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		NOT = {
-			has_modifier = acot_modifier_voidsphere_silo_energy
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        NOT = {
+            has_modifier = acot_modifier_voidsphere_silo_energy
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			add_modifier = { modifier = "acot_modifier_voidsphere_silo_energy" days = -1 }
-		}
-	}
+    effect = {
+        hidden_effect = {
+            add_modifier = { modifier = "acot_modifier_voidsphere_silo_energy" days = -1 }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-	}
+    ai_weight = {
+        weight = 2000
+    }
 }
 
 decision_acot_voidsphere_silo_food = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = choose_ascension_perk_01
 
-	enactment_time = 180
+    enactment_time = 180
 
-	resources = {
-		category = decisions
-		cost = {
-			food = 100000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            food = 100000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	prerequisites = {
-		tech_acot_enigmapolis_silo
-	}
+    prerequisites = {
+        tech_acot_enigmapolis_silo
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		NOT = {
-			has_modifier = acot_modifier_voidsphere_silo_food
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        NOT = {
+            has_modifier = acot_modifier_voidsphere_silo_food
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			add_modifier = { modifier = "acot_modifier_voidsphere_silo_food" days = -1 }
-		}
-	}
+    effect = {
+        hidden_effect = {
+            add_modifier = { modifier = "acot_modifier_voidsphere_silo_food" days = -1 }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-	}
+    ai_weight = {
+        weight = 2000
+    }
 }
 
 decision_acot_voidsphere_silo_goods = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = choose_ascension_perk_01
 
-	enactment_time = 180
+    enactment_time = 180
 
-	resources = {
-		category = decisions
-		cost = {
-			consumer_goods = 100000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            consumer_goods = 100000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	prerequisites = {
-		tech_acot_enigmapolis_silo
-	}
+    prerequisites = {
+        tech_acot_enigmapolis_silo
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		NOT = {
-			has_modifier = acot_modifier_voidsphere_silo_goods
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        NOT = {
+            has_modifier = acot_modifier_voidsphere_silo_goods
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			add_modifier = { modifier = "acot_modifier_voidsphere_silo_goods" days = -1 }
-		}
-	}
+    effect = {
+        hidden_effect = {
+            add_modifier = { modifier = "acot_modifier_voidsphere_silo_goods" days = -1 }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-		modifier = {
-			factor = 0
-			from = {
-				country_uses_consumer_goods = no
-			}
-		}
-	}
+    ai_weight = {
+        weight = 2000
+        modifier = {
+            factor = 0
+            from = {
+                country_uses_consumer_goods = no
+            }
+        }
+    }
 }
 
 decision_acot_voidsphere_silo_minerals = {
-	owned_planets_only = yes
-	sound = choose_ascension_perk_01
+    owned_planets_only = yes
+    sound = choose_ascension_perk_01
 
-	enactment_time = 180
+    enactment_time = 180
 
-	resources = {
-		category = decisions
-		cost = {
-			minerals = 100000
-			acot_sr_dark_energy = 10000
-			sr_dark_matter = 10000
-		}
-	}
+    resources = {
+        category = decisions
+        cost = {
+            minerals = 100000
+            acot_sr_dark_energy = 10000
+            sr_dark_matter = 10000
+        }
+    }
 
-	prerequisites = {
-		tech_acot_enigmapolis_silo
-	}
+    prerequisites = {
+        tech_acot_enigmapolis_silo
+    }
 
-	potential = {
-		is_planet_class = pc_acot_enigmopolis
-		NOT = {
-			has_modifier = acot_modifier_voidsphere_silo_minerals
-		}
-	}
+    potential = {
+        is_planet_class = pc_acot_enigmopolis
+        NOT = {
+            has_modifier = acot_modifier_voidsphere_silo_minerals
+        }
+    }
 
-	effect = {
-		hidden_effect = {
-			add_modifier = { modifier = "acot_modifier_voidsphere_silo_minerals" days = -1 }
-		}
-	}
+    effect = {
+        hidden_effect = {
+            add_modifier = { modifier = "acot_modifier_voidsphere_silo_minerals" days = -1 }
+        }
+    }
 
-	ai_weight = {
-		weight = 2000
-	}
+    ai_weight = {
+        weight = 2000
+    }
 }
 
 

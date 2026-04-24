@@ -12,7 +12,7 @@
 
 ### Delta+ Palace+ on Capital
 col_acot_enigma_capital = {
-    icon = GFX_colony_type_capital
+    icon = GFX_col_acot_enigma_capital
     potential = {
         exists = owner
         owner = {
@@ -28,23 +28,23 @@ col_acot_enigma_capital = {
     }
     # Capital is very stable and conforms to ethics, all jobs shall make a lot of stuff
     planet_modifier = {
-        planet_stability_add = 5	# Stability thing is overflowing too much, keep it same as vanilla
-        planet_amenities_add = 15	# Slight buff to vanilla so that ACoT amenity buildings still have some usage
+        planet_stability_add = 500    # Stability thing is overflowing too much, keep it same as vanilla
+        planet_amenities_add = 1500    # Slight buff to vanilla so that ACoT amenity buildings still have some usage
         pop_government_ethic_attraction = 2
         planet_resettlement_unemployed_destination_mult = 0.1
         planet_building_build_speed_mult = 0.50
-        planet_jobs_produces_mult = 0.30	# Better than most designation, slightly worse than industrial with galatic resolution on
+        planet_jobs_produces_mult = 0.30    # Better than most designation, slightly worse than industrial with galatic resolution on
         planet_jobs_upkeep_mult = -0.10
     }
     # If Planet is Ringworld, stronger effects of vanilla ringworld specialization
     triggered_planet_modifier = {
         potential = { merg_is_hab_ringworld = yes }
-        pop_growth_speed = 0.25
-        planet_pop_assembly_mult = 0.2
-        planet_pop_assembly_organic_mult = 0.2
+        planet_pop_assembly_mult = 0.25
+        bonus_pop_growth_mult = 0.25
     }
     ### Automated Production, all districts go nuts I guess
-    triggered_planet_modifier = { ### Standard world for capital
+    triggered_planet_modifier = {
+        ### Standard world for capital
         potential = {
             has_modifier = acot_modifier_ascended_city
             NOR = {
@@ -64,7 +64,8 @@ col_acot_enigma_capital = {
             planet_districts_mining_acot_sr_dark_energy_upkeep_add = 0.5
         }
     }
-    triggered_planet_modifier = { ### Habitat capital
+    triggered_planet_modifier = {
+        ### Habitat capital
         potential = {
             has_modifier = acot_modifier_ascended_city
             uses_district_set = habitat
@@ -76,7 +77,8 @@ col_acot_enigma_capital = {
             planet_districts_hab_energy_acot_sr_dark_energy_upkeep_add = 0.5
         }
     }
-    triggered_planet_modifier = { ### Ring world capital
+    triggered_planet_modifier = {
+        ### Ring world capital
         potential = {
             owner = {
                 is_regular_empire = yes
@@ -110,13 +112,13 @@ col_acot_enigma_capital = {
     }
 
     weight_modifier = {
-        base = 2000	# Vanilla base is 1000
+        base = 2000    # Vanilla base is 1000
     }
 }
 
 ### Delta+ Basic Resource World
 col_acot_brw = {
-    icon = GFX_colony_type_rural
+    icon = GFX_col_acot_brw
 
     potential = {
         exists = owner
@@ -151,9 +153,8 @@ col_acot_brw = {
     triggered_planet_modifier = {
         potential = { merg_is_hab_ringworld = yes }
         modifier = {
-            pop_growth_speed = 0.25
-            planet_pop_assembly_mult = 0.2
-            planet_pop_assembly_organic_mult = 0.2
+            planet_pop_assembly_mult = 0.25
+            bonus_pop_growth_mult = 0.25
         }
     }
 
@@ -175,7 +176,7 @@ col_acot_brw = {
             }
         }
         modifier = {
-            planet_jobs_worker_produces_mult = 0.35
+            planet_jobs_worker_produces_mult = 0.50
         }
     }
 
@@ -188,7 +189,7 @@ col_acot_brw = {
             }
         }
         modifier = {
-            planet_jobs_simple_drone_produces_mult = 0.35
+            planet_jobs_simple_drone_produces_mult = 0.50
         }
     }
 
@@ -391,30 +392,6 @@ col_acot_indus_refin = {
         }
     }
 
-    # triggered_planet_modifier = {
-    # 	potential = {
-    # 		exists = owner
-    # 		owner = {
-    # 			is_gestalt = no
-    # 		}
-    # 	}
-    # 	modifier = {
-
-    # 	}
-    # }
-
-    # triggered_planet_modifier = {
-    # 	potential = {
-    # 		exists = owner
-    # 		owner = {
-    # 			is_gestalt = yes
-    # 		}
-    # 	}
-    # 	modifier = {
-
-    # 	}
-    # }
-
     triggered_planet_modifier = {
         potential = { has_modifier = acot_modifier_ascended_city }
         planet_districts_industrial_alloys_produces_add = 20
@@ -446,10 +423,12 @@ col_acot_indus_refin = {
             mult = 6
         }
         complex_trigger_modifier = {
-            trigger = count_owned_pop
+            trigger = count_owned_pop_group
             parameters = {
                 limit = {
-                    has_sr_producing_job = yes
+                    root = {
+                        has_sr_producing_job = yes
+                    }
                 }
             }
             mode = add
@@ -463,6 +442,9 @@ col_acot_knowledge_is_power = {
     icon = GFX_colony_type_research
     potential = {
         exists = owner
+        owner = {
+            is_ai = no
+        }
         NOR = {
             is_planet_class = pc_dark_fractured
             is_planet_class = pc_acot_enigmatic
@@ -473,25 +455,8 @@ col_acot_knowledge_is_power = {
     }
 
     planet_modifier = {
-        planet_researchers_produces_mult = 0.2
-        planet_researchers_upkeep_mult = -0.05
-    }
-
-    weight_modifier = {
-        modifier = {
-            add = @stickiness
-            has_designation = col_acot_knowledge_is_power
-        }
-        complex_trigger_modifier = {
-            trigger = count_owned_pop
-            parameters = {
-                limit = {
-                    has_research_job = yes
-                }
-            }
-            mode = add
-            mult = 3
-        }
+        planet_researchers_produces_mult = 0.25
+        planet_researchers_upkeep_mult = -0.25
     }
 
     triggered_planet_modifier = {
@@ -503,4 +468,43 @@ col_acot_knowledge_is_power = {
             planet_jobs_produces_mult = 0.05
         }
     }
+
+    weight_modifier = {
+        modifier = {
+            add = @stickiness
+            has_designation = col_acot_knowledge_is_power
+        }
+        modifier = {
+            OR = {
+                num_zones = {
+                    type = zone_research
+                    value > 0
+                }
+                num_zones = {
+                    type = zone_research_engineering
+                    value > 0
+                }
+                num_zones = {
+                    type = zone_research_physics
+                    value > 0
+                }
+                num_zones = {
+                    type = zone_research_society
+                    value > 0
+                }
+                num_zones = {
+                    type = zone_research_unity
+                    value > 0
+                }
+            }
+            add = @zone_urban
+        }
+        inline_script = {
+            script = colony_types/shared_weights_research
+        }
+        inline_script = {
+            script = colony_types/shared_weights_urban
+        }
+    }
+
 }

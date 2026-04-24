@@ -1,0 +1,118 @@
+add_ai_zone_effect = {
+    if = {
+        limit = {
+            exists = owner
+            owner = {
+                has_technology = tech_acot_dm_ancient_palace
+                NOR = {
+                    has_technology = tech_acot_ae_ancient_palace
+                    has_technology = tech_phanon_palace
+                    has_technology = tech_stellarite_palace
+                }
+            }
+        }
+        add_zone = {
+            district = $TARGET_DISTRICT$
+            zone = zone_$PREFIX$_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
+    }
+    if = {
+        limit = {
+            exists = owner
+            owner = {
+                has_technology = tech_acot_ae_ancient_palace
+                NOR = {
+                    has_technology = tech_phanon_palace
+                    has_technology = tech_stellarite_palace
+                }
+            }
+        }
+        add_zone = {
+            district = $TARGET_DISTRICT$
+            zone = zone_$PREFIX$_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
+    }
+    if = {
+        limit = {
+            exists = owner
+            owner = {
+                NOT = {
+                    has_technology = tech_phanon_palace
+                }
+            }
+        }
+        add_zone = {
+            district = $TARGET_DISTRICT$
+            zone = zone_aot_PE_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
+    }
+    if = {
+        limit = {
+            exists = owner
+            owner = {
+                has_technology = tech_phanon_palace
+                NOT = {
+                    has_technology = tech_stellarite_palace
+                }
+            }
+        }
+        add_zone = {
+            district = $TARGET_DISTRICT$
+            zone = zone_aot_PE_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
+    }
+    if = {
+        limit = {
+            exists = owner
+            owner = {
+                has_technology = tech_stellarite_palace
+            }
+        }
+        add_zone = {
+            district = $TARGET_DISTRICT$
+            zone = zone_aot_PE_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
+    }
+}
+
+acot_ai_void_sphere_effect = {
+    export_trigger_value_to_variable = {
+        trigger = planet_size
+        variable = district_count
+    }
+    multiply_variable = {
+        which = district_count
+        value = 1.5
+    }
+    change_pc = pc_acot_enigmopolis
+    while = {
+        count = district_count
+        random_list = {
+            1 = {
+                add_district = district_acot_enigmapolis_city
+            }
+            5 = {
+                add_district = district_acot_enigmapolis_science
+            }
+            2 = {
+                add_district = district_acot_enigmapolis_forge
+            }
+            5 = {
+                add_district = district_acot_enigmapolis_silo
+            }
+            1 = {
+                add_district = district_acot_enigmapolis_fortress
+            }
+        }
+    }
+}

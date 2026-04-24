@@ -25,10 +25,11 @@ special_project = {
     tech_department = society_technology
     picture = GFX_acot_precursor_uprising
 
-    event_scope = planet_event
+    event_scope = ship_event
 
-    requirements = { # stop doing this its stupid lol
-       shipclass_science_ship = 1
+    requirements = {
+        # stop doing this its stupid lol
+        shipclass_science_ship = 1
     }
 
     abort_trigger = {
@@ -36,7 +37,7 @@ special_project = {
     }
 
     on_success = {
-        planet_event = { id = acot_planets.5 }
+        ship_event = { id = acot_planets.5 }
     }
 
     on_fail = {
@@ -66,116 +67,3 @@ special_project = {
     on_fail = {
     }
 }
-
-special_project = {
-    key = "ACOT_HERCULEAN_PHYSICS_STUDY"
-    cost = 5000000
-    tech_department = physics_technology
-    picture = GFX_evt_physics_research
-
-    event_chain = acot_herculean_development_chain
-
-    event_scope = country_event
-
-    abort_trigger = {
-        OR = {
-            has_global_flag = acot_herculean_forbidden
-            has_technology = "tech_precursor_colossus"
-            has_tech_option = tech_precursor_colossus
-        }
-    }
-
-    on_progress_25 = {
-        country_event = { id = acot_herculean_events.300 }
-    }
-
-    on_progress_50 = {
-        country_event = { id = acot_herculean_events.301 }
-    }
-
-    on_progress_75 = {
-        country_event = { id = acot_herculean_events.302 }
-    }
-
-    on_success = {
-        country_event = { id = acot_herculean_events.303 }
-    }
-    on_fail = {
-    }
-}
-
-special_project = {
-    key = "ACOT_HERCULEAN_SOCIETY_STUDY"
-    cost = 5000000
-    tech_department = society_technology
-    picture = GFX_evt_society_research
-
-    event_chain = acot_herculean_development_chain
-
-    event_scope = country_event
-
-    abort_trigger = {
-        OR = {
-            has_global_flag = acot_herculean_forbidden
-            has_technology = "tech_precursor_colossus"
-            has_tech_option = tech_precursor_colossus
-        }
-    }
-
-    on_progress_25 = {
-        country_event = { id = acot_herculean_events.310 }
-    }
-
-    on_progress_50 = {
-        country_event = { id = acot_herculean_events.311 }
-    }
-
-    on_progress_75 = {
-        country_event = { id = acot_herculean_events.312 }
-    }
-
-    on_success = {
-        country_event = { id = acot_herculean_events.313 }
-    }
-    on_fail = {
-    }
-}
-
-special_project = {
-    key = "ACOT_HERCULEAN_ENGINEER_STUDY"
-    cost = 5000000
-    tech_department = engineering_technology
-    picture = GFX_evt_engineering_research
-
-    event_chain = acot_herculean_development_chain
-
-    event_scope = country_event
-
-    abort_trigger = {
-        OR = {
-            has_global_flag = acot_herculean_forbidden
-            has_technology = "tech_precursor_colossus"
-            has_tech_option = tech_precursor_colossus
-        }
-    }
-
-    on_progress_25 = {
-        country_event = { id = acot_herculean_events.320 }
-    }
-
-    on_progress_50 = {
-        country_event = { id = acot_herculean_events.321 }
-    }
-
-    on_progress_75 = {
-        country_event = { id = acot_herculean_events.322 }
-    }
-
-    on_success = {
-        country_event = { id = acot_herculean_events.323 }
-    }
-
-    on_fail = {
-    }
-}
-

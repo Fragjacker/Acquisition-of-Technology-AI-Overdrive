@@ -7,252 +7,70 @@ automate_building_housing = {
     category = "planet_automation_housing"
 
     prio_districts = {
-        district_acot_ai_city
-        district_ae_ai_city
-        district_runic_ai_city
-        district_stellarite_ai_city
+        # AoT housing
+        district_dm_hab_housing
+        district_macripp_housing
+        district_solaripp_housing
+
         district_hab_housing
         district_arcology_housing
         district_rw_nexus
         district_city
         district_hive
         district_nexus
+
+        # gigas
+        district_giga_elysium_housing
+        district_giga_planet_city
+        district_giga_planet_hive
+        district_giga_planet_nexus
+        district_giga_alderson_city
+        district_giga_alderson_hive
+        district_giga_alderson_nexus
+        district_flusion_city
+        district_giga_gas_giant_habitat_city
+        district_giga_gas_giant_habitat_hive
+        district_giga_gas_giant_habitat_nexus
+        district_interstellar_city
+        district_interstellar_hive
+        district_interstellar_nexus
+        district_maginot_world_barracks
+        district_maginot_ringworld_barracks
+        district_penrose_city
+        district_penrose_hive
+        district_penrose_nexus
+        district_virtual_city
+        district_virtual_hive
+        district_virtual_nexus
     }
 }
 
-automate_building_slot_management = {
-    available = {
-        free_building_slots < 1
-        num_buildings = { type = any value < 16 }
-    }
-
-    emergency = yes
-    category = "planet_automation_building_slot"
-
-    prio_districts = {
-        district_acot_ai_city
-        district_ae_ai_city
-        district_runic_ai_city
-        district_stellarite_ai_city
-        district_city
-        district_hive
-        district_nexus
-    }
-}
-
-automate_dark_matter_production = {
-    available = {
-        always = no
-    }
-
-    emergency = yes
-    category = "planet_automation_rare_resources"
-
-    buildings = {
-        dark_matter_synthersizer_ae = {
-            building = building_acot_ae_dark_matter_synthersizer
-        }
-
-        dark_matter_synthersizer = {
-            building = building_acot_dm_dark_matter_synthersizer
-        }
-
-        micro_black_hole = {
-            building = building_micro_black_hole
-        }
-    }
-}
-
-automate_crystal_deficit_management = {
-    available = {
-        owner = { has_monthly_income = { resource = rare_crystals value < 3 } }
-        free_building_slots > 0
-    }
-
-    empire_wide_emergency = yes
-    category = "planet_automation_rare_resources"
-
-    buildings = {
-        transumator = {
-            building = building_acot_dm_transmutor
-            available = {
-                exists = owner
-                owner = {
-                    has_technology = tech_acot_dm_transmutor
-                }
-            }
-        }
-        crystal_plant = {
-            building = building_crystal_plant
-            available = { #you really want to be building science/unity buildings instead of refineries on those designations
-                has_research_designation = no
-                has_unity_designation = no
-                has_fortress_designation = no
-            }
-        }
-    }
-}
-
-automate_mote_deficit_management = {
-    available = {
-        owner = { has_monthly_income = { resource = volatile_motes value < 3 } }
-        free_building_slots > 0
-    }
-
-    empire_wide_emergency = yes
-    category = "planet_automation_rare_resources"
-
-    buildings = {
-        transumator = {
-            building = building_acot_dm_transmutor
-            available = {
-                exists = owner
-                owner = {
-                    has_technology = tech_acot_dm_transmutor
-                }
-            }
-        }
-        chem_plant = {
-            building = building_chemical_plant
-            available = { #you really want to be building science/unity buildings instead of refineries on those designations
-                has_research_designation = no
-                has_unity_designation = no
-                has_fortress_designation = no
-            }
-        }
-    }
-}
-
-automate_gas_deficit_management = {
-    available = {
-        owner = { has_monthly_income = { resource = exotic_gases value < 3 } }
-        free_building_slots > 0
-    }
-
-    empire_wide_emergency = yes
-    category = "planet_automation_rare_resources"
-
-    buildings = {
-        transumator = {
-            building = building_acot_dm_transmutor
-            available = {
-                exists = owner
-                owner = {
-                    has_technology = tech_acot_dm_transmutor
-                }
-            }
-        }
-        refinery = {
-            building = building_refinery
-            available = { #you really want to be building science/unity buildings instead of refineries on those designations
-                has_research_designation = no
-                has_unity_designation = no
-                has_fortress_designation = no
-            }
-        }
-    }
-}
-
-automate_dark_matter_deficit_management = {
+automate_runic_power_production = {
     available = {
         owner = {
-            has_monthly_income = { resource = sr_dark_matter value < 20 }
-            has_technology = tech_dark_matter_power_core_dm
-        }
-    }
-
-    empire_wide_emergency = yes
-    category = "planet_automation_rare_resources"
-
-    prio_districts = {
-        district_acot_ai_reactor
-        district_ae_ai_reactor
-        district_runic_ai_reactor
-        district_stellarite_ai_reactor
-    }
-
-    buildings = {
-        dark_matter_generator = {
-            building = building_acot_dm_dark_matter_generator
-            available = { # you really want to be building science/unity buildings instead of refineries on those designations
-                has_research_designation = no
-                has_unity_designation = no
-                has_fortress_designation = no
-                NAND = {
-                    has_available_jobs = acot_dark_matter_drone
-                    has_available_jobs = acot_dark_matter_man
-                }
-                any_owned_pop = {
-                    OR = {
-                        can_work_specific_job = acot_dark_matter_drone
-                        can_work_specific_job = acot_dark_matter_man
-                    }
-                }
+            OR = {
+                has_technology = tech_dark_matter_power_core_re
+                has_technology = tech_phanon_runic_generator
+                has_technology = tech_phanon_synthersizer
             }
-            upgrade_trigger = {
-                NAND = {
-                    has_available_jobs = acot_dark_matter_drone
-                    has_available_jobs = acot_dark_matter_man
-                }
-                any_owned_pop = {
-                    OR = {
-                        can_work_specific_job = acot_dark_matter_drone
-                        can_work_specific_job = acot_dark_matter_man
-                    }
-                }
-            }
+            has_monthly_income = { resource = aot_sr_runic_power value < 1000 }
         }
     }
-}
 
-automate_dark_energy_deficit_management = {
-    available = {
-        owner = {
-            has_monthly_income = { resource = acot_sr_dark_energy value < 20 }
-            has_technology = tech_dark_matter_power_core_dm
-        }
-    }
     emergency = yes
-    empire_wide_emergency = yes
     category = "planet_automation_rare_resources"
 
-    prio_districts = {
-        district_acot_ai_reactor
-        district_ae_ai_reactor
-        district_runic_ai_reactor
-        district_stellarite_ai_reactor
-    }
-
     buildings = {
-        dark_energy_pylon = {
-            building = building_acot_dm_dark_energy_pylon
-            available = { # you really want to be building science/unity buildings instead of refineries on those designations
-                has_research_designation = no
-                has_unity_designation = no
-                has_fortress_designation = no
-                NAND = {
-                    has_available_jobs = acot_dark_energy_drone
-                    has_available_jobs = acot_dark_energy_man
-                }
-                any_owned_pop = {
-                    OR = {
-                        can_work_specific_job = acot_dark_energy_drone
-                        can_work_specific_job = acot_dark_energy_man
-                    }
-                }
-            }
-            upgrade_trigger = {
-                NAND = {
-                    has_available_jobs = acot_dark_energy_drone
-                    has_available_jobs = acot_dark_energy_man
-                }
-                any_owned_pop = {
-                    OR = {
-                        can_work_specific_job = acot_dark_energy_drone
-                        can_work_specific_job = acot_dark_energy_man
-                    }
-                }
-            }
+        dark_matter_synthersizer_phanon = {
+            building = building_phanon_synthersizer
+        }
+
+        conduit = {
+            building = building_phanon_stellarite_nexus
+        }
+
+        adratic = {
+            building = building_phanon_runic_generator
         }
     }
 }

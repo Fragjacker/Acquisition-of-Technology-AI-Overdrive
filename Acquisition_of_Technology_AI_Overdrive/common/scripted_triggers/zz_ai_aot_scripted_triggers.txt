@@ -21,73 +21,73 @@ has_bio_growth = {
 
 has_miner_job = {
     OR = {
-        has_job = miner
-        has_job = mining_drone
-        has_job = acot_mineralman
-        has_job = ae_mineralman
-        has_job = phanon_mineralman
-        has_job = stellarite_mineralman
-        has_job = acot_mineraldrone
-        has_job = ae_mineraldrone
-        has_job = phanon_mineraldrone
-        has_job = stellarite_mineraldrone
+        has_job_type = miner
+        has_job_type = mining_drone
+        has_job_type = acot_mineralman
+        has_job_type = ae_mineralman
+        has_job_type = phanon_mineralman
+        has_job_type = stellarite_mineralman
+        has_job_type = acot_mineraldrone
+        has_job_type = ae_mineraldrone
+        has_job_type = phanon_mineraldrone
+        has_job_type = stellarite_mineraldrone
     }
 }
 has_technician_job = {
     OR = {
-        has_job = technician
-        has_job = technician_drone
-        has_job = acot_energyman
-        has_job = ae_energyman
-        has_job = phanon_energyman
-        has_job = stellarite_energyman
-        has_job = acot_energydrone
-        has_job = ae_energydrone
-        has_job = phanon_energydrone
-        has_job = stellarite_energydrone
+        has_job_type = technician
+        has_job_type = technician_drone
+        has_job_type = acot_energyman
+        has_job_type = ae_energyman
+        has_job_type = phanon_energyman
+        has_job_type = stellarite_energyman
+        has_job_type = acot_energydrone
+        has_job_type = ae_energydrone
+        has_job_type = phanon_energydrone
+        has_job_type = stellarite_energydrone
     }
 }
 has_farmer_job = {
     OR = {
-        has_job = farmer
-        has_job = agri_drone
-        has_job = acot_foodman
-        has_job = ae_foodman
-        has_job = phanon_foodman
-        has_job = stellarite_foodman
-        has_job = acot_fooddrone
-        has_job = ae_fooddrone
-        has_job = phanon_fooddrone
-        has_job = stellarite_fooddrone
+        has_job_type = farmer
+        has_job_type = agri_drone
+        has_job_type = acot_foodman
+        has_job_type = ae_foodman
+        has_job_type = phanon_foodman
+        has_job_type = stellarite_foodman
+        has_job_type = acot_fooddrone
+        has_job_type = ae_fooddrone
+        has_job_type = phanon_fooddrone
+        has_job_type = stellarite_fooddrone
     }
 }
 has_foundry_job = {
     OR = {
-        has_job = foundry
-        has_job = fabricator
-        has_job = alloy_drone
-        has_job = acot_alloyman
-        has_job = ae_alloyman
-        has_job = phanon_alloyman
-        has_job = stellarite_alloyman
-        has_job = acot_alloydrone
-        has_job = ae_alloydrone
-        has_job = phanon_alloydrone
-        has_job = stellarite_alloydrone
+        has_job_type = foundry
+        has_job_type = fabricator
+        has_job_type = alloy_drone
+        has_job_type = acot_alloyman
+        has_job_type = ae_alloyman
+        has_job_type = phanon_alloyman
+        has_job_type = stellarite_alloyman
+        has_job_type = acot_alloydrone
+        has_job_type = ae_alloydrone
+        has_job_type = phanon_alloydrone
+        has_job_type = stellarite_alloydrone
     }
 }
 has_factory_job = {
     OR = {
-        has_job = artisan
-        has_job = artisan_drone
-        has_job = acot_artisan
-        has_job = ae_artisan
-        has_job = phanon_artisan
-        has_job = stellarite_artisan
-        has_job = acot_artisan_drone
-        has_job = ae_artisan_drone
-        has_job = phanon_artisan_drone
-        has_job = stellarite_artisan_drone
+        has_job_type = artisan
+        has_job_type = artisan_drone
+        has_job_type = acot_artisan
+        has_job_type = ae_artisan
+        has_job_type = phanon_artisan
+        has_job_type = stellarite_artisan
+        has_job_type = acot_artisan_drone
+        has_job_type = ae_artisan_drone
+        has_job_type = phanon_artisan_drone
+        has_job_type = stellarite_artisan_drone
     }
 }
 
@@ -190,10 +190,6 @@ has_any_farming_district_or_buildings = {
         has_district = district_rw_farming
         has_district = district_farming_uncapped
         has_building = building_hydroponics_farm
-        has_district = district_acot_ai_rural
-        has_district = district_ae_ai_rural
-        has_district = district_runic_ai_rural
-        has_district = district_stellarite_ai_rural
     }
 }
 has_any_mining_district = {
@@ -201,10 +197,6 @@ has_any_mining_district = {
         has_district = district_mining
         has_district = district_hab_mining
         has_district = district_mining_uncapped
-        has_district = district_acot_ai_rural
-        has_district = district_ae_ai_rural
-        has_district = district_runic_ai_rural
-        has_district = district_stellarite_ai_rural
     }
 }
 has_any_generator_district_or_building = {
@@ -214,10 +206,6 @@ has_any_generator_district_or_building = {
         has_district = district_generator_uncapped
         has_district = district_rw_generator
         has_building = building_betharian_power_plant
-        has_district = district_acot_ai_rural
-        has_district = district_ae_ai_rural
-        has_district = district_runic_ai_rural
-        has_district = district_stellarite_ai_rural
     }
 }
 
@@ -225,10 +213,6 @@ has_any_industry_district = {
     OR = {
         has_district = district_arcology_arms_industry
         has_district = district_arcology_civilian_industry
-        has_district = district_acot_ai_industrial
-        has_district = district_ae_ai_industrial
-        has_district = district_runic_ai_industrial
-        has_district = district_stellarite_ai_industrial
     }
 }
 has_research_designation = {
@@ -238,20 +222,5 @@ has_research_designation = {
         has_designation = col_habitat_research
         has_designation = col_ecu_research
         has_designation = col_acot_knowledge_is_power
-    }
-}
-has_any_outdated_zone = {
-    OR = {
-        has_any_agriculture_zone = yes
-        has_any_betharian_zone = yes
-        has_any_factory_zone = yes
-        has_any_fortress_zone = yes
-        has_any_foundry_zone = yes
-        has_any_industrial_zone = yes
-        has_any_generator_zone = yes
-        has_any_mining_zone = yes
-        has_any_research_zone = yes
-        has_any_unity_zone = yes
-        has_any_trade_zone = yes
     }
 }

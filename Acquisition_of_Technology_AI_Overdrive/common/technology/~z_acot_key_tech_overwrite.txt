@@ -37,6 +37,9 @@ tech_dark_matter_power_core_ae = {
     is_dangerous = yes
     is_rare = yes
     potential = {
+        OR = {
+            has_country_flag = acot_databank_sophia_agreed
+        }
         NOR = {
             has_global_flag = acot_shipcom_forbidden
             has_global_flag = acot_alpha_forbidden
@@ -98,7 +101,7 @@ tech_dark_matter_power_core_dm = {
     }
     ### PLEASE PLEASE PLEASE PLEASE PLEASE
     ai_weight = {
-        factor = 100
+        factor = 10000
     }
 
 }
@@ -112,7 +115,7 @@ tech_acot_dm_ancient_palace = {
     weight = @acot_techweight_advanced
     is_rare = yes
 
-    gateway = capital	# Unlocks Empire Capital-Complex
+    gateway = capital    # Unlocks Empire Capital-Complex
 
     potential = {
         OR = {
@@ -141,7 +144,7 @@ tech_acot_dm_ancient_palace = {
     }
 
     ai_weight = {
-        factor = 100
+        factor = 10000
     }
 }
 
@@ -154,7 +157,7 @@ tech_acot_dm_ancient_control_center = {
     weight = @acot_techweight_advanced
     is_rare = yes
 
-    gateway = capital	# Unlocks Empire Capital-Complex
+    gateway = capital    # Unlocks Empire Capital-Complex
 
     potential = {
         is_machine_empire = yes
@@ -180,7 +183,7 @@ tech_acot_dm_ancient_control_center = {
     }
 
     ai_weight = {
-        factor = 100
+        factor = 10000
     }
 }
 
@@ -193,7 +196,7 @@ tech_acot_dm_ancient_hive_cluster = {
     weight = @acot_techweight_advanced
     is_rare = yes
 
-    gateway = capital	# Unlocks Empire Capital-Complex
+    gateway = capital    # Unlocks Empire Capital-Complex
 
     potential = {
         is_hive_empire = yes
@@ -219,7 +222,7 @@ tech_acot_dm_ancient_hive_cluster = {
     }
 
     ai_weight = {
-        factor = 100
+        factor = 10000
     }
 }
 
@@ -247,7 +250,7 @@ tech_dm_habitat = {
         modifier = {
             factor = 0
             NOR = {
-                has_country_flag = ascended_empire				# Player ascended Dawn of Ascension style
+                has_country_flag = ascended_empire                # Player ascended Dawn of Ascension style
                 any_owned_planet = {
                     is_aot_habitat = yes
                 }

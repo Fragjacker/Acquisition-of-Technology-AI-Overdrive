@@ -1,4 +1,4 @@
-acot_heavy_armor_ae_def = {
+acot_defense_army_heavy = {
     use_armynames_from = assault_army
     damage = 6.00
     health = 7.00
@@ -33,7 +33,7 @@ acot_heavy_armor_ae_def = {
         is_fallen_empire = no
     }
     potential = {
-       exists = owner
+        exists = owner
         owner = {
             is_ai = yes
         }
