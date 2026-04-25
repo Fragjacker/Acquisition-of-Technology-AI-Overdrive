@@ -482,20 +482,20 @@ automate_mining_planet = {
     prio_zones = {
         zone_acot_dm_minerals
         zone_acot_ae_minerals
-        zone_aot_PE_minerals
-        zone_aot_SE_minerals
-        zone_aot_DM_minerals_arcology
-        zone_aot_DE_minerals_arcology
-        zone_aot_PE_minerals_arcology
-        zone_aot_SE_minerals_arcology
-        zone_aot_DM_minerals_ring_world
-        zone_aot_DE_minerals_ring_world
-        zone_aot_PE_minerals_ring_world
-        zone_aot_SE_minerals_ring_world
-        zone_aot_DM_minerals_hive
-        zone_aot_DE_minerals_hive
-        zone_aot_PE_minerals_hive
-        zone_aot_SE_minerals_hive
+        zone_aot_PE_mineral
+        zone_aot_SE_mineral
+        zone_aot_DM_mineral_arcology
+        zone_aot_DE_mineral_arcology
+        zone_aot_PE_mineral_arcology
+        zone_aot_SE_mineral_arcology
+        zone_aot_DM_mineral_ring_world
+        zone_aot_DE_mineral_ring_world
+        zone_aot_PE_mineral_ring_world
+        zone_aot_SE_mineral_ring_world
+        zone_aot_DM_mineral_hive
+        zone_aot_DE_mineral_hive
+        zone_aot_PE_mineral_hive
+        zone_aot_SE_mineral_hive
         zone_subterranean_urban
         zone_minerals_physics
         zone_minerals
