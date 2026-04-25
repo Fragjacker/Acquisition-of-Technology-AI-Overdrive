@@ -1197,7 +1197,7 @@ planet_event = {
         acot_upgrade_to_delta_building = yes
         root.owner = {
             country_event = {
-                id = acot_ai_districts.31
+                id = aot_ai_districts.31
                 days = 1
             }
         }

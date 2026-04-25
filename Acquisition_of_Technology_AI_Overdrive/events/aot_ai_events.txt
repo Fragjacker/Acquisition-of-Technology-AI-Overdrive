@@ -1,8 +1,8 @@
 ### They replace old districts with new good ones lol
-namespace = acot_ai_districts
+namespace = aot_ai_districts
 
 country_event = {
-    id = acot_ai_districts.1
+    id = aot_ai_districts.1
     hide_window = yes
     is_triggered_only = yes
     trigger = {
@@ -14,87 +14,46 @@ country_event = {
     immediate = {
         every_owned_planet = {
             limit = {
-                has_enigmatic_capital = yes
+                is_exclusively_delta_tier = yes
                 has_any_outdated_zone = yes
             }
-            if = {
-                limit = {
-                    OR = {
-                        has_district = district_farming
-                        has_district = district_farming_uncapped
-                        has_district = district_rw_farming
-                    }
-                }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_farming TYPE = rural PREFIX = acot_dm }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_farming_uncapped TYPE = rural PREFIX = acot_dm }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_rw_farming TYPE = rural PREFIX = aot_DM }
-            }
-            if = {
-                limit = {
-                    OR = {
-                        has_district = district_mining
-                        has_district = district_mining_uncapped
-                    }
-                }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_mining TYPE = rural PREFIX = acot_dm }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_mining_uncapped TYPE = rural PREFIX = acot_dm }
-            }
-            if = {
-                limit = {
-                    OR = {
-                        has_district = district_generator
-                        has_district = district_generator_uncapped
-                    }
-                }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_mining TYPE = rural PREFIX = acot_dm }
-                add_ai_zone_effect = { TARGET_DISTRICT = district_mining_uncapped TYPE = rural PREFIX = acot_dm }
-            }
-            if = {
-                limit = {
-                    OR = {
-                        has_district = district_city
-                        has_district = district_hive
-                        has_district = district_nexus
-                    }
-                }
-                add_zone = {
-                    district = district_city
-                    zone = zone_acot_dm_urban
-                    zone_slot = 1
-                }
-                add_zone = {
-                    district = district_city
-                    zone = zone_acot_dm_urban
-                    zone_slot = 2
-                }
-                add_zone = {
-                    district = district_hive
-                    zone = zone_acot_dm_urban
-                    zone_slot = 1
-                }
-                add_zone = {
-                    district = district_hive
-                    zone = zone_acot_dm_urban
-                    zone_slot = 2
-                }
-                add_zone = {
-                    district = district_nexus
-                    zone = zone_acot_dm_urban
-                    zone_slot = 1
-                }
-                add_zone = {
-                    district = district_nexus
-                    zone = zone_acot_dm_urban
-                    zone_slot = 2
-                }
-            }
+            # Food
+            replace_single_zone = { DISTRICT = district_farming TYPE = food PREFIX = acot_dm }
+            replace_single_zone = { DISTRICT = district_farming_uncapped TYPE = food PREFIX = acot_dm }
+            replace_single_zone = { DISTRICT = district_rw_farming TYPE = food PREFIX = aot_DM }
+            # Minerals
+            replace_single_zone = { DISTRICT = district_mining TYPE = minerals PREFIX = acot_dm }
+            replace_single_zone = { DISTRICT = district_mining_uncapped TYPE = minerals PREFIX = acot_dm }
+            # Energy
+            replace_single_zone = { DISTRICT = district_generator TYPE = energy PREFIX = acot_dm }
+            replace_single_zone = { DISTRICT = district_generator_uncapped TYPE = energy PREFIX = acot_dm }
+            replace_single_zone = { DISTRICT = district_rw_generator TYPE = energy PREFIX = aot_dm }
+            # Ecu
+            replace_single_zone = { DISTRICT = district_arcology_arms_industry TYPE = foundry_arcology PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_arcology_civilian_industry TYPE = factory_arcology PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_arcology_mixed_industry TYPE = industry_arcology PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_arcology_research TYPE = research_arcology PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_arcology_fortress TYPE = fortress_arcology PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_arcology_trade TYPE = trade_arcology PREFIX = aot_dm }
+            # Ringworlds
+            replace_single_zone = { DISTRICT = district_ring_world_foundry TYPE = foundry_ring_world PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_ring_world_factory TYPE = factory_ring_world PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_ring_world_industrial TYPE = industry_ring_world PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_ring_world_research TYPE = research_ring_world PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_ring_world_fortress TYPE = fortress_ring_world PREFIX = aot_dm }
+            replace_single_zone = { DISTRICT = district_ring_world_trade TYPE = trade_ring_world PREFIX = aot_dm }
+            # Urban
+            replace_urban_districts = { DISTRICT = district_arcology_housing PREFIX = aot_dm }
+            replace_urban_districts = { DISTRICT = district_city PREFIX = acot_dm }
+            replace_urban_districts = { DISTRICT = district_hive PREFIX = acot_dm }
+            replace_urban_districts = { DISTRICT = district_nexus PREFIX = acot_dm }
         }
     }
 }
 
 # Upgrade capital buildings when eligible, the AI likes to eat glue way too much.
 country_event = {
-    id = acot_ai_districts.2
+    id = aot_ai_districts.2
     hide_window = yes
     is_triggered_only = yes
     trigger = {
@@ -115,7 +74,7 @@ country_event = {
             }
             set_planet_flag = pending_capital_upgrade
             planet_event = {
-                id = acot_ai_districts.3
+                id = aot_ai_districts.3
                 days = 1440
             }
         }
@@ -123,7 +82,7 @@ country_event = {
 }
 
 planet_event = {
-    id = acot_ai_districts.3
+    id = aot_ai_districts.3
     hide_window = yes
     is_triggered_only = yes
     immediate = {
@@ -144,7 +103,7 @@ planet_event = {
         }
         root.owner = {
             country_event = {
-                id = acot_ai_districts.31
+                id = aot_ai_districts.31
                 days = 1
             }
         }
@@ -152,7 +111,7 @@ planet_event = {
 }
 
 country_event = {
-    id = acot_ai_districts.31
+    id = aot_ai_districts.31
     is_triggered_only = yes
     hide_window = yes
     immediate = {
@@ -161,7 +120,7 @@ country_event = {
 }
 
 #country_event = {
-#	id = acot_ai_districts.4
+#	id = aot_ai_districts.4
 #	fire_only_once = yes
 #	hide_window = yes
 #	is_triggered_only = yes
@@ -176,7 +135,7 @@ country_event = {
 #			}
 #			set_planet_flag = cheated_sphere
 #			planet_event = {
-#				id = acot_ai_districts.5
+#				id = aot_ai_districts.5
 #				days = 18000
 #				random = 18000
 #			}
@@ -185,11 +144,11 @@ country_event = {
 #}
 
 #planet_event = {
-#	id = acot_ai_districts.5
+#	id = aot_ai_districts.5
 #	is_triggered_only = yes
 #	picture = GFX_evt_cate
-#	title = "acot_ai_districts.5"
-#	desc = "acot_ai_districts.5_desc"
+#	title = "aot_ai_districts.5"
+#	desc = "aot_ai_districts.5_desc"
 #	immediate = {
 #		acot_ai_void_sphere_effect = yes
 #	}
@@ -198,7 +157,7 @@ country_event = {
 ### just blow up habitats they're not good here :(
 
 #country_event = {
-#	id = acot_ai_districts.9000
+#	id = aot_ai_districts.9000
 #	hide_window = yes
 #	is_triggered_only = yes
 #	trigger = {
@@ -240,7 +199,7 @@ country_event = {
 
 # Change planets into fractured worlds, to prepare for voidspheres I guess.
 country_event = {
-    id = acot_ai_districts.8000
+    id = aot_ai_districts.8000
     hide_window = yes
     is_triggered_only = yes
     trigger = {
@@ -299,7 +258,7 @@ country_event = {
 }
 
 #country_event = {
-#	id = acot_ai_districts.7000
+#	id = aot_ai_districts.7000
 #	hide_window = yes
 #	is_triggered_only = yes
 #	trigger = {
@@ -321,7 +280,7 @@ country_event = {
 #	}
 #}
 country_event = {
-    id = acot_ai_districts.6
+    id = aot_ai_districts.6
     is_triggered_only = yes
     hide_window = yes
     trigger = {
@@ -344,7 +303,7 @@ country_event = {
 }
 
 country_event = {
-    id = acot_ai_districts.6000
+    id = aot_ai_districts.6000
     hide_window = yes
     is_triggered_only = yes
     trigger = {
@@ -367,35 +326,35 @@ country_event = {
                 }
             }
             #country_event = {
-            #	id = acot_ai_districts.6001
+            #	id = aot_ai_districts.6001
             #}
         }
     }
 }
 
 #country_event = {
-#	id = acot_ai_districts.6001
+#	id = aot_ai_districts.6001
 #	is_triggered_only = yes
 #	picture = GFX_evt_cate
-#	title = acot_ai_districts.6001.title
+#	title = aot_ai_districts.6001.title
 #	desc = {
 #		trigger = {
 #			always = yes
 #		}
-#		text = acot_ai_districts.6001.desc
+#		text = aot_ai_districts.6001.desc
 #	}
 #	option = {
 #		trigger = {
 #			always = yes
 #		}
-#		name = acot_ai_districts.6001.a
+#		name = aot_ai_districts.6001.a
 #	}
 #}
 
 ### Help them along
 
 country_event = {
-    id = acot_ai_districts.5
+    id = aot_ai_districts.5
     is_triggered_only = yes
     hide_window = yes
     trigger = {
@@ -433,7 +392,7 @@ country_event = {
             set_owner = root
             set_planet_flag = reinforce_defense_armies
             planet_event = {
-                id = acot_ai_districts.52
+                id = aot_ai_districts.52
                 days = 30
             }
         }
@@ -441,7 +400,7 @@ country_event = {
 }
 
 country_event = {
-    id = acot_ai_districts.51
+    id = aot_ai_districts.51
     is_triggered_only = yes
     hide_window = yes
     trigger = {
@@ -460,14 +419,14 @@ country_event = {
             }
             set_planet_flag = reinforce_defense_armies
             planet_event = {
-                id = acot_ai_districts.52
+                id = aot_ai_districts.52
                 days = 30
             }
         }
     }
 }
 planet_event = {
-    id = acot_ai_districts.52
+    id = aot_ai_districts.52
     is_triggered_only = yes
     hide_window = yes
     immediate = {
@@ -498,7 +457,7 @@ planet_event = {
 ### 40*9 = 360000, 9000
 ### upgradde the stupid turrets
 country_event = {
-    id = acot_ai_districts.53
+    id = aot_ai_districts.53
     is_triggered_only = yes
     hide_window = yes
     trigger = {

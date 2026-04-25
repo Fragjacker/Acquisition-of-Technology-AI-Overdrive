@@ -116,12 +116,12 @@
 
     acot_ai_cannot_build: "£trigger_no£ We can continue to use this district but we cannot construct more."
 
-    acot_ai_districts.5:0 "Void Sphered."
-    acot_ai_districts.5_desc:0 "§Y[Root.Planet.GetName]§! has transformed into a §HVoid Sphere.§! Wow!"
+    aot_ai_districts.5:0 "Void Sphered."
+    aot_ai_districts.5_desc:0 "§Y[Root.Planet.GetName]§! has transformed into a §HVoid Sphere.§! Wow!"
 
-    acot_ai_districts.6001.title:0 "An Unknown Announcement"
-    acot_ai_districts.6001.desc:0 "An unsigned broadcast issuing a vague threat has been sent to every empire. We should consider being cautious with the fights we pick."
-    acot_ai_districts.6001.a:0 "Uh... Okay..?"
+    aot_ai_districts.6001.title:0 "An Unknown Announcement"
+    aot_ai_districts.6001.desc:0 "An unsigned broadcast issuing a vague threat has been sent to every empire. We should consider being cautious with the fights we pick."
+    aot_ai_districts.6001.a:0 "Uh... Okay..?"
     modifier_we_ball:0 "WE BALL. WE BALL. WE BALL."
     NAME_Astral_Avatar_Titan:0 "Cringe"
     NAME_Dimensional_Titan:0 "Spectral Hyperion"

@@ -2,17 +2,13 @@ add_ai_zone_effect = {
     if = {
         limit = {
             exists = owner
+            num_districts = { type = $DISTRICT$ value > 0 }
             owner = {
-                has_technology = tech_acot_dm_ancient_palace
-                NOR = {
-                    has_technology = tech_acot_ae_ancient_palace
-                    has_technology = tech_phanon_palace
-                    has_technology = tech_stellarite_palace
-                }
+                has_exclusively_delta_capital_tech = yes
             }
         }
         add_zone = {
-            district = $TARGET_DISTRICT$
+            district = $DISTRICT$
             zone = zone_$PREFIX$_$TYPE$
             zone_slot = 0
             replace = yes
@@ -21,16 +17,13 @@ add_ai_zone_effect = {
     if = {
         limit = {
             exists = owner
+            num_districts = { type = $DISTRICT$ value > 0 }
             owner = {
-                has_technology = tech_acot_ae_ancient_palace
-                NOR = {
-                    has_technology = tech_phanon_palace
-                    has_technology = tech_stellarite_palace
-                }
+                has_exclusively_alpha_capital_tech = yes
             }
         }
         add_zone = {
-            district = $TARGET_DISTRICT$
+            district = $DISTRICT$
             zone = zone_$PREFIX$_$TYPE$
             zone_slot = 0
             replace = yes
@@ -39,14 +32,13 @@ add_ai_zone_effect = {
     if = {
         limit = {
             exists = owner
+            num_districts = { type = $DISTRICT$ value > 0 }
             owner = {
-                NOT = {
-                    has_technology = tech_phanon_palace
-                }
+                has_exclusively_phanon_capital_tech = yes
             }
         }
         add_zone = {
-            district = $TARGET_DISTRICT$
+            district = $DISTRICT$
             zone = zone_aot_PE_$TYPE$
             zone_slot = 0
             replace = yes
@@ -55,32 +47,44 @@ add_ai_zone_effect = {
     if = {
         limit = {
             exists = owner
+            num_districts = { type = $DISTRICT$ value > 0 }
             owner = {
-                has_technology = tech_phanon_palace
-                NOT = {
-                    has_technology = tech_stellarite_palace
-                }
+                has_exclusively_stellarite_capital_tech = yes
             }
         }
         add_zone = {
-            district = $TARGET_DISTRICT$
-            zone = zone_aot_PE_$TYPE$
+            district = $DISTRICT$
+            zone = zone_aot_SE_$TYPE$
             zone_slot = 0
             replace = yes
         }
     }
+}
+
+replace_single_zone = {
     if = {
         limit = {
-            exists = owner
-            owner = {
-                has_technology = tech_stellarite_palace
-            }
+            has_district = $DISTRICT$
+            num_districts = { type = $DISTRICT$ value > 0 } # Only add zones when at least one district has been built
+        }
+        add_ai_zone_effect = { DISTRICT = $DISTRICT$ TYPE = $TYPE$ PREFIX = $PREFIX$ }
+    }
+}
+
+replace_urban_districts = {
+    if = {
+        limit = {
+            has_district = $DISTRICT$
         }
         add_zone = {
-            district = $TARGET_DISTRICT$
-            zone = zone_aot_PE_$TYPE$
-            zone_slot = 0
-            replace = yes
+            district = $DISTRICT$
+            zone = zone_$PREFIX$_urban
+            zone_slot = 1
+        }
+        add_zone = {
+            district = $DISTRICT$
+            zone = zone_$PREFIX$_urban
+            zone_slot = 2
         }
     }
 }

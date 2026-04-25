@@ -553,6 +553,10 @@ decision_upgrade_dm_gigafort = {
     prerequisites = { tech_acot_giga_fortress }
     enactment_time = 360
     potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
         has_building = building_giga_fortress_dm
         has_ascended_capital = yes
     }
@@ -582,6 +586,10 @@ decision_upgrade_ae_gigafort = {
     prerequisites = { tech_acot_giga_fortress }
     enactment_time = 360
     potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
         has_building = building_acot_giga_fortress
         has_ascended_capital = yes
     }
@@ -610,6 +618,10 @@ decision_upgrade_re_gigafort = {
     prerequisites = { tech_phanon_giga_fortress }
     enactment_time = 360
     potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
         has_building = building_acot_giga_fortress_array
         has_phanon_capital = yes
     }
@@ -638,6 +650,10 @@ decision_upgrade_se_gigafort = {
     prerequisites = { tech_stellarite_giga_fortress }
     enactment_time = 360
     potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
         has_building = building_phanon_giga_fortress_array
         has_stellarite_capital = yes
     }
@@ -770,7 +786,7 @@ decision_populate_voidsphere = {
                 NOT = {
                     is_planet_class = pc_acot_enigmopolis
                 }
-                num_pops > 4
+                pop_amount > 4000
             }
         }
     }
@@ -787,19 +803,15 @@ decision_populate_voidsphere = {
         owner = {
             random_owned_planet = {
                 limit = {
-                    num_pops > 6
+                    pop_amount > 6000
                     NOT = {
                         is_planet_class = pc_acot_enigmopolis
                     }
                 }
-                while = {
-                    count = 4
-                    random_pop = {
-                        resettle_pop = {
-                            pop = this
-                            planet = root
-                        }
-                    }
+                resettle_pop_group = {
+                    POP_GROUP = this
+                    PLANET = root
+                    PERCENTAGE = 4000
                 }
             }
         }
@@ -853,7 +865,7 @@ decision_add_power_planet = {
         }
     }
     effect = {
-        add_district = district_acot_ai_reactor
+        add_district_if_possible_effect = { district = district_generator }
     }
     ai_weight = {
         base = 1000
@@ -883,10 +895,59 @@ decision_add_crisis_district = {
     effect = {
         random_list = {
             1 = {
-                add_district = district_acot_ai_rural
+                add_district_if_possible_effect = { district = district_farming }
             }
             1 = {
-                add_district = district_acot_ai_industrial
+                if = {
+                    limit = {
+                        has_district = district_mining
+                    }
+                    replace_single_zone = { DISTRICT = district_mining PREFIX = acot_dm TYPE = industry }
+                    add_district = district_mining
+                }
+                if = {
+                    limit = {
+                        has_district = district_mining_uncapped
+                    }
+                    replace_single_zone = { DISTRICT = district_mining_uncapped PREFIX = acot_dm TYPE = industry }
+                    add_district = district_mining_uncapped
+                }
+                if = {
+                    limit = {
+                        has_district = district_arcology_mixed_industry
+                    }
+                    add_district_if_possible_effect = { district = district_arcology_mixed_industry }
+                }
+                if = {
+                    limit = {
+                        has_district = district_arcology_arms_industry
+                    }
+                    add_district_if_possible_effect = { district = district_arcology_arms_industry }
+                }
+                if = {
+                    limit = {
+                        has_district = district_arcology_civilian_industry
+                    }
+                    add_district_if_possible_effect = { district = district_arcology_civilian_industry }
+                }
+                if = {
+                    limit = {
+                        has_district = district_ring_world_industrial
+                    }
+                    add_district_if_possible_effect = { district = district_ring_world_industrial }
+                }
+                if = {
+                    limit = {
+                        has_district = district_ring_world_foundry
+                    }
+                    add_district_if_possible_effect = { district = district_ring_world_foundry }
+                }
+                if = {
+                    limit = {
+                        has_district = district_ring_world_factory
+                    }
+                    add_district_if_possible_effect = { district = district_ring_world_factory }
+                }
             }
         }
     }

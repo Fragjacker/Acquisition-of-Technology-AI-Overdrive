@@ -13,3 +13,46 @@ has_any_outdated_zone = {
         has_any_trade_zone = yes
     }
 }
+# This makes sure the player has only delta tech and nothing higher.
+has_exclusively_delta_capital_tech = {
+    has_dm_capital_tech = yes
+    NOR = {
+        has_technology = tech_acot_ae_ancient_palace
+        has_technology = tech_acot_ae_ancient_control_center
+        has_technology = tech_acot_ae_ancient_hive_cluster
+        has_technology = tech_phanon_palace
+        has_technology = tech_phanon_control_center
+        has_technology = tech_phanon_hive_cluster
+        has_technology = tech_stellarite_palace
+        has_technology = tech_stellarite_control_center
+        has_technology = tech_stellarite_hive_cluster
+    }
+}
+
+has_exclusively_alpha_capital_tech = {
+    has_ae_capital_tech = yes
+    NOR = {
+        has_technology = tech_phanon_palace
+        has_technology = tech_phanon_control_center
+        has_technology = tech_phanon_hive_cluster
+        has_technology = tech_stellarite_palace
+        has_technology = tech_stellarite_control_center
+        has_technology = tech_stellarite_hive_cluster
+    }
+}
+
+has_exclusively_phanon_capital_tech = {
+    has_phanon_capital_tech = yes
+    NOR = {
+        has_technology = tech_stellarite_palace
+        has_technology = tech_stellarite_control_center
+        has_technology = tech_stellarite_hive_cluster
+    }
+}
+
+has_exclusively_stellarite_capital_tech = {
+    has_stellarite_capital_tech = yes
+    NOR = {
+        # Space for rent
+    }
+}
