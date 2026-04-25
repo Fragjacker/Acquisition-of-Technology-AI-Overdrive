@@ -1,91 +1,32 @@
-add_ai_zone_effect = {
-    if = {
-        limit = {
-            exists = owner
-            num_districts = { type = $DISTRICT$ value > 0 }
-            owner = {
-                has_exclusively_delta_capital_tech = yes
-            }
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_$PREFIX$_$TYPE$
-            zone_slot = 0
-            replace = yes
-        }
-    }
-    if = {
-        limit = {
-            exists = owner
-            num_districts = { type = $DISTRICT$ value > 0 }
-            owner = {
-                has_exclusively_alpha_capital_tech = yes
-            }
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_$PREFIX$_$TYPE$
-            zone_slot = 0
-            replace = yes
-        }
-    }
-    if = {
-        limit = {
-            exists = owner
-            num_districts = { type = $DISTRICT$ value > 0 }
-            owner = {
-                has_exclusively_phanon_capital_tech = yes
-            }
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_aot_PE_$TYPE$
-            zone_slot = 0
-            replace = yes
-        }
-    }
-    if = {
-        limit = {
-            exists = owner
-            num_districts = { type = $DISTRICT$ value > 0 }
-            owner = {
-                has_exclusively_stellarite_capital_tech = yes
-            }
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_aot_SE_$TYPE$
-            zone_slot = 0
-            replace = yes
-        }
-    }
-}
-
+# Replaces a single zone according to the proper tech tier.
 replace_single_zone = {
     if = {
         limit = {
+            exists = root
             has_district = $DISTRICT$
             num_districts = { type = $DISTRICT$ value > 0 } # Only add zones when at least one district has been built
         }
-        add_ai_zone_effect = { DISTRICT = $DISTRICT$ TYPE = $TYPE$ PREFIX = $PREFIX$ }
+        add_zone = {
+            district = $DISTRICT$
+            zone = zone_$PREFIX$_$TYPE$
+            zone_slot = 0
+            replace = yes
+        }
     }
 }
 
 replace_urban_districts = {
-    if = {
-        limit = {
-            has_district = $DISTRICT$
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_$PREFIX$_urban
-            zone_slot = 1
-        }
-        add_zone = {
-            district = $DISTRICT$
-            zone = zone_$PREFIX$_urban
-            zone_slot = 2
-        }
+    add_zone = {
+        district = $DISTRICT$
+        zone = zone_$PREFIX$_urban
+        zone_slot = 1
+        replace = yes
+    }
+    add_zone = {
+        district = $DISTRICT$
+        zone = zone_$PREFIX$_urban
+        zone_slot = 2
+        replace = yes
     }
 }
 

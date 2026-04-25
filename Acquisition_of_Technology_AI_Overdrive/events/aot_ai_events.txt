@@ -20,33 +20,36 @@ country_event = {
             # Food
             replace_single_zone = { DISTRICT = district_farming TYPE = food PREFIX = acot_dm }
             replace_single_zone = { DISTRICT = district_farming_uncapped TYPE = food PREFIX = acot_dm }
-            replace_single_zone = { DISTRICT = district_rw_farming TYPE = food PREFIX = aot_DM }
+            # replace_single_zone = { DISTRICT = district_rw_farming TYPE = food_ring_world PREFIX = aot_dm }
             # Minerals
             replace_single_zone = { DISTRICT = district_mining TYPE = minerals PREFIX = acot_dm }
             replace_single_zone = { DISTRICT = district_mining_uncapped TYPE = minerals PREFIX = acot_dm }
             # Energy
             replace_single_zone = { DISTRICT = district_generator TYPE = energy PREFIX = acot_dm }
             replace_single_zone = { DISTRICT = district_generator_uncapped TYPE = energy PREFIX = acot_dm }
-            replace_single_zone = { DISTRICT = district_rw_generator TYPE = energy PREFIX = aot_dm }
-            # Ecu
-            replace_single_zone = { DISTRICT = district_arcology_arms_industry TYPE = foundry_arcology PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_arcology_civilian_industry TYPE = factory_arcology PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_arcology_mixed_industry TYPE = industry_arcology PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_arcology_research TYPE = research_arcology PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_arcology_fortress TYPE = fortress_arcology PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_arcology_trade TYPE = trade_arcology PREFIX = aot_dm }
-            # Ringworlds
-            replace_single_zone = { DISTRICT = district_ring_world_foundry TYPE = foundry_ring_world PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_ring_world_factory TYPE = factory_ring_world PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_ring_world_industrial TYPE = industry_ring_world PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_ring_world_research TYPE = research_ring_world PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_ring_world_fortress TYPE = fortress_ring_world PREFIX = aot_dm }
-            replace_single_zone = { DISTRICT = district_ring_world_trade TYPE = trade_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_rw_generator TYPE = energy_ring_world PREFIX = aot_dm }
+
+            # This shit won't work because it's not possible to scope into zones/districts and there's too many possibilities to figure out.
+            # # Ecu
+            # replace_single_zone = { DISTRICT = district_arcology_arms_industry TYPE = foundry_arcology PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_arcology_civilian_industry TYPE = factory_arcology PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_arcology_mixed_industry TYPE = industry_arcology PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_arcology_research TYPE = research_arcology PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_arcology_fortress TYPE = fortress_arcology PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_arcology_trade TYPE = trade_arcology PREFIX = aot_dm }
+            # # Ringworlds
+            # replace_single_zone = { DISTRICT = district_ring_world_foundry TYPE = foundry_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_ring_world_factory TYPE = factory_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_ring_world_industrial TYPE = industry_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_ring_world_research TYPE = research_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_ring_world_fortress TYPE = fortress_ring_world PREFIX = aot_dm }
+            # replace_single_zone = { DISTRICT = district_ring_world_trade TYPE = trade_ring_world PREFIX = aot_dm }
             # Urban
-            replace_urban_districts = { DISTRICT = district_arcology_housing PREFIX = aot_dm }
             replace_urban_districts = { DISTRICT = district_city PREFIX = acot_dm }
             replace_urban_districts = { DISTRICT = district_hive PREFIX = acot_dm }
             replace_urban_districts = { DISTRICT = district_nexus PREFIX = acot_dm }
+            replace_urban_districts = { DISTRICT = district_rw_city PREFIX = acot_dm }
+            replace_urban_districts = { DISTRICT = district_arcology_housing PREFIX = acot_dm }
         }
     }
 }
