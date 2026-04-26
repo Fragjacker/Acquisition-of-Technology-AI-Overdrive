@@ -1,21 +1,20 @@
 on_yearly_pulse_country = {
-	events = {
-		aot_ai_districts.1
-		aot_ai_districts.8000
-		aot_ai_districts.6
-		aot_ai_districts.6000# god i hate stellaris
-	}
+    events = {
+        aot_ai_districts.1
+        aot_ai_districts.8000
+        aot_ai_districts.6
+        aot_ai_districts.6000# god i hate stellaris
+    }
 }
 
 on_bi_yearly_pulse_country = {
-	events = {
-		aot_ai_districts.2 # god i hate stellaris even more
-		#aot_ai_districts.4 # voic dpshere
-		#aot_ai_districts.7000
-		aot_ai_districts.5
-		aot_ai_districts.51
-		aot_ai_districts.53
-	}
+    events = {
+        aot_ai_districts.2 # god i hate stellaris even more
+        #aot_ai_districts.4 # voic dpshere
+        #aot_ai_districts.7000
+        aot_ai_districts.5
+        aot_ai_districts.51
+    }
 }
 
 #on_tech_increased = {
@@ -25,12 +24,12 @@ on_bi_yearly_pulse_country = {
 #}
 
 on_colonized = {
-	events = {
-	}
+    events = {
+    }
 }
 
 on_megastructure_built = {
-	events = {
-		#aot_ai_districts.9000
-	}
+    events = {
+        #aot_ai_districts.9000
+    }
 }
