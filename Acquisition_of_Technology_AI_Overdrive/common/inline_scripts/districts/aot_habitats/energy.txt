@@ -1,0 +1,117 @@
+base_buildtime = @[ hab_base_build_time + ( 120 * two_exp$EXPONENT$ ) ]
+is_capped_by_modifier = yes
+zone_slots = {
+    slot_habitat_energy
+}
+planet_modifier = {
+    planet_housing_add = 300
+}
+inline_script = {
+    script = districts/aot_habitats/parts/cost
+    EXPONENT = $EXPONENT$
+    COST = "$COST$"
+}
+triggered_planet_modifier = {
+    potential = {
+        exists = owner
+        owner = {
+            is_gestalt = no
+            is_fallen_empire_spiritualist = no
+        }
+    }
+    modifier = {
+        job_$JOB$_add = @[ habitat_zone_district_1_job * 2 ]
+    }
+}
+triggered_planet_modifier = {
+    potential = {
+        exists = owner
+        owner = {
+            is_fallen_empire_spiritualist = yes
+        }
+    }
+    modifier = {
+        job_fe_acolyte_generator_add = @[ habitat_zone_district_1_job * 2 ]
+    }
+}
+triggered_planet_modifier = {
+    potential = {
+        exists = owner
+        owner = {
+            is_machine_empire = yes
+        }
+    }
+    modifier = {
+        job_$JOB_GESTALT$_add = @[ habitat_zone_district_1_job * 2 ]
+    }
+}
+triggered_planet_modifier = {
+    potential = {
+        exists = owner
+        owner = {
+            is_hive_empire = yes
+        }
+    }
+    modifier = {
+        job_$JOB_GESTALT$_add = @[ 100 + ( habitat_zone_district_1_job * 2 ) ]
+    }
+}
+triggered_desc = {
+    trigger = {
+        exists = owner
+        owner = {
+            is_gestalt = yes
+        }
+    }
+    text = job_$JOB_GESTALT$_desc
+}
+triggered_desc = {
+    trigger = {
+        exists = owner
+        owner = {
+            is_gestalt = no
+        }
+    }
+    text = job_$JOB$_desc
+}
+triggered_desc = {
+    trigger = {
+        exists = owner
+        owner = {
+            is_fallen_empire_spiritualist = yes
+        }
+    }
+    text = job_fe_acolyte_generator_effect_desc
+}
+ai_weight = {
+    weight = 0
+    modifier = {
+        weight = 400
+        planet = {
+            num_free_districts = { type = $DISTRICT$ value > 0 }
+        }
+    }
+    modifier = {
+        factor = value:num_orbital_sites
+    }
+    # We really want to focus on special resource districts when there's inactive support pylons around.
+    modifier = {
+        factor = 0
+        solar_system = {
+            any_owned_megastructure = {
+                is_inactive_support_pylon = yes
+            }
+        }
+    }
+}
+ai_resource_production = {
+    energy = 1
+    trigger = {
+        always = yes
+    }
+}
+on_built = {
+    planet_event = {
+        id = aot_habitat_events.100        # Spawn an energy orbital
+    }
+}

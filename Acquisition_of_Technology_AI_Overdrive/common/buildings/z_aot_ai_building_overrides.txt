@@ -1,0 +1,350 @@
+building_delta_nexus = {
+    inline_script = {
+        script = buildings/production/power_conduit
+        TIER = @DELTA_TIER
+        EXPONENT = @DELTA_EXPONENT
+        ALLOW = "
+			has_enigmatic_capital = yes
+			NOR = {
+				has_building = building_acot_stellarite_nexus
+				has_building = building_phanon_stellarite_nexus
+				has_building = building_alpha_nexus
+				has_building = building_delta_nexus
+			}
+			"
+        CAN_BUILD = yes
+        PREREQUISITE = tech_delta_nexus
+        UPGRADES_INTO = building_alpha_nexus
+        STORAGE_INCREASE = "
+			country_resource_max_sr_dark_matter_add = @max_conduit_storage
+			country_resource_max_acot_sr_dark_energy_add = @max_conduit_storage
+			"
+        PLANET_MODIFIER = "
+			planet_jobs_sr_dark_matter_produces_mult = @planet_mult
+			planet_jobs_acot_sr_dark_energy_produces_mult = @planet_mult
+			"
+        AI_FACTORS = "
+			modifier = {
+				factor = 0
+				planet_owner = {
+					merg_is_awakened_fe = yes
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = sr_dark_matter
+						value <= 1
+					}
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = acot_sr_dark_energy
+						value <= 1
+					}
+				}
+			}
+            modifier = {
+            factor = 10000
+                solar_system = {
+                    any_system_planet = {
+                        is_aot_habitat = yes
+                    }
+                }
+            }
+			"
+    }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 1000
+        }
+        cost = {
+            minerals = 2000
+            acot_sr_dark_energy = 1500
+            sr_dark_matter = 1500
+        }
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = upkeep
+            RESOURCE = energy
+            AMOUNT = 500
+        }
+        upkeep = {
+            trigger = {
+                planet_owner = {
+                    is_ai = no
+                }
+            }
+            sr_dark_matter = 200
+            acot_sr_dark_energy = 200
+        }
+    }
+}
+
+building_alpha_nexus = {
+    inline_script = {
+        script = buildings/production/power_conduit
+        TIER = @ALPHA_TIER
+        EXPONENT = @ALPHA_EXPONENT
+        ALLOW = "
+			has_ascended_capital = yes
+			NOR = {
+				has_building = building_acot_stellarite_nexus
+				has_building = building_phanon_stellarite_nexus
+				has_building = building_alpha_nexus
+			}
+			"
+        CAN_BUILD = no
+        PREREQUISITE = tech_alpha_nexus
+        UPGRADES_INTO = building_phanon_stellarite_nexus
+        STORAGE_INCREASE = "
+			country_resource_max_sr_dark_matter_add = @max_conduit_storage
+			country_resource_max_acot_sr_dark_energy_add = @max_conduit_storage
+			"
+        PLANET_MODIFIER = "
+			planet_jobs_sr_dark_matter_produces_mult = @planet_mult
+			planet_jobs_acot_sr_dark_energy_produces_mult = @planet_mult
+			"
+        AI_FACTORS = "
+			modifier = {
+				factor = 0
+				planet_owner = {
+					merg_is_awakened_fe = yes
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = sr_dark_matter
+						value <= 1
+					}
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = acot_sr_dark_energy
+						value <= 1
+					}
+				}
+			}
+            modifier = {
+            factor = 10000
+                solar_system = {
+                    any_system_planet = {
+                        is_aot_habitat = yes
+                    }
+                }
+            }
+			"
+    }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 2000
+        }
+        cost = {
+            minerals = 4000
+            acot_sr_dark_energy = 2500
+            sr_dark_matter = 2500
+        }
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = upkeep
+            RESOURCE = energy
+            AMOUNT = 1000
+        }
+        upkeep = {
+            trigger = {
+                planet_owner = {
+                    is_ai = no
+                }
+            }
+            sr_dark_matter = 500
+            acot_sr_dark_energy = 500
+        }
+    }
+}
+
+building_phanon_stellarite_nexus = {
+    icon = building_phanon_nexus
+    inline_script = {
+        script = buildings/production/power_conduit
+        TIER = @PHANON_TIER
+        EXPONENT = @PHANON_EXPONENT
+        ALLOW = "
+			has_phanon_capital = yes
+			NOR = {
+				has_building = building_acot_stellarite_nexus
+				has_building = building_phanon_stellarite_nexus
+			}
+			"
+        CAN_BUILD = no
+        PREREQUISITE = tech_phanon_stellarite_nexus
+        UPGRADES_INTO = building_acot_stellarite_nexus
+        STORAGE_INCREASE = "
+			country_resource_max_sr_dark_matter_add = @max_conduit_storage
+			country_resource_max_acot_sr_dark_energy_add = @max_conduit_storage
+			country_resource_max_aot_sr_runic_power_add = @max_conduit_storage
+			"
+        PLANET_MODIFIER = "
+			planet_jobs_sr_dark_matter_produces_mult = @planet_mult
+			planet_jobs_acot_sr_dark_energy_produces_mult = @planet_mult
+			planet_jobs_aot_sr_runic_power_produces_mult = @planet_mult
+			"
+        AI_FACTORS = "
+			modifier = {
+				factor = 0
+				planet_owner = {
+					merg_is_awakened_fe = yes
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = aot_sr_runic_power
+						value <= 1
+					}
+				}
+			}
+            modifier = {
+                factor = 10000
+                solar_system = {
+                    any_system_planet = {
+                        is_aot_habitat = yes
+                    }
+                }
+            }
+        "
+    }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 4000
+        }
+        cost = {
+            minerals = 6000
+            aot_sr_runic_power = 1000
+        }
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = upkeep
+            RESOURCE = energy
+            AMOUNT = 1500
+        }
+        upkeep = {
+            trigger = {
+                planet_owner = {
+                    is_ai = no
+                }
+            }
+            aot_sr_runic_power = 800
+        }
+    }
+}
+
+building_acot_stellarite_nexus = {
+    icon = building_stellarite_nexus
+    inline_script = {
+        script = buildings/production/power_conduit
+        TIER = @SIGMA_TIER
+        EXPONENT = @SIGMA_EXPONENT
+        ALLOW = "
+			has_stellarite_capital = yes
+			NOT = { has_building = building_acot_stellarite_nexus }
+			"
+        CAN_BUILD = no
+        PREREQUISITE = tech_acot_stellarite_nexus
+        UPGRADES_INTO = "always = no"
+        STORAGE_INCREASE = "
+			country_resource_max_sr_dark_matter_add = @max_conduit_storage
+			country_resource_max_acot_sr_dark_energy_add = @max_conduit_storage
+			country_resource_max_aot_sr_runic_power_add = @max_conduit_storage
+			country_resource_max_acot_sr_stellarite_add = @max_conduit_storage
+			"
+        PLANET_MODIFIER = "
+			planet_jobs_sr_dark_matter_produces_mult = @planet_mult
+			planet_jobs_acot_sr_dark_energy_produces_mult = @planet_mult
+			planet_jobs_aot_sr_runic_power_produces_mult = @planet_mult
+			planet_jobs_acot_sr_stellarite_produces_mult = @planet_mult
+			"
+        AI_FACTORS = "
+			modifier = {
+				factor = 0
+				planet_owner = {
+					merg_is_awakened_fe = yes
+				}
+			}
+			modifier = {
+				factor = 1000
+				planet_owner = {
+					has_monthly_income = {
+						resource = acot_sr_stellarite
+						value <= 1
+					}
+				}
+			}
+            modifier = {
+                factor = 10000
+                solar_system = {
+                    any_system_planet = {
+                        is_aot_habitat = yes
+                    }
+                }
+            }
+			"
+    }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 6000
+        }
+        cost = {
+            minerals = 8000
+            acot_sr_stellarite = 2000
+        }
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = upkeep
+            RESOURCE = energy
+            AMOUNT = 2000
+        }
+        upkeep = {
+            trigger = {
+                planet_owner = {
+                    is_ai = no
+                }
+            }
+            acot_sr_stellarite = 1000
+        }
+    }
+}
+
