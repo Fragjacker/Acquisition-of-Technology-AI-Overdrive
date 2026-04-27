@@ -877,11 +877,21 @@ decision_add_crisis_district = {
         owner = {
             is_ai = yes
         }
-        num_unemployed > 2
         has_enigmatic_capital = yes
+        num_unemployed > 2
         num_free_districts = {
             type = any
             value >= 1
+        }
+        OR = {
+            has_district = district_farming
+            has_district = district_mining
+            has_district = district_mining_uncapped
+            has_district = district_arcology_mixed_industry
+            has_district = district_arcology_arms_industry
+            has_district = district_ring_world_industrial
+            has_district = district_ring_world_foundry
+            has_district = district_ring_world_factory
         }
     }
     prerequisites = { tech_dark_matter_power_core_dm }
@@ -895,59 +905,33 @@ decision_add_crisis_district = {
     effect = {
         random_list = {
             1 = {
-                add_district_if_possible_effect = { district = district_farming }
+                if = {
+                    limit = {
+                        country_uses_food = yes
+                    }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_farming }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_farming_uncapped }
+                }
+                else_if = {
+                    limit = {
+                        is_lithoid = yes
+                    }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_mining_uncapped }
+                }
+                else = {
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_generator }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_generator_uncapped }
+                }
             }
             1 = {
-                if = {
-                    limit = {
-                        has_district = district_mining
-                    }
-                    replace_single_zone = { DISTRICT = district_mining PREFIX = acot_dm TYPE = industry }
-                    add_district = district_mining
-                }
-                if = {
-                    limit = {
-                        has_district = district_mining_uncapped
-                    }
-                    replace_single_zone = { DISTRICT = district_mining_uncapped PREFIX = acot_dm TYPE = industry }
-                    add_district = district_mining_uncapped
-                }
-                if = {
-                    limit = {
-                        has_district = district_arcology_mixed_industry
-                    }
-                    add_district_if_possible_effect = { district = district_arcology_mixed_industry }
-                }
-                if = {
-                    limit = {
-                        has_district = district_arcology_arms_industry
-                    }
-                    add_district_if_possible_effect = { district = district_arcology_arms_industry }
-                }
-                if = {
-                    limit = {
-                        has_district = district_arcology_civilian_industry
-                    }
-                    add_district_if_possible_effect = { district = district_arcology_civilian_industry }
-                }
-                if = {
-                    limit = {
-                        has_district = district_ring_world_industrial
-                    }
-                    add_district_if_possible_effect = { district = district_ring_world_industrial }
-                }
-                if = {
-                    limit = {
-                        has_district = district_ring_world_foundry
-                    }
-                    add_district_if_possible_effect = { district = district_ring_world_foundry }
-                }
-                if = {
-                    limit = {
-                        has_district = district_ring_world_factory
-                    }
-                    add_district_if_possible_effect = { district = district_ring_world_factory }
-                }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining_uncapped }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_mixed_industry }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_civilian_industry }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_industrial }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_foundry }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_factory }
             }
         }
     }

@@ -61,3 +61,18 @@ acot_ai_void_sphere_effect = {
         }
     }
 }
+
+add_district_if_possible_valid_district_effect = {
+    optimize_memory
+    if = {
+        limit = {
+            has_district = $DISTRICT$
+            free_district_slots >= 1
+        }
+        add_district = {
+            district_type = $DISTRICT$
+            ignore_cap = yes
+        }
+    }
+    #else do nothing
+}
