@@ -1096,10 +1096,8 @@ decision_terraform_planet_into_preferred = {
         exists = owner
         owner = {
             is_ai = yes
-            OR = {
-                has_technology = tech_terrestrial_sculpting
-                has_technology = tech_climate_restoration
-            }
+            has_technology = tech_terrestrial_sculpting
+            has_technology = tech_ecological_adaptation
         }
         is_planet_habitable = yes
         is_terraforming = no
@@ -1157,6 +1155,17 @@ decision_terraform_planet_into_preferred = {
         weight = 0
         modifier = {
             weight = 1000
+            OR = {
+                # Either normal planets
+                habitable_planet_not_urban = yes
+                # OR nuked planets but only with climate restoration
+                AND = {
+                    is_planet_class = pc_nuked
+                    owner = {
+                        has_technology = tech_climate_restoration
+                    }
+                }
+            }
             from.species = {
                 switch = {
                     trigger = has_trait
@@ -1174,6 +1183,10 @@ decision_terraform_planet_into_preferred = {
         }
         modifier = {
             weight = 1000
+            habitable_planet_not_urban = yes
+            owner = {
+                has_technology = tech_climate_restoration
+            }
             from.species = {
                 switch = {
                     trigger = has_trait
@@ -1188,13 +1201,13 @@ decision_terraform_planet_into_preferred = {
             owner = {
                 resource_stockpile_compare = {
                     resource = energy
-                    value >= 2000
+                    value <= 4000
                 }
             }
         }
         modifier = {
             factor = 0
-            is_ideal_planet_class = { who = from.species status = yes } # We don't want to touch ideal planet class
+            is_ideal = yes
         }
     }
 }
@@ -1329,53 +1342,55 @@ decision_pivot_planet_district = {
         weight = 0
         modifier = {
             weight = 500
+            num_free_districts = { type = any value <= 0 }
             OR = {
-                num_free_districts = { type = any value <= 0 }
-                AND = {
-                    OR = {
-                        colony_type = col_factory
-                        colony_type = col_industrial
-                        colony_type = col_foundry
-                    }
-                    OR = {
-                        num_districts = { type = district_farming value > 0 }
-                        num_districts = { type = district_farming_uncapped value > 0 }
-                        num_districts = { type = district_mining value > 0 }
-                        num_districts = { type = district_mining_uncapped value > 0 }
-                        num_districts = { type = district_generator value > 0 }
-                        num_districts = { type = district_generator_uncapped value > 0 }
-                    }
-                }
-                AND = {
-                    colony_type = col_generator
-                    OR = {
-                        num_districts = { type = district_city value > 0 }
-                        num_districts = { type = district_mining value > 0 }
-                        num_districts = { type = district_mining_uncapped value > 0 }
-                        num_districts = { type = district_generator value > 0 }
-                        num_districts = { type = district_generator_uncapped value > 0 }
-                    }
-                }
-                AND = {
-                    colony_type = col_mining
-                    OR = {
-                        num_districts = { type = district_city value > 0 }
-                        num_districts = { type = district_farming value > 0 }
-                        num_districts = { type = district_farming_uncapped value > 0 }
-                        num_districts = { type = district_generator value > 0 }
-                        num_districts = { type = district_generator_uncapped value > 0 }
-                    }
-                }
-                AND = {
-                    colony_type = col_generator
-                    OR = {
-                        num_districts = { type = district_city value > 0 }
-                        num_districts = { type = district_farming value > 0 }
-                        num_districts = { type = district_farming_uncapped value > 0 }
-                        num_districts = { type = district_mining value > 0 }
-                        num_districts = { type = district_mining_uncapped value > 0 }
-                    }
-                }
+                colony_type = col_factory
+                colony_type = col_industrial
+                colony_type = col_foundry
+            }
+            OR = {
+                num_districts = { type = district_farming value > 0 }
+                num_districts = { type = district_farming_uncapped value > 0 }
+                num_districts = { type = district_mining value > 0 }
+                num_districts = { type = district_mining_uncapped value > 0 }
+                num_districts = { type = district_generator value > 0 }
+                num_districts = { type = district_generator_uncapped value > 0 }
+            }
+        }
+        modifier = {
+            weight = 500
+            num_free_districts = { type = any value <= 0 }
+            colony_type = col_generator
+            OR = {
+                num_districts = { type = district_city value > 0 }
+                num_districts = { type = district_mining value > 0 }
+                num_districts = { type = district_mining_uncapped value > 0 }
+                num_districts = { type = district_generator value > 0 }
+                num_districts = { type = district_generator_uncapped value > 0 }
+            }
+        }
+        modifier = {
+            weight = 500
+            num_free_districts = { type = any value <= 0 }
+            colony_type = col_mining
+            OR = {
+                num_districts = { type = district_city value > 0 }
+                num_districts = { type = district_farming value > 0 }
+                num_districts = { type = district_farming_uncapped value > 0 }
+                num_districts = { type = district_generator value > 0 }
+                num_districts = { type = district_generator_uncapped value > 0 }
+            }
+        }
+        modifier = {
+            weight = 500
+            num_free_districts = { type = any value <= 0 }
+            colony_type = col_generator
+            OR = {
+                num_districts = { type = district_city value > 0 }
+                num_districts = { type = district_farming value > 0 }
+                num_districts = { type = district_farming_uncapped value > 0 }
+                num_districts = { type = district_mining value > 0 }
+                num_districts = { type = district_mining_uncapped value > 0 }
             }
         }
     }
