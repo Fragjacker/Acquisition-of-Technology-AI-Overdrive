@@ -1083,6 +1083,122 @@ decision_destroy_trade_building = {
     }
 }
 
+# Instigate Terraform of inhabited planet into prefered planet class
+decision_terraform_planet_into_preferred = {
+    enactment_time = 30
+    resources = {
+        category = planet_buildings
+        cost = {
+            energy = 2000
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            OR = {
+                has_technology = tech_terrestrial_sculpting
+                has_technology = tech_climate_restoration
+            }
+        }
+        is_planet_habitable = yes
+        is_terraforming = no
+    }
+
+    effect = {
+        if = {
+            limit = {
+                habitable_planet_not_urban = yes
+                owner = {
+                    has_technology = tech_climate_restoration
+                }
+            }
+            from.species = {
+                switch = {
+                    trigger = has_trait
+                    trait_survivor = { root = { start_terraform_process = pc_nuked } }
+                    trait_pc_nuked_preference = { root = { start_terraform_process = pc_nuked } }
+                    trait_plantoid_radiotrophic = { root = { start_terraform_process = pc_nuked } }
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                OR = {
+                    # Either normal planets
+                    habitable_planet_not_urban = yes
+                    # OR nuked planets but only with climate restoration
+                    AND = {
+                        is_planet_class = pc_nuked
+                        owner = {
+                            has_technology = tech_climate_restoration
+                        }
+                    }
+                }
+            }
+            from.species = {
+                switch = {
+                    trigger = has_trait
+                    trait_pc_alpine_preference = { root = { start_terraform_process = pc_alpine } }
+                    trait_pc_arctic_preference = { root = { start_terraform_process = pc_arctic } }
+                    trait_pc_tundra_preference = { root = { start_terraform_process = pc_tundra } }
+                    trait_pc_arid_preference = { root = { start_terraform_process = pc_arid } }
+                    trait_pc_savannah_preference = { root = { start_terraform_process = pc_savannah } }
+                    trait_pc_desert_preference = { root = { start_terraform_process = pc_desert } }
+                    trait_pc_continental_preference = { root = { start_terraform_process = pc_continental } }
+                    trait_pc_tropical_preference = { root = { start_terraform_process = pc_tropical } }
+                    trait_pc_ocean_preference = { root = { start_terraform_process = pc_ocean } }
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 0
+        modifier = {
+            weight = 1000
+            from.species = {
+                switch = {
+                    trigger = has_trait
+                    trait_pc_alpine_preference = { root = { NOT = { is_planet_class = pc_alpine } } }
+                    trait_pc_arctic_preference = { root = { NOT = { is_planet_class = pc_arctic } } }
+                    trait_pc_tundra_preference = { root = { NOT = { is_planet_class = pc_tundra } } }
+                    trait_pc_arid_preference = { root = { NOT = { is_planet_class = pc_arid } } }
+                    trait_pc_savannah_preference = { root = { NOT = { is_planet_class = pc_savannah } } }
+                    trait_pc_desert_preference = { root = { NOT = { is_planet_class = pc_desert } } }
+                    trait_pc_continental_preference = { root = { NOT = { is_planet_class = pc_continental } } }
+                    trait_pc_tropical_preference = { root = { NOT = { is_planet_class = pc_tropical } } }
+                    trait_pc_ocean_preference = { root = { NOT = { is_planet_class = pc_ocean } } }
+                }
+            }
+        }
+        modifier = {
+            weight = 1000
+            from.species = {
+                switch = {
+                    trigger = has_trait
+                    trait_survivor = { NOT = { root = { is_planet_class = pc_nuked } } }
+                    trait_pc_nuked_preference = { NOT = { root = { is_planet_class = pc_nuked } } }
+                    trait_plantoid_radiotrophic = { NOT = { root = { is_planet_class = pc_nuked } } }
+                }
+            }
+        }
+        modifier = {
+            factor = 0
+            owner = {
+                resource_stockpile_compare = {
+                    resource = energy
+                    value >= 2000
+                }
+            }
+        }
+        modifier = {
+            factor = 0
+            is_ideal_planet_class = { who = from.species status = yes } # We don't want to touch ideal planet class
+        }
+    }
+}
+
 # mass recruit armies button thanks aerolfos i love you
 decision_enigmatic_mass_recruitment = {
     enactment_time = 120
