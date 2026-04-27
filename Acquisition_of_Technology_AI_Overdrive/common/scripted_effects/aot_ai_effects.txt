@@ -18,13 +18,13 @@ replace_single_zone = {
 replace_urban_districts = {
     add_zone = {
         district = $DISTRICT$
-        zone = zone_$PREFIX$_urban
+        zone = $ZONE$
         zone_slot = 1
         replace = yes
     }
     add_zone = {
         district = $DISTRICT$
-        zone = zone_$PREFIX$_urban
+        zone = $ZONE$
         zone_slot = 2
         replace = yes
     }
@@ -75,4 +75,26 @@ add_district_if_possible_valid_district_effect = {
         }
     }
     #else do nothing
+}
+
+# This fills all free districts up with the desired district type.
+fill_districts_to_max = {
+    if = {
+        limit = { has_district = $DISTRICT$ }
+        export_trigger_value_to_variable = {
+            trigger = num_free_districts
+            parameters = {
+                type = $DISTRICT$
+            }
+            variable = total_num_target_districts
+        }
+        while = {
+            count = total_num_target_districts
+            add_district = {
+                district_type = $DISTRICT$
+                ignore_cap = yes
+            }
+        }
+        clear_variable = total_num_target_districts
+    }
 }

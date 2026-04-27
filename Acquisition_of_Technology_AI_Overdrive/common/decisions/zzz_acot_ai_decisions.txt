@@ -1199,6 +1199,188 @@ decision_terraform_planet_into_preferred = {
     }
 }
 
+# Fully commit a planet to its designation once it's been filled. Energy planets should have all their generator districts filled etc.
+decision_pivot_planet_district = {
+    enactment_time = 90
+    resources = {
+        category = planet_buildings
+        cost = {
+            unity = 100
+            minerals = 500
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
+        OR = {
+            has_district = district_city
+            has_district = district_farming
+            has_district = district_mining
+            has_district = district_mining_uncapped
+            has_district = district_generator
+            has_district = district_generator_uncapped
+            has_district = district_farming
+            has_district = district_farming_uncapped
+        }
+    }
+    effect = {
+        # Nuke all districts first, we redistribute them next.
+        remove_all_districts = yes
+        switch = {
+            trigger = colony_type
+            col_farming = {
+                # Fill up the target district up first
+                fill_districts_to_max = { DISTRICT = district_farming }
+                fill_districts_to_max = { DISTRICT = district_farming_uncapped }
+            }
+            col_mining = {
+                # Fill up the target district up first
+                fill_districts_to_max = { DISTRICT = district_mining }
+                fill_districts_to_max = { DISTRICT = district_mining_uncapped }
+            }
+            col_generator = {
+                # Fill up the target district up first
+                fill_districts_to_max = { DISTRICT = district_generator }
+                fill_districts_to_max = { DISTRICT = district_generator_uncapped }
+            }
+            # Change zones to be uniform now
+            col_foundry = {
+                replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+            }
+            col_industrial = {
+                replace_urban_districts = { DISTRICT = district_city ZONE = zone_industrial }
+            }
+            col_foundry = {
+                replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+            }
+            # col_ecu_foundry = {
+            #     # Fill up the target district up first
+            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+            #     add_zone = {
+            #         district = district_arcology_urban_1
+            #         zone = zone_foundry_arcology
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ecu_factory = {
+            #     # Fill up the target district up first
+            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+            #     add_zone = {
+            #         district = district_arcology_urban_1
+            #         zone = zone_factory_arcology
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ecu_industrial = {
+            #     # Fill up the target district up first
+            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+            #     add_zone = {
+            #         district = district_arcology_urban_1
+            #         zone = zone_industrial_arcology
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ring_farming = {
+            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+            #     add_zone = {
+            #         district = district_rw_urban_1
+            #         zone = zone_food_ring_world
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ring_generator = {
+            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+            #     add_zone = {
+            #         district = district_rw_urban_1
+            #         zone = zone_energy_ring_world
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ring_research = {
+            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+            #     add_zone = {
+            #         district = district_rw_urban_1
+            #         zone = zone_research_ring_world
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+            # col_ring_trade = {
+            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+            #     add_zone = {
+            #         district = district_rw_urban_1
+            #         zone = zone_trade_ring_world
+            #         zone_slot = 0
+            #         replace = yes
+            #     }
+            # }
+        }
+        ## Fill the rest up with city districts.
+        fill_districts_to_max = { DISTRICT = district_city }
+    }
+    ai_weight = {
+        weight = 0
+        modifier = {
+            weight = 500
+            OR = {
+                num_free_districts = { type = any value <= 0 }
+                AND = {
+                    OR = {
+                        colony_type = col_factory
+                        colony_type = col_industrial
+                        colony_type = col_foundry
+                    }
+                    OR = {
+                        num_districts = { type = district_farming value > 0 }
+                        num_districts = { type = district_farming_uncapped value > 0 }
+                        num_districts = { type = district_mining value > 0 }
+                        num_districts = { type = district_mining_uncapped value > 0 }
+                        num_districts = { type = district_generator value > 0 }
+                        num_districts = { type = district_generator_uncapped value > 0 }
+                    }
+                }
+                AND = {
+                    colony_type = col_generator
+                    OR = {
+                        num_districts = { type = district_city value > 0 }
+                        num_districts = { type = district_mining value > 0 }
+                        num_districts = { type = district_mining_uncapped value > 0 }
+                        num_districts = { type = district_generator value > 0 }
+                        num_districts = { type = district_generator_uncapped value > 0 }
+                    }
+                }
+                AND = {
+                    colony_type = col_mining
+                    OR = {
+                        num_districts = { type = district_city value > 0 }
+                        num_districts = { type = district_farming value > 0 }
+                        num_districts = { type = district_farming_uncapped value > 0 }
+                        num_districts = { type = district_generator value > 0 }
+                        num_districts = { type = district_generator_uncapped value > 0 }
+                    }
+                }
+                AND = {
+                    colony_type = col_generator
+                    OR = {
+                        num_districts = { type = district_city value > 0 }
+                        num_districts = { type = district_farming value > 0 }
+                        num_districts = { type = district_farming_uncapped value > 0 }
+                        num_districts = { type = district_mining value > 0 }
+                        num_districts = { type = district_mining_uncapped value > 0 }
+                    }
+                }
+            }
+        }
+    }
+}
+
 # mass recruit armies button thanks aerolfos i love you
 decision_enigmatic_mass_recruitment = {
     enactment_time = 120

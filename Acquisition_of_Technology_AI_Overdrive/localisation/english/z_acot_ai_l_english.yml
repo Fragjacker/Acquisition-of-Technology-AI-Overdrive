@@ -224,6 +224,8 @@ decision_populate_voidsphere: "Voidsphere Relocation Grant"
 decision_populate_voidsphere_desc: "Powerful jobs require powerful pops to work them."
 decision_terraform_planet_into_preferred: "Terraforming Act"
 decision_terraform_planet_into_preferred_desc: "We need to stop huffing glue and get this planet into shape!"
+decision_pivot_planet_district: "Optimize Planet"
+decision_pivot_planet_district_desc: "After filling all planet districts we need to fully commit to an uniform loadout."
 
 tech_acot_ai_tech_debug: "Starbase AI Debug Unobtainable"
 tech_acot_ai_tech_debug_desc: "Debugging tech for Starbase AI!"
