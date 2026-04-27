@@ -1171,6 +1171,31 @@ namespace = aot_tech_events
 
 namespace = aot_events
 
+namespace = acot_ai_pmc
+
+# The AI is going batshit crazy with those phanon terraforming doodads, we gotta shut it down.
+country_event = {
+    id = acot_ai_pmc.3
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        always = no
+    }
+
+    immediate = {
+        set_timed_country_flag = {
+            flag = acot_pmc_terraform_service_ai_cooldown
+            days = 360
+        }
+        country_event = {
+            id = acot_ai_pmc.300
+            days = 30 random = 60
+        }
+    }
+}
+
 namespace = acot_ai_helper
 planet_event = {
     id = acot_ai_helper.3
