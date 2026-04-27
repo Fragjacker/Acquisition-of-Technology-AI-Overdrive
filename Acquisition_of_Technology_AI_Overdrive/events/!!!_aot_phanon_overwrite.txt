@@ -1059,8 +1059,7 @@ country_event = {
                     is_ai = yes
                     OR = {
                         is_country_type = default
-                        is_country_type = fallen_empire
-                        is_country_type = awakened_fallen_empire
+                        is_fallen_empire = yes
                     }
                 }
                 remove_modifier = easy_acot
@@ -1086,16 +1085,14 @@ country_event = {
                     is_ai = yes
                     OR = {
                         is_country_type = default
-                        is_country_type = fallen_empire
-                        is_country_type = awakened_fallen_empire
+                        is_fallen_empire = yes
                     }
                 }
                 remove_modifier = easy_acot
                 remove_modifier = medium_acot
                 remove_modifier = hard_acot
                 add_modifier = {
-                    modifier = easy_acot
-                    mult = 10
+                    modifier = medium_acot
                 }
             }
         }
@@ -1122,8 +1119,7 @@ country_event = {
                 remove_modifier = medium_acot
                 remove_modifier = hard_acot
                 add_modifier = {
-                    modifier = easy_acot
-                    mult = 100
+                    modifier = hard_acot
                 }
             }
         }
@@ -1149,8 +1145,8 @@ country_event = {
                 remove_modifier = medium_acot
                 remove_modifier = hard_acot
                 add_modifier = {
-                    modifier = easy_acot
-                    mult = 100000
+                    modifier = hard_acot
+                    mult = 1000
                 }
             }
         }
