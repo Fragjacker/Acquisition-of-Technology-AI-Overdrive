@@ -1100,9 +1100,12 @@ decision_terraform_planet_into_preferred = {
             has_technology = tech_terrestrial_sculpting
             has_technology = tech_ecological_adaptation
         }
-        is_planet_habitable = yes
         is_artificial = no
         is_terraforming = no
+    }
+
+    allow = {
+        habitable_planet_not_urban = yes
     }
 
     effect = {
@@ -1112,7 +1115,6 @@ decision_terraform_planet_into_preferred = {
                 habitable_planet_not_urban = yes
                 owner = {
                     has_ascension_perk = ap_world_shaper
-                    has_technology = tech_climate_restoration
                 }
             }
             start_terraform_process = pc_gaia
@@ -1125,7 +1127,7 @@ decision_terraform_planet_into_preferred = {
                     has_technology = tech_climate_restoration
                 }
             }
-            from.species = {
+            owner.species = {
                 switch = {
                     trigger = has_trait
                     trait_pc_nuked_preference = { root = { start_terraform_process = pc_nuked } }
@@ -1147,7 +1149,7 @@ decision_terraform_planet_into_preferred = {
                     }
                 }
             }
-            from.species = {
+            owner.species = {
                 switch = {
                     trigger = has_trait
                     trait_pc_alpine_preference = { root = { start_terraform_process = pc_alpine } }
@@ -1163,23 +1165,12 @@ decision_terraform_planet_into_preferred = {
             }
         }
     }
-
+    # First: NEURON ACTIVATION.
     ai_weight = {
         weight = 0
         modifier = {
             weight = 1000
-            OR = {
-                # Either normal planets
-                habitable_planet_not_urban = yes
-                # OR nuked planets but only with climate restoration
-                AND = {
-                    is_planet_class = pc_nuked
-                    owner = {
-                        has_technology = tech_climate_restoration
-                    }
-                }
-            }
-            from.species = {
+            owner.species = {
                 switch = {
                     trigger = has_trait
                     trait_pc_alpine_preference = { root = { NOT = { is_planet_class = pc_alpine } } }
@@ -1191,28 +1182,26 @@ decision_terraform_planet_into_preferred = {
                     trait_pc_continental_preference = { root = { NOT = { is_planet_class = pc_continental } } }
                     trait_pc_tropical_preference = { root = { NOT = { is_planet_class = pc_tropical } } }
                     trait_pc_ocean_preference = { root = { NOT = { is_planet_class = pc_ocean } } }
-                }
-            }
-        }
-        modifier = {
-            weight = 1000
-            habitable_planet_not_urban = yes
-            owner = {
-                has_technology = tech_climate_restoration
-            }
-            from.species = {
-                switch = {
-                    trigger = has_trait
                     trait_pc_nuked_preference = { NOT = { root = { is_planet_class = pc_nuked } } }
                 }
             }
         }
+        # We want to terraform into GAIA.
         modifier = {
             weight = 1000
-            habitable_planet_not_urban = yes
+            NOT = { is_planet_class = pc_gaia }
             owner = {
                 has_ascension_perk = ap_world_shaper
-                has_technology = tech_climate_restoration
+            }
+        }
+        # Tomb world without climate restoration? What a bummer...
+        modifier = {
+            weight = 0
+            is_planet_class = pc_nuked
+            owner = {
+                NOT = {
+                    has_technology = tech_climate_restoration
+                }
             }
         }
         modifier = {
