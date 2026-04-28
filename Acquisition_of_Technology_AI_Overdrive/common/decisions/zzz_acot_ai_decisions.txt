@@ -1109,58 +1109,60 @@ decision_terraform_planet_into_preferred = {
     }
 
     effect = {
-        # Let's go Gaia
-        if = {
-            limit = {
-                habitable_planet_not_urban = yes
-                owner = {
-                    has_ascension_perk = ap_world_shaper
-                }
-            }
-            start_terraform_process = pc_gaia
-        }
-        # Tomb worlds for them rad sickos.
-        else_if = {
-            limit = {
-                habitable_planet_not_urban = yes
-                owner = {
-                    has_technology = tech_climate_restoration
-                }
-            }
-            owner.species = {
-                switch = {
-                    trigger = has_trait
-                    trait_pc_nuked_preference = { root = { start_terraform_process = pc_nuked } }
-                }
-            }
-        }
-        # Best of the meh planets for everybody else.
-        else_if = {
-            limit = {
-                OR = {
-                    # Either normal planets
+        hidden_effect = {
+            # Let's go Gaia
+            if = {
+                limit = {
                     habitable_planet_not_urban = yes
-                    # OR nuked planets but only with climate restoration
-                    AND = {
-                        is_planet_class = pc_nuked
-                        owner = {
-                            has_technology = tech_climate_restoration
-                        }
+                    owner = {
+                        has_ascension_perk = ap_world_shaper
+                    }
+                }
+                start_terraform_process = pc_gaia
+            }
+            # Tomb worlds for them rad sickos.
+            else_if = {
+                limit = {
+                    habitable_planet_not_urban = yes
+                    owner = {
+                        has_technology = tech_climate_restoration
+                    }
+                }
+                owner.species = {
+                    switch = {
+                        trigger = has_trait
+                        trait_pc_nuked_preference = { root = { start_terraform_process = pc_nuked } }
                     }
                 }
             }
-            owner.species = {
-                switch = {
-                    trigger = has_trait
-                    trait_pc_alpine_preference = { root = { start_terraform_process = pc_alpine } }
-                    trait_pc_arctic_preference = { root = { start_terraform_process = pc_arctic } }
-                    trait_pc_tundra_preference = { root = { start_terraform_process = pc_tundra } }
-                    trait_pc_arid_preference = { root = { start_terraform_process = pc_arid } }
-                    trait_pc_savannah_preference = { root = { start_terraform_process = pc_savannah } }
-                    trait_pc_desert_preference = { root = { start_terraform_process = pc_desert } }
-                    trait_pc_continental_preference = { root = { start_terraform_process = pc_continental } }
-                    trait_pc_tropical_preference = { root = { start_terraform_process = pc_tropical } }
-                    trait_pc_ocean_preference = { root = { start_terraform_process = pc_ocean } }
+            # Best of the meh planets for everybody else.
+            else_if = {
+                limit = {
+                    OR = {
+                        # Either normal planets
+                        habitable_planet_not_urban = yes
+                        # OR nuked planets but only with climate restoration
+                        AND = {
+                            is_planet_class = pc_nuked
+                            owner = {
+                                has_technology = tech_climate_restoration
+                            }
+                        }
+                    }
+                }
+                owner.species = {
+                    switch = {
+                        trigger = has_trait
+                        trait_pc_alpine_preference = { root = { start_terraform_process = pc_alpine } }
+                        trait_pc_arctic_preference = { root = { start_terraform_process = pc_arctic } }
+                        trait_pc_tundra_preference = { root = { start_terraform_process = pc_tundra } }
+                        trait_pc_arid_preference = { root = { start_terraform_process = pc_arid } }
+                        trait_pc_savannah_preference = { root = { start_terraform_process = pc_savannah } }
+                        trait_pc_desert_preference = { root = { start_terraform_process = pc_desert } }
+                        trait_pc_continental_preference = { root = { start_terraform_process = pc_continental } }
+                        trait_pc_tropical_preference = { root = { start_terraform_process = pc_tropical } }
+                        trait_pc_ocean_preference = { root = { start_terraform_process = pc_ocean } }
+                    }
                 }
             }
         }
@@ -1169,7 +1171,7 @@ decision_terraform_planet_into_preferred = {
     ai_weight = {
         weight = 0
         modifier = {
-            weight = 1000
+            add = 1000
             owner.species = {
                 switch = {
                     trigger = has_trait
@@ -1188,7 +1190,7 @@ decision_terraform_planet_into_preferred = {
         }
         # We want to terraform into GAIA.
         modifier = {
-            weight = 1000
+            add = 1000
             NOT = { is_planet_class = pc_gaia }
             owner = {
                 has_ascension_perk = ap_world_shaper
@@ -1196,7 +1198,7 @@ decision_terraform_planet_into_preferred = {
         }
         # Tomb world without climate restoration? What a bummer...
         modifier = {
-            weight = 0
+            factor = 0
             is_planet_class = pc_nuked
             owner = {
                 NOT = {
@@ -1253,39 +1255,41 @@ decision_terraform_planet_into_advanced = {
     }
 
     effect = {
-        # Let's go hive
-        if = {
-            limit = {
-                habitable_planet_not_urban = yes
-                owner = {
-                    has_ascension_perk = ap_hive_worlds
+        hidden_effect = {
+            # Let's go hive
+            if = {
+                limit = {
+                    habitable_planet_not_urban = yes
+                    owner = {
+                        has_ascension_perk = ap_hive_worlds
+                    }
                 }
+                start_terraform_process = pc_hive
             }
-            start_terraform_process = pc_hive
-        }
-        # Let's go machine!
-        else_if = {
-            limit = {
-                habitable_planet_not_urban = yes
-                owner = {
-                    has_ascension_perk = ap_machine_worlds
+            # Let's go machine!
+            else_if = {
+                limit = {
+                    habitable_planet_not_urban = yes
+                    owner = {
+                        has_ascension_perk = ap_machine_worlds
+                    }
                 }
+                start_terraform_process = pc_machine
             }
-            start_terraform_process = pc_machine
         }
     }
 
     ai_weight = {
         weight = 0
         modifier = {
-            weight = 1000
+            add = 1000
             owner = {
                 has_ascension_perk = ap_hive_worlds
             }
             NOT = { is_planet_class = pc_hive }
         }
         modifier = {
-            weight = 1000
+            add = 1000
             owner = {
                 has_ascension_perk = ap_machine_worlds
             }
@@ -1296,6 +1300,7 @@ decision_terraform_planet_into_advanced = {
 
 # Fully commit a planet to its designation once it's been filled. Energy planets should have all their generator districts filled etc.
 decision_pivot_planet_district = {
+    owned_planets_only = yes
     enactment_time = 90
     resources = {
         category = planet_buildings
@@ -1320,115 +1325,119 @@ decision_pivot_planet_district = {
             has_district = district_farming_uncapped
         }
     }
+    allow = {
+        free_district_slots < 1
+    }
     effect = {
-        # Nuke all districts first, we redistribute them next.
-        remove_all_districts = yes
-        switch = {
-            trigger = colony_type
-            col_farming = {
-                # Fill up the target district up first
-                fill_districts_to_max = { DISTRICT = district_farming }
-                fill_districts_to_max = { DISTRICT = district_farming_uncapped }
+        hidden_effect = {
+            # Nuke all districts first, we redistribute them next.
+            remove_all_districts = yes
+            switch = {
+                trigger = has_designation
+                col_farming = {
+                    # Fill up the target district up first
+                    fill_districts_to_max = { DISTRICT = district_farming }
+                    fill_districts_to_max = { DISTRICT = district_farming_uncapped }
+                }
+                col_mining = {
+                    # Fill up the target district up first
+                    fill_districts_to_max = { DISTRICT = district_mining }
+                    fill_districts_to_max = { DISTRICT = district_mining_uncapped }
+                }
+                col_generator = {
+                    # Fill up the target district up first
+                    fill_districts_to_max = { DISTRICT = district_generator }
+                    fill_districts_to_max = { DISTRICT = district_generator_uncapped }
+                }
+                # Change zones to be uniform now
+                col_foundry = {
+                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+                }
+                col_industrial = {
+                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_industrial }
+                }
+                col_foundry = {
+                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+                }
+                # col_ecu_foundry = {
+                #     # Fill up the target district up first
+                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+                #     add_zone = {
+                #         district = district_arcology_urban_1
+                #         zone = zone_foundry_arcology
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ecu_factory = {
+                #     # Fill up the target district up first
+                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+                #     add_zone = {
+                #         district = district_arcology_urban_1
+                #         zone = zone_factory_arcology
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ecu_industrial = {
+                #     # Fill up the target district up first
+                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
+                #     add_zone = {
+                #         district = district_arcology_urban_1
+                #         zone = zone_industrial_arcology
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ring_farming = {
+                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+                #     add_zone = {
+                #         district = district_rw_urban_1
+                #         zone = zone_food_ring_world
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ring_generator = {
+                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+                #     add_zone = {
+                #         district = district_rw_urban_1
+                #         zone = zone_energy_ring_world
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ring_research = {
+                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+                #     add_zone = {
+                #         district = district_rw_urban_1
+                #         zone = zone_research_ring_world
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
+                # col_ring_trade = {
+                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
+                #     add_zone = {
+                #         district = district_rw_urban_1
+                #         zone = zone_trade_ring_world
+                #         zone_slot = 0
+                #         replace = yes
+                #     }
+                # }
             }
-            col_mining = {
-                # Fill up the target district up first
-                fill_districts_to_max = { DISTRICT = district_mining }
-                fill_districts_to_max = { DISTRICT = district_mining_uncapped }
-            }
-            col_generator = {
-                # Fill up the target district up first
-                fill_districts_to_max = { DISTRICT = district_generator }
-                fill_districts_to_max = { DISTRICT = district_generator_uncapped }
-            }
-            # Change zones to be uniform now
-            col_foundry = {
-                replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
-            }
-            col_industrial = {
-                replace_urban_districts = { DISTRICT = district_city ZONE = zone_industrial }
-            }
-            col_foundry = {
-                replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
-            }
-            # col_ecu_foundry = {
-            #     # Fill up the target district up first
-            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-            #     add_zone = {
-            #         district = district_arcology_urban_1
-            #         zone = zone_foundry_arcology
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ecu_factory = {
-            #     # Fill up the target district up first
-            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-            #     add_zone = {
-            #         district = district_arcology_urban_1
-            #         zone = zone_factory_arcology
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ecu_industrial = {
-            #     # Fill up the target district up first
-            #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-            #     add_zone = {
-            #         district = district_arcology_urban_1
-            #         zone = zone_industrial_arcology
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ring_farming = {
-            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-            #     add_zone = {
-            #         district = district_rw_urban_1
-            #         zone = zone_food_ring_world
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ring_generator = {
-            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-            #     add_zone = {
-            #         district = district_rw_urban_1
-            #         zone = zone_energy_ring_world
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ring_research = {
-            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-            #     add_zone = {
-            #         district = district_rw_urban_1
-            #         zone = zone_research_ring_world
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
-            # col_ring_trade = {
-            #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-            #     add_zone = {
-            #         district = district_rw_urban_1
-            #         zone = zone_trade_ring_world
-            #         zone_slot = 0
-            #         replace = yes
-            #     }
-            # }
+            ## Fill the rest up with city districts.
+            fill_districts_to_max = { DISTRICT = district_city }
         }
-        ## Fill the rest up with city districts.
-        fill_districts_to_max = { DISTRICT = district_city }
     }
     ai_weight = {
         weight = 0
         modifier = {
-            weight = 500
-            num_free_districts = { type = any value <= 0 }
+            add = 1000
             OR = {
-                colony_type = col_factory
-                colony_type = col_industrial
-                colony_type = col_foundry
+                has_designation = col_factory
+                has_designation = col_industrial
+                has_designation = col_foundry
             }
             OR = {
                 num_districts = { type = district_farming value > 0 }
@@ -1440,9 +1449,8 @@ decision_pivot_planet_district = {
             }
         }
         modifier = {
-            weight = 500
-            num_free_districts = { type = any value <= 0 }
-            colony_type = col_generator
+            add = 1000
+            has_designation = col_generator
             OR = {
                 num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_mining value > 0 }
@@ -1452,9 +1460,8 @@ decision_pivot_planet_district = {
             }
         }
         modifier = {
-            weight = 500
-            num_free_districts = { type = any value <= 0 }
-            colony_type = col_mining
+            add = 1000
+            has_designation = col_mining
             OR = {
                 num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_farming value > 0 }
@@ -1464,9 +1471,8 @@ decision_pivot_planet_district = {
             }
         }
         modifier = {
-            weight = 500
-            num_free_districts = { type = any value <= 0 }
-            colony_type = col_generator
+            add = 1000
+            has_designation = col_generator
             OR = {
                 num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_farming value > 0 }
@@ -1927,7 +1933,8 @@ decision_arcology_project_ai = {
         category = decisions
         cost = {
             # influence = 200
-            alloys = 10000
+            # alloys = 10000
+            minerals = 10000
         }
     }
 
@@ -2015,7 +2022,7 @@ decision_arcology_project_ai = {
     ai_weight = {
         weight = 0
         modifier = {
-            weight = 1000
+            add = 1000
             # Custom AI check to help decide
             owner = {
                 # You usually don't need more then two ecu's a game.
@@ -2075,7 +2082,8 @@ decision_arcology_project_relic_ai = {
         category = decisions
         cost = {
             # influence = 200
-            alloys = 10000
+            # alloys = 10000
+            minerals = 10000
         }
     }
 
@@ -2149,13 +2157,9 @@ decision_arcology_project_relic_ai = {
     }
 
     ai_weight = {
-        weight = 100
-    }
-
-    ai_weight = {
         weight = 0
         modifier = {
-            weight = 1000
+            add = 1000
             # Custom AI check to help decide
             owner = {
                 # You usually don't need more then two ecu's a game.

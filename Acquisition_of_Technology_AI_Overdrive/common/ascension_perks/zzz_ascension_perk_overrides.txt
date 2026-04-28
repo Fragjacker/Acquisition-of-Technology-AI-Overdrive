@@ -39,7 +39,7 @@ ap_world_shaper = {
     }
 
     ai_weight = {
-        weight = 100
+        weight = 1000
         modifier = {
             factor = 0
             OR = {
@@ -50,14 +50,14 @@ ap_world_shaper = {
             }
         }
         modifier = {
-            factor = 5
+            factor = 2
             OR = {
                 has_ethic = ethic_pacifist
                 has_ethic = ethic_xenophobe
             }
         }
         modifier = {
-            factor = 10
+            factor = 5
             OR = {
                 has_ethic = ethic_fanatic_pacifist
                 has_ethic = ethic_fanatic_xenophobe
@@ -66,7 +66,7 @@ ap_world_shaper = {
         }
         modifier = {
             #only way to get more nice planets
-            factor = 100
+            factor = 10
             has_origin = origin_life_seeded
         }
     }
