@@ -1083,8 +1083,9 @@ decision_destroy_trade_building = {
     }
 }
 
-# Instigate Terraform of inhabited planet into prefered planet class
+# Instigate Terraform of inhabited planet into preferred planet class
 decision_terraform_planet_into_preferred = {
+    owned_planets_only = yes
     enactment_time = 30
     resources = {
         category = planet_buildings
@@ -1104,7 +1105,19 @@ decision_terraform_planet_into_preferred = {
     }
 
     effect = {
+        # Let's go Gaia
         if = {
+            limit = {
+                habitable_planet_not_urban = yes
+                owner = {
+                    has_ascension_perk = ap_world_shaper
+                    has_technology = tech_climate_restoration
+                }
+            }
+            start_terraform_process = pc_gaia
+        }
+        # Tomb worlds for them rad sickos.
+        else_if = {
             limit = {
                 habitable_planet_not_urban = yes
                 owner = {
@@ -1114,12 +1127,11 @@ decision_terraform_planet_into_preferred = {
             from.species = {
                 switch = {
                     trigger = has_trait
-                    trait_survivor = { root = { start_terraform_process = pc_nuked } }
                     trait_pc_nuked_preference = { root = { start_terraform_process = pc_nuked } }
-                    trait_plantoid_radiotrophic = { root = { start_terraform_process = pc_nuked } }
                 }
             }
         }
+        # Best of the meh planets for everybody else.
         else_if = {
             limit = {
                 OR = {
@@ -1190,10 +1202,16 @@ decision_terraform_planet_into_preferred = {
             from.species = {
                 switch = {
                     trigger = has_trait
-                    trait_survivor = { NOT = { root = { is_planet_class = pc_nuked } } }
                     trait_pc_nuked_preference = { NOT = { root = { is_planet_class = pc_nuked } } }
-                    trait_plantoid_radiotrophic = { NOT = { root = { is_planet_class = pc_nuked } } }
                 }
+            }
+        }
+        modifier = {
+            weight = 1000
+            habitable_planet_not_urban = yes
+            owner = {
+                has_ascension_perk = ap_world_shaper
+                has_technology = tech_climate_restoration
             }
         }
         modifier = {
@@ -1831,6 +1849,272 @@ decision_upgrade_all_system_megaturrets = {
     ai_weight = {
         # Whenever this becomes available and the money is there JUST DO IT!
         weight = 10000
+    }
+}
+
+# ──────────────────────────── Overriding Vanilla Decisions ────────────────────────────
+# Arcology Project
+decision_arcology_project_ai = {
+    owned_planets_only = yes
+    icon = decision_arcology_project
+
+    enactment_time = 3600
+    resources = {
+        category = decisions
+        cost = {
+            # influence = 200
+            alloys = 10000
+        }
+    }
+
+    potential = {
+        NOR = {
+            is_planet_class = pc_city
+            is_planet_class = pc_relic
+            has_modifier = resort_colony
+            has_modifier = penal_colony
+            has_modifier = slave_colony
+            has_modifier = pm_wenkwort_custodian
+        }
+        is_artificial = no
+        exists = owner
+        owner = {
+            has_ascension_perk = ap_arcology_project
+            is_ai = yes
+        }
+        NOT = { has_designation = col_nanotech_world }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = decision_arcology_project_requirements
+            free_district_slots < 1
+            num_districts = { type = district_farming value < 1 }
+            num_districts = { type = district_mining value < 1 }
+            num_districts = { type = district_generator value < 1 }
+            # Volcanic Worlds
+            num_districts = { type = district_geothermal value < 1 }
+            num_districts = { type = district_melting value < 1 }
+            num_districts = { type = district_polytechnic value < 1 }
+        }
+        custom_tooltip = {
+            fail_text = legendary_leader_decision_arcology_project
+            NOT = { has_planet_flag = legendary_leader_planet }
+        }
+        num_uncleared_blockers < 1
+    }
+
+    on_queued = {
+        set_planet_flag = arcology_project_construction
+    }
+
+    on_unqueued = {
+        remove_planet_flag = arcology_project_construction
+    }
+
+    effect = {
+        remove_planet_flag = arcology_project_construction
+        # Make city-planet
+        custom_tooltip = decision_arcology_project_effects
+        hidden_effect = {
+            save_deposits = yes
+            clear_deposits = yes
+            restore_saved_deposits = yes
+            change_pc = pc_city
+            relic_world_conversion_effect = {
+                DISTRICT = district_arcology_housing
+                VARIABLE = num_housing_districts
+            }
+            set_planet_entity = {
+                entity = "city_planet_entity"
+                graphical_culture = owner
+            }
+            planet_event = { id = action.68 }
+            owner = {
+                country_event = { id = distar.201 } # port for living planet distar.197, triggers in event
+            }
+            planet_event = { id = mega.200 }
+            if = {
+                limit = {
+                    OR = {
+                        is_active_resolution = "resolution_ecology_environmental_control_board"
+                        is_active_resolution = "resolution_ecology_paradise_initiative"
+                    }
+                }
+                owner = {
+                    set_timed_country_flag = { flag = resolution_breached_terraformed days = 3600 }
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 0
+        modifier = {
+            weight = 1000
+            # Custom AI check to help decide
+            owner = {
+                # You usually don't need more then two ecu's a game.
+                count_owned_planet = {
+                    limit = {
+                        OR = {
+                            is_planet_class = pc_city
+                            has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
+                        }
+                    }
+                    count <= 2
+                }
+            }
+            OR = {
+                has_designation = col_capital_factory
+                has_designation = col_capital_factory
+                has_designation = col_capital_foundry
+                has_designation = col_foundry
+                has_designation = col_factory
+                has_designation = col_industrial
+            }
+        }
+        modifier = {
+            add = 200
+            planet_size >= 20 # Bigger is better!
+        }
+        modifier = {
+            add = 200
+            planet_size > 21 # Bigger is better!
+        }
+        modifier = {
+            add = 200
+            planet_size > 22 # Bigger is better!
+        }
+        modifier = {
+            add = 200
+            planet_size > 23 # Bigger is better!
+        }
+        modifier = {
+            add = 200
+            planet_size > 24 # Bigger is better!
+        }
+        modifier = {
+            factor = 0
+            planet_size < 20 # Only planets big enough should become ecus.
+        }
+    }
+}
+
+# Arcology Project (Relic Worlds)
+decision_arcology_project_relic_ai = {
+    owned_planets_only = yes
+    icon = decision_arcology_project
+
+    enactment_time = 3600
+    resources = {
+        category = decisions
+        cost = {
+            # influence = 200
+            alloys = 10000
+        }
+    }
+
+    potential = {
+        is_planet_class = pc_relic
+        is_artificial = no
+        exists = owner
+        owner = {
+            is_ai = yes
+            OR = {
+                is_regular_empire = yes
+                has_valid_civic = civic_machine_servitor
+            }
+        }
+    }
+
+    allow = {
+        num_uncleared_blockers < 1
+        owner = { has_technology = tech_housing_2 }
+    }
+
+    on_queued = {
+        set_planet_flag = arcology_project_construction
+    }
+
+    on_unqueued = {
+        remove_planet_flag = arcology_project_construction
+    }
+
+    effect = {
+        remove_planet_flag = arcology_project_construction
+        # Make city-planet
+        custom_tooltip = decision_arcology_project_effects
+        hidden_effect = {
+            save_deposits = yes
+            clear_deposits = yes
+            restore_saved_deposits = yes
+            change_pc = pc_city
+            relic_world_conversion_effect = {
+                DISTRICT = district_arcology_housing
+                VARIABLE = num_housing_districts
+            }
+            set_planet_entity = {
+                entity = "city_planet_entity"
+                graphical_culture = owner
+            }
+            planet_event = { id = action.68 }
+            add_deposit = d_former_relic_world
+            planet_event = { id = mega.201 }
+            while = {
+                count = 4
+                solar_system = {
+                    random_system_ambient_object = {
+                        limit = { has_ambient_object_flag = relic_world_debris }
+                        destroy_ambient_object = this
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        is_active_resolution = "resolution_ecology_environmental_control_board"
+                        is_active_resolution = "resolution_ecology_paradise_initiative"
+                    }
+                }
+                owner = {
+                    set_timed_country_flag = { flag = resolution_breached_terraformed days = 3600 }
+                }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 100
+    }
+
+    ai_weight = {
+        weight = 0
+        modifier = {
+            weight = 1000
+            # Custom AI check to help decide
+            owner = {
+                # You usually don't need more then two ecu's a game.
+                count_owned_planet = {
+                    limit = {
+                        OR = {
+                            is_planet_class = pc_city
+                            has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
+                        }
+                    }
+                    count <= 2
+                }
+
+            }
+            OR = {
+                has_designation = col_capital_factory
+                has_designation = col_capital_factory
+                has_designation = col_capital_foundry
+                has_designation = col_foundry
+                has_designation = col_factory
+                has_designation = col_industrial
+            }
+        }
     }
 }
 
