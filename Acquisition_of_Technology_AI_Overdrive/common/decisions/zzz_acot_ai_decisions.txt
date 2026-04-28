@@ -1101,6 +1101,7 @@ decision_terraform_planet_into_preferred = {
             has_technology = tech_ecological_adaptation
         }
         is_planet_habitable = yes
+        is_artificial = no
         is_terraforming = no
     }
 
@@ -1226,6 +1227,80 @@ decision_terraform_planet_into_preferred = {
         modifier = {
             factor = 0
             is_ideal = yes
+        }
+    }
+}
+
+# Instigate Terraform into hive worlds and machine planets.
+decision_terraform_planet_into_advanced = {
+    owned_planets_only = yes
+    enactment_time = 30
+    resources = {
+        category = planet_buildings
+        cost = {
+            energy = 2000
+            minerals = 2000
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            OR = {
+                has_ascension_perk = ap_machine_worlds
+                has_ascension_perk = ap_hive_worlds
+            }
+        }
+        habitable_planet_not_urban = yes
+        is_artificial = no
+        is_terraforming = no
+    }
+
+    allow = {
+        NOR = {
+            is_planet_class = pc_machine
+            is_planet_class = pc_hive
+        }
+    }
+
+    effect = {
+        # Let's go hive
+        if = {
+            limit = {
+                habitable_planet_not_urban = yes
+                owner = {
+                    has_ascension_perk = ap_hive_worlds
+                }
+            }
+            start_terraform_process = pc_hive
+        }
+        # Let's go machine!
+        else_if = {
+            limit = {
+                habitable_planet_not_urban = yes
+                owner = {
+                    has_ascension_perk = ap_machine_worlds
+                }
+            }
+            start_terraform_process = pc_machine
+        }
+    }
+
+    ai_weight = {
+        weight = 0
+        modifier = {
+            weight = 1000
+            owner = {
+                has_ascension_perk = ap_hive_worlds
+            }
+            NOT = { is_planet_class = pc_hive }
+        }
+        modifier = {
+            weight = 1000
+            owner = {
+                has_ascension_perk = ap_machine_worlds
+            }
+            NOT = { is_planet_class = pc_machine }
         }
     }
 }
