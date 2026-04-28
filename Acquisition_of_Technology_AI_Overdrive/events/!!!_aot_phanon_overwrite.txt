@@ -1216,12 +1216,7 @@ planet_event = {
     immediate = {
         set_update_modifiers_batch = begin
         acot_upgrade_to_delta_building = yes
-        root.owner = {
-            country_event = {
-                id = aot_ai_districts.31
-                days = 1
-            }
-        }
+        set_update_modifiers_batch = end
     }
 }
 

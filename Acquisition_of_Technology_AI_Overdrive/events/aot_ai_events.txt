@@ -71,54 +71,23 @@ country_event = {
         every_owned_planet = {
             limit = {
                 has_enigmatic_capital = no
-                NOT = {
-                    has_planet_flag = pending_capital_upgrade
-                }
             }
-            set_planet_flag = pending_capital_upgrade
-            planet_event = {
-                id = aot_ai_districts.3
-                days = 1440
-            }
-        }
-    }
-}
-
-planet_event = {
-    id = aot_ai_districts.3
-    hide_window = yes
-    is_triggered_only = yes
-    immediate = {
-        set_update_modifiers_batch = begin
-        hidden_effect = {
-            remove_capital_building = yes
-            add_advanced_capital_building = yes
-            if = {
-                limit = {
-                    NOT = {
-                        has_building = building_giga_fortress_dm
+            set_update_modifiers_batch = begin
+            hidden_effect = {
+                remove_capital_building = yes
+                add_advanced_capital_building = yes
+                if = {
+                    limit = {
+                        NOT = {
+                            has_building = building_giga_fortress_dm
+                        }
                     }
+                    # FREE GIGAFORT BABY
+                    add_building = building_giga_fortress_dm
                 }
-                # FREE GIGAFORT BABY
-                add_building = building_giga_fortress_dm
             }
-            remove_planet_flag = pending_capital_upgrade
+            set_update_modifiers_batch = end
         }
-        root.owner = {
-            country_event = {
-                id = aot_ai_districts.31
-                days = 1
-            }
-        }
-    }
-}
-
-country_event = {
-    id = aot_ai_districts.31
-    is_triggered_only = yes
-    hide_window = yes
-    immediate = {
-        set_update_modifiers_batch = end
     }
 }
 
