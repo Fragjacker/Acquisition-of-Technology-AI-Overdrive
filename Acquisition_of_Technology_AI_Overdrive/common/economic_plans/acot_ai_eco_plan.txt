@@ -145,44 +145,41 @@ basic_economy_plan = {
             rare_crystals = @economic_plan_scaling_rare_resource_target
         }
     }
+    subplan = {
+        scaling = yes
+        set_name = "Scaling ecu alloys"
+
+        potential = {
+            OR = {
+                has_ascension_perk = ap_arcology_project
+                has_ascension_perk = ap_hive_worlds
+                has_ascension_perk = ap_machine_worlds
+            }
+        }
+        income = {
+            energy = 200
+            minerals = 500
+            alloys = 1000
+            society_research = 5000
+            engineering_research = 5000
+            society_research = 5000
+        }
+    }
     ### SCALE HARDER!!!!!
-    #subplan = {
-    #	scaling = yes
-    #	set_name = "acot resource focus 2"
-    #	potential = {
-    #		has_technology = tech_dark_matter_power_core
-    #		has_monthly_income = {
-    #			resource = alloys
-    #			value > 10000
-    #		}
-    #		has_monthly_income = {
-    #			resource = society_research
-    #			value > 10000
-    #		}
-    #		has_monthly_income = {
-    #			resource = engineering_research
-    #			value > 10000
-    #		}
-    #		has_monthly_income = {
-    #			resource = society_research
-    #			value > 10000
-    #		}
-    #		has_monthly_income = {
-    #			resource = acot_sr_dark_energy
-    #			value > 400
-    #		}
-    #		has_monthly_income = {
-    #			resource = sr_dark_matter
-    #			value > 400
-    #		}
-    #	}
-    #	income = {
-    #		alloys = 5000
-    #		society_research = 5000
-    #		engineering_research = 5000
-    #		society_research = 5000
-    #	}
-    #}
+    subplan = {
+        scaling = yes
+        set_name = "acot resource focus 2"
+        potential = {
+            has_technology = tech_dark_matter_power_core
+        }
+        income = {
+            energy = 2000
+            alloys = 5000
+            society_research = 10000
+            engineering_research = 10000
+            society_research = 10000
+        }
+    }
 
     subplan = {
         scaling = yes

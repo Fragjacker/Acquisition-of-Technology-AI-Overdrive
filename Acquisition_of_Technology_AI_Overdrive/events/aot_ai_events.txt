@@ -45,11 +45,11 @@ country_event = {
             # replace_single_zone = { DISTRICT = district_ring_world_fortress TYPE = fortress_ring_world PREFIX = aot_dm }
             # replace_single_zone = { DISTRICT = district_ring_world_trade TYPE = trade_ring_world PREFIX = aot_dm }
             # Urban
-            replace_urban_districts = { DISTRICT = district_city ZONE = zone_acot_dm_urban }
-            replace_urban_districts = { DISTRICT = district_hive ZONE = zone_acot_dm_urban }
-            replace_urban_districts = { DISTRICT = district_nexus ZONE = zone_acot_dm_urban }
-            replace_urban_districts = { DISTRICT = district_rw_city ZONE = zone_acot_dm_urban }
-            replace_urban_districts = { DISTRICT = district_arcology_housing ZONE = zone_acot_dm_urban }
+            replace_urban_zones = { DISTRICT = district_city ZONE = zone_acot_dm_urban }
+            replace_urban_zones = { DISTRICT = district_hive ZONE = zone_acot_dm_urban }
+            replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_acot_dm_urban }
+            replace_urban_zones = { DISTRICT = district_rw_city ZONE = zone_acot_dm_urban }
+            replace_urban_zones = { DISTRICT = district_arcology_housing ZONE = zone_acot_dm_urban }
         }
     }
 }

@@ -479,7 +479,7 @@ decision_transform_into_super_awesome = {
     }
 
     ai_weight = {
-        weight = 1000
+        weight = 10000
     }
 }
 
@@ -542,7 +542,7 @@ decision_transform_into_enigmatic_planet = {
 decision_upgrade_dm_gigafort = {
     owned_planets_only = yes
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 20000
             influence = 100
@@ -575,7 +575,7 @@ decision_upgrade_dm_gigafort = {
 decision_upgrade_ae_gigafort = {
     owned_planets_only = yes
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 15000
             influence = 50
@@ -608,7 +608,7 @@ decision_upgrade_ae_gigafort = {
 decision_upgrade_re_gigafort = {
     owned_planets_only = yes
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             energy = 50000
             minerals = 30000
@@ -640,7 +640,7 @@ decision_upgrade_re_gigafort = {
 decision_upgrade_se_gigafort = {
     owned_planets_only = yes
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             energy = 100000
             minerals = 60000
@@ -737,7 +737,7 @@ decision_build_up_voidsphere = {
     }
     prerequisites = { tech_acot_create_enigmapolis }
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 15000
         }
@@ -793,7 +793,7 @@ decision_populate_voidsphere = {
     prerequisites = { tech_acot_create_enigmapolis }
     enactment_time = 100
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 1
         }
@@ -859,7 +859,7 @@ decision_add_power_planet = {
     prerequisites = { tech_dark_matter_power_core_dm }
     enactment_time = 30 # crisis mode!
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 500
         }
@@ -897,7 +897,7 @@ decision_add_crisis_district = {
     prerequisites = { tech_dark_matter_power_core_dm }
     enactment_time = 90 # crisis mode!
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 750
         }
@@ -943,7 +943,7 @@ decision_add_crisis_district = {
 decision_destroy_old_lab = {
     enactment_time = 30
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 50
         }
@@ -993,7 +993,7 @@ decision_destroy_old_lab = {
 decision_destroy_sr_building = {
     enactment_time = 30
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 50
         }
@@ -1043,7 +1043,7 @@ decision_destroy_sr_building = {
 decision_destroy_trade_building = {
     enactment_time = 30
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             minerals = 50
         }
@@ -1088,7 +1088,7 @@ decision_terraform_planet_into_preferred = {
     owned_planets_only = yes
     enactment_time = 30
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             energy = 2000
         }
@@ -1227,7 +1227,7 @@ decision_terraform_planet_into_advanced = {
     owned_planets_only = yes
     enactment_time = 30
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             energy = 2000
             minerals = 2000
@@ -1303,7 +1303,7 @@ decision_pivot_planet_district = {
     owned_planets_only = yes
     enactment_time = 90
     resources = {
-        category = planet_buildings
+        category = decisions
         cost = {
             unity = 100
             minerals = 500
@@ -1324,6 +1324,7 @@ decision_pivot_planet_district = {
             has_district = district_farming
             has_district = district_farming_uncapped
         }
+        has_enigmatic_capital = no  # Only for pleb tier stuffs
     }
     allow = {
         free_district_slots < 1
@@ -1336,95 +1337,47 @@ decision_pivot_planet_district = {
                 trigger = has_designation
                 col_farming = {
                     # Fill up the target district up first
-                    fill_districts_to_max = { DISTRICT = district_farming }
-                    fill_districts_to_max = { DISTRICT = district_farming_uncapped }
+                    if = {
+                        limit = { is_farming_district_uncapped = yes }
+                        fill_districts_to_max = { DISTRICT = district_farming_uncapped }
+                    }
+                    else = {
+                        fill_districts_to_max = { DISTRICT = district_farming }
+                    }
                 }
                 col_mining = {
                     # Fill up the target district up first
-                    fill_districts_to_max = { DISTRICT = district_mining }
-                    fill_districts_to_max = { DISTRICT = district_mining_uncapped }
+                    if = {
+                        limit = { is_mining_district_uncapped = yes }
+                        fill_districts_to_max = { DISTRICT = district_mining_uncapped }
+                    }
+                    else = {
+                        fill_districts_to_max = { DISTRICT = district_mining }
+                    }
                 }
                 col_generator = {
                     # Fill up the target district up first
-                    fill_districts_to_max = { DISTRICT = district_generator }
-                    fill_districts_to_max = { DISTRICT = district_generator_uncapped }
+                    if = {
+                        limit = { is_generator_district_uncapped = yes }
+                        fill_districts_to_max = { DISTRICT = district_generator_uncapped }
+                    }
+                    else = {
+                        fill_districts_to_max = { DISTRICT = district_generator }
+                    }
                 }
                 # Change zones to be uniform now
                 col_foundry = {
-                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
                 }
                 col_industrial = {
-                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_industrial }
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_industrial }
                 }
                 col_foundry = {
-                    replace_urban_districts = { DISTRICT = district_city ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
                 }
-                # col_ecu_foundry = {
-                #     # Fill up the target district up first
-                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-                #     add_zone = {
-                #         district = district_arcology_urban_1
-                #         zone = zone_foundry_arcology
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ecu_factory = {
-                #     # Fill up the target district up first
-                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-                #     add_zone = {
-                #         district = district_arcology_urban_1
-                #         zone = zone_factory_arcology
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ecu_industrial = {
-                #     # Fill up the target district up first
-                #     fill_districts_to_max = { DISTRICT = district_arcology_urban_1 }
-                #     add_zone = {
-                #         district = district_arcology_urban_1
-                #         zone = zone_industrial_arcology
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ring_farming = {
-                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-                #     add_zone = {
-                #         district = district_rw_urban_1
-                #         zone = zone_food_ring_world
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ring_generator = {
-                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-                #     add_zone = {
-                #         district = district_rw_urban_1
-                #         zone = zone_energy_ring_world
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ring_research = {
-                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-                #     add_zone = {
-                #         district = district_rw_urban_1
-                #         zone = zone_research_ring_world
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
-                # col_ring_trade = {
-                #     fill_districts_to_max = { DISTRICT = district_rw_urban_1 }
-                #     add_zone = {
-                #         district = district_rw_urban_1
-                #         zone = zone_trade_ring_world
-                #         zone_slot = 0
-                #         replace = yes
-                #     }
-                # }
+                col_research = {
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_research }
+                }
             }
             ## Fill the rest up with city districts.
             fill_districts_to_max = { DISTRICT = district_city }
@@ -1438,6 +1391,7 @@ decision_pivot_planet_district = {
                 has_designation = col_factory
                 has_designation = col_industrial
                 has_designation = col_foundry
+                has_designation = col_research
             }
             OR = {
                 num_districts = { type = district_farming value > 0 }
@@ -1452,7 +1406,6 @@ decision_pivot_planet_district = {
             add = 1000
             has_designation = col_generator
             OR = {
-                num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_mining value > 0 }
                 num_districts = { type = district_mining_uncapped value > 0 }
                 num_districts = { type = district_generator value > 0 }
@@ -1463,7 +1416,6 @@ decision_pivot_planet_district = {
             add = 1000
             has_designation = col_mining
             OR = {
-                num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_farming value > 0 }
                 num_districts = { type = district_farming_uncapped value > 0 }
                 num_districts = { type = district_generator value > 0 }
@@ -1474,7 +1426,6 @@ decision_pivot_planet_district = {
             add = 1000
             has_designation = col_generator
             OR = {
-                num_districts = { type = district_city value > 0 }
                 num_districts = { type = district_farming value > 0 }
                 num_districts = { type = district_farming_uncapped value > 0 }
                 num_districts = { type = district_mining value > 0 }
@@ -1957,22 +1908,37 @@ decision_arcology_project_ai = {
     }
 
     allow = {
-        custom_tooltip = {
-            fail_text = decision_arcology_project_requirements
-            free_district_slots < 1
-            num_districts = { type = district_farming value < 1 }
-            num_districts = { type = district_mining value < 1 }
-            num_districts = { type = district_generator value < 1 }
-            # Volcanic Worlds
-            num_districts = { type = district_geothermal value < 1 }
-            num_districts = { type = district_melting value < 1 }
-            num_districts = { type = district_polytechnic value < 1 }
-        }
+        # It's hard enough to get this already
+
+        # custom_tooltip = {
+        #     fail_text = decision_arcology_project_requirements
+        #     free_district_slots < 1
+        #     num_districts = { type = district_farming value < 1 }
+        #     num_districts = { type = district_mining value < 1 }
+        #     num_districts = { type = district_generator value < 1 }
+        #     # Volcanic Worlds
+        #     num_districts = { type = district_geothermal value < 1 }
+        #     num_districts = { type = district_melting value < 1 }
+        #     num_districts = { type = district_polytechnic value < 1 }
+        # }
         custom_tooltip = {
             fail_text = legendary_leader_decision_arcology_project
             NOT = { has_planet_flag = legendary_leader_planet }
         }
+
         num_uncleared_blockers < 1
+        owner = {
+            # You usually don't need more then two ecu's a game.
+            count_owned_planet = {
+                limit = {
+                    OR = {
+                        is_planet_class = pc_city
+                        has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
+                    }
+                }
+                count < 2
+            }
+        }
     }
 
     on_queued = {
@@ -2023,19 +1989,6 @@ decision_arcology_project_ai = {
         weight = 0
         modifier = {
             add = 1000
-            # Custom AI check to help decide
-            owner = {
-                # You usually don't need more then two ecu's a game.
-                count_owned_planet = {
-                    limit = {
-                        OR = {
-                            is_planet_class = pc_city
-                            has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
-                        }
-                    }
-                    count <= 2
-                }
-            }
             OR = {
                 has_designation = col_capital_factory
                 has_designation = col_capital_factory
@@ -2046,23 +1999,23 @@ decision_arcology_project_ai = {
             }
         }
         modifier = {
-            add = 200
+            factor = 1.1
             planet_size >= 20 # Bigger is better!
         }
         modifier = {
-            add = 200
+            factor = 1.1
             planet_size > 21 # Bigger is better!
         }
         modifier = {
-            add = 200
+            factor = 1.1
             planet_size > 22 # Bigger is better!
         }
         modifier = {
-            add = 200
+            factor = 1.1
             planet_size > 23 # Bigger is better!
         }
         modifier = {
-            add = 200
+            factor = 1.1
             planet_size > 24 # Bigger is better!
         }
         modifier = {
