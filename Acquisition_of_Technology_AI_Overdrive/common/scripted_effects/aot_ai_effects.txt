@@ -3,7 +3,6 @@ replace_single_zone = {
     if = {
         limit = {
             exists = root
-            has_district = $DISTRICT$
             num_districts = { type = $DISTRICT$ value > 0 } # Only add zones when at least one district has been built
         }
         add_zone = {
@@ -27,6 +26,130 @@ replace_urban_zones = {
         zone = $ZONE$
         zone_slot = 2
         replace = yes
+    }
+}
+
+bulk_upgrade_zones = {
+    # Food
+    replace_single_zone = { DISTRICT = district_farming TYPE = food PREFIX = $TYPE_STANDARD$ }
+    replace_single_zone = { DISTRICT = district_farming_uncapped TYPE = food PREFIX = $TYPE_STANDARD$ }
+    # Minerals
+    replace_single_zone = { DISTRICT = district_mining TYPE = minerals PREFIX = $TYPE_STANDARD$ }
+    replace_single_zone = { DISTRICT = district_mining_uncapped TYPE = minerals PREFIX = $TYPE_STANDARD$ }
+    # Energy
+    replace_single_zone = { DISTRICT = district_generator TYPE = energy PREFIX = $TYPE_STANDARD$ }
+    replace_single_zone = { DISTRICT = district_generator_uncapped TYPE = energy PREFIX = $TYPE_STANDARD$ }
+
+    # Ecu
+    switch = {
+        trigger = has_designation
+        col_ecu_industrial = {
+            replace_single_zone = { DISTRICT = district_arcology_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = industry_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = industry_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = industry_arcology }
+        }
+        col_ecu_foundry = {
+            replace_single_zone = { DISTRICT = district_arcology_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_arcology }
+        }
+        col_ecu_factory = {
+            replace_single_zone = { DISTRICT = district_arcology_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = factory_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = factory_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = factory_arcology }
+        }
+        col_ecu_research = {
+            replace_single_zone = { DISTRICT = district_arcology_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = research_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = research_arcology }
+            replace_single_zone = { DISTRICT = district_arcology_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_arcology }
+        }
+    }
+    # Ringworlds
+    switch = {
+        trigger = has_designation
+        col_ring_trade = {
+            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = trade_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = trade_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = trade_ring_world }
+        }
+        col_ring_generator = {
+            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = energy_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = energy_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = energy_ring_world }
+        }
+        col_ring_farming = {
+            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = food_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = food_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = food_ring_world }
+        }
+        col_ring_research = {
+            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = research_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = research_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_ring_world }
+        }
+    }
+    # Hive Worlds
+    switch = {
+        trigger = has_designation
+        col_hiv_foundry = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_hive }
+        }
+        col_generator = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+        }
+        col_farming = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = food_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = food_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = food_hive }
+        }
+        col_mining = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_hive }
+        }
+        col_generator = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = energy_hive }
+        }
+        col_research = {
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = research_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = research_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_hive }
+        }
+    }
+    # Machine Worlds
+    switch = {
+        trigger = has_designation
+        col_mac_foundry = {
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_nexus }
+        }
+        col_mac_factory = {
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = factory_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = factory_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = factory_nexus }
+        }
+        col_generator = {
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = energy_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = energy_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = energy_nexus }
+        }
+        col_mining = {
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = mineral_nexus }
+        }
+        col_research = {
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = research_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = research_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_nexus }
+        }
     }
 }
 
