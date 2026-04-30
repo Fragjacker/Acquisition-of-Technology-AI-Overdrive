@@ -1,0 +1,27 @@
+enactment_time = 90 # crisis mode!
+resources = {
+    category = decisions
+    cost = {
+        minerals = 750
+    }
+}
+potential = {
+    exists = owner
+    owner = {
+        is_ai = yes
+    }
+    is_planet_class = $PLANET_CLASS$
+}
+allow = {
+    num_districts = { type = district_$TYPE$_1 value < 1 }
+    num_districts = { type = district_$TYPE$_2 value < 1 }
+    num_districts = { type = district_$TYPE$_3 value < 1 }
+}
+effect = {
+    add_district = district_$TYPE$_1
+    add_district = district_$TYPE$_2
+    add_district = district_$TYPE$_3
+}
+ai_weight = {
+    base = 1000
+}

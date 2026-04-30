@@ -938,6 +938,26 @@ decision_add_crisis_district = {
     }
 }
 
+# Initialize ecumenopolis.
+decision_add_base_ecu_district = {
+    inline_script = { script = decisions/initialize_special_planets PLANET_CLASS = pc_city TYPE = arcology_urban }
+}
+
+# Initialize ecumenopolis.
+decision_add_base_ring_world_district = {
+    inline_script = { script = decisions/initialize_special_planets PLANET_CLASS = pc_ringworld_habitable TYPE = rw_urban }
+}
+
+# Initialize hive world.
+decision_add_base_hive_world_district = {
+    inline_script = { script = decisions/initialize_special_planets PLANET_CLASS = pc_hive TYPE = hive }
+}
+
+# Initialize machine world.
+decision_add_base_machine_world_district = {
+    inline_script = { script = decisions/initialize_special_planets PLANET_CLASS = pc_machine TYPE = nexus }
+}
+
 decision_destroy_old_lab = {
     enactment_time = 30
     resources = {
@@ -1294,8 +1314,8 @@ decision_terraform_planet_into_advanced = {
     resources = {
         category = decisions
         cost = {
-            energy = 2000
-            minerals = 2000
+            energy = 1000
+            minerals = 1000
         }
     }
     potential = {
@@ -1345,7 +1365,7 @@ decision_terraform_planet_into_advanced = {
     }
 
     ai_weight = {
-        weight = 1000
+        base = 1000
         # modifier = {
         #     add = 1000
         #     owner = {
@@ -1543,7 +1563,7 @@ decision_enigmatic_mass_recruitment = {
                         count = 10
                         create_army = {
                             owner = planet_owner
-                            species = planet_owner_main_species
+                            species = owner_main_species
                             type = acot_special_force_ae
                             effect = {
                                 set_army_flag = acot_war_army
@@ -1558,7 +1578,7 @@ decision_enigmatic_mass_recruitment = {
                         count = 10
                         create_army = {
                             owner = planet_owner
-                            species = planet_owner_main_species
+                            species = owner_main_species
                             type = acot_hive_heavy_ae
                             effect = {
                                 set_army_flag = acot_war_army
@@ -1572,7 +1592,7 @@ decision_enigmatic_mass_recruitment = {
                         count = 10
                         create_army = {
                             owner = planet_owner
-                            species = planet_owner_main_species
+                            species = owner_main_species
                             type = acot_army_machine_heavy_ae
                             effect = {
                                 set_army_flag = acot_war_army
@@ -1591,6 +1611,172 @@ decision_enigmatic_mass_recruitment = {
 }
 
 ### man why
+
+decision_convert_dm_habitat = {
+    owned_planets_only = yes
+    icon = decision_convert_to_dm_habitat
+    enactment_time = 1080
+    resources = {
+        category = decisions
+        cost = {
+            unity = 5000
+            alloys = 3000
+            sr_dark_matter = 5000
+        }
+    }
+    potential = {
+        NOR = {
+            is_planet_class = pc_dm_habitat
+        }
+        owner = {
+            has_technology = tech_dm_habitat
+        }
+        merg_is_habitat = yes
+        exists = owner
+    }
+    prerequisites = {
+        tech_dm_habitat
+    }
+    allow = {
+    }
+    effect = {
+        custom_tooltip = decision_convert_dm_habitat_effects
+        hidden_effect = {
+            upgrade_dm_habitat = yes
+        }
+    }
+    ai_weight = {
+        base = 1000
+    }
+}
+decision_retrofit_ae_habitat = {
+    owned_planets_only = yes
+    icon = decision_convert_to_ae_habitat
+    enactment_time = 1440
+    resources = {
+        category = decisions
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 1000
+        }
+        cost = {
+            sr_dark_matter = 1000
+            acot_sr_dark_energy = 5000
+        }
+    }
+    potential = {
+        is_planet_class = pc_dm_habitat
+        NOT = {
+            has_planet_flag = retrofitted_ae_habitat
+        }
+        exists = owner
+        owner = {
+            has_technology = tech_ae_habitat
+        }
+    }
+    prerequisites = {
+        tech_ae_habitat
+    }
+    allow = {
+    }
+    effect = {
+        custom_tooltip = decision_retrofit_ae_habitat_effects
+        hidden_effect = {
+            upgrade_ae_habitat = yes
+        }
+    }
+    ai_weight = {
+        base = 1000
+    }
+}
+decision_retrofit_phanon_habitat = {
+    owned_planets_only = yes
+    icon = decision_convert_to_phanon_habitat
+    enactment_time = 1440
+    resources = {
+        category = decisions
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 1000
+        }
+        cost = {
+            sr_dark_matter = 2500
+            acot_sr_dark_energy = 2500
+        }
+    }
+    potential = {
+        is_planet_class = pc_ae_habitat
+        NOT = {
+            has_planet_flag = retrofitted_phanon_habitat
+        }
+        exists = owner
+        owner = {
+            has_technology = tech_phanon_habitat
+        }
+    }
+    prerequisites = {
+        tech_phanon_habitat
+    }
+    allow = {
+    }
+    effect = {
+        custom_tooltip = decision_retrofit_phanon_habitat_effects
+        hidden_effect = {
+            upgrade_phanon_habitat = yes
+        }
+    }
+    ai_weight = {
+        base = 1000
+    }
+}
+decision_retrofit_sigma_habitat = {
+    owned_planets_only = yes
+    icon = decision_convert_to_stellarite_habitat
+    enactment_time = 1440
+    resources = {
+        category = decisions
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = 1000
+        }
+        cost = {
+            aot_sr_runic_power = 5000
+        }
+    }
+    potential = {
+        is_planet_class = pc_phanon_habitat
+        NOT = {
+            has_planet_flag = retrofitted_sigma_habitat
+        }
+        exists = owner
+        owner = {
+            has_technology = tech_stellarite_habitat
+        }
+    }
+    prerequisites = {
+        tech_stellarite_habitat
+    }
+    allow = {
+    }
+    effect = {
+        custom_tooltip = decision_retrofit_sigma_habitat_effects
+        hidden_effect = {
+            upgrade_sigma_habitat = yes
+        }
+    }
+    ai_weight = {
+        base = 1000
+    }
+}
 
 decision_acot_voidsphere_silo_alloys = {
     owned_planets_only = yes
