@@ -104,7 +104,63 @@ country_event = {
 
 namespace = acot_alpha_matter_events
 
+# Alpha Matter Power Award Power Core AE Tech
+# acot_alpha_matter_events.4
+country_event = {
+    id = acot_alpha_matter_events.4
+    title = acot_alpha_matter_events.4.name
+    desc = acot_alpha_matter_events.4.desc
+    picture = GFX_evt_matter_decompressor
+    show_sound = event_mystery
+    is_triggered_only = yes
 
+    immediate = {
+        clear_variable = acot_alpha_tech_score
+    }
+
+    option = {
+        name = acot_alpha_matter_events.4.a
+        default_hide_option = yes
+        add_research_option = tech_dark_matter_power_core_ae
+        # The flag may not get set properly for AI's, fix this now!
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = acot_databank_sophia_agreed
+                }
+            }
+            set_country_flag = acot_databank_sophia_agreed
+        }
+        ai_chance = {
+            weight = 10000 # YES, SO MUCH YES! WE WANT THIS!
+        }
+    }
+
+    option = {
+        name = acot_alpha_matter_events.4.b
+        trigger = {
+            is_ai = no
+        }
+        every_owned_leader = {
+            limit = {
+                NOR = {
+                    is_councilor = yes
+                    has_leader_flag = leader_death_events_blocked
+                }
+            }
+            kill_leader = { show_notification = no }
+        }
+        # In case player changes mind, trigger again with MTTH 20 years
+        hidden_country_self_event_call = {
+            EVENT_ID = acot_alpha_matter_events.4
+            DAYS = 5400
+            RANDOM = 3600
+        }
+        ai_chance = {
+            factor = 0
+        }
+    }
+}
 # Alpha is actually pretty attainable for the AI! its going to be commented if I do have to edit it further.
 # i was actually so wrong
 
