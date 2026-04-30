@@ -51,16 +51,38 @@ country_event = {
             }
             set_update_modifiers_batch = begin
             hidden_effect = {
-                remove_capital_building = yes
-                add_advanced_capital_building = yes
+                # AI got enough brains now to do the superior constructs decision but the extra giga fortress is still nice tho.
+                # remove_capital_building = yes
+                # add_advanced_capital_building = yes
                 if = {
                     limit = {
+                        owner = {
+                            has_technology = tech_giga_fortress_dm
+                        }
                         NOT = {
                             has_building = building_giga_fortress_dm
                         }
                     }
                     # FREE GIGAFORT BABY
                     add_building = building_giga_fortress_dm
+                }
+                # Add conduit to planet if there's an AoT dark matter habitat since this is important.
+                if = {
+                    limit = {
+                        owner = {
+                            has_technology = tech_delta_nexus
+                        }
+                        solar_system = {
+                            any_system_planet = {
+                                is_aot_habitat = yes
+                            }
+                        }
+                        NOT = {
+                            has_building = building_delta_nexus
+                        }
+                    }
+                    # FREE GIGAFORT BABY
+                    add_building = building_delta_nexus
                 }
             }
             set_update_modifiers_batch = end
