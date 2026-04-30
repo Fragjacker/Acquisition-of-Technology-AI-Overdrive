@@ -106,7 +106,7 @@ ai_weight = {
     }
 }
 ai_resource_production = {
-    minerals = 1
+    minerals = @[ 100 * two_exp$EXPONENT$ ]
     trigger = {
         always = yes
     }
