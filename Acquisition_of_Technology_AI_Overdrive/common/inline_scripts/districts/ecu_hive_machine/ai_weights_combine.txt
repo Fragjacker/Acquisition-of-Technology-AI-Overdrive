@@ -1,0 +1,90 @@
+ai_weight = {
+    weight = 0
+    # Build one district initially for zone specialisation.
+    modifier = {
+        add = 1000
+        num_districts = { type = $DISTRICT$ value < 1 }
+    }
+    modifier = {
+        add = 100
+        free_jobs <= 300
+    }
+    modifier = {
+        add = 100
+        free_housing <= 300
+    }
+}
+inline_script = {
+    script = districts/ai_alloys_extra_weighting
+}
+
+inline_script = {
+    script = districts/ai_consumer_goods_extra_weighting
+    AMOUNT = @[ 10 * $FACTOR$ ]
+}
+
+ai_resource_production = {
+    physics_research = @[ 5 * $FACTOR$ ]
+    society_research = @[ 5 * $FACTOR$ ]
+    engineering_research = @[ 5 * $FACTOR$ ]
+
+    trigger = {
+        has_any_unspecialized_research_zone = yes
+    }
+}
+
+ai_resource_production = {
+    physics_research = @[ 10 * $FACTOR$ ]
+
+    trigger = {
+        has_any_research_physics_zone = yes
+    }
+}
+
+ai_resource_production = {
+    society_research = @[ 10 * $FACTOR$ ]
+
+    trigger = {
+        has_any_research_society_zone = yes
+    }
+}
+
+ai_resource_production = {
+    engineering_research = @[ 10 * $FACTOR$ ]
+
+    trigger = {
+        has_any_research_engineering_zone = yes
+    }
+}
+
+ai_resource_production = {
+    unity = @[ 10 * $FACTOR$ ]
+    trigger = {
+        has_any_unity_zone = yes
+    }
+}
+
+ai_resource_production = {
+    unity = @[ 5 * $FACTOR$ ]
+    trigger = {
+        OR = {
+            has_zone = {
+                zone = zone_research_unity
+            }
+            has_zone = {
+                zone = zone_habitat_research_unity
+            }
+            has_zone = {
+                zone = zone_research_unity_wilderness
+            }
+        }
+    }
+}
+
+ai_resource_production = {
+    trade = @[ 10 * $FACTOR$ ]
+
+    trigger = {
+        has_any_trade_zone = yes
+    }
+}

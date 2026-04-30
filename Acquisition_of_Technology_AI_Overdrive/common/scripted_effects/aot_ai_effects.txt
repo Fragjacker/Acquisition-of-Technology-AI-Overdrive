@@ -67,7 +67,7 @@ add_district_if_possible_valid_district_effect = {
     if = {
         limit = {
             has_district = $DISTRICT$
-            free_district_slots >= 1
+            free_district_slots > 0
         }
         add_district = $DISTRICT$
     }
