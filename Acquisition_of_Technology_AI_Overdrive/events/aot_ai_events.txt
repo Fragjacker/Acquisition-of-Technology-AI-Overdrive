@@ -69,6 +69,9 @@ country_event = {
                 # Add conduit to planet if there's an AoT dark matter habitat since this is important.
                 if = {
                     limit = {
+                        this = {
+                            is_aot_habitat = no
+                        }
                         owner = {
                             has_technology = tech_delta_nexus
                         }
