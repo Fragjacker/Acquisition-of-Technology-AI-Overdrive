@@ -93,9 +93,9 @@ bulk_upgrade_zones = {
             replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_ring_world }
         }
         col_industrial = {
-            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_ring_world }
-            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_ring_world }
-            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = industry_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_2 PREFIX = $TYPE_SPECIAL$ TYPE = industry_ring_world }
+            replace_single_zone = { DISTRICT = district_rw_urban_3 PREFIX = $TYPE_SPECIAL$ TYPE = industry_ring_world }
         }
         col_foundry = {
             replace_single_zone = { DISTRICT = district_rw_urban_1 PREFIX = $TYPE_SPECIAL$ TYPE = foundry_ring_world }
@@ -147,9 +147,9 @@ bulk_upgrade_zones = {
             replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_hive }
         }
         col_industrial = {
-            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_hive }
-            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_hive }
-            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_hive }
+            replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = industry_hive }
+            replace_single_zone = { DISTRICT = district_hive_2 PREFIX = $TYPE_SPECIAL$ TYPE = industry_hive }
+            replace_single_zone = { DISTRICT = district_hive_3 PREFIX = $TYPE_SPECIAL$ TYPE = industry_hive }
         }
         col_factory = {
             replace_single_zone = { DISTRICT = district_hive_1 PREFIX = $TYPE_SPECIAL$ TYPE = factory_hive }
@@ -191,9 +191,9 @@ bulk_upgrade_zones = {
             replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = research_nexus }
         }
         col_industrial = {
-            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_nexus }
-            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_nexus }
-            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = industrial_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = industry_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_2 PREFIX = $TYPE_SPECIAL$ TYPE = industry_nexus }
+            replace_single_zone = { DISTRICT = district_nexus_3 PREFIX = $TYPE_SPECIAL$ TYPE = industry_nexus }
         }
         col_acot_fortress = {
             replace_single_zone = { DISTRICT = district_nexus_1 PREFIX = $TYPE_SPECIAL$ TYPE = fortress_nexus }
