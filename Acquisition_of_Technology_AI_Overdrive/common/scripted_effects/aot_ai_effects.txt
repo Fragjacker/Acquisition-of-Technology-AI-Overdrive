@@ -235,6 +235,93 @@ acot_ai_void_sphere_effect = {
     }
 }
 
+construct_delta_defense_armies_on_planet = {
+    set_update_modifiers_batch = begin
+    if = {
+        limit = { planet_owner = { is_machine_empire = no } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_defense_army_heavy
+            }
+        }
+    }
+    else_if = {
+        limit = { planet_owner = { is_hive_empire = yes } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_hive_defense_army_heavy_dm
+            }
+        }
+    }
+    else_if = {
+        limit = { planet_owner = { is_machine_empire = yes } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_army_machine_cyborg_defense_dm
+            }
+        }
+    }
+    set_update_modifiers_batch = end
+}
+
+
+construct_armies_on_planet = {
+    set_update_modifiers_batch = begin
+    if = {
+        limit = { planet_owner = { is_machine_empire = no } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_special_force_ae
+                effect = {
+                    set_army_flag = acot_war_army
+                }
+            }
+
+        }
+    }
+    else_if = {
+        limit = { planet_owner = { is_hive_empire = yes } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_hive_heavy_ae
+                effect = {
+                    set_army_flag = acot_war_army
+                }
+            }
+        }
+    }
+    else_if = {
+        limit = { planet_owner = { is_machine_empire = yes } }
+        while = {
+            count = $AMOUNT$
+            create_army = {
+                owner = planet_owner
+                species = owner_main_species
+                type = acot_army_machine_heavy_ae
+                effect = {
+                    set_army_flag = acot_war_army
+                }
+            }
+        }
+    }
+    set_update_modifiers_batch = end
+}
+
 add_district_if_possible_valid_district_effect = {
     optimize_memory
     if = {

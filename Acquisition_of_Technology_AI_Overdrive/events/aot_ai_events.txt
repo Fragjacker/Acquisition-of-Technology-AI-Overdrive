@@ -49,7 +49,6 @@ country_event = {
             limit = {
                 has_enigmatic_capital = no
             }
-            set_update_modifiers_batch = begin
             hidden_effect = {
                 # AI got enough brains now to do the superior constructs decision but the extra giga fortress is still nice tho.
                 # remove_capital_building = yes
@@ -66,29 +65,7 @@ country_event = {
                     # FREE GIGAFORT BABY
                     add_building = building_giga_fortress_dm
                 }
-                # Add conduit to planet if there's an AoT dark matter habitat since this is important.
-                if = {
-                    limit = {
-                        this = {
-                            is_aot_habitat = no
-                        }
-                        owner = {
-                            has_technology = tech_delta_nexus
-                        }
-                        solar_system = {
-                            any_system_planet = {
-                                is_aot_habitat = yes
-                            }
-                        }
-                        NOT = {
-                            has_building = building_delta_nexus
-                        }
-                    }
-                    # FREE GIGAFORT BABY
-                    add_building = building_delta_nexus
-                }
             }
-            set_update_modifiers_batch = end
         }
     }
 }

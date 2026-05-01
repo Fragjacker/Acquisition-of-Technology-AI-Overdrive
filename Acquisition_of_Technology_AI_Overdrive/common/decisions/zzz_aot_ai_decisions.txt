@@ -141,6 +141,7 @@ decision_acot_kill_void_mutant = {
     }
 
     potential = {
+        exists = owner
         has_modifier = acot_modifier_fractured_mutants
         NOR = {
             has_planet_flag = ongoing_void_mutant_purge
@@ -178,10 +179,12 @@ decision_acot_kill_void_mutant = {
     ai_weight = {
         weight = 1
         modifier = {
-            factor = 1000
-            any_planet_army = {
-                army_type = acot_defense_army_heavy_ae
-            }
+            factor = 10000
+            num_armies > 100
+        }
+        modifier = {
+            factor = 0
+            num_armies < 100
         }
     }
 }
@@ -201,6 +204,7 @@ decision_acot_kill_void_lifeform = {
     }
 
     potential = {
+        exists = owner
         has_modifier = acot_modifier_fractured_lifeforms
         NOR = {
             has_planet_flag = ongoing_void_mutant_purge
@@ -238,10 +242,12 @@ decision_acot_kill_void_lifeform = {
     ai_weight = {
         weight = 1
         modifier = {
-            factor = 1000
-            any_planet_army = {
-                army_type = acot_defense_army_heavy_ae
-            }
+            factor = 10000
+            num_armies > 100
+        }
+        modifier = {
+            factor = 0
+            num_armies < 100
         }
     }
 }
@@ -261,6 +267,7 @@ decision_acot_kill_void_machine = {
     }
 
     potential = {
+        exists = owner
         has_modifier = acot_modifier_fractured_machines
         NOR = {
             has_planet_flag = ongoing_void_mutant_purge
@@ -298,10 +305,12 @@ decision_acot_kill_void_machine = {
     ai_weight = {
         weight = 1
         modifier = {
-            factor = 1000
-            any_planet_army = {
-                army_type = acot_defense_army_heavy_ae
-            }
+            factor = 10000
+            num_armies > 100
+        }
+        modifier = {
+            factor = 0
+            num_armies < 100
         }
     }
 }
@@ -354,10 +363,12 @@ decision_acot_kill_void_crystal = {
     ai_weight = {
         weight = 1
         modifier = {
-            factor = 1000
-            any_planet_army = {
-                army_type = acot_defense_army_heavy_ae
-            }
+            factor = 10000
+            num_armies > 100
+        }
+        modifier = {
+            factor = 0
+            num_armies < 100
         }
     }
 }
@@ -410,10 +421,12 @@ decision_acot_kill_void_flora = {
     ai_weight = {
         weight = 1
         modifier = {
-            factor = 1000
-            any_planet_army = {
-                army_type = acot_defense_army_heavy_ae
-            }
+            factor = 10000
+            num_armies > 100
+        }
+        modifier = {
+            factor = 0
+            num_armies < 100
         }
     }
 }
@@ -533,7 +546,7 @@ decision_transform_into_enigmatic_planet = {
     }
 
     ai_weight = {
-        weight = 1000
+        weight = 10000
     }
 }
 
@@ -786,7 +799,7 @@ decision_populate_voidsphere = {
                 NOT = {
                     is_planet_class = pc_acot_enigmopolis
                 }
-                pop_amount > 4000
+                pop_amount < 8000
             }
         }
     }
@@ -811,7 +824,7 @@ decision_populate_voidsphere = {
                 resettle_pop_group = {
                     POP_GROUP = this
                     PLANET = root
-                    PERCENTAGE = 4000
+                    AMOUNT = 4000
                 }
             }
         }
@@ -834,6 +847,50 @@ decision_populate_voidsphere = {
     }
 }
 
+# Wee need to built more troops to defend against shits.
+decision_militarize_factured_planets = {
+    potential = {
+        is_planet_class = pc_dark_fractured
+        OR = {
+            num_buildings = {
+                type = building_giga_fortress_dm
+                value < 1
+                in_construction = yes
+            }
+            num_armies < 100
+        }
+        exists = owner
+        owner = {
+            is_ai = yes
+        }
+    }
+    enactment_time = 90
+    resources = {
+        category = decisions
+        cost = {
+            minerals = 2500
+        }
+    }
+    effect = {
+        set_update_modifiers_batch = begin
+        add_building_if_not_present = { BUILDING = building_giga_fortress_dm }
+        construct_delta_defense_armies_on_planet = { AMOUNT = 20 }
+        set_update_modifiers_batch = end
+    }
+    ai_weight = {
+        ### we REALLY want to max this planet out
+        base = 1
+        modifier = {
+            factor = 1500
+            num_armies < 200
+        }
+        modifier = {
+            factor = 0
+            num_armies > 100
+        }
+    }
+}
+
 decision_add_power_planet = {
     potential = {
         exists = owner
@@ -850,7 +907,13 @@ decision_add_power_planet = {
                 }
             }
         }
-        free_building_slots > 1
+        if = {
+            limit = { is_aot_habitat = yes }
+            free_district_slots > 0
+        }
+        else = {
+            free_building_slots > 1
+        }
         has_enigmatic_capital = yes
     }
     prerequisites = { tech_dark_matter_power_core_dm }
@@ -862,13 +925,52 @@ decision_add_power_planet = {
         }
     }
     effect = {
-        add_building = building_acot_dm_dark_energy_pylon
-        add_building = building_acot_dm_dark_matter_generator
+        if = {
+            limit = {
+                is_aot_habitat = yes
+            }
+            add_district_if_possible_valid_district_effect = { DISTRICT = district_dm_hab_dark_matter_energy }
+        }
+        else = {
+            add_building = building_acot_dm_dark_energy_pylon
+            add_building = building_acot_dm_dark_matter_generator
+        }
     }
     ai_weight = {
         base = 1000
     }
 }
+decision_upgrade_dm_de_power_planet = {
+    potential = {
+        exists = owner
+        owner = {
+            is_ai = yes
+            has_technology = tech_acot_dm_dark_energy_pylon
+            has_technology = tech_acot_dm_dark_matter_generator
+        }
+        has_building = building_acot_dm_dark_energy_pylon
+        has_building = building_acot_dm_dark_matter_generator
+        is_exclusively_alpha_tier = yes
+    }
+    prerequisites = { tech_dark_matter_power_core_ae }
+    enactment_time = 30 # crisis mode!
+    resources = {
+        category = decisions
+        cost = {
+            minerals = 500
+        }
+    }
+    effect = {
+        remove_building = building_acot_dm_dark_energy_pylon
+        remove_building = building_acot_dm_dark_matter_generator
+        add_building = building_acot_ae_dark_energy_pylon
+        add_building = building_acot_ae_dark_matter_generator
+    }
+    ai_weight = {
+        base = 1000
+    }
+}
+
 decision_add_crisis_district = {
     potential = {
         exists = owner
@@ -1689,7 +1791,7 @@ decision_retrofit_ae_habitat = {
         }
     }
     ai_weight = {
-        base = 1000
+        base = 5000
     }
 }
 decision_retrofit_phanon_habitat = {
@@ -1732,7 +1834,7 @@ decision_retrofit_phanon_habitat = {
         }
     }
     ai_weight = {
-        base = 1000
+        base = 5000
     }
 }
 decision_retrofit_sigma_habitat = {
@@ -1774,7 +1876,7 @@ decision_retrofit_sigma_habitat = {
         }
     }
     ai_weight = {
-        base = 1000
+        base = 5000
     }
 }
 

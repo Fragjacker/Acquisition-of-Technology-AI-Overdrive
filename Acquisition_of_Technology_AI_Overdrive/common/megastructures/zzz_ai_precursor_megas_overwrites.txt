@@ -118,7 +118,7 @@ acot_precursor_science_nexus_portal = {
         }
     }
     ai_weight = {
-        factor = 5
+        base = 5
         modifier = {
             factor = 200
             exists = owner
@@ -442,7 +442,7 @@ acot_precursor_strategy_center_portal = {
         }
     }
     ai_weight = {
-        factor = 5
+        base = 5
         modifier = {
             factor = 200
             exists = owner
@@ -765,7 +765,7 @@ acot_precursor_sentry_orb_portal = {
         }
     }
     ai_weight = {
-        factor = 5
+        base = 5
         modifier = {
             factor = 200
             exists = owner
@@ -1130,7 +1130,7 @@ acot_precursor_dyson_sphere_portal = {
         }
     }
     ai_weight = {
-        factor = 100
+        base = 1000
         modifier = {
             factor = 10
             exists = owner
@@ -1164,6 +1164,12 @@ acot_precursor_dyson_sphere_stage_one = {
     upgrade_from = {
         acot_precursor_dyson_sphere_portal
         dyson_swarm_3
+        dyson_sphere_1
+        dyson_sphere_2
+        dyson_sphere_3
+        dyson_sphere_4
+        dyson_sphere_5
+        dyson_sphere_restored
     }
 
     #place_entity_on_planet_plane = no
@@ -1213,6 +1219,12 @@ acot_precursor_dyson_sphere_stage_one = {
     }
     ai_weight = {
         weight = 1000
+        modifier = {
+            factor = 10
+            exists = owner
+            is_capital_system = yes
+        }
+
     }
     on_build_start = { }
     on_build_cancel = { }
@@ -1283,6 +1295,11 @@ acot_precursor_dyson_sphere_stage_two = {
     }
     ai_weight = {
         weight = 1000
+        modifier = {
+            factor = 10
+            exists = owner
+            is_capital_system = yes
+        }
     }
     on_build_start = { }
     on_build_cancel = { }
@@ -1568,16 +1585,26 @@ acot_ancient_gateway_portal = {
         }
     }
     ai_weight = {
-        weight = 100
+        base = 100
         # Build gateway at border to enemies for fast deployment.
         modifier = {
-            factor = 5
+            factor = 10
             any_neighbor_system = {
                 exists = owner
                 NOT = {
                     owner = { is_same_value = from }
                 }
             }
+        }
+        modifier = {
+            factor = 10
+            exists = owner
+            is_capital_system = yes
+        }
+        modifier = {
+            add = 500
+            exists = owner
+            factor = value:num_habitable_planets
         }
         modifier = {
             factor = 0
@@ -1668,7 +1695,7 @@ acot_ancient_gateway = {
     ai_weight = {
         weight = 100
         modifier = {
-            factor = 10
+            factor = 100
             solar_system = {
                 OR = {
                     has_megastructure = gateway_0

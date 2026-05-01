@@ -1,0 +1,41 @@
+# We need more constructor ships for them crazy AI bois.
+desired_constructors_min = {
+    complex_trigger_modifier = {
+        trigger = num_owned_planets
+        trigger_scope = owner
+        mode = add
+    }
+    divide = 10
+    modifier = {
+        add = 1
+        OR = {
+            is_country_type = default
+            is_country_type = awakened_fallen_empire
+        }
+    }
+    modifier = {
+        add = 2
+        is_country_type = default
+        controlled_systems > 3
+        years_passed < 100
+    }
+    round = yes
+}
+
+desired_constructors_max = {
+    complex_trigger_modifier = {
+        trigger = num_owned_planets
+        trigger_scope = owner
+        mode = add
+    }
+    divide = 5
+    modifier = {
+        add = 5
+        is_country_type = default
+    }
+    modifier = {
+        add = 3
+        is_country_type = awakened_fallen_empire
+    }
+    round = yes
+}
