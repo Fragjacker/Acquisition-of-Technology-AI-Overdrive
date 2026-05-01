@@ -11,6 +11,7 @@ potential = {
         is_ai = yes
     }
     is_planet_class = $PLANET_CLASS$
+    free_district_slots >= 3
 }
 allow = {
     num_districts = { type = district_$TYPE$_1 value < 1 }
