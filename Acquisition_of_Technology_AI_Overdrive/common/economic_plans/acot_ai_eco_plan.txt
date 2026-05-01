@@ -59,6 +59,22 @@ basic_economy_plan = {
     ### I cannot stress how important these resources are.
 
     # scale but PLEASE upkeep
+    subplan = {
+        scaling = yes
+        set_name = "tech boost"
+        potential = {
+            NOT = {
+                has_technology = tech_dark_matter_power_core_dm
+            }
+            country_uses_consumer_goods = yes
+        }
+        income = {
+            physics_research = 500
+            engineering_research = 500
+            society_research = 500
+            consumer_goods = 400
+        }
+    }
 
     subplan = {
         scaling = yes
@@ -86,7 +102,6 @@ basic_economy_plan = {
             rare_crystals = 20
             volatile_motes = 20
         }
-
     }
 
     subplan = {
@@ -100,7 +115,7 @@ basic_economy_plan = {
             minerals = 1000
             energy = 1000
             unity = 1000
-            alloys = 5000
+            alloys = 10000
             physics_research = 1000
             engineering_research = 1000
             society_research = 1000
@@ -109,9 +124,9 @@ basic_economy_plan = {
         }
         focus = {
             alloys = 5000
-            physics_research = 1000
-            engineering_research = 1000
-            society_research = 1000
+            physics_research = 10000
+            engineering_research = 10000
+            society_research = 10000
         }
     }
     subplan = {
@@ -125,7 +140,7 @@ basic_economy_plan = {
             minerals = 10000
             energy = 10000
             unity = 10000
-            alloys = 10000
+            alloys = 100000
             physics_research = 10000
             engineering_research = 10000
             society_research = 10000
@@ -229,16 +244,16 @@ basic_economy_plan = {
             has_technology = tech_stellarite_palace
             has_monthly_income = {
                 resource = aot_sr_runic_power
-                value > 1000
+                value < 1000
             }
             has_monthly_income = {
                 resource = acot_sr_stellarite
-                value > 1000
+                value < 1000
             }
         }
         income = {
-            acot_sr_stellarite = 100
-            aot_sr_runic_power = 100
+            acot_sr_stellarite = 10000
+            aot_sr_runic_power = 10000
         }
     }
 
