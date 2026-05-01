@@ -15,17 +15,22 @@ replace_single_zone = {
 }
 
 replace_urban_zones = {
-    add_zone = {
-        district = $DISTRICT$
-        zone = $ZONE$
-        zone_slot = 1
-        replace = yes
-    }
-    add_zone = {
-        district = $DISTRICT$
-        zone = $ZONE$
-        zone_slot = 2
-        replace = yes
+    if = {
+        limit = {
+            has_district = $DISTRICT$
+        }
+        add_zone = {
+            district = $DISTRICT$
+            zone = $ZONE$
+            zone_slot = 1
+            replace = yes
+        }
+        add_zone = {
+            district = $DISTRICT$
+            zone = $ZONE$
+            zone_slot = 2
+            replace = yes
+        }
     }
 }
 

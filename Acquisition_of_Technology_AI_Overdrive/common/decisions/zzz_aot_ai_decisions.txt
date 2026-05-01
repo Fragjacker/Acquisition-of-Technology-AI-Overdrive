@@ -1503,6 +1503,10 @@ decision_pivot_planet_district = {
         }
         OR = {
             has_district = district_city
+            has_district = district_hive
+            has_district = district_nexus
+        }
+        OR = {
             has_district = district_farming
             has_district = district_mining
             has_district = district_mining_uncapped
@@ -1555,19 +1559,29 @@ decision_pivot_planet_district = {
                 # Change zones to be uniform now
                 col_foundry = {
                     replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_foundry }
                 }
                 col_industrial = {
                     replace_urban_zones = { DISTRICT = district_city ZONE = zone_industrial }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_industrial }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_industrial }
                 }
-                col_foundry = {
-                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
+                col_factory = {
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_factory }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_factory }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_factory }
                 }
                 col_research = {
                     replace_urban_zones = { DISTRICT = district_city ZONE = zone_research }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_research }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_research }
                 }
             }
             ## Fill the rest up with city districts.
-            fill_districts_to_max = { DISTRICT = district_city }
+            if = { limit = { has_district = district_city } fill_districts_to_max = { DISTRICT = district_city } }
+            else_if = { limit = { has_district = district_hive } fill_districts_to_max = { DISTRICT = district_hive } }
+            else_if = { limit = { has_district = district_nexus } fill_districts_to_max = { DISTRICT = district_nexus } }
         }
     }
     ai_weight = {
