@@ -70,6 +70,26 @@ country_event = {
     }
 }
 
+# Repair all ruined buildings because the AI can't help itself.
+country_event = {
+    id = aot_ai_districts.3
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_ai = yes
+    }
+    immediate = {
+        every_owned_planet = {
+            limit = {
+                planet_devastation <= 10
+                has_orbital_bombardment = no
+            }
+            repair_all_buildings = yes
+        }
+    }
+}
+
+
 #country_event = {
 #	id = aot_ai_districts.4
 #	fire_only_once = yes

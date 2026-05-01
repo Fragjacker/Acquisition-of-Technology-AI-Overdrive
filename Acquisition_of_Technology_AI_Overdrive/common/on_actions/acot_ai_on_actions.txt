@@ -3,6 +3,7 @@ on_yearly_pulse_country = {
         aot_ai_districts.1
         aot_ai_districts.8000
         aot_ai_districts.6
+        aot_ai_districts.3
         aot_ai_districts.6000# god i hate stellaris
     }
 }
