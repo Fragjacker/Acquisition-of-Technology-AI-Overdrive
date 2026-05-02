@@ -164,6 +164,58 @@ minerals_ecumenopolis_expenditure_decisions = {
     }
 }
 
+minerals_lab_construction_expenditure_decisions = {
+    resource = minerals
+    type = expenditure
+    category = decisions
+
+    potential = {
+        always = yes
+    }
+
+    weight = {
+        weight = 0.20
+        modifier = {
+            factor = 4
+            OR = {
+                has_monthly_income = {
+                    resource = society_research
+                    value < value:expected_research_value_empire
+                }
+                has_monthly_income = {
+                    resource = physics_research
+                    value < value:expected_research_value_empire
+                }
+                has_monthly_income = {
+                    resource = engineering_research
+                    value < value:expected_research_value_empire
+                }
+            }
+            if = {
+                limit = { country_uses_consumer_goods = yes }
+                NOT = {
+                    has_deficit = consumer_goods
+                }
+            }
+            else = {
+                NOT = {
+                    has_deficit = energy
+                }
+            }
+        }
+    }
+
+    desired_min = {
+        base = 500
+    }
+
+    # this is the cost of the arcology project decision
+    desired_max = {
+        base = 1000
+    }
+}
+
+
 unity_expenditure_ships = {
     resource = unity
     type = expenditure
