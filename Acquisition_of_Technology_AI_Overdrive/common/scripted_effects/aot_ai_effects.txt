@@ -369,6 +369,16 @@ add_district_if_possible_valid_district_effect = {
     #else do nothing
 }
 
+remove_building_if_exists = {
+    optimize_memory
+    if = {
+        limit = {
+            has_building = $BUILDING$
+        }
+        remove_building = $BUILDING$
+    }
+}
+
 # This fills all free districts up with the desired district type.
 fill_districts_to_max = {
     optimize_memory

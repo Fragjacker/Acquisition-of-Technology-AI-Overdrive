@@ -1079,27 +1079,45 @@ decision_destroy_old_lab = {
             has_building = building_research_lab_1
             has_building = building_research_lab_2
             has_building = building_research_lab_3
+
+            has_building = building_physics_lab_1
+            has_building = building_physics_lab_2
+            has_building = building_physics_lab_3
+
+            has_building = building_biolab_1
+            has_building = building_biolab_2
+            has_building = building_biolab_3
+
+            has_building = building_engineering_facility_1
+            has_building = building_engineering_facility_2
+            has_building = building_engineering_facility_3
         }
     }
     effect = {
-        if = {
+        while = {
             limit = {
-                has_building = building_research_lab_1
+                OR = {
+                    has_building = building_research_lab_1
+                    has_building = building_research_lab_2
+                    has_building = building_research_lab_3
+                }
             }
-            remove_building = building_research_lab_1
+            remove_building_if_exists = { BUILDING = building_research_lab_1 }
+            remove_building_if_exists = { BUILDING = building_research_lab_2 }
+            remove_building_if_exists = { BUILDING = building_research_lab_3 }
         }
-        if = {
-            limit = {
-                has_building = building_research_lab_2
-            }
-            remove_building = building_research_lab_2
-        }
-        if = {
-            limit = {
-                has_building = building_research_lab_3
-            }
-            remove_building = building_research_lab_3
-        }
+
+        remove_building_if_exists = { BUILDING = building_physics_lab_1 }
+        remove_building_if_exists = { BUILDING = building_physics_lab_2 }
+        remove_building_if_exists = { BUILDING = building_physics_lab_3 }
+
+        remove_building_if_exists = { BUILDING = building_biolab_1 }
+        remove_building_if_exists = { BUILDING = building_biolab_2 }
+        remove_building_if_exists = { BUILDING = building_biolab_3 }
+
+        remove_building_if_exists = { BUILDING = building_engineering_facility_1 }
+        remove_building_if_exists = { BUILDING = building_engineering_facility_2 }
+        remove_building_if_exists = { BUILDING = building_engineering_facility_3 }
     }
     ai_weight = {
         base = 10

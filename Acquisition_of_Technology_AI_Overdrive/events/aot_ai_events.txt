@@ -499,6 +499,8 @@ country_event = {
 #		}
 #	}
 #}
+
+# Disband armeis built for war once the war is over.
 country_event = {
     id = aot_ai_districts.6
     is_triggered_only = yes
@@ -522,6 +524,7 @@ country_event = {
     }
 }
 
+# THE FALLEN EMPIRE IS ANGER, WE BALL!
 country_event = {
     id = aot_ai_districts.6000
     hide_window = yes
