@@ -945,8 +945,8 @@ decision_upgrade_dm_de_power_planet = {
         exists = owner
         owner = {
             is_ai = yes
-            has_technology = tech_acot_dm_dark_energy_pylon
-            has_technology = tech_acot_dm_dark_matter_generator
+            has_technology = tech_acot_ae_dark_energy_pylon
+            has_technology = tech_acot_ae_dark_matter_generator
         }
         has_building = building_acot_dm_dark_energy_pylon
         has_building = building_acot_dm_dark_matter_generator
@@ -1467,7 +1467,7 @@ decision_terraform_planet_into_advanced = {
     }
 
     ai_weight = {
-        base = 1000
+        weight = 10000
         # modifier = {
         #     add = 1000
         #     owner = {
