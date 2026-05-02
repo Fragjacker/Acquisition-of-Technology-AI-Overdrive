@@ -200,20 +200,20 @@ country_event = {
             switch = {
                 trigger = is_planet_class
                 pc_ringworld_habitable = {
-                    tiered_generic_special_zone_replace = { DISTRICT = district_rw_urban_3 TYPE = research PLANET_TYPE = ring_world }
                     add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_urban_3 }
+                    tiered_generic_special_zone_replace = { DISTRICT = district_rw_urban_3 TYPE = research PLANET_TYPE = ring_world }
                 }
                 pc_city = {
-                    tiered_generic_special_zone_replace = { DISTRICT = district_arcology_urban_3 TYPE = research PLANET_TYPE = arcology }
                     add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_urban_3 }
+                    tiered_generic_special_zone_replace = { DISTRICT = district_arcology_urban_3 TYPE = research PLANET_TYPE = arcology }
                 }
                 pc_machine = {
-                    tiered_generic_special_zone_replace = { DISTRICT = district_nexus_3 TYPE = research PLANET_TYPE = nexus }
                     add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_3 }
+                    tiered_generic_special_zone_replace = { DISTRICT = district_nexus_3 TYPE = research PLANET_TYPE = nexus }
                 }
                 pc_hive = {
-                    tiered_generic_special_zone_replace = { DISTRICT = district_hive_3 TYPE = research PLANET_TYPE = hive }
                     add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_3 }
+                    tiered_generic_special_zone_replace = { DISTRICT = district_hive_3 TYPE = research PLANET_TYPE = hive }
                 }
                 # Default case for any other planet out there
                 default = {
