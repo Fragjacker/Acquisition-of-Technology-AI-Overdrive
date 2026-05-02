@@ -96,33 +96,52 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         is_ai = yes
-        OR = {
-            has_monthly_income = {
-                resource = society_research
-                value < value:expected_research_value_empire
-            }
-            has_monthly_income = {
-                resource = physics_research
-                value < value:expected_research_value_empire
-            }
-            has_monthly_income = {
-                resource = engineering_research
-                value < value:expected_research_value_empire
-            }
+        # Is the economy healthy enough for more labs?
+        resource_income_compare = {
+            resource = alloys
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = food
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = minerals
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = energy
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = volatile_motes
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = rare_crystals
+            value >= 0
+        }
+        resource_income_compare = {
+            resource = exotic_gases
+            value >= 0
         }
         if = {
             limit = { country_uses_consumer_goods = yes }
-            NOT = {
-                has_deficit = consumer_goods
+            resource_income_compare = {
+                resource = consumer_goods
+                value >= 0
             }
         }
-        else = {
-            NOT = {
-                has_deficit = energy
-            }
-        }
+        # Do we have any free capacity on any planet?
         any_owned_planet = {
-            free_jobs > 0
+            OR = {
+                has_designation = col_city
+                has_designation = col_research
+                has_designation = col_ecu_research
+                has_designation = col_ring_research
+                has_designation = col_habitat_research
+            }
+            free_jobs < 1
             switch = {
                 trigger = is_planet_class
                 pc_ringworld_habitable = {
@@ -142,7 +161,6 @@ country_event = {
                     free_building_slots > 0
                 }
             }
-
         }
     }
     immediate = {
@@ -155,7 +173,7 @@ country_event = {
                     has_designation = col_ring_research
                     has_designation = col_habitat_research
                 }
-                free_jobs > 0
+                free_jobs < 1
                 switch = {
                     trigger = is_planet_class
                     pc_ringworld_habitable = {
@@ -175,10 +193,10 @@ country_event = {
                         free_building_slots > 0
                     }
                 }
-
             }
+            # Bias towards special planets.
             weights = {
-                base = 10
+                weight = 10
                 modifier = {
                     factor = 4
                     has_designation = col_research
@@ -196,7 +214,8 @@ country_event = {
                     has_designation = col_ring_research
                 }
             }
-            # Add the lab of which we have the least monthly tech for
+
+            # Add research districts instead of buildings on certain planets.
             switch = {
                 trigger = is_planet_class
                 pc_ringworld_habitable = {
@@ -215,61 +234,93 @@ country_event = {
                     add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_3 }
                     tiered_generic_special_zone_replace = { DISTRICT = district_hive_3 TYPE = research PLANET_TYPE = hive }
                 }
+                pc_habitat = {
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_science }
+                    tiered_generic_special_zone_replace = { DISTRICT = district_hab_science TYPE = habitat PLANET_TYPE = research }
+                }
                 # Default case for any other planet out there
                 default = {
-                    # Do the actual business now
-                    owner = {
-                        export_trigger_value_to_variable = {
-                            trigger = has_monthly_income
-                            parameters = {
-                                resource = physics_research
-                            }
-                            variable = physics_research_income_current
-                        }
-                        export_trigger_value_to_variable = {
-                            trigger = has_monthly_income
-                            parameters = {
-                                resource = society_research
-                            }
-                            variable = society_research_income_current
-                        }
-                        export_trigger_value_to_variable = {
-                            trigger = has_monthly_income
-                            parameters = {
-                                resource = engineering_research
-                            }
-                            variable = engineering_research_income_current
-                        }
-                    }
+                    # Add the lab of which we have the least monthly tech for
                     if = {
                         limit = { has_enigmatic_capital = yes }
                         add_building = building_acot_dm_enigmatic_lab
                     }
-                    else_if = {
-                        limit = {
-                            owner = {
-                                has_monthly_income = { resource = physics_research value < society_research_income_current }
-                                has_monthly_income = { resource = physics_research value < engineering_research_income_current }
-                            }
-                        }
-                        add_building = building_physics_lab_1
-                    }
-                    else_if = {
-                        limit = {
-                            owner = {
-                                has_monthly_income = { resource = society_research value < physics_research_income_current }
-                                has_monthly_income = { resource = society_research value < engineering_research_income_current }
-                            }
-                        }
-                        add_building = building_biolab_1
-                    }
                     else = {
-                        add_building = building_engineering_facility_1
+                        owner = {
+                            export_trigger_value_to_variable = {
+                                trigger = has_monthly_income
+                                parameters = {
+                                    resource = physics_research
+                                }
+                                variable = physics_research_income_current
+                            }
+                            export_trigger_value_to_variable = {
+                                trigger = has_monthly_income
+                                parameters = {
+                                    resource = society_research
+                                }
+                                variable = society_research_income_current
+                            }
+                            export_trigger_value_to_variable = {
+                                trigger = has_monthly_income
+                                parameters = {
+                                    resource = engineering_research
+                                }
+                                variable = engineering_research_income_current
+                            }
+                        }
+                        if = {
+                            limit = {
+                                NOR = {
+                                    has_building = building_physics_lab_1
+                                    has_building = building_physics_lab_2
+                                    has_building = building_physics_lab_3
+                                }
+                                owner = {
+                                    check_variable = { which = physics_research_income_current value < society_research_income_current }
+                                    check_variable = { which = physics_research_income_current value < engineering_research_income_current }
+                                }
+                            }
+                            add_building = building_physics_lab_1
+                        }
+                        else_if = {
+                            limit = {
+                                NOR = {
+                                    has_building = building_biolab_1
+                                    has_building = building_biolab_2
+                                    has_building = building_biolab_3
+                                }
+                                owner = {
+                                    check_variable = { which = society_research_income_current value < physics_research_income_current }
+                                    check_variable = { which = society_research_income_current value < engineering_research_income_current }
+                                }
+                            }
+                            add_building = building_biolab_1
+                        }
+                        else_if = {
+                            limit = {
+                                NOR = {
+                                    has_building = building_engineering_facility_1
+                                    has_building = building_engineering_facility_2
+                                    has_building = building_engineering_facility_3
+                                }
+                                owner = {
+                                    check_variable = { which = engineering_research_income_current value < physics_research_income_current }
+                                    check_variable = { which = engineering_research_income_current value < society_research_income_current }
+                                }
+                            }
+                            add_building = building_engineering_facility_1
+                        }
+                        else = {
+                            add_building = building_research_lab_1
+                        }
+                        # Switch into research enclaves.
+                        replace_urban_zones = { DISTRICT = district_city ZONE = zone_research }
+                        # Cleanup variables.
+                        clear_variable = physics_research_income_current
+                        clear_variable = society_research_income_current
+                        clear_variable = engineering_research_income_current
                     }
-                    # Cleanup variables.
-                    clear_variable = physics_research_income_current
-                    clear_variable = society_research_income_current
-                    clear_variable = engineering_research_income_current
                 }
             }
         }

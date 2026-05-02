@@ -39,16 +39,3 @@ desired_constructors_max = {
     }
     round = yes
 }
-
-expected_research_value_empire = {
-    complex_trigger_modifier = {
-        trigger = num_owned_planets
-        trigger_scope = owner
-        mode = add
-    }
-    complex_trigger_modifier = {
-        trigger = years_passed
-        mode = add
-    }
-    mult = 25
-}
