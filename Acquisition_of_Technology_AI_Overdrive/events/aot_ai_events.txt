@@ -271,12 +271,16 @@ country_event = {
                         }
                         if = {
                             limit = {
+                                # Does the building already exist on the planet?
                                 NOR = {
                                     has_building = building_physics_lab_1
                                     has_building = building_physics_lab_2
                                     has_building = building_physics_lab_3
                                 }
                                 owner = {
+                                    # Do we have the necessary techs for the specialized labs?
+                                    has_technology = tech_physics_1
+                                    # Which tech branch do we generate the least tech in?
                                     check_variable = { which = physics_research_income_current value < society_research_income_current }
                                     check_variable = { which = physics_research_income_current value < engineering_research_income_current }
                                 }
@@ -285,12 +289,16 @@ country_event = {
                         }
                         else_if = {
                             limit = {
+                                # Does the building already exist on the planet?
                                 NOR = {
                                     has_building = building_biolab_1
                                     has_building = building_biolab_2
                                     has_building = building_biolab_3
                                 }
                                 owner = {
+                                    # Do we have the necessary techs for the specialized labs?
+                                    has_technology = tech_society_1
+                                    # Which tech branch do we generate the least tech in?
                                     check_variable = { which = society_research_income_current value < physics_research_income_current }
                                     check_variable = { which = society_research_income_current value < engineering_research_income_current }
                                 }
@@ -299,12 +307,16 @@ country_event = {
                         }
                         else_if = {
                             limit = {
+                                # Does the building already exist on the planet?
                                 NOR = {
                                     has_building = building_engineering_facility_1
                                     has_building = building_engineering_facility_2
                                     has_building = building_engineering_facility_3
                                 }
                                 owner = {
+                                    # Do we have the necessary techs for the specialized labs?
+                                    has_technology = tech_engineering_1
+                                    # Which tech branch do we generate the least tech in?
                                     check_variable = { which = engineering_research_income_current value < physics_research_income_current }
                                     check_variable = { which = engineering_research_income_current value < society_research_income_current }
                                 }
