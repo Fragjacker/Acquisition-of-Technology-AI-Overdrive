@@ -1,5 +1,6 @@
 # Replaces a single zone according to the proper tech tier.
 replace_single_zone = {
+    optimize_memory
     if = {
         limit = {
             exists = root
@@ -15,6 +16,7 @@ replace_single_zone = {
 }
 
 replace_urban_zones = {
+    optimize_memory
     if = {
         limit = {
             has_district = $DISTRICT$
@@ -34,7 +36,32 @@ replace_urban_zones = {
     }
 }
 
+# This replaces a certain zone with another according to the planet capitals tier.
+tiered_generic_special_zone_replace = {
+    optimize_memory
+    if = {
+        limit = { is_exclusively_delta_tier = yes }
+        replace_single_zone = { DISTRICT = $DISTRICT$ TYPE = $TYPE$_$PLANET_TYPE$ PREFIX = aot_DM }
+    }
+    else_if = {
+        limit = { is_exclusively_alpha_tier = yes }
+        replace_single_zone = { DISTRICT = $DISTRICT$ TYPE = $TYPE$_$PLANET_TYPE$ PREFIX = aot_DE }
+    }
+    else_if = {
+        limit = { is_exclusively_phanon_tier = yes }
+        replace_single_zone = { DISTRICT = $DISTRICT$ TYPE = $TYPE$_$PLANET_TYPE$ PREFIX = aot_PE }
+    }
+    else_if = {
+        limit = { is_exclusively_sigma_tier = yes }
+        replace_single_zone = { DISTRICT = $DISTRICT$ TYPE = $TYPE$_$PLANET_TYPE$ PREFIX = aot_SE }
+    }
+    else = {
+        replace_single_zone = { DISTRICT = $DISTRICT$ TYPE = $PLANET_TYPE$ PREFIX = $TYPE$ }
+    }
+}
+
 bulk_upgrade_zones = {
+    optimize_memory
     # Food
     replace_single_zone = { DISTRICT = district_farming TYPE = food PREFIX = $TYPE_STANDARD$ }
     replace_single_zone = { DISTRICT = district_farming_uncapped TYPE = food PREFIX = $TYPE_STANDARD$ }
@@ -209,6 +236,7 @@ bulk_upgrade_zones = {
 }
 
 acot_ai_void_sphere_effect = {
+    optimize_memory
     export_trigger_value_to_variable = {
         trigger = planet_size
         variable = district_count
@@ -241,6 +269,7 @@ acot_ai_void_sphere_effect = {
 }
 
 construct_delta_defense_armies_on_planet = {
+    optimize_memory
     set_update_modifiers_batch = begin
     if = {
         limit = { planet_owner = { is_machine_empire = no } }
@@ -280,6 +309,7 @@ construct_delta_defense_armies_on_planet = {
 
 
 construct_armies_on_planet = {
+    optimize_memory
     set_update_modifiers_batch = begin
     if = {
         limit = { planet_owner = { is_machine_empire = no } }
@@ -341,6 +371,7 @@ add_district_if_possible_valid_district_effect = {
 
 # This fills all free districts up with the desired district type.
 fill_districts_to_max = {
+    optimize_memory
     while = {
         count = 100
         add_district = $DISTRICT$

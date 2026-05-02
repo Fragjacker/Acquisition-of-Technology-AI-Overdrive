@@ -89,6 +89,192 @@ country_event = {
     }
 }
 
+# Watch over the AI if they have capacity to build new labs but somehow refuse to build them.
+country_event = {
+    id = aot_ai_districts.4
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_ai = yes
+        OR = {
+            has_monthly_income = {
+                resource = society_research
+                value < value:expected_research_value_empire
+            }
+            has_monthly_income = {
+                resource = physics_research
+                value < value:expected_research_value_empire
+            }
+            has_monthly_income = {
+                resource = engineering_research
+                value < value:expected_research_value_empire
+            }
+        }
+        if = {
+            limit = { country_uses_consumer_goods = yes }
+            NOT = {
+                has_deficit = consumer_goods
+            }
+        }
+        else = {
+            NOT = {
+                has_deficit = energy
+            }
+        }
+        any_owned_planet = {
+            free_jobs > 0
+            switch = {
+                trigger = is_planet_class
+                pc_ringworld_habitable = {
+                    free_district_slots > 0
+                }
+                pc_city = {
+                    free_district_slots > 0
+                }
+                pc_machine = {
+                    free_district_slots > 0
+                }
+                pc_hive = {
+                    free_district_slots > 0
+                }
+                # Default case for any other planet out there
+                default = {
+                    free_building_slots > 0
+                }
+            }
+
+        }
+    }
+    immediate = {
+        random_owned_planet = {
+            limit = {
+                OR = {
+                    has_designation = col_city
+                    has_designation = col_research
+                    has_designation = col_ecu_research
+                    has_designation = col_ring_research
+                    has_designation = col_habitat_research
+                }
+                free_jobs > 0
+                switch = {
+                    trigger = is_planet_class
+                    pc_ringworld_habitable = {
+                        free_district_slots > 0
+                    }
+                    pc_city = {
+                        free_district_slots > 0
+                    }
+                    pc_machine = {
+                        free_district_slots > 0
+                    }
+                    pc_hive = {
+                        free_district_slots > 0
+                    }
+                    # Default case for any other planet out there
+                    default = {
+                        free_building_slots > 0
+                    }
+                }
+
+            }
+            weights = {
+                base = 10
+                modifier = {
+                    factor = 4
+                    has_designation = col_research
+                }
+                modifier = {
+                    factor = 6
+                    has_designation = col_habitat_research
+                }
+                modifier = {
+                    factor = 8
+                    has_designation = col_ecu_research
+                }
+                modifier = {
+                    factor = 10
+                    has_designation = col_ring_research
+                }
+            }
+            # Add the lab of which we have the least monthly tech for
+            switch = {
+                trigger = is_planet_class
+                pc_ringworld_habitable = {
+                    tiered_generic_special_zone_replace = { DISTRICT = district_rw_urban_3 TYPE = research PLANET_TYPE = ring_world }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_urban_3 }
+                }
+                pc_city = {
+                    tiered_generic_special_zone_replace = { DISTRICT = district_arcology_urban_3 TYPE = research PLANET_TYPE = arcology }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_urban_3 }
+                }
+                pc_machine = {
+                    tiered_generic_special_zone_replace = { DISTRICT = district_nexus_3 TYPE = research PLANET_TYPE = nexus }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_3 }
+                }
+                pc_hive = {
+                    tiered_generic_special_zone_replace = { DISTRICT = district_hive_3 TYPE = research PLANET_TYPE = hive }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_3 }
+                }
+                # Default case for any other planet out there
+                default = {
+                    # Do the actual business now
+                    owner = {
+                        export_trigger_value_to_variable = {
+                            trigger = has_monthly_income
+                            parameters = {
+                                resource = physics_research
+                            }
+                            variable = physics_research_income_current
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = has_monthly_income
+                            parameters = {
+                                resource = society_research
+                            }
+                            variable = society_research_income_current
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = has_monthly_income
+                            parameters = {
+                                resource = engineering_research
+                            }
+                            variable = engineering_research_income_current
+                        }
+                    }
+                    if = {
+                        limit = { has_enigmatic_capital = yes }
+                        add_building = building_acot_dm_enigmatic_lab
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_monthly_income = { resource = physics_research value < society_research_income_current }
+                                has_monthly_income = { resource = physics_research value < engineering_research_income_current }
+                            }
+                        }
+                        add_building = building_physics_lab_1
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_monthly_income = { resource = society_research value < physics_research_income_current }
+                                has_monthly_income = { resource = society_research value < engineering_research_income_current }
+                            }
+                        }
+                        add_building = building_biolab_1
+                    }
+                    else = {
+                        add_building = building_engineering_facility_1
+                    }
+                    # Cleanup variables.
+                    clear_variable = physics_research_income_current
+                    clear_variable = society_research_income_current
+                    clear_variable = engineering_research_income_current
+                }
+            }
+        }
+    }
+}
 
 #country_event = {
 #	id = aot_ai_districts.4

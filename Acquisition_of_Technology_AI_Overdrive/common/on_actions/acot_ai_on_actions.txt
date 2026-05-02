@@ -11,10 +11,15 @@ on_yearly_pulse_country = {
 on_bi_yearly_pulse_country = {
     events = {
         aot_ai_districts.2 # god i hate stellaris even more
-        #aot_ai_districts.4 # voic dpshere
         #aot_ai_districts.7000
         aot_ai_districts.5
         aot_ai_districts.51
+    }
+}
+
+on_monthly_pulse_country = {
+    events = {
+        aot_ai_districts.4 # Add research labs/districts to planets if possible.
     }
 }
 
