@@ -2325,15 +2325,28 @@ decision_arcology_project_ai = {
 
         num_uncleared_blockers < 1
         owner = {
-            # You usually don't need more then two ecu's a game.
-            count_owned_planet = {
-                limit = {
+            # Construction is permitted if:
+            # We have spare minerals to boot
+            resource_income_compare = {
+                resource = minerals
+                value > 100
+            }
+            # AND there's no existing Ecu under construction in the empire OR an existing ecu is fully developed.
+            OR = {
+                # There's no existing Ecu or any one under construction in the empire.
+                any_owned_planet = {
                     OR = {
                         is_planet_class = pc_city
                         has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
                     }
                 }
-                count < 2
+                # OR an existing ecu is fully developed.
+                any_owned_planet = {
+                    AND = {
+                        is_planet_class = pc_city
+                        free_district_slots < 1
+                    }
+                }
             }
         }
     }
@@ -2384,6 +2397,7 @@ decision_arcology_project_ai = {
 
     ai_weight = {
         weight = 0
+        # Bias towards production Ecu's
         modifier = {
             add = 1000
             OR = {
@@ -2395,25 +2409,30 @@ decision_arcology_project_ai = {
                 has_designation = col_industrial
             }
         }
+        # Lower priority on research Ecu's.
+        modifier = {
+            add = 800
+            has_designation = col_research
+        }
         modifier = {
             factor = 1.1
             planet_size >= 20 # Bigger is better!
         }
         modifier = {
             factor = 1.1
-            planet_size > 21 # Bigger is better!
+            planet_size >= 21 # Bigger is better!
         }
         modifier = {
             factor = 1.1
-            planet_size > 22 # Bigger is better!
+            planet_size >= 22 # Bigger is better!
         }
         modifier = {
             factor = 1.1
-            planet_size > 23 # Bigger is better!
+            planet_size >= 23 # Bigger is better!
         }
         modifier = {
             factor = 1.1
-            planet_size > 24 # Bigger is better!
+            planet_size >= 24 # Bigger is better!
         }
         modifier = {
             factor = 0
@@ -2443,6 +2462,7 @@ decision_arcology_project_relic_ai = {
         exists = owner
         owner = {
             is_ai = yes
+            has_technology = tech_housing_2
             OR = {
                 is_regular_empire = yes
                 has_valid_civic = civic_machine_servitor
@@ -2452,7 +2472,31 @@ decision_arcology_project_relic_ai = {
 
     allow = {
         num_uncleared_blockers < 1
-        owner = { has_technology = tech_housing_2 }
+        owner = {
+            # Construction is permitted if:
+            # We have spare minerals to boot
+            resource_income_compare = {
+                resource = minerals
+                value > 100
+            }
+            # AND there's no existing Ecu under construction in the empire OR an existing ecu is fully developed.
+            OR = {
+                # There's no existing Ecu or any one under construction in the empire.
+                any_owned_planet = {
+                    OR = {
+                        is_planet_class = pc_city
+                        has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
+                    }
+                }
+                # OR an existing ecu is fully developed.
+                any_owned_planet = {
+                    AND = {
+                        is_planet_class = pc_city
+                        free_district_slots < 1
+                    }
+                }
+            }
+        }
     }
 
     on_queued = {
@@ -2510,20 +2554,6 @@ decision_arcology_project_relic_ai = {
         weight = 0
         modifier = {
             add = 1000
-            # Custom AI check to help decide
-            owner = {
-                # You usually don't need more then two ecu's a game.
-                count_owned_planet = {
-                    limit = {
-                        OR = {
-                            is_planet_class = pc_city
-                            has_planet_flag = arcology_project_construction # Consider ecu's under construction too.
-                        }
-                    }
-                    count <= 2
-                }
-
-            }
             OR = {
                 has_designation = col_capital_factory
                 has_designation = col_capital_factory
@@ -2531,6 +2561,7 @@ decision_arcology_project_relic_ai = {
                 has_designation = col_foundry
                 has_designation = col_factory
                 has_designation = col_industrial
+                has_designation = col_research
             }
         }
     }
