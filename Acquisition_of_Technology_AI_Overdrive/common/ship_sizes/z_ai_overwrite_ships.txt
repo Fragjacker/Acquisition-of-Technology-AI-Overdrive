@@ -26,9 +26,6 @@
 @speed_fast = 180
 @speed_very_fast = 200
 
-@build_block_orbital_ring = 20
-@orbital_ring_formation_priority = 1
-
 precursor_escort = {
     use_shipnames_from = destroyer
     formation_priority = 3
