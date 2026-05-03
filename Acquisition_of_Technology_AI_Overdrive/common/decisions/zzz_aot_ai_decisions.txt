@@ -1525,7 +1525,6 @@ decision_pivot_planet_district = {
             has_district = district_nexus
         }
         OR = {
-            has_district = district_farming
             has_district = district_mining
             has_district = district_mining_uncapped
             has_district = district_generator
@@ -1627,8 +1626,8 @@ decision_pivot_planet_district = {
             OR = {
                 num_districts = { type = district_mining value > 0 }
                 num_districts = { type = district_mining_uncapped value > 0 }
-                num_districts = { type = district_generator value > 0 }
-                num_districts = { type = district_generator_uncapped value > 0 }
+                num_districts = { type = district_farming value > 0 }
+                num_districts = { type = district_farming_uncapped value > 0 }
             }
         }
         modifier = {
@@ -1643,10 +1642,10 @@ decision_pivot_planet_district = {
         }
         modifier = {
             add = 1000
-            has_designation = col_generator
+            has_designation = col_farming
             OR = {
-                num_districts = { type = district_farming value > 0 }
-                num_districts = { type = district_farming_uncapped value > 0 }
+                num_districts = { type = district_generator value > 0 }
+                num_districts = { type = district_generator_uncapped value > 0 }
                 num_districts = { type = district_mining value > 0 }
                 num_districts = { type = district_mining_uncapped value > 0 }
             }
