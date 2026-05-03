@@ -48,5 +48,9 @@ acot_sb_phanon_assembly = {
     ai_build_outside_chokepoint = yes
     ai_weight = {
         weight = 0
+        modifier = {
+            weight = 1000
+            has_starbase_module = acot_phanon_starbase_shipyard
+        }
     }
 }

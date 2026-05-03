@@ -83,6 +83,13 @@ sshipyard = {
                     uses_standard_ship_sizes = yes
                 }
             }
+            modifier = {
+                add = 1
+                exists = owner
+                owner = {
+                    country_uses_bio_ships = yes
+                }
+            }
         }
 
         ratio = {
@@ -106,6 +113,7 @@ sshipyard = {
                 exists = owner
                 owner = {
                     uses_standard_ship_sizes = no
+                    country_uses_bio_ships = no
                 }
             }
         }
