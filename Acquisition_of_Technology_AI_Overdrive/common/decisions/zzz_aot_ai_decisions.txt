@@ -1228,7 +1228,7 @@ decision_terraform_planet_into_preferred = {
     resources = {
         category = decisions
         cost = {
-            energy = 2000
+            unity = 500
         }
     }
     potential = {
@@ -1243,7 +1243,10 @@ decision_terraform_planet_into_preferred = {
     }
 
     allow = {
-        habitable_planet_not_urban = yes
+        OR = {
+            habitable_planet_not_urban = yes
+            is_planet_class = pc_nuked
+        }
     }
 
     effect = {
@@ -1311,7 +1314,7 @@ decision_terraform_planet_into_preferred = {
         }
         # Tomb world without climate restoration? What a bummer...
         modifier = {
-            factor = 1000
+            add = 1000
             is_planet_class = pc_nuked
             owner = {
                 has_technology = tech_climate_restoration
@@ -1332,7 +1335,7 @@ decision_terraform_planet_into_preferred = {
             }
         }
         modifier = {
-            factor = 1000
+            add = 1000
             is_planet_class = pc_volcanic
             owner = {
                 has_technology = tech_volcanic_terraforming
@@ -1358,7 +1361,7 @@ decision_terraform_planet_into_preferred = {
             owner = {
                 resource_stockpile_compare = {
                     resource = energy
-                    value <= 4000
+                    value <= 10000
                 }
             }
         }
@@ -1410,13 +1413,12 @@ decision_nuke_planet_into_preferred = {
             add = 1000
             NOT = { is_planet_class = pc_nuked }
         }
-        # Tomb world without climate restoration? What a bummer...
         modifier = {
             factor = 0
             owner = {
                 resource_stockpile_compare = {
                     resource = energy
-                    value <= 4000
+                    value <= 10000
                 }
             }
         }
@@ -1434,8 +1436,7 @@ decision_terraform_planet_into_advanced = {
     resources = {
         category = decisions
         cost = {
-            energy = 1000
-            minerals = 1000
+            unity = 500
         }
     }
     potential = {
@@ -1447,7 +1448,10 @@ decision_terraform_planet_into_advanced = {
                 has_ascension_perk = ap_hive_worlds
             }
         }
-        habitable_planet_not_urban = yes
+        OR = {
+            habitable_planet_not_urban = yes
+            is_planet_class = pc_nuked
+        }
         is_artificial = no
         is_terraforming = no
     }
@@ -1485,21 +1489,30 @@ decision_terraform_planet_into_advanced = {
     }
 
     ai_weight = {
-        weight = 10000
-        # modifier = {
-        #     add = 1000
-        #     owner = {
-        #         has_ascension_perk = ap_hive_worlds
-        #     }
-        #     NOT = { is_planet_class = pc_hive }
-        # }
-        # modifier = {
-        #     add = 1000
-        #     owner = {
-        #         has_ascension_perk = ap_machine_worlds
-        #     }
-        #     NOT = { is_planet_class = pc_machine }
-        # }
+        base = 0
+        modifier = {
+            add = 1000
+            owner = {
+                has_ascension_perk = ap_hive_worlds
+            }
+            NOT = { is_planet_class = pc_hive }
+        }
+        modifier = {
+            add = 1000
+            owner = {
+                has_ascension_perk = ap_machine_worlds
+            }
+            NOT = { is_planet_class = pc_machine }
+        }
+        modifier = {
+            factor = 0
+            owner = {
+                resource_stockpile_compare = {
+                    resource = energy
+                    value <= 10000
+                }
+            }
+        }
     }
 }
 
