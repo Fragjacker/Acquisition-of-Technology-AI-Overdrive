@@ -155,12 +155,10 @@ ap_galactic_wonders_utopia = {
                 has_technology = tech_mega_engineering
                 AND = {
                     is_ai = yes
-                    OR = {
-                        any_country = {
-                            is_ai = no
-                            has_galactic_wonders = yes
-                        }
-                        num_ascension_perks >= 4
+                    num_ascension_perks >= 4
+                    any_country = {
+                        is_ai = no
+                        has_galactic_wonders = yes
                     }
                 }
             }
