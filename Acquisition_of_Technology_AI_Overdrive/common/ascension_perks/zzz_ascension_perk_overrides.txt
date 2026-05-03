@@ -439,5 +439,25 @@ ap_arcology_project = {
             factor = 3
             has_ethic = ethic_fanatic_materialist
         }
+        modifier = {
+            factor = 2
+            any_owned_planet = {
+                OR = {
+                    has_designation = col_capital_factory
+                    has_designation = col_capital_factory
+                    has_designation = col_capital_foundry
+                    has_designation = col_foundry
+                    has_designation = col_factory
+                    has_designation = col_industrial
+                }
+            }
+        }
+        # Don't pick this if we only have small planets.
+        modifier = {
+            factor = 0
+            any_owned_planet = {
+                planet_size < 20
+            }
+        }
     }
 }
