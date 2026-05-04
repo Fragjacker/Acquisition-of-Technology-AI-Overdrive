@@ -24,5 +24,5 @@ effect = {
     add_district = district_$TYPE$_3
 }
 ai_weight = {
-    base = 1000
+    base = 10000
 }

@@ -12,10 +12,20 @@ country_event = {
         }
     }
     immediate = {
-        every_owned_planet = {
+        random_owned_planet = {
             limit = {
                 is_exclusively_delta_tier = yes
                 has_any_outdated_zone = yes
+                owner = {
+                    resource_income_compare = {
+                        resource = acot_sr_dark_energy
+                        value > 0
+                    }
+                    resource_income_compare = {
+                        resource = sr_dark_matter
+                        value > 0
+                    }
+                }
             }
 
             # Upgrade all non urban zones.
@@ -50,9 +60,8 @@ country_event = {
                 has_enigmatic_capital = no
             }
             hidden_effect = {
-                # AI got enough brains now to do the superior constructs decision but the extra giga fortress is still nice tho.
-                # remove_capital_building = yes
-                # add_advanced_capital_building = yes
+                remove_capital_building = yes
+                add_advanced_capital_building = yes
                 if = {
                     limit = {
                         owner = {
@@ -239,7 +248,12 @@ country_event = {
                 default = {
                     # Add the lab of which we have the least monthly tech for
                     if = {
-                        limit = { has_enigmatic_capital = yes }
+                        limit = {
+                            has_enigmatic_capital = yes
+                            owner = {
+                                has_technology = tech_acot_dm_enigmatic_lab
+                            }
+                        }
                         add_building = building_acot_dm_enigmatic_lab
                     }
                     else = {
@@ -329,6 +343,132 @@ country_event = {
                         clear_variable = engineering_research_income_current
                     }
                 }
+            }
+        }
+    }
+}
+
+# add_modifier = { modifier = modifier_starbase_cheat_cap_add }
+
+# Upgrade Orbital Rings because the AI would rather devour crayons than do anything sensible.
+country_event = {
+    id = aot_ai_districts.5
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_ai = yes
+        any_owned_ship = {
+            starbase = {
+                OR = {
+                    is_orbital_ring = yes
+                    is_space_citadel = yes
+                }
+            }
+        }
+    }
+    immediate = {
+        every_owned_nonprimary_starbase = {
+            if = {
+                limit = { has_starbase_size = orbital_ring_tier_1 }
+                set_starbase_size = orbital_ring_tier_2
+                switch = {
+                    trigger = is_starbase_type
+                    sorbital_habitation = {
+                        # Cleanup any old modules
+                        remove_starbase_module = { slot = 1 module = all }
+                        remove_starbase_module = { slot = 2 module = all }
+                        set_starbase_module = { slot = 1 module = orbital_ring_habitation }
+                        set_starbase_module = { slot = 2 module = orbital_ring_habitation }
+                        set_starbase_module = { slot = 3 module = orbital_ring_habitation }
+                        planet = {
+                            switch = {
+                                trigger = has_designation
+                                col_capital = { prev = { set_starbase_building = { slot = 1 building = ring_embassy_complex } } }
+                                col_capital_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_capital_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                                col_capital_extraction = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                                col_capital_trade = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                                col_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_hiv_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                                col_ecu_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_ecu_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_ecu_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                                col_mac_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_mac_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                                col_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                                col_generator = { prev = { set_starbase_building = { slot = 1 building = ring_energy_hub } } }
+                                col_mining = { prev = { set_starbase_building = { slot = 1 building = ring_minerals_hub } } }
+                                col_farming = { prev = { set_starbase_building = { slot = 1 building = ring_food_hub } } }
+                                col_city = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                                col_fortress = { prev = { set_starbase_building = { slot = 1 building = target_uplink_computer } } }
+                            }
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = { has_starbase_size = orbital_ring_tier_2 }
+                set_starbase_size = orbital_ring_tier_3
+                switch = {
+                    trigger = is_starbase_type
+                    sorbital_habitation = {
+                        remove_starbase_module = { slot = 1 module = all }
+                        remove_starbase_module = { slot = 2 module = all }
+                        remove_starbase_module = { slot = 3 module = all }
+                        set_starbase_module = { slot = 1 module = orbital_ring_habitation }
+                        set_starbase_module = { slot = 2 module = orbital_ring_habitation }
+                        set_starbase_module = { slot = 3 module = orbital_ring_habitation }
+                        set_starbase_module = { slot = 4 module = orbital_ring_habitation }
+                        planet = {
+                            switch = {
+                                trigger = has_designation
+                                col_capital = { prev = { set_starbase_building = { slot = 2 building = ring_bureaucracy_hub } } }
+                                col_capital_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
+                                col_capital_factory = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
+                                col_capital_extraction = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
+                                col_capital_trade = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                                col_hiv_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                                col_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_ecu_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                                col_ecu_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
+                                col_ecu_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_mac_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                                col_mac_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
+                                col_generator = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_mining = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_farming = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_city = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                                col_fortress = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
+                            }
+                        }
+                    }
+                }
+            }
+            # Deep Space Citadel
+            else_if = {
+                limit = {
+                    has_starbase_size = starbase_deep_space_citadel_1
+                }
+                set_starbase_size = starbase_deep_space_citadel_2
+                design
+                # switch = {
+                #     trigger = is_starbase_type
+                #     sdeepspacecitadel = {
+                #         set_starbase_module = { slot = 1 module = gun_battery }
+                #         set_starbase_module = { slot = 2 module = gun_battery }
+                #         set_starbase_module = { slot = 3 module = gun_battery }
+                #         set_starbase_module = { slot = 4 module = gun_battery }
+                #     }
+                # }
+            }
+            else_if = {
+                limit = {
+                    has_starbase_size = starbase_deep_space_citadel_2
+                }
+                set_starbase_size = starbase_deep_space_citadel_3
             }
         }
     }
@@ -495,7 +635,7 @@ country_event = {
 #	}
 #}
 
-# Disband armeis built for war once the war is over.
+# Disband armies built for war once the war is over.
 country_event = {
     id = aot_ai_districts.6
     is_triggered_only = yes
