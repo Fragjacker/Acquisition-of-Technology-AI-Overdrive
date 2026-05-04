@@ -1764,10 +1764,16 @@ decision_convert_dm_habitat = {
     enactment_time = 1080
     resources = {
         category = decisions
+        inline_script = {
+            script = resources/convert_to_food
+            SCOPE = from
+            MODE = cost
+            RESOURCE = alloys
+            AMOUNT = @[ 1500 * two_exp0 ]
+        }
         cost = {
-            unity = 5000
-            alloys = 3000
-            sr_dark_matter = 5000
+            unity = @[ 1000 * two_exp0 ]
+            sr_dark_matter = @[ 2500 * two_exp0 ]
         }
     }
     potential = {
@@ -1791,8 +1797,9 @@ decision_convert_dm_habitat = {
             upgrade_dm_habitat = yes
         }
     }
+    # This is VERY GOOD, WE WANT THIS PLZ! OK THX BYE.
     ai_weight = {
-        base = 1000
+        base = 10000
     }
 }
 decision_retrofit_ae_habitat = {
@@ -1806,11 +1813,12 @@ decision_retrofit_ae_habitat = {
             SCOPE = from
             MODE = cost
             RESOURCE = alloys
-            AMOUNT = 1000
+            AMOUNT = @[ 1500 * two_exp1 ]
         }
         cost = {
-            sr_dark_matter = 1000
-            acot_sr_dark_energy = 5000
+            unity = @[ 1000 * two_exp1 ]
+            sr_dark_matter = @[ 2500 * two_exp1 ]
+            acot_sr_dark_energy = @[ 2500 * two_exp1 ]
         }
     }
     potential = {
@@ -1849,11 +1857,11 @@ decision_retrofit_phanon_habitat = {
             SCOPE = from
             MODE = cost
             RESOURCE = alloys
-            AMOUNT = 1000
+            AMOUNT = @[ 1500 * two_exp2 ]
         }
         cost = {
-            sr_dark_matter = 2500
-            acot_sr_dark_energy = 2500
+            unity = @[ 1000 * two_exp2 ]
+            aot_sr_runic_power = @[ 2500 * two_exp2 ]
         }
     }
     potential = {
@@ -1892,10 +1900,11 @@ decision_retrofit_sigma_habitat = {
             SCOPE = from
             MODE = cost
             RESOURCE = alloys
-            AMOUNT = 1000
+            AMOUNT = @[ 1500 * two_exp3 ]
         }
         cost = {
-            aot_sr_runic_power = 5000
+            unity = @[ 1000 * two_exp3 ]
+            acot_sr_stellarite = @[ 2500 * two_exp3 ]
         }
     }
     potential = {
