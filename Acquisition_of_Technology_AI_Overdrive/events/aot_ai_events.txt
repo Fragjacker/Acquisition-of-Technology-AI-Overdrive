@@ -361,7 +361,7 @@ country_event = {
             starbase = {
                 OR = {
                     is_orbital_ring = yes
-                    is_space_citadel = yes
+                    # is_space_citadel = yes # Currently doesn't work.
                 }
             }
         }
@@ -448,28 +448,28 @@ country_event = {
                 }
             }
             # Deep Space Citadel
-            else_if = {
-                limit = {
-                    has_starbase_size = starbase_deep_space_citadel_1
-                }
-                set_starbase_size = starbase_deep_space_citadel_2
-                design
-                # switch = {
-                #     trigger = is_starbase_type
-                #     sdeepspacecitadel = {
-                #         set_starbase_module = { slot = 1 module = gun_battery }
-                #         set_starbase_module = { slot = 2 module = gun_battery }
-                #         set_starbase_module = { slot = 3 module = gun_battery }
-                #         set_starbase_module = { slot = 4 module = gun_battery }
-                #     }
-                # }
-            }
-            else_if = {
-                limit = {
-                    has_starbase_size = starbase_deep_space_citadel_2
-                }
-                set_starbase_size = starbase_deep_space_citadel_3
-            }
+            # TODO: Just setting the starbase size for the citadel alone won't work, it does not choose the tier II and III designs automatically.
+            # else_if = {
+            #     limit = {
+            #         has_starbase_size = starbase_deep_space_citadel_1
+            #     }
+            #     set_starbase_size = starbase_deep_space_citadel_2
+            #     switch = {
+            #         trigger = is_starbase_type
+            #         sdeepspacecitadel = {
+            #             set_starbase_module = { slot = 1 module = gun_battery }
+            #             set_starbase_module = { slot = 2 module = gun_battery }
+            #             set_starbase_module = { slot = 3 module = gun_battery }
+            #             set_starbase_module = { slot = 4 module = gun_battery }
+            #         }
+            #     }
+            # }
+            # else_if = {
+            #     limit = {
+            #         has_starbase_size = starbase_deep_space_citadel_2
+            #     }
+            #     set_starbase_size = starbase_deep_space_citadel_3
+            # }
         }
     }
 }
