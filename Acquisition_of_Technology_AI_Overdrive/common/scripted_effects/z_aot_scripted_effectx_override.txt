@@ -1,0 +1,162 @@
+acot_upgrade_to_delta_building = {
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_enigmatic_lab
+            }
+            OR = {
+                has_building = building_research_lab_1
+                has_building = building_research_lab_2
+                has_building = building_research_lab_3
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_research_lab_1 }
+        remove_building_if_exists = { BUILDING = building_research_lab_2 }
+        remove_building_if_exists = { BUILDING = building_research_lab_3 }
+        add_building = building_acot_dm_enigmatic_lab
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_stronghold
+            }
+            OR = {
+                has_building = building_stronghold
+                has_building = building_fortress
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_stronghold }
+        remove_building_if_exists = { BUILDING = building_fortress }
+        add_building = building_acot_dm_stronghold
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_psg
+            }
+            OR = {
+                has_building = building_planetary_shield_generator
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_planetary_shield_generator }
+        add_building = building_acot_dm_psg
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_alloy_foundry
+            }
+            OR = {
+                has_building = building_foundry_1
+                has_building = building_foundry_2
+                has_building = building_foundry_3
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_foundry_1 }
+        remove_building_if_exists = { BUILDING = building_foundry_2 }
+        remove_building_if_exists = { BUILDING = building_foundry_3 }
+        add_building = building_acot_dm_alloy_forge
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_factory
+            }
+            OR = {
+                has_building = building_factory_1
+                has_building = building_factory_2
+                has_building = building_factory_3
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_factory_1 }
+        remove_building_if_exists = { BUILDING = building_factory_2 }
+        remove_building_if_exists = { BUILDING = building_factory_3 }
+        add_building = building_acot_dm_factory
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_food_processing
+            }
+            OR = {
+                has_building = building_food_processing_center
+                has_building = building_food_processing_facility
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_food_processing_center }
+        remove_building_if_exists = { BUILDING = building_food_processing_facility }
+        add_building = building_acot_dm_food_processing_complex
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_power_hub
+            }
+            OR = {
+                has_building = building_energy_grid
+                has_building = building_energy_nexus
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_energy_grid }
+        remove_building_if_exists = { BUILDING = building_energy_nexus }
+        add_building = building_acot_dm_power_hub
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_acot_dm_mineral_processing_plant
+            }
+            OR = {
+                has_building = building_mineral_purification_hub
+                has_building = building_mineral_purification_plant
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_mineral_purification_hub }
+        remove_building_if_exists = { BUILDING = building_mineral_purification_plant }
+        add_building = building_acot_dm_mineral_processing_plant
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_global_research_initiative
+            }
+            OR = {
+                has_building = building_institute
+                # has_building = building_core
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_institute }
+        # remove_building = building_mineral_purification_plant
+        add_building = building_acot_dm_institute
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_dm_commercial_megaplex
+            }
+            OR = {
+                has_building = building_commercial_zone
+                has_building = building_commercial_megaplex
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_commercial_zone }
+        remove_building_if_exists = { BUILDING = building_commercial_megaplex }
+        # remove_building = building_mineral_purification_plant
+        add_building = building_dm_commercial_megaplex
+    }
+    IF = {
+        limit = {
+            owner = {
+                has_technology = tech_dm_embassy
+            }
+            OR = {
+                has_building = building_embassy
+                has_building = building_grand_embassy
+            }
+        }
+        remove_building_if_exists = { BUILDING = building_embassy }
+        remove_building_if_exists = { BUILDING = building_grand_embassy }
+        # remove_building = building_mineral_purification_plant
+        add_building = building_dm_embassy
+    }
+}

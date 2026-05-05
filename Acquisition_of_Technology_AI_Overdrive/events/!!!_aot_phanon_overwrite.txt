@@ -1315,7 +1315,6 @@ planet_event = {
             is_playable_country = yes
         }
         has_enigmatic_capital = yes
-        free_building_slots <= 4
     }
 
     immediate = {
