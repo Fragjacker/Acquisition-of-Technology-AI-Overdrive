@@ -12,6 +12,7 @@ on_bi_yearly_pulse_country = {
     events = {
         aot_ai_districts.2      # god i hate stellaris even more
         #aot_ai_districts.7000
+        aot_ai_districts.7      # Spawn friendly armies on the phanon vault.
         aot_ai_districts.51
     }
 }

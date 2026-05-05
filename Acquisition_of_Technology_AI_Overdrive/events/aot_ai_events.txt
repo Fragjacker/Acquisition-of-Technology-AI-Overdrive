@@ -730,7 +730,7 @@ country_event = {
 ### Help them along
 
 country_event = {
-    id = aot_ai_districts.5
+    id = aot_ai_districts.7
     is_triggered_only = yes
     hide_window = yes
     trigger = {
