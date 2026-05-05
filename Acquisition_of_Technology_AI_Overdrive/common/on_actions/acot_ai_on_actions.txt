@@ -3,7 +3,7 @@ on_yearly_pulse_country = {
         aot_ai_districts.8000   # Create fractured planets.
         aot_ai_districts.6
         aot_ai_districts.3      # Repair all ruined buildings.
-        aot_ai_districts.5      # Upgrade Orbital rings.
+        aot_ai_districts.5      # Upgrade Orbital rings and Deep Space Citadels.
         aot_ai_districts.6000   # god i hate stellaris
     }
 }

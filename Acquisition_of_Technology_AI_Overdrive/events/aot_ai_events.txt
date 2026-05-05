@@ -361,7 +361,7 @@ country_event = {
             starbase = {
                 OR = {
                     is_orbital_ring = yes
-                    # is_space_citadel = yes # Currently doesn't work.
+                    is_space_citadel = yes
                 }
             }
         }
@@ -371,79 +371,96 @@ country_event = {
             if = {
                 limit = { has_starbase_size = orbital_ring_tier_1 }
                 set_starbase_size = orbital_ring_tier_2
-                switch = {
-                    trigger = is_starbase_type
-                    sorbital_habitation = {
-                        # Cleanup any old modules
-                        remove_starbase_module = { slot = 1 module = all }
-                        remove_starbase_module = { slot = 2 module = all }
-                        set_starbase_module = { slot = 1 module = orbital_ring_habitation }
-                        set_starbase_module = { slot = 2 module = orbital_ring_habitation }
-                        set_starbase_module = { slot = 3 module = orbital_ring_habitation }
-                        planet = {
-                            switch = {
-                                trigger = has_designation
-                                col_capital = { prev = { set_starbase_building = { slot = 1 building = ring_embassy_complex } } }
-                                col_capital_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_capital_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
-                                col_capital_extraction = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
-                                col_capital_trade = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
-                                col_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_hiv_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
-                                col_ecu_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_ecu_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_ecu_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
-                                col_mac_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_mac_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
-                                col_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
-                                col_generator = { prev = { set_starbase_building = { slot = 1 building = ring_energy_hub } } }
-                                col_mining = { prev = { set_starbase_building = { slot = 1 building = ring_minerals_hub } } }
-                                col_farming = { prev = { set_starbase_building = { slot = 1 building = ring_food_hub } } }
-                                col_city = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
-                                col_fortress = { prev = { set_starbase_building = { slot = 1 building = target_uplink_computer } } }
+                # Cleanup any old modules
+                remove_starbase_module = { slot = 1 module = all }
+                remove_starbase_module = { slot = 2 module = all }
+                set_starbase_module = { slot = 1 module = orbital_ring_habitation }
+                set_starbase_module = { slot = 2 module = orbital_ring_habitation }
+                set_starbase_module = { slot = 3 module = orbital_ring_habitation }
+                planet = {
+                    switch = {
+                        trigger = has_designation
+                        col_capital = {
+                            if = {
+                                limit = {
+
+                                    owner = { is_regular_empire = yes has_technology = tech_xeno_relations }
+                                }
+                                prev = { set_starbase_building = { slot = 1 building = ring_embassy_complex } }
+                            }
+                            else_if = {
+                                limit = {
+                                    owner = {
+                                        has_technology = tech_hive_cluster
+                                        is_hive_empire = yes
+                                        is_wilderness_empire = no
+                                    }
+                                }
+                                prev = { set_starbase_building = { slot = 1 building = ring_synapse_hub } }
+                            }
+                            else_if = {
+                                limit = {
+                                    owner = {
+                                        has_technology = tech_resource_processing_algorithms
+                                        is_machine_empire = yes
+                                    }
+                                }
+                                prev = { set_starbase_building = { slot = 1 building = ring_maintenance_hub } }
                             }
                         }
+                        col_capital_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_capital_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                        col_capital_extraction = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                        col_capital_trade = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                        col_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_hiv_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                        col_ecu_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_ecu_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_ecu_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                        col_mac_foundry = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_mac_factory = { prev = { set_starbase_building = { slot = 1 building = ring_consumer_goods_hub } } }
+                        col_industrial = { prev = { set_starbase_building = { slot = 1 building = ring_alloys_hub } } }
+                        col_generator = { prev = { set_starbase_building = { slot = 1 building = ring_energy_hub } } }
+                        col_mining = { prev = { set_starbase_building = { slot = 1 building = ring_minerals_hub } } }
+                        col_farming = { prev = { set_starbase_building = { slot = 1 building = ring_food_hub } } }
+                        col_city = { prev = { set_starbase_building = { slot = 1 building = ring_trade_hub } } }
+                        col_fortress = { prev = { set_starbase_building = { slot = 1 building = target_uplink_computer } } }
                     }
                 }
             }
             else_if = {
                 limit = { has_starbase_size = orbital_ring_tier_2 }
                 set_starbase_size = orbital_ring_tier_3
-                switch = {
-                    trigger = is_starbase_type
-                    sorbital_habitation = {
-                        remove_starbase_module = { slot = 1 module = all }
-                        remove_starbase_module = { slot = 2 module = all }
-                        remove_starbase_module = { slot = 3 module = all }
-                        set_starbase_module = { slot = 1 module = orbital_ring_habitation }
-                        set_starbase_module = { slot = 2 module = orbital_ring_habitation }
-                        set_starbase_module = { slot = 3 module = orbital_ring_habitation }
-                        set_starbase_module = { slot = 4 module = orbital_ring_habitation }
-                        planet = {
-                            switch = {
-                                trigger = has_designation
-                                col_capital = { prev = { set_starbase_building = { slot = 2 building = ring_bureaucracy_hub } } }
-                                col_capital_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
-                                col_capital_factory = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
-                                col_capital_extraction = { prev = { set_starbase_building = { slot = 2 building = ring_embassy_complex } } }
-                                col_capital_trade = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
-                                col_hiv_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
-                                col_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_ecu_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
-                                col_ecu_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
-                                col_ecu_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_mac_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
-                                col_mac_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
-                                col_generator = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_mining = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_farming = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_city = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
-                                col_fortress = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
-                            }
-                        }
+                remove_starbase_module = { slot = 1 module = all }
+                remove_starbase_module = { slot = 2 module = all }
+                remove_starbase_module = { slot = 3 module = all }
+                set_starbase_module = { slot = 1 module = orbital_ring_habitation }
+                set_starbase_module = { slot = 2 module = orbital_ring_habitation }
+                set_starbase_module = { slot = 3 module = orbital_ring_habitation }
+                set_starbase_module = { slot = 4 module = orbital_ring_habitation }
+                planet = {
+                    switch = {
+                        trigger = has_designation
+                        col_capital = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
+                        col_capital_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
+                        col_capital_factory = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
+                        col_capital_extraction = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
+                        col_capital_trade = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                        col_hiv_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                        col_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_ecu_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                        col_ecu_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
+                        col_ecu_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_mac_foundry = { prev = { set_starbase_building = { slot = 2 building = ring_trade_hub } } }
+                        col_mac_factory = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_industrial = { prev = { set_starbase_building = { slot = 2 building = ring_alloys_hub } } }
+                        col_generator = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_mining = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_farming = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_city = { prev = { set_starbase_building = { slot = 2 building = ring_galactic_stock_exchange } } }
+                        col_fortress = { prev = { set_starbase_building = { slot = 2 building = ring_orbital_shield_generator } } }
                     }
                 }
             }
