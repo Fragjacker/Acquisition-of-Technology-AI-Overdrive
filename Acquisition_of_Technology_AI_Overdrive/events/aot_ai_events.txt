@@ -448,28 +448,29 @@ country_event = {
                 }
             }
             # Deep Space Citadel
-            # TODO: Just setting the starbase size for the citadel alone won't work, it does not choose the tier II and III designs automatically.
-            # else_if = {
-            #     limit = {
-            #         has_starbase_size = starbase_deep_space_citadel_1
-            #     }
-            #     set_starbase_size = starbase_deep_space_citadel_2
-            #     switch = {
-            #         trigger = is_starbase_type
-            #         sdeepspacecitadel = {
-            #             set_starbase_module = { slot = 1 module = gun_battery }
-            #             set_starbase_module = { slot = 2 module = gun_battery }
-            #             set_starbase_module = { slot = 3 module = gun_battery }
-            #             set_starbase_module = { slot = 4 module = gun_battery }
-            #         }
-            #     }
-            # }
-            # else_if = {
-            #     limit = {
-            #         has_starbase_size = starbase_deep_space_citadel_2
-            #     }
-            #     set_starbase_size = starbase_deep_space_citadel_3
-            # }
+            else_if = {
+                limit = {
+                    has_starbase_size = starbase_deep_space_citadel_1
+                }
+                set_starbase_size = starbase_deep_space_citadel_2
+                fleet = {
+                    set_ship_design = {
+                        random_existing_design = starbase_deep_space_citadel_2
+                    }
+                }
+                set_starbase_building = { slot = 1 building = target_uplink_computer }
+            }
+            else_if = {
+                limit = {
+                    has_starbase_size = starbase_deep_space_citadel_2
+                }
+                set_starbase_size = starbase_deep_space_citadel_3
+                fleet = {
+                    set_ship_design = {
+                        random_existing_design = starbase_deep_space_citadel_3
+                    }
+                }
+            }
         }
     }
 }
