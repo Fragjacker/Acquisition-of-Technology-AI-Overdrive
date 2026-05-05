@@ -1225,6 +1225,55 @@ namespace = aot_events
 
 namespace = acot_ai_pmc
 
+# Buying too many phanon packages early game, spirals the AI into debt due to pop upkeep.
+country_event = {
+    id = acot_ai_pmc.1
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        mid_game_years_passed >= 10 # Don't buy pops intil midgame
+        has_positive_total_resource_balance = yes # Only buy stuff when not on any resource deficit.
+        is_ai = yes
+        is_country_type = default
+        NOR = {
+            has_global_flag = acot_phanon_retaliation_crisis_imminent
+            has_global_flag = acot_phanon_retaliation_crisis_initiated
+            has_global_flag = acot_phanon_portal_disabled
+            has_global_flag = acot_phanon_forbidden
+            has_country_flag = attacked_phanon_property
+        }
+        NOR = {
+            has_country_flag = acot_pmc_pop_purchased_large
+            has_country_flag = acot_pmc_pop_purchased_medium
+            has_country_flag = acot_pmc_pop_purchased
+            has_country_flag = acot_pmc_pop_service_ai_cooldown
+        }
+        resource_stockpile_compare = { resource = energy value >= 1000 }
+        resource_stockpile_compare = { resource = influence value >= 15 }
+        any_relation = {
+            is_same_value = event_target:phanon_base_country
+            has_communications = prev
+        }
+        any_owned_planet = {
+            pop_amount <= 3000
+        }
+    }
+
+    immediate = {
+        set_timed_country_flag = {
+            flag = acot_pmc_pop_service_ai_cooldown
+            days = 360
+        }
+        country_event = {
+            id = acot_ai_pmc.100
+            days = 30 random = 60
+        }
+    }
+}
+
+
 # The AI is going batshit crazy with those phanon terraforming doodads, we gotta shut it down.
 country_event = {
     id = acot_ai_pmc.3
