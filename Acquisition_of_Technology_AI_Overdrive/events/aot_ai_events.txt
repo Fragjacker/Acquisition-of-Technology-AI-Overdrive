@@ -830,6 +830,192 @@ planet_event = {
     }
 }
 
+# Do something to fix deficits instead of twiddling thumbs!
+country_event = {
+    id = aot_ai_districts.8
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            resource_income_compare = {
+                resource = energy
+                value < 0
+            }
+            resource_income_compare = {
+                resource = minerals
+                value < 0
+            }
+            resource_income_compare = {
+                resource = alloys
+                value < 0
+            }
+            resource_income_compare = {
+                resource = consumer_goods
+                value < 0
+            }
+            resource_income_compare = {
+                resource = food
+                value < 0
+            }
+            resource_income_compare = {
+                resource = unity
+                value < 0
+            }
+        }
+        any_owned_planet = {
+            has_unemployed_or_servants = yes
+        }
+    }
+    immediate = {
+        # FIX ENERGY DEFICIT
+        if = {
+            limit = {
+                resource_income_compare = { resource = energy value < 0 }
+            }
+            random_owned_planet = {
+                limit = {
+                    OR = {
+                        has_any_generator_zone = yes
+                        has_district = district_generator
+                        has_district = district_generator_uncapped
+                        has_district = district_rw_generator
+                        has_district = district_hive_energy
+                        has_district = district_nexus_energy
+                        has_district = district_hab_energy
+                    }
+                    has_unemployed_or_servants = yes
+                    free_district_slots > 0
+                }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_generator }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_generator_uncapped }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_generator }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_energy }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_energy }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_energy }
+            }
+        }
+        # FIX MINERALS DEFICIT
+        if = {
+            limit = {
+                resource_income_compare = { resource = minerals value < 0 }
+            }
+            random_owned_planet = {
+                limit = {
+                    OR = {
+                        has_any_mining_zone = yes
+                        has_district = district_mining
+                        has_district = district_mining_uncapped
+                        has_district = district_hive_mining
+                        has_district = district_nexus_mining
+                    }
+                    has_unemployed_or_servants = yes
+                    free_district_slots > 0
+                }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining_uncapped }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_mining }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_mining }
+            }
+        }
+        # FIX FOOD DEFICIT
+        if = {
+            limit = {
+                resource_income_compare = { resource = food value < 0 }
+            }
+            random_owned_planet = {
+                limit = {
+                    OR = {
+                        has_any_agriculture_zone = yes
+                        has_district = district_farming
+                        has_district = district_farming_uncapped
+                        has_district = district_hive_food
+                        has_district = district_rw_farming
+                    }
+                    has_unemployed_or_servants = yes
+                    free_district_slots > 0
+                }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_farming }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_farming_uncapped }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_food }
+                add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_farming }
+            }
+        }
+        if = {
+            limit = {
+                resource_income_compare = { resource = alloys value < 0 }
+            }
+            if = {
+                limit = { any_owned_planet = { free_district_slots > 0 has_unemployed_or_servants = yes } }
+                random_owned_planet = {
+                    limit = {
+                        OR = {
+                            has_any_mining_zone = yes
+                            has_district = district_hive_foundry
+                            has_district = district_nexus_foundry
+                            has_district = district_ring_world_foundry
+                            has_district = district_arcology_arms_industry
+                        }
+                    }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_foundry }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_foundry }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_foundry }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_arms_industry }
+                }
+            }
+            else_if = {
+                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_foundry_zone = yes } }
+                random_owned_planet = {
+                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_foundry_zone = yes }
+                    add_building = building_foundry_1
+                }
+            }
+        }
+        if = {
+            limit = {
+                resource_income_compare = { resource = consumer_goods value < 0 }
+            }
+            if = {
+                limit = { any_owned_planet = { free_district_slots > 0 has_unemployed_or_servants = yes } }
+                random_owned_planet = {
+                    limit = {
+                        OR = {
+                            has_any_mining_zone = yes
+                            has_district = district_hive_factory
+                            has_district = district_nexus_factory
+                            has_district = district_ring_world_factory
+                            has_district = district_arcology_civilian_industry
+                        }
+                    }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_factory }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_factory }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_factory }
+                    add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_civilian_industry }
+                }
+            }
+            else_if = {
+                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_factory_zone = yes } }
+                random_owned_planet = {
+                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_factory_zone = yes }
+                    add_building = building_factory_1
+                }
+            }
+        }
+        if = {
+            limit = {
+                resource_income_compare = { resource = unity value < 0 }
+            }
+            if = {
+                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_unity_zone = yes } }
+                random_owned_planet = {
+                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_unity_zone = yes }
+                    add_building = building_bureaucratic_1
+                }
+            }
+        }
+    }
+}
+
 #namespace = acot_ai_starbase
 #country_event = {
 #	id = acot_ai_starbase.1

@@ -21,6 +21,7 @@ on_monthly_pulse_country = {
     events = {
         aot_ai_districts.1  # Slowly Update legacy zones into delta.
         aot_ai_districts.4  # Add research labs/districts to planets if possible.
+        aot_ai_districts.8  # Fix resource deficits.
     }
 }
 
