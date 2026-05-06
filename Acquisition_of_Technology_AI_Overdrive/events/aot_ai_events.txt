@@ -833,37 +833,71 @@ planet_event = {
 # Do something to fix deficits instead of twiddling thumbs!
 country_event = {
     id = aot_ai_districts.8
-    hide_window = yes
     is_triggered_only = yes
+    hide_window = yes
     trigger = {
+        is_ai = yes
         OR = {
-            resource_income_compare = {
-                resource = energy
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = energy
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_district_slots > 0
+                }
             }
-            resource_income_compare = {
-                resource = minerals
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = minerals
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_district_slots > 0
+                }
             }
-            resource_income_compare = {
-                resource = alloys
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = food
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_building_slots > 0
+                }
             }
-            resource_income_compare = {
-                resource = consumer_goods
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = alloys
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_building_slots > 0
+                }
             }
-            resource_income_compare = {
-                resource = food
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = consumer_goods
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_building_slots > 0
+                }
             }
-            resource_income_compare = {
-                resource = unity
-                value < 0
+            AND = {
+                resource_income_compare = {
+                    resource = unity
+                    value < 0
+                }
+                any_owned_planet = {
+                    free_jobs < 1
+                    free_building_slots > 0
+                }
             }
-        }
-        any_owned_planet = {
-            has_unemployed_or_servants = yes
         }
     }
     immediate = {
@@ -878,19 +912,20 @@ country_event = {
                         has_any_generator_zone = yes
                         has_district = district_generator
                         has_district = district_generator_uncapped
-                        has_district = district_rw_generator
-                        has_district = district_hive_energy
-                        has_district = district_nexus_energy
                         has_district = district_hab_energy
                     }
-                    has_unemployed_or_servants = yes
+                    free_jobs < 1
                     free_district_slots > 0
+                }
+                weights = {
+                    base = 10
+                    modifier = {
+                        factor = 100
+                        has_farming_designation = yes
+                    }
                 }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_generator }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_generator_uncapped }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_generator }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_energy }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_energy }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_energy }
             }
         }
@@ -905,16 +940,20 @@ country_event = {
                         has_any_mining_zone = yes
                         has_district = district_mining
                         has_district = district_mining_uncapped
-                        has_district = district_hive_mining
-                        has_district = district_nexus_mining
+                        has_district = district_hab_mining
                     }
-                    has_unemployed_or_servants = yes
+                    free_jobs < 1
                     free_district_slots > 0
+                }
+                weights = {
+                    base = 10
+                    modifier = {
+                        factor = 100
+                        has_mining_designation = yes
+                    }
                 }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_mining_uncapped }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_mining }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_mining }
             }
         }
@@ -929,16 +968,19 @@ country_event = {
                         has_any_agriculture_zone = yes
                         has_district = district_farming
                         has_district = district_farming_uncapped
-                        has_district = district_hive_food
-                        has_district = district_rw_farming
                     }
-                    has_unemployed_or_servants = yes
+                    free_jobs < 1
                     free_district_slots > 0
+                }
+                weights = {
+                    base = 10
+                    modifier = {
+                        factor = 100
+                        has_farming_designation = yes
+                    }
                 }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_farming }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_farming_uncapped }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_food }
-                add_district_if_possible_valid_district_effect = { DISTRICT = district_rw_farming }
             }
         }
         if = {
@@ -946,28 +988,74 @@ country_event = {
                 resource_income_compare = { resource = alloys value < 0 }
             }
             if = {
-                limit = { any_owned_planet = { free_district_slots > 0 has_unemployed_or_servants = yes } }
-                random_owned_planet = {
-                    limit = {
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_any_foundry_zone = yes
                         OR = {
-                            has_any_mining_zone = yes
-                            has_district = district_hive_foundry
-                            has_district = district_nexus_foundry
-                            has_district = district_ring_world_foundry
-                            has_district = district_arcology_arms_industry
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_hive }
                         }
                     }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_foundry }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_foundry }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_foundry }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_arms_industry }
+                }
+                random_owned_planet = {
+                    limit = {
+                        free_jobs < 1
+                        has_any_foundry_zone = yes
+                        OR = {
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_hive }
+                        }
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_foundry_designation = yes
+                        }
+                    }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_wilderness }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_hive }
                 }
             }
+            # Add new zones if the AI couldn't.
             else_if = {
-                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_foundry_zone = yes } }
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_foundry_designation = yes
+                        has_any_foundry_zone = no
+                    }
+                }
                 random_owned_planet = {
-                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_foundry_zone = yes }
-                    add_building = building_foundry_1
+                    limit = {
+                        free_jobs < 1
+                        has_foundry_designation = yes
+                        has_any_foundry_zone = no
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_foundry_designation = yes
+                        }
+                    }
+                    log = "Trying to add a foundry district"
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_foundry }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_foundry }
                 }
             }
         }
@@ -976,28 +1064,70 @@ country_event = {
                 resource_income_compare = { resource = consumer_goods value < 0 }
             }
             if = {
-                limit = { any_owned_planet = { free_district_slots > 0 has_unemployed_or_servants = yes } }
-                random_owned_planet = {
-                    limit = {
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_any_factory_zone = yes
                         OR = {
-                            has_any_mining_zone = yes
-                            has_district = district_hive_factory
-                            has_district = district_nexus_factory
-                            has_district = district_ring_world_factory
-                            has_district = district_arcology_civilian_industry
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_hive }
                         }
                     }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_hive_factory }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_nexus_factory }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_ring_world_factory }
-                    add_district_if_possible_valid_district_effect = { DISTRICT = district_arcology_civilian_industry }
+                }
+                random_owned_planet = {
+                    limit = {
+                        free_jobs < 1
+                        has_any_factory_zone = yes
+                        OR = {
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_hive }
+                        }
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_factory_designation = yes
+                        }
+                    }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_hive }
                 }
             }
+            # Add new zones if the AI couldn't.
             else_if = {
-                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_factory_zone = yes } }
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_factory_designation = yes
+                        has_any_factory_zone = no
+                    }
+                }
                 random_owned_planet = {
-                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_factory_zone = yes }
-                    add_building = building_factory_1
+                    limit = {
+                        free_jobs < 1
+                        has_factory_designation = yes
+                        has_any_factory_zone = no
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_factory_designation = yes
+                        }
+                    }
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_factory }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_factory }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_factory }
                 }
             }
         }
@@ -1006,10 +1136,106 @@ country_event = {
                 resource_income_compare = { resource = unity value < 0 }
             }
             if = {
-                limit = { any_owned_planet = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_unity_zone = yes } }
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_any_unity_zone = yes
+                        OR = {
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_hive }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_research_unity }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_research_unity_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_habitat_research_unity }
+                        }
+                    }
+                }
                 random_owned_planet = {
-                    limit = { free_building_slots > 0 has_unemployed_or_servants = yes has_any_unity_zone = yes }
-                    add_building = building_bureaucratic_1
+                    limit = {
+                        free_building_slots > 0
+                        free_jobs < 1
+                        has_any_unity_zone = yes
+                        OR = {
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_spiritualist_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_bio_trophy_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_hive }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_unity_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_research_unity }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_research_unity_wilderness }
+                            can_fit_special_zone_building = { BUILDING_TYPE = bureaucratic ZONE_TYPE = zone_habitat_research_unity }
+                        }
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_unity_designation = yes
+                        }
+                    }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_spiritualist }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_bio_trophy }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_spiritualist_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_bio_trophy_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_spiritualist_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_bio_trophy_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_spiritualist_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_bio_trophy_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_hive }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_unity_wilderness }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_research_unity }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_research_unity_wilderness }
+                    add_building_to_zone_if_possible = { BUILDING = building_bureaucratic_1 ZONE = zone_habitat_research_unity }
+                }
+            }
+            else_if = {
+                limit = {
+                    any_owned_planet = {
+                        free_jobs < 1
+                        has_unity_designation = yes
+                        has_any_unity_zone = no
+                    }
+                }
+                random_owned_planet = {
+                    limit = {
+                        free_jobs < 1
+                        has_unity_designation = yes
+                        has_any_unity_zone = no
+                    }
+                    weights = {
+                        base = 10
+                        modifier = {
+                            factor = 100
+                            has_unity_designation = yes
+                        }
+                    }
+                    replace_urban_zones = { DISTRICT = district_city ZONE = zone_unity }
+                    replace_urban_zones = { DISTRICT = district_hive ZONE = zone_unity }
+                    replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_unity }
                 }
             }
         }

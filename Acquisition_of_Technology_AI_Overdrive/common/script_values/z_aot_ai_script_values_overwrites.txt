@@ -39,3 +39,31 @@ desired_constructors_max = {
     }
     round = yes
 }
+
+# This is used to count vanilla buildings such as forges, factories etc.
+count_special_buildings_on_planet = {
+    complex_trigger_modifier = {
+        trigger = num_buildings
+        parameters = {
+            type = building_$BUILDING_TYPE$_1
+        }
+        trigger_scope = planet
+        mode = add
+    }
+    complex_trigger_modifier = {
+        trigger = num_buildings
+        parameters = {
+            type = building_$BUILDING_TYPE$_2
+        }
+        trigger_scope = planet
+        mode = add
+    }
+    complex_trigger_modifier = {
+        trigger = num_buildings
+        parameters = {
+            type = building_$BUILDING_TYPE$_3
+        }
+        trigger_scope = planet
+        mode = add
+    }
+}

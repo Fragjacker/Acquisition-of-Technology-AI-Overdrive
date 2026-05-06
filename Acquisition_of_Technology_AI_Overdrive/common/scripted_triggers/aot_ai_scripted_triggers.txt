@@ -102,3 +102,24 @@ has_positive_total_resource_balance = {
         value >= 0
     }
 }
+
+# Checks if there's space in special urban zones like foundry, factory etc.
+can_fit_special_zone_building = {
+    # If we only have one specialized zone we can have 3 buildings.
+    if = {
+        limit = {
+            num_zones = { type = $ZONE_TYPE$ value = 1 }
+        }
+        check_variable_arithmetic = { which = value:count_special_buildings_on_planet|BUILDING_TYPE|$BUILDING_TYPE$| value < 3 }
+    }
+    # If we have two specialized zone we can have up to 6 buildings.
+    else_if = {
+        limit = {
+            num_zones = { type = $ZONE_TYPE$ value = 2 }
+        }
+        check_variable_arithmetic = { which = value:count_special_buildings_on_planet|BUILDING_TYPE|$BUILDING_TYPE$| value < 6 }
+    }
+    else = {
+        always = no
+    }
+}

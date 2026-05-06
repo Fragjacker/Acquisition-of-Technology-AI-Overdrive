@@ -369,6 +369,17 @@ add_district_if_possible_valid_district_effect = {
     #else do nothing
 }
 
+add_building_to_zone_if_possible = {
+    optimize_memory
+    if = {
+        limit = { has_zone = { zone = $ZONE$ } }
+        add_building = {
+            building = $BUILDING$
+            zone = $ZONE$
+        }
+    }
+}
+
 remove_building_if_exists = {
     optimize_memory
     if = {
