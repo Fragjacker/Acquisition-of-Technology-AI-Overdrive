@@ -917,13 +917,6 @@ country_event = {
                     free_jobs < 1
                     free_district_slots > 0
                 }
-                weights = {
-                    base = 10
-                    modifier = {
-                        factor = 100
-                        has_farming_designation = yes
-                    }
-                }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_generator }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_generator_uncapped }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_energy }
@@ -945,13 +938,6 @@ country_event = {
                     free_jobs < 1
                     free_district_slots > 0
                 }
-                weights = {
-                    base = 10
-                    modifier = {
-                        factor = 100
-                        has_mining_designation = yes
-                    }
-                }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_mining }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_mining_uncapped }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_hab_mining }
@@ -972,13 +958,6 @@ country_event = {
                     free_jobs < 1
                     free_district_slots > 0
                 }
-                weights = {
-                    base = 10
-                    modifier = {
-                        factor = 100
-                        has_farming_designation = yes
-                    }
-                }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_farming }
                 add_district_if_possible_valid_district_effect = { DISTRICT = district_farming_uncapped }
             }
@@ -991,7 +970,10 @@ country_event = {
                 limit = {
                     any_owned_planet = {
                         free_jobs < 1
-                        has_any_foundry_zone = yes
+                        OR = {
+                            has_any_foundry_zone = no
+                            has_any_industrial_zone = yes
+                        }
                         OR = {
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_wilderness }
@@ -999,13 +981,22 @@ country_event = {
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_ring_world }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_nexus }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_hive }
+                            # Industry zones fit too.
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_hive }
                         }
                     }
                 }
                 random_owned_planet = {
                     limit = {
                         free_jobs < 1
-                        has_any_foundry_zone = yes
+                        OR = {
+                            has_any_foundry_zone = no
+                            has_any_industrial_zone = yes
+                        }
                         OR = {
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_wilderness }
@@ -1013,13 +1004,12 @@ country_event = {
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_ring_world }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_nexus }
                             can_fit_special_zone_building = { BUILDING_TYPE = foundry ZONE_TYPE = zone_foundry_hive }
-                        }
-                    }
-                    weights = {
-                        base = 10
-                        modifier = {
-                            factor = 100
-                            has_foundry_designation = yes
+                            # Industry zones fit too.
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_hive }
                         }
                     }
                     add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry }
@@ -1028,6 +1018,12 @@ country_event = {
                     add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_ring_world }
                     add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_nexus }
                     add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_foundry_hive }
+                    # Industry zones fit too.
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_industrial }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_industrial_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_industrial_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_industrial_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_industrial_hive }
                 }
             }
             # Add new zones if the AI couldn't.
@@ -1036,23 +1032,21 @@ country_event = {
                     any_owned_planet = {
                         free_jobs < 1
                         has_foundry_designation = yes
-                        has_any_foundry_zone = no
+                        NOR = {
+                            has_any_foundry_zone = no
+                            has_any_industrial_zone = yes
+                        }
                     }
                 }
                 random_owned_planet = {
                     limit = {
                         free_jobs < 1
                         has_foundry_designation = yes
-                        has_any_foundry_zone = no
-                    }
-                    weights = {
-                        base = 10
-                        modifier = {
-                            factor = 100
-                            has_foundry_designation = yes
+                        NOR = {
+                            has_any_foundry_zone = no
+                            has_any_industrial_zone = yes
                         }
                     }
-                    log = "Trying to add a foundry district"
                     replace_urban_zones = { DISTRICT = district_city ZONE = zone_foundry }
                     replace_urban_zones = { DISTRICT = district_hive ZONE = zone_foundry }
                     replace_urban_zones = { DISTRICT = district_nexus ZONE = zone_foundry }
@@ -1067,40 +1061,57 @@ country_event = {
                 limit = {
                     any_owned_planet = {
                         free_jobs < 1
-                        has_any_factory_zone = yes
+                        OR = {
+                            has_any_factory_zone = yes
+                            has_any_industrial_zone = yes
+                        }
                         OR = {
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_arcology }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_ring_world }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_nexus }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_hive }
+                            # Industry zones fit too.
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_hive }
                         }
                     }
                 }
                 random_owned_planet = {
                     limit = {
                         free_jobs < 1
-                        has_any_factory_zone = yes
+                        OR = {
+                            has_any_factory_zone = yes
+                            has_any_industrial_zone = yes
+                        }
                         OR = {
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_arcology }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_ring_world }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_nexus }
                             can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_factory_hive }
+                            # Industry zones fit too.
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_arcology }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_ring_world }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_nexus }
+                            can_fit_special_zone_building = { BUILDING_TYPE = factory ZONE_TYPE = zone_industrial_hive }
                         }
                     }
-                    weights = {
-                        base = 10
-                        modifier = {
-                            factor = 100
-                            has_factory_designation = yes
-                        }
-                    }
-                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory }
-                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_arcology }
-                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_ring_world }
-                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_nexus }
-                    add_building_to_zone_if_possible = { BUILDING = building_foundry_1 ZONE = zone_factory_hive }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_factory }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_factory_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_factory_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_factory_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_factory_hive }
+                    # Industry zones fit too.
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_industrial }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_industrial_arcology }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_industrial_ring_world }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_industrial_nexus }
+                    add_building_to_zone_if_possible = { BUILDING = building_factory_1 ZONE = zone_industrial_hive }
                 }
             }
             # Add new zones if the AI couldn't.
@@ -1109,20 +1120,19 @@ country_event = {
                     any_owned_planet = {
                         free_jobs < 1
                         has_factory_designation = yes
-                        has_any_factory_zone = no
+                        NOR = {
+                            has_any_factory_zone = yes
+                            has_any_industrial_zone = yes
+                        }
                     }
                 }
                 random_owned_planet = {
                     limit = {
                         free_jobs < 1
                         has_factory_designation = yes
-                        has_any_factory_zone = no
-                    }
-                    weights = {
-                        base = 10
-                        modifier = {
-                            factor = 100
-                            has_factory_designation = yes
+                        NOR = {
+                            has_any_factory_zone = yes
+                            has_any_industrial_zone = yes
                         }
                     }
                     replace_urban_zones = { DISTRICT = district_city ZONE = zone_factory }
