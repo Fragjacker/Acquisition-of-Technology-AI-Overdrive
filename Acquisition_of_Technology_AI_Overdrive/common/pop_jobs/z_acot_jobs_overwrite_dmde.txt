@@ -118,12 +118,11 @@ acot_dark_energy_drone = {
         }
         modifier = {
             factor = 1.5
-            from = {
+            planet = {
                 any_owned_pop_job = {
                     has_job_type = acot_dark_energy_drone
                 }
             }
-
         }
     }
     promotion = {
@@ -186,7 +185,7 @@ acot_dark_matter_man = {
         }
         modifier = {
             factor = 1.5
-            from = {
+            planet = {
                 any_owned_pop_job = {
                     has_job_type = acot_dark_matter_man
                 }
