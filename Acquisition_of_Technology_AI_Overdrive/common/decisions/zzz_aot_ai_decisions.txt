@@ -773,11 +773,11 @@ decision_build_up_voidsphere = {
             OR = {
                 free_jobs > 3
                 owner = {
-                    has_monthly_income = {
+                    resource_income_compare = {
                         resource = acot_sr_dark_energy
                         value < 300
                     }
-                    has_monthly_income = {
+                    resource_income_compare = {
                         resource = sr_dark_matter
                         value < 300
                     }
