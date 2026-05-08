@@ -896,16 +896,6 @@ decision_add_power_planet = {
         exists = owner
         owner = {
             is_ai = yes
-            OR = {
-                has_monthly_income = {
-                    resource = acot_sr_dark_energy
-                    value < 0
-                }
-                has_monthly_income = {
-                    resource = sr_dark_matter
-                    value < 0
-                }
-            }
         }
         if = {
             limit = { is_aot_habitat = yes }
@@ -928,8 +918,9 @@ decision_add_power_planet = {
         if = {
             limit = {
                 is_aot_habitat = yes
+                free_district_slots > 0
             }
-            add_district_if_possible_valid_district_effect = { DISTRICT = district_dm_hab_dark_matter_energy }
+            add_district = district_dm_hab_dark_matter_energy
         }
         else = {
             add_building = building_acot_dm_dark_energy_pylon
@@ -937,7 +928,25 @@ decision_add_power_planet = {
         }
     }
     ai_weight = {
-        base = 1000
+        base = 0
+        modifier = {
+            add = 5000
+            owner = {
+                resource_income_compare = {
+                    resource = acot_sr_dark_energy
+                    value <= 0
+                }
+            }
+        }
+        modifier = {
+            factor = 5000
+            owner = {
+                resource_income_compare = {
+                    resource = sr_dark_matter
+                    value <= 0
+                }
+            }
+        }
     }
 }
 decision_upgrade_dm_de_power_planet = {
