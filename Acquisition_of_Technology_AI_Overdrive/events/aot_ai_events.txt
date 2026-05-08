@@ -589,6 +589,7 @@ country_event = {
                 is_planet_class = pc_toxic
                 is_planet_class = pc_molten
             }
+            planet_size >= 20
         }
     }
     immediate = {
@@ -601,8 +602,10 @@ country_event = {
                     is_planet_class = pc_toxic
                     is_planet_class = pc_molten
                 }
+                planet_size >= 20
             }
             change_pc = pc_dark_fractured
+
             #add_modifier = {
             #	modifier = acot_modifier_precursor_digsite
             #	days = -1
