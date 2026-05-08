@@ -43,7 +43,7 @@ advanced_economy_plan = {
     subplan = {
         scaling = yes
         #optional = yes
-        set_name = "acot resource focus"
+        set_name = "AoT DELTA Resource Focus"
         potential = {
             has_technology = tech_dark_matter_power_core_dm
         }
@@ -68,7 +68,7 @@ advanced_economy_plan = {
     subplan = {
         scaling = yes
         #optional = yes
-        set_name = "acot resource focus AI"
+        set_name = "AoT ALPHA Resource Focus"
         potential = {
             has_technology = tech_dark_matter_power_core_ae
         }
