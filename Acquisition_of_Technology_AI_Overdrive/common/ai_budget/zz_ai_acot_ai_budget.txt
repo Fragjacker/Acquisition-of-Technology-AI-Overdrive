@@ -739,7 +739,21 @@ acot_dark_matter_expenditure_planet = {
     type = expenditure
     category = planets
     potential = {
-        has_ae_capital_tech = yes
+        has_dm_capital_tech = yes
+    }
+    desired_min = {
+        min = 2500
+    }
+    weight = {
+        weight = 0.4
+    }
+}
+acot_dark_energy_expenditure_planet = {
+    resource = acot_sr_dark_energy
+    type = expenditure
+    category = planets
+    potential = {
+        has_dm_capital_tech = yes
     }
     desired_min = {
         min = 2500
@@ -852,7 +866,7 @@ acot_dark_energy_expenditure_blocker = {
         base = 5000
     }
 }
-acot_alloy_megas_expenditure = {
+acot_alloy_megastructures_expenditure = {
     resource = alloys
     type = expenditure
     category = megastructures
@@ -863,8 +877,30 @@ acot_alloy_megas_expenditure = {
         base = 1
     }
 }
-acot_dark_matter_megas_expenditure = {
+acot_dark_matter_precursor_citadel_expenditure = {
     resource = sr_dark_matter
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_precursor_citadel
+    }
+    weight = {
+        base = 0.85
+    }
+}
+acot_dark_matter_megastructures_expenditure = {
+    resource = sr_dark_matter
+    type = expenditure
+    category = megastructures
+    potential = {
+        has_technology = tech_dark_matter_power_core_dm
+    }
+    weight = {
+        base = 0.7
+    }
+}
+acot_dark_energy_precursor_citadel_expenditure = {
+    resource = acot_sr_dark_energy
     type = expenditure
     category = megastructures
     potential = {
@@ -874,15 +910,15 @@ acot_dark_matter_megas_expenditure = {
         base = 0.5
     }
 }
-acot_dark_energy_megas_expenditure = {
+acot_dark_energy_megastructures_expenditure = {
     resource = acot_sr_dark_energy
     type = expenditure
     category = megastructures
     potential = {
-        has_technology = tech_precursor_citadel
+        has_technology = tech_dark_matter_power_core_dm
     }
     weight = {
-        base = 0.5
+        base = 0.7
     }
 }
 aot_sr_runic_power_megas_expenditure = {
