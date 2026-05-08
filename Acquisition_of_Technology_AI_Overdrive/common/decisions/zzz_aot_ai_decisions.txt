@@ -1481,7 +1481,10 @@ decision_terraform_planet_into_advanced = {
             # Let's go hive
             if = {
                 limit = {
-                    habitable_planet_not_urban = yes
+                    OR = {
+                        habitable_planet_not_urban = yes
+                        is_planet_class = pc_nuked
+                    }
                     owner = {
                         has_ascension_perk = ap_hive_worlds
                     }
@@ -1491,7 +1494,10 @@ decision_terraform_planet_into_advanced = {
             # Let's go machine!
             else_if = {
                 limit = {
-                    habitable_planet_not_urban = yes
+                    OR = {
+                        habitable_planet_not_urban = yes
+                        is_planet_class = pc_nuked
+                    }
                     owner = {
                         has_ascension_perk = ap_machine_worlds
                     }
