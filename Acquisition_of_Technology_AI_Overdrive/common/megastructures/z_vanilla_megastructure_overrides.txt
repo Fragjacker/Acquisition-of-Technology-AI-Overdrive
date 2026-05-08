@@ -303,6 +303,16 @@ ring_world_1 = {
                 is_capital_system = yes
             }
         }
+        modifier = {
+            factor = 80
+            any_neighbor_system = {
+                exists = owner
+                # Build them in clusters around the capital, snaking outwards.
+                any_system_planet = {
+                    is_ringworld = yes
+                }
+            }
+        }
         # We have no more room
         modifier = {
             factor = 1000
