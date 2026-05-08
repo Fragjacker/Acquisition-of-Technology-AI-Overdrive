@@ -1,7 +1,13 @@
 # The AI needs something to do, even in the endgame!
 
 beyond_endgame_economy_plan = {
-    ai_weight = { weight = 1500 }
+    ai_weight = {
+        weight = 10
+        modifier = {
+            factor = 100
+            has_technology = tech_dark_matter_power_core_se
+        }
+    }
 
     subplan = {
         scaling = yes

@@ -2,7 +2,13 @@
 # ACOT edit time
 
 endgame_economy_plan = {
-    ai_weight = { weight = 1200 }
+    ai_weight = {
+        weight = 150
+        modifier = {
+            factor = 0
+            has_technology = tech_dark_matter_power_core_se
+        }
+    }
     #### SCALING SUBPLANS HERE ####
     # Values in the scaling subplans are added to the base plan each time the AI reaches the target
     # If base alloys = 10 and the AI reaches +12 per month, and it says alloys = 20 in the scaling subplan, the next target becomes alloys = 30

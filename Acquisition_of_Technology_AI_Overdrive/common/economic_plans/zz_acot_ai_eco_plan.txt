@@ -2,7 +2,13 @@
 # ACOT edit time
 
 basic_economy_plan = {
-    ai_weight = { weight = 1000 }
+    ai_weight = {
+        weight = 1000
+        modifier = {
+            factor = 0
+            has_technology = tech_dark_matter_power_core_dm
+        }
+    }
 
     #### SCALING SUBPLANS HERE ####
     # Values in the scaling subplans are added to the base plan each time the AI reaches the target
@@ -98,7 +104,7 @@ basic_economy_plan = {
             minerals = 1000
             energy = 1000
             unity = 1000
-            alloys = 10000
+            alloys = 1000
             physics_research = 1000
             engineering_research = 1000
             society_research = 1000
@@ -106,34 +112,10 @@ basic_economy_plan = {
             acot_sr_dark_energy = 1000
         }
         focus = {
-            alloys = 5000
-            physics_research = 10000
-            engineering_research = 10000
-            society_research = 10000
-        }
-    }
-    subplan = {
-        scaling = yes
-        #optional = yes
-        set_name = "acot resource focus AI"
-        potential = {
-            has_technology = tech_dark_matter_power_core_ae
-        }
-        income = {
-            minerals = 10000
-            energy = 10000
-            unity = 10000
-            alloys = 100000
-            physics_research = 10000
-            engineering_research = 10000
-            society_research = 10000
-            sr_dark_matter = 100000
-            acot_sr_dark_energy = 100000
-        }
-        focus = {
-            alloys = 100000
-            sr_dark_matter = 100000
-            acot_sr_dark_energy = 100000
+            alloys = 1000
+            physics_research = 1000
+            engineering_research = 1000
+            society_research = 1000
         }
     }
 
@@ -176,67 +158,9 @@ basic_economy_plan = {
             energy = 200
             minerals = 500
             alloys = 1000
-            society_research = 5000
-            engineering_research = 5000
-            society_research = 5000
-        }
-    }
-    ### SCALE HARDER!!!!!
-    subplan = {
-        scaling = yes
-        set_name = "acot resource focus 2"
-        potential = {
-            has_technology = tech_dark_matter_power_core
-        }
-        income = {
-            energy = 2000
-            alloys = 5000
-            society_research = 10000
-            engineering_research = 10000
-            society_research = 10000
-        }
-    }
-
-    subplan = {
-        scaling = yes
-        set_name = "Runic Power"
-        potential = {
-            has_technology = tech_civil_phanon_application
-        }
-        income = {
-            aot_sr_runic_power = 100
-        }
-    }
-
-    subplan = {
-        scaling = yes
-        set_name = "Stellarite"
-        potential = {
-            has_technology = tech_dark_matter_power_core_se
-        }
-        income = {
-            acot_sr_stellarite = 100
-        }
-    }
-
-    subplan = {
-        # in the end game now!
-        scaling = yes
-        set_name = "sr scale"
-        potential = {
-            has_technology = tech_stellarite_palace
-            has_monthly_income = {
-                resource = aot_sr_runic_power
-                value < 1000
-            }
-            has_monthly_income = {
-                resource = acot_sr_stellarite
-                value < 1000
-            }
-        }
-        income = {
-            acot_sr_stellarite = 10000
-            aot_sr_runic_power = 10000
+            society_research = 500
+            engineering_research = 500
+            society_research = 500
         }
     }
 
