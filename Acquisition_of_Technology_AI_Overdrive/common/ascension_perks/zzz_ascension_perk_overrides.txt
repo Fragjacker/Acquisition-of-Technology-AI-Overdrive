@@ -159,10 +159,12 @@ ap_galactic_wonders_utopia = {
                 has_technology = tech_mega_engineering
                 AND = {
                     is_ai = yes
-                    num_ascension_perks >= 4
-                    any_country = {
-                        is_ai = no
-                        has_galactic_wonders = yes
+                    OR = {
+                        num_ascension_perks > 4
+                        any_country = {
+                            is_ai = no
+                            has_galactic_wonders = yes
+                        }
                     }
                 }
             }
@@ -208,11 +210,11 @@ ap_galactic_wonders_megacorp = {
                 AND = {
                     is_ai = yes
                     OR = {
+                        num_ascension_perks > 4
                         any_country = {
                             is_ai = no
                             has_galactic_wonders = yes
                         }
-                        num_ascension_perks >= 4
                     }
                 }
             }
@@ -273,11 +275,11 @@ ap_galactic_wonders_utopia_and_megacorp = {
                 AND = {
                     is_ai = yes
                     OR = {
+                        num_ascension_perks > 4
                         any_country = {
                             is_ai = no
                             has_galactic_wonders = yes
                         }
-                        num_ascension_perks >= 4
                     }
                 }
             }
@@ -442,6 +444,42 @@ ap_arcology_project = {
         modifier = {
             factor = 3
             has_ethic = ethic_fanatic_materialist
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size >= 21
+            }
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size >= 22
+            }
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size >= 22
+            }
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size >= 23
+            }
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size >= 24
+            }
+        }
+        modifier = {
+            add = 1000
+            any_owned_planet = {
+                planet_size = 25
+            }
         }
         # Pick this if we have eligible planets.
         modifier = {
