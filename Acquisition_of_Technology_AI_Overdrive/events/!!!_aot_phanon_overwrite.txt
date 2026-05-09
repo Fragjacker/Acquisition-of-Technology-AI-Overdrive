@@ -413,7 +413,7 @@ country_event = {
     title = acot_herculean_events.1.name
     desc = acot_herculean_events.1.desc
     picture = GFX_evt_physics_research
-    show_sound = event_mystery
+    show_sound = event_acot_empire_event_start
 
     mean_time_to_happen = {
         years = 2
@@ -425,10 +425,9 @@ country_event = {
         NOR = {
             has_technology = tech_precursor_colossus
             has_country_flag = acot_herculean_rumor_heard
-        }
-        NOT = {
             has_global_flag = acot_herculean_forbidden
         }
+        has_country_flag = acot_databank_sophia_agreed
     }
 
     immediate = {
@@ -545,18 +544,27 @@ country_event = {
         name = acot_herculean_events.2.a
         response_text = acot_herculean_events.2.a.response
         is_dialog_only = yes
+        trigger = {
+            is_ai = no
+        }
     }
 
     option = {
         name = acot_herculean_events.2.b
         response_text = acot_herculean_events.2.b.response
         is_dialog_only = yes
+        trigger = {
+            is_ai = no
+        }
     }
 
     option = {
         name = acot_herculean_events.2.c
         response_text = acot_herculean_events.2.c.response
         is_dialog_only = yes
+        trigger = {
+            is_ai = no
+        }
     }
 
     option = {
@@ -567,6 +575,10 @@ country_event = {
             country_event = {
                 id = acot_herculean_events.3
             }
+        }
+        # YASS WE WANT THIS!
+        ai_chance = {
+            weight = 10000
         }
     }
 
@@ -610,6 +622,9 @@ country_event = {
         name = acot_herculean_events.3.a
         response_text = acot_herculean_events.3.a.response
         is_dialog_only = yes
+        trigger = {
+            is_ai = no
+        }
     }
 
     option = {
@@ -641,6 +656,10 @@ country_event = {
                 }
             }
         }
+        # GIMME GIMME GIMME
+        ai_chance = {
+            weight = 10000
+        }
     }
     option = {
         trigger = {
@@ -663,7 +682,7 @@ country_event = {
         hidden_effect = {
             if = {
                 limit = {
-                    or = {
+                    OR = {
                         AND = {
                             has_technology = tech_acot_enigmapolis_silo
                             any_owned_planet = {
@@ -672,7 +691,7 @@ country_event = {
                         }
                         resource_income_compare = {
                             resource = physics_research
-                            value > 100000
+                            value > 10000
                         }
                     }
                     NOT = {
@@ -685,13 +704,13 @@ country_event = {
             }
             if = {
                 limit = {
-                    or = {
+                    OR = {
                         any_owned_planet = {
                             is_planet_class = pc_acot_enigmopolis
                         }
                         resource_income_compare = {
                             resource = society_research
-                            value > 100000
+                            value > 10000
                         }
                     }
                     NOT = {
@@ -704,13 +723,13 @@ country_event = {
             }
             if = {
                 limit = {
-                    or = {
+                    OR = {
                         any_owned_planet = {
                             is_planet_class = pc_acot_enigmopolis
                         }
                         resource_income_compare = {
                             resource = engineering_research
-                            value > 100000
+                            value > 10000
                         }
                     }
                     NOT = {
