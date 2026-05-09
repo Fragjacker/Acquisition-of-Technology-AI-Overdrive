@@ -113,7 +113,7 @@ advanced_economy_plan = {
         set_name = "Scaling rare crystals"
 
         potential = {
-            has_monthly_income = { resource = rare_crystals value < @economic_plan_rare_resource_limit }
+            resource_income_compare = { resource = rare_crystals value < @economic_plan_rare_resource_limit }
         }
 
         income = {

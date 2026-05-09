@@ -53,7 +53,7 @@ automate_runic_power_production = {
                 has_technology = tech_phanon_runic_generator
                 has_technology = tech_phanon_synthersizer
             }
-            has_monthly_income = { resource = aot_sr_runic_power value < 1000 }
+            resource_income_compare = { resource = aot_sr_runic_power value < 1000 }
         }
     }
 

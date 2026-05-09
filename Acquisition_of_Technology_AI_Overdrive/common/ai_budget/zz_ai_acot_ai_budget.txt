@@ -527,7 +527,7 @@ acot_alloy_expenditure_ships = {
     category = ships
     type = expenditure
     potential = {
-        has_monthly_income = {
+        resource_income_compare = {
             resource = alloys
             value > 10000
         }

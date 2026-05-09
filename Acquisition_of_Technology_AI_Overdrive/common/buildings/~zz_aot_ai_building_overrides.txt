@@ -33,7 +33,7 @@ building_delta_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = sr_dark_matter
 						value <= 1
 					}
@@ -42,7 +42,7 @@ building_delta_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = acot_sr_dark_energy
 						value <= 1
 					}
@@ -125,7 +125,7 @@ building_alpha_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = sr_dark_matter
 						value <= 1
 					}
@@ -134,7 +134,7 @@ building_alpha_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = acot_sr_dark_energy
 						value <= 1
 					}
@@ -219,7 +219,7 @@ building_phanon_stellarite_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = aot_sr_runic_power
 						value <= 1
 					}
@@ -301,7 +301,7 @@ building_acot_stellarite_nexus = {
 			modifier = {
 				factor = 1000
 				planet_owner = {
-					has_monthly_income = {
+					resource_income_compare = {
 						resource = acot_sr_stellarite
 						value <= 1
 					}

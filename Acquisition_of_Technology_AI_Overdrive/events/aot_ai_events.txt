@@ -259,21 +259,21 @@ country_event = {
                     else = {
                         owner = {
                             export_trigger_value_to_variable = {
-                                trigger = has_monthly_income
+                                trigger = resource_income_compare
                                 parameters = {
                                     resource = physics_research
                                 }
                                 variable = physics_research_income_current
                             }
                             export_trigger_value_to_variable = {
-                                trigger = has_monthly_income
+                                trigger = resource_income_compare
                                 parameters = {
                                     resource = society_research
                                 }
                                 variable = society_research_income_current
                             }
                             export_trigger_value_to_variable = {
-                                trigger = has_monthly_income
+                                trigger = resource_income_compare
                                 parameters = {
                                     resource = engineering_research
                                 }

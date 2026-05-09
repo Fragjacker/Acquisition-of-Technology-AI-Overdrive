@@ -626,7 +626,7 @@ country_event = {
                                 is_planet_class = pc_acot_enigmopolis
                             }
                         }
-                        has_monthly_income = {
+                        resource_income_compare = {
                             resource = physics_research
                             value > 100000
                         }
@@ -645,7 +645,7 @@ country_event = {
                         any_owned_planet = {
                             is_planet_class = pc_acot_enigmopolis
                         }
-                        has_monthly_income = {
+                        resource_income_compare = {
                             resource = society_research
                             value > 100000
                         }
@@ -664,7 +664,7 @@ country_event = {
                         any_owned_planet = {
                             is_planet_class = pc_acot_enigmopolis
                         }
-                        has_monthly_income = {
+                        resource_income_compare = {
                             resource = engineering_research
                             value > 100000
                         }
