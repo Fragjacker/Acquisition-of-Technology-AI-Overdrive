@@ -163,6 +163,50 @@ country_event = {
 }
 # Alpha is actually pretty attainable for the AI! its going to be commented if I do have to edit it further.
 # i was actually so wrong
+# Determine AI Alpha Approach
+# acot_alpha_matter_events.12
+country_event = {
+    id = acot_alpha_matter_events.12
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = yes
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                has_global_flag = acot_ai_simple_event_forbidden
+            }
+            set_country_flag = allow_databank_steal
+            begin_event_chain = {
+                event_chain = acot_alpha_tech_chain
+            }
+            country_self_event_call = {
+                EVENT_ID = acot_alpha_matter_events.13
+            }
+            country_self_event_call = {
+                EVENT_ID = acot_alpha_matter_events.101
+                DAYS = 1440
+                RANDOM = 360
+            }
+        }
+        else = {
+            # The flag may not get set properly for AI's, fix this now!
+            if = {
+                limit = {
+                    NOT = {
+                        has_country_flag = acot_databank_sophia_agreed
+                    }
+                }
+                set_country_flag = acot_databank_sophia_agreed
+            }
+            add_research_option = tech_dark_matter_power_core_ae
+            set_country_flag = learned_dm_alpha_existence
+        }
+    }
+}
 
 ### Stellarite also is pretty doable!
 ### TOO EASY
