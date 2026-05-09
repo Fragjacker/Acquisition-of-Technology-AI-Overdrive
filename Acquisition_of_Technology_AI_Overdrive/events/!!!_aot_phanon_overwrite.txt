@@ -121,7 +121,6 @@ country_event = {
     option = {
         name = acot_alpha_matter_events.4.a
         default_hide_option = yes
-        add_research_option = tech_dark_matter_power_core_ae
         # The flag may not get set properly for AI's, fix this now!
         if = {
             limit = {
@@ -131,6 +130,7 @@ country_event = {
             }
             set_country_flag = acot_databank_sophia_agreed
         }
+        add_research_option = tech_dark_matter_power_core_ae
         ai_chance = {
             weight = 10000 # YES, SO MUCH YES! WE WANT THIS!
         }
