@@ -790,40 +790,19 @@ country_event = {
         FROMFROM = {
             if = {
                 limit = {
-                    any_ship_in_system = {
-                        is_ship_class = shipclass_starbase
-                        NOR = {
-                            is_ship_size = precursor_colossus
-                            is_ship_size = juggernaut
-                        }
-                    }
+                    exists = starbase
                 }
-                random_fleet_in_system = {
-                    limit = {
-                        any_owned_ship = {
-                            is_ship_class = shipclass_starbase
-                            OR = {
-                                is_ship_size = starbase_outpost
-                                is_ship_size = starbase_starport
-                                is_ship_size = starbase_starhold
-                                is_ship_size = starbase_starfortress
-                                is_ship_size = starbase_citadel
-                                is_ship_size = acot_fallen_outpost
-                                is_ship_size = acot_fallen_starbase
-                            }
-                        }
-                    }
+                starbase.fleet = {
                     destroy_fleet = this
                 }
             }
             create_starbase = {
-                size = "acot_precusor_starbase"
+                size = acot_precusor_starbase
                 owner = root
-                effect = {
-                }
             }
         }
     }
+
     option = {
         name = "acot_mega.1.a"
     }
@@ -892,7 +871,7 @@ country_event = {
                     destroy_fleet = this
                 }
                 create_starbase = {
-                    size = "acot_precusor_sigma_starbase"
+                    size = acot_precusor_sigma_starcitadel
                     owner = root
                     effect = {
                     }
@@ -1028,7 +1007,7 @@ country_event = {
                 }
             }
             create_starbase = {
-                size = "acot_precusor_phanon_starcitadel"
+                size = acot_precusor_phanon_starcitadel
                 owner = root
                 effect = {
                 }
@@ -1041,36 +1020,7 @@ country_event = {
 }
 
 namespace = acot_planets
-ship_event = {
-    id = acot_planets.5
-    title = acot_planets.5.name
-    desc = acot_planets.5.desc
-    picture = GFX_acot_precursor_uprising
-    show_sound = event_mystic_reveal
 
-    is_triggered_only = yes
-
-    immediate = {
-        owner = {
-            IF = {
-                limit = {
-                    NOT = {
-                        has_country_flag = acot_has_made_enigmatic_world
-                    }
-                }
-                set_country_flag = acot_has_made_enigmatic_world
-            }
-        }
-        fromfrom = {
-            change_pc = pc_acot_enigmatic
-        }
-    }
-
-    option = {
-        name = acot_planets.5.a
-    }
-
-}
 planet_event = {
     id = acot_planets.7
     title = acot_planets.7.name
@@ -1098,17 +1048,83 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
-        this = {
-            trigger_megastructure_icon = yes
-            change_pc = pc_acot_enigmopolis
-            set_planet_flag = is_void_sphere
+        trigger_megastructure_icon = yes
+        change_pc = pc_acot_enigmopolis
+        set_planet_flag = is_void_sphere
+        if = {
+            limit = {
+                exists = orbital_defence
+            }
+            orbital_defence = {
+                starbase = {
+                    set_starbase_size = acot_precusor_orbital_ring_t4
+                }
+            }
         }
     }
 
     option = {
         name = acot_planets.7.a
+        custom_tooltip = "acot_planets.7.a.tooltip"
+        trigger = {
+            owner = {
+                is_ai = no
+                NOT = {
+                    has_country_flag = acot_void_sphere_created
+                }
+            }
+        }
+        owner = {
+            add_victory_score = {
+                source = acot_void_sphere_score
+                score = 1000000
+            }
+            win = yes
+            hidden_effect = {
+                set_country_flag = acot_void_sphere_created
+            }
+        }
     }
 
+    option = {
+        name = acot_planets.7.b
+        custom_tooltip = "acot_planets.7.b.tooltip"
+        trigger = {
+            owner = {
+                is_ai = no
+                NOT = {
+                    has_country_flag = acot_void_sphere_created
+                }
+            }
+        }
+        owner = {
+            add_victory_score = {
+                source = acot_void_sphere_score
+                score = 1000000
+            }
+            hidden_effect = {
+                set_country_flag = acot_void_sphere_created
+            }
+        }
+    }
+    # The AI should keep on going.
+    option = {
+        name = acot_planets.7.c
+        trigger = {
+            owner = {
+                has_country_flag = acot_void_sphere_created
+            }
+        }
+        owner = {
+            add_victory_score = {
+                source = acot_void_sphere_score
+                score = 1000000
+            }
+        }
+        ai_chance = {
+            weight = 1000
+        }
+    }
 }
 
 namespace = acot_mod_options
