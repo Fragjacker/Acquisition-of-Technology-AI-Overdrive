@@ -930,7 +930,7 @@ decision_add_power_planet = {
     ai_weight = {
         base = 0
         modifier = {
-            add = 5000
+            add = 500
             owner = {
                 resource_income_compare = {
                     resource = acot_sr_dark_energy
@@ -939,7 +939,7 @@ decision_add_power_planet = {
             }
         }
         modifier = {
-            factor = 5000
+            factor = 500
             owner = {
                 resource_income_compare = {
                     resource = sr_dark_matter
@@ -977,7 +977,25 @@ decision_upgrade_dm_de_power_planet = {
         add_building = building_acot_ae_dark_matter_generator
     }
     ai_weight = {
-        base = 1000
+        base = 0
+        modifier = {
+            add = 500
+            owner = {
+                resource_income_compare = {
+                    resource = acot_sr_dark_energy
+                    value <= 0
+                }
+            }
+        }
+        modifier = {
+            factor = 500
+            owner = {
+                resource_income_compare = {
+                    resource = sr_dark_matter
+                    value <= 0
+                }
+            }
+        }
     }
 }
 
