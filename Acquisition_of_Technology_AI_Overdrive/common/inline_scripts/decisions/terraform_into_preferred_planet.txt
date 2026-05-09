@@ -1,0 +1,17 @@
+owner_main_species = {
+    switch = {
+        trigger = has_trait
+        trait_pc_alpine_preference = { root = { $ACTION$ = pc_alpine } } $POSTFIX$
+        trait_pc_arctic_preference = { root = { $ACTION$ = pc_arctic } } $POSTFIX$
+        trait_pc_tundra_preference = { root = { $ACTION$ = pc_tundra } } $POSTFIX$
+        trait_pc_arid_preference = { root = { $ACTION$ = pc_arid } } $POSTFIX$
+        trait_pc_savannah_preference = { root = { $ACTION$ = pc_savannah } } $POSTFIX$
+        trait_pc_desert_preference = { root = { $ACTION$ = pc_desert } } $POSTFIX$
+        trait_pc_continental_preference = { root = { $ACTION$ = pc_continental } } $POSTFIX$
+        trait_pc_tropical_preference = { root = { $ACTION$ = pc_tropical } } $POSTFIX$
+        trait_pc_ocean_preference = { root = { $ACTION$ = pc_ocean } } $POSTFIX$
+        trait_wet_planet_preference = { root = { $ACTION$ = pc_continental } } $POSTFIX$
+        trait_cold_planet_preference = { root = { $ACTION$ = pc_arctic } } $POSTFIX$
+        trait_dry_planet_preference = { root = { $ACTION$ = pc_desert } } $POSTFIX$
+    }
+}

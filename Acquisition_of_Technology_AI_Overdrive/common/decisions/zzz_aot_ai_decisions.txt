@@ -949,6 +949,7 @@ decision_add_power_planet = {
         }
     }
 }
+
 decision_upgrade_dm_de_power_planet = {
     potential = {
         exists = owner
@@ -1260,6 +1261,9 @@ decision_terraform_planet_into_preferred = {
                 has_trait = trait_pc_continental_preference
                 has_trait = trait_pc_tropical_preference
                 has_trait = trait_pc_ocean_preference
+                has_trait = trait_wet_planet_preference
+                has_trait = trait_cold_planet_preference
+                has_trait = trait_dry_planet_preference
             }
         }
     }
@@ -1285,20 +1289,7 @@ decision_terraform_planet_into_preferred = {
             }
             # Best of the meh planets for everybody else.
             else = {
-                owner_main_species = {
-                    switch = {
-                        trigger = has_trait
-                        trait_pc_alpine_preference = { root = { start_terraform_process = pc_alpine } }
-                        trait_pc_arctic_preference = { root = { start_terraform_process = pc_arctic } }
-                        trait_pc_tundra_preference = { root = { start_terraform_process = pc_tundra } }
-                        trait_pc_arid_preference = { root = { start_terraform_process = pc_arid } }
-                        trait_pc_savannah_preference = { root = { start_terraform_process = pc_savannah } }
-                        trait_pc_desert_preference = { root = { start_terraform_process = pc_desert } }
-                        trait_pc_continental_preference = { root = { start_terraform_process = pc_continental } }
-                        trait_pc_tropical_preference = { root = { start_terraform_process = pc_tropical } }
-                        trait_pc_ocean_preference = { root = { start_terraform_process = pc_ocean } }
-                    }
-                }
+                inline_script = { script = decisions/terraform_into_preferred_planet ACTION = start_terraform_process POSTFIX = "" }
             }
         }
     }
@@ -1306,29 +1297,16 @@ decision_terraform_planet_into_preferred = {
     ai_weight = {
         weight = 0
         modifier = {
-            add = 1000
+            add = 1500
             NOR = {
                 is_planet_class = pc_nuked
                 is_planet_class = pc_volcanic
             }
-            owner_main_species = {
-                switch = {
-                    trigger = has_trait
-                    trait_pc_alpine_preference = { root = { NOT = { is_planet_class = pc_alpine } } }
-                    trait_pc_arctic_preference = { root = { NOT = { is_planet_class = pc_arctic } } }
-                    trait_pc_tundra_preference = { root = { NOT = { is_planet_class = pc_tundra } } }
-                    trait_pc_arid_preference = { root = { NOT = { is_planet_class = pc_arid } } }
-                    trait_pc_savannah_preference = { root = { NOT = { is_planet_class = pc_savannah } } }
-                    trait_pc_desert_preference = { root = { NOT = { is_planet_class = pc_desert } } }
-                    trait_pc_continental_preference = { root = { NOT = { is_planet_class = pc_continental } } }
-                    trait_pc_tropical_preference = { root = { NOT = { is_planet_class = pc_tropical } } }
-                    trait_pc_ocean_preference = { root = { NOT = { is_planet_class = pc_ocean } } }
-                }
-            }
+            inline_script = { script = decisions/terraform_into_preferred_planet ACTION = "NOT = { is_planet_class" POSTFIX = "}" }
         }
         # We want to terraform into GAIA.
         modifier = {
-            add = 1000
+            add = 1500
             NOT = { is_planet_class = pc_gaia }
             owner = {
                 has_ascension_perk = ap_world_shaper
@@ -1336,46 +1314,20 @@ decision_terraform_planet_into_preferred = {
         }
         # Tomb world without climate restoration? What a bummer...
         modifier = {
-            add = 1000
+            add = 1500
             is_planet_class = pc_nuked
             owner = {
                 has_technology = tech_climate_restoration
             }
-            owner_main_species = {
-                switch = {
-                    trigger = has_trait
-                    trait_pc_alpine_preference = { root = { NOT = { is_planet_class = pc_alpine } } }
-                    trait_pc_arctic_preference = { root = { NOT = { is_planet_class = pc_arctic } } }
-                    trait_pc_tundra_preference = { root = { NOT = { is_planet_class = pc_tundra } } }
-                    trait_pc_arid_preference = { root = { NOT = { is_planet_class = pc_arid } } }
-                    trait_pc_savannah_preference = { root = { NOT = { is_planet_class = pc_savannah } } }
-                    trait_pc_desert_preference = { root = { NOT = { is_planet_class = pc_desert } } }
-                    trait_pc_continental_preference = { root = { NOT = { is_planet_class = pc_continental } } }
-                    trait_pc_tropical_preference = { root = { NOT = { is_planet_class = pc_tropical } } }
-                    trait_pc_ocean_preference = { root = { NOT = { is_planet_class = pc_ocean } } }
-                }
-            }
+            inline_script = { script = decisions/terraform_into_preferred_planet ACTION = "NOT = { is_planet_class" POSTFIX = "}" }
         }
         modifier = {
-            add = 1000
+            add = 1500
             is_planet_class = pc_volcanic
             owner = {
                 has_technology = tech_volcanic_terraforming
             }
-            owner_main_species = {
-                switch = {
-                    trigger = has_trait
-                    trait_pc_alpine_preference = { root = { NOT = { is_planet_class = pc_alpine } } }
-                    trait_pc_arctic_preference = { root = { NOT = { is_planet_class = pc_arctic } } }
-                    trait_pc_tundra_preference = { root = { NOT = { is_planet_class = pc_tundra } } }
-                    trait_pc_arid_preference = { root = { NOT = { is_planet_class = pc_arid } } }
-                    trait_pc_savannah_preference = { root = { NOT = { is_planet_class = pc_savannah } } }
-                    trait_pc_desert_preference = { root = { NOT = { is_planet_class = pc_desert } } }
-                    trait_pc_continental_preference = { root = { NOT = { is_planet_class = pc_continental } } }
-                    trait_pc_tropical_preference = { root = { NOT = { is_planet_class = pc_tropical } } }
-                    trait_pc_ocean_preference = { root = { NOT = { is_planet_class = pc_ocean } } }
-                }
-            }
+            inline_script = { script = decisions/terraform_into_preferred_planet ACTION = "NOT = { is_planet_class" POSTFIX = "}" }
         }
 
         modifier = {
