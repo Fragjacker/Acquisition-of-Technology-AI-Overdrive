@@ -126,8 +126,10 @@ modifier_we_ball:0 "WE BALL. WE BALL. WE BALL."
 NAME_Astral_Avatar_Titan:0 "Cringe"
 NAME_Dimensional_Titan:0 "Spectral Hyperion"
 
-mod_planet_jobs_acot_sr_dark_energy_produces_mult:0 "£sr_dark_matter£ Dark Matter from £job£ Jobs"
-mod_planet_jobs_sr_dark_matter_produces_mult:0 "£acot_sr_dark_energy£ Dark Energy from £job£ Jobs"
+mod_planet_jobs_sr_dark_matter_produces_mult:0 "£sr_dark_matter£ Dark Matter from £job£ Jobs"
+mod_planet_jobs_acot_sr_dark_energy_produces_mult:0 "£acot_sr_dark_energy£ Dark Energy from £job£ Jobs"
+mod_planet_jobs_aot_sr_runic_power_produces_mult:0 "£aot_sr_runic_power£ Runic Power from £job£ Jobs"
+mod_planet_jobs_acot_sr_stellarite_produces_mult:0 "£acot_sr_stellarite£ Stellarite from £job£ Jobs"
 
 job_acot_dark_energy_man_effect_desc:0 "£job_acot_dark_energy_man£ $job_acot_dark_energy_man_plural$ turn £energy£ §Y$energy$§! into £acot_sr_dark_energy£ §Y$acot_sr_dark_energy$§!"
 job_acot_dark_matter_man_effect_desc:0 "£job_acot_dark_matter_man£ $job_acot_dark_matter_man_plural$ turn £minerals£ §Y$minerals$§! into £sr_dark_matter£ §Y$sr_dark_matter$§!"
