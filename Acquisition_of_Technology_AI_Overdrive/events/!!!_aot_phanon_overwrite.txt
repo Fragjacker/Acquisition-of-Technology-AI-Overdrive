@@ -1021,7 +1021,7 @@ country_event = {
 
 namespace = acot_planets
 
-planet_event = {
+carrier_event = {
     id = acot_planets.7
     title = acot_planets.7.name
     desc = {
@@ -1051,6 +1051,7 @@ planet_event = {
         trigger_megastructure_icon = yes
         change_pc = pc_acot_enigmopolis
         set_planet_flag = is_void_sphere
+        set_carrier_flag = is_void_sphere
         if = {
             limit = {
                 exists = orbital_defence
@@ -1377,7 +1378,7 @@ country_event = {
 }
 
 namespace = acot_ai_helper
-planet_event = {
+carrier_event = {
     id = acot_ai_helper.3
     hide_window = yes
 
