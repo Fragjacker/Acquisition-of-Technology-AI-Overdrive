@@ -10,6 +10,22 @@ basic_economy_plan = {
         }
     }
 
+    # Merged here from zz_ai_incentive_economic_plan.txt to avoid a duplicate
+    # 'basic_economy_plan' definition across two files.
+    subplan = {
+        set_name = "AI Incentive"
+        optional = yes
+        potential = {
+            always = yes
+        }
+        income = {
+            ai_unobtainium = 100000
+        }
+        focus = {
+            ai_unobtainium = 50000
+        }
+    }
+
     #### SCALING SUBPLANS HERE ####
     # Values in the scaling subplans are added to the base plan each time the AI reaches the target
     # If base alloys = 10 and the AI reaches +12 per month, and it says alloys = 20 in the scaling subplan, the next target becomes alloys = 30
@@ -70,6 +86,8 @@ basic_economy_plan = {
         optional = yes
         set_name = "acot vanilla sr"
         potential = {
+            # ACoT tier-6 base transmutor; prerequisite chain acot_dm -> acot_ae ->
+            # phanon -> stellarite, so this single check covers the whole line.
             has_technology = tech_acot_dm_transmutor
             NOT = {
                 resource_income_compare = {

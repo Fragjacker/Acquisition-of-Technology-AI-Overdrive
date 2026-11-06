@@ -1169,6 +1169,8 @@ decision_destroy_sr_building = {
         owner = {
             is_ai = yes
             has_dm_capital_tech = yes
+            # ACoT tier-6 base transmutor; prerequisite chain acot_dm -> acot_ae ->
+            # phanon -> stellarite, so this single check covers the whole line.
             has_technology = tech_acot_dm_transmutor
         }
         OR = {

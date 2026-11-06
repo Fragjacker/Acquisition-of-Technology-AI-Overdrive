@@ -93,7 +93,7 @@ country_event = {
                 planet_devastation <= 10
                 has_orbital_bombardment = no
             }
-            repair_all_buildings = yes
+            validate_and_repair_planet_buildings_and_districts = yes
         }
     }
 }

@@ -16,4 +16,4 @@ dependencies = {
 }
 name = "Acquisition of Technology: AI Overdrive"
 picture = "thumbnail.png"
-supported_version = "v4.4.*"
+supported_version = "v4.5.*"

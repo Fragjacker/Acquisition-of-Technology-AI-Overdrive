@@ -128,12 +128,8 @@ sshipyard = {
                 base = 1.00
             }
 
-            titan_yards = {
-                base = 1.00
-            }
-
-            colossus_yards = {
-                base = 1.00
+            capital_yards = {
+                base = 2.00
             }
 
             ice_mining_station = {
@@ -177,7 +173,7 @@ sshipyard = {
                 base = 0.50
             }
 
-            hangar_bay = {
+            starbase_hangar_bay = {
                 base = 0.45
             }
         }
